@@ -24,9 +24,9 @@
 OlaOutThread::OlaOutThread()
     : QThread()
     , m_init_run(false)
-    , m_ss(NULL)
-    , m_pipe(NULL)
-    , m_client(NULL)
+    , m_ss(nullptr)
+    , m_pipe(nullptr)
+    , m_client(nullptr)
 {
 }
 
@@ -162,7 +162,7 @@ bool OlaOutThread::setup_client(ola::io::ConnectedDescriptor *descriptor)
         {
             qWarning() << "olaout: client setup failed";
             delete m_client;
-            m_client = NULL;
+            m_client = nullptr;
             return false;
         }
         m_ss->AddReadDescriptor(descriptor);
@@ -181,7 +181,7 @@ void OlaStandaloneClient::cleanup()
         if (m_ss)
             m_ss->RemoveReadDescriptor(m_tcp_socket);
         delete m_tcp_socket;
-        m_tcp_socket = NULL;
+        m_tcp_socket = nullptr;
     }
 
     if (m_ss)
@@ -210,9 +210,9 @@ bool OlaStandaloneClient::init()
         {
             qWarning() << "olaout: Connect failed, is OLAD running?";
             delete m_tcp_socket;
-            m_tcp_socket = NULL;
+            m_tcp_socket = nullptr;
             delete m_ss;
-            m_ss = NULL;
+            m_ss = nullptr;
             return false;
         }
     }
@@ -221,9 +221,9 @@ bool OlaStandaloneClient::init()
     {
         m_tcp_socket->Close();
         delete m_tcp_socket;
-        m_tcp_socket = NULL;
+        m_tcp_socket = nullptr;
         delete m_ss;
-        m_ss = NULL;
+        m_ss = nullptr;
         return false;
     }
     m_init_run = true;
@@ -261,7 +261,7 @@ bool OlaEmbeddedServer::init()
     {
         qWarning() << "OLA Server failed init";
         delete m_daemon;
-        m_daemon = NULL;
+        m_daemon = nullptr;
         return false;
     }
     m_ss = m_daemon->GetSelectServer();
@@ -274,9 +274,9 @@ bool OlaEmbeddedServer::init()
         {
             qWarning() << "olaout: pipe failed";
             delete m_pipe_socket;
-            m_pipe_socket = NULL;
+            m_pipe_socket = nullptr;
             delete m_daemon;
-            m_daemon = NULL;
+            m_daemon = nullptr;
             return false;
         }
     }
@@ -284,9 +284,9 @@ bool OlaEmbeddedServer::init()
     if (!setup_client(m_pipe_socket))
     {
         delete m_pipe_socket;
-        m_pipe_socket = NULL;
+        m_pipe_socket = nullptr;
         delete m_daemon;
-        m_daemon = NULL;
+        m_daemon = nullptr;
         return false;
     }
 

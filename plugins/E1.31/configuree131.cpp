@@ -57,7 +57,7 @@
 ConfigureE131::ConfigureE131(E131Plugin* plugin, QWidget* parent)
         : QDialog(parent)
 {
-    Q_ASSERT(plugin != NULL);
+    Q_ASSERT(plugin != nullptr);
     m_plugin = plugin;
 
     /* Setup UI controls */
@@ -82,24 +82,24 @@ ConfigureE131::~ConfigureE131()
 
 void ConfigureE131::fillMappingTree()
 {
-    QTreeWidgetItem* inputItem = NULL;
-    QTreeWidgetItem* outputItem = NULL;
+    QTreeWidgetItem* inputItem = nullptr;
+    QTreeWidgetItem* outputItem = nullptr;
 
     QList<E131IO> IOmap = m_plugin->getIOMapping();
     foreach (E131IO io, IOmap)
     {
         E131Controller *controller = io.controller;
-        if (controller == NULL)
+        if (controller == nullptr)
             continue;
 
         qDebug() << "[E1.31] controller IP" << controller->getNetworkIP() << "type:" << controller->type();
-        if ((controller->type() & E131Controller::Input) && inputItem == NULL)
+        if ((controller->type() & E131Controller::Input) && inputItem == nullptr)
         {
             inputItem = new QTreeWidgetItem(m_uniMapTree);
             inputItem->setText(KMapColumnInterface, tr("Inputs"));
             inputItem->setExpanded(true);
         }
-        if ((controller->type() & E131Controller::Output) && outputItem == NULL)
+        if ((controller->type() & E131Controller::Output) && outputItem == nullptr)
         {
             outputItem = new QTreeWidgetItem(m_uniMapTree);
             outputItem->setText(KMapColumnInterface, tr("Outputs"));
@@ -248,9 +248,9 @@ void ConfigureE131::showIPAlert(QString ip)
 void ConfigureE131::slotMulticastCheckboxClicked()
 {
     QCheckBox* checkBox = qobject_cast<QCheckBox*>(sender());
-    Q_ASSERT(checkBox != NULL);
+    Q_ASSERT(checkBox != nullptr);
 
-    for (QTreeWidgetItem* item = m_uniMapTree->topLevelItem(0); item != NULL;
+    for (QTreeWidgetItem* item = m_uniMapTree->topLevelItem(0); item != nullptr;
             item = m_uniMapTree->itemBelow(item))
     {
         QCheckBox* cb = qobject_cast<QCheckBox*>(m_uniMapTree->itemWidget(item, KMapColumnMulticast));
@@ -263,16 +263,16 @@ void ConfigureE131::slotMulticastCheckboxClicked()
             qDebug() << Q_FUNC_INFO << "uni" << universe << "line" << line << "type" << type;
 
             E131Controller* controller = m_plugin->getIOMapping().at(line).controller;
-            Q_ASSERT(controller != NULL);
+            Q_ASSERT(controller != nullptr);
             UniverseInfo* info = controller->getUniverseInfo(universe);
-            Q_ASSERT(info != NULL);
+            Q_ASSERT(info != nullptr);
 
             if (type == E131Controller::Input)
             {
                 if (checkBox->isChecked())
                 {
                     item->setText(KMapColumnIPAddress, "");
-                    m_uniMapTree->setItemWidget(item, KMapColumnPort, NULL);
+                    m_uniMapTree->setItemWidget(item, KMapColumnPort, nullptr);
 
                     m_uniMapTree->setItemWidget(item, KMapColumnIPAddress,
                             createMcastIPWidget(info->inputMcastAddress.toString()));
@@ -280,7 +280,7 @@ void ConfigureE131::slotMulticastCheckboxClicked()
                 }
                 else
                 {
-                    m_uniMapTree->setItemWidget(item, KMapColumnIPAddress, NULL);
+                    m_uniMapTree->setItemWidget(item, KMapColumnIPAddress, nullptr);
                     item->setText(KMapColumnPort, "");
 
                     item->setText(KMapColumnIPAddress, controller->getNetworkIP());
@@ -294,8 +294,8 @@ void ConfigureE131::slotMulticastCheckboxClicked()
             {
                 if (checkBox->isChecked())
                 {
-                    m_uniMapTree->setItemWidget(item, KMapColumnIPAddress, NULL);
-                    m_uniMapTree->setItemWidget(item, KMapColumnPort, NULL);
+                    m_uniMapTree->setItemWidget(item, KMapColumnIPAddress, nullptr);
+                    m_uniMapTree->setItemWidget(item, KMapColumnPort, nullptr);
 
                     m_uniMapTree->setItemWidget(item, KMapColumnIPAddress,
                             createMcastIPWidget(info->outputMcastAddress.toString()));
@@ -303,7 +303,7 @@ void ConfigureE131::slotMulticastCheckboxClicked()
                 }
                 else
                 {
-                    m_uniMapTree->setItemWidget(item, KMapColumnIPAddress, NULL);
+                    m_uniMapTree->setItemWidget(item, KMapColumnIPAddress, nullptr);
                     item->setText(KMapColumnPort, "");
 
                     m_uniMapTree->setItemWidget(item, KMapColumnIPAddress,

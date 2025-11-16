@@ -114,10 +114,10 @@ static hid_device *new_hid_device(void)
 /* The caller must free the returned string with free(). */
 static wchar_t *utf8_to_wchar_t(const char *utf8)
 {
-	wchar_t *ret = NULL;
+	wchar_t *ret = nullptr;
 
 	if (utf8) {
-		size_t wlen = mbstowcs(NULL, utf8, 0);
+		size_t wlen = mbstowcs(nullptr, utf8, 0);
 		if ((size_t) -1 == wlen) {
 			return wcsdup(L"");
 		}
@@ -208,7 +208,7 @@ parse_uevent_info(const char *uevent, int *bus_type,
 	char **serial_number_utf8, char **product_name_utf8)
 {
 	char *tmp = strdup(uevent);
-	char *saveptr = NULL;
+	char *saveptr = nullptr;
 	char *line;
 	char *key;
 	char *value;
@@ -218,7 +218,7 @@ parse_uevent_info(const char *uevent, int *bus_type,
 	int found_name = 0;
 
 	line = strtok_r(tmp, "\n", &saveptr);
-	while (line != NULL) {
+	while (line != nullptr) {
 		/* line: "KEY=value" */
 		key = line;
 		value = strchr(line, '=');
@@ -258,7 +258,7 @@ parse_uevent_info(const char *uevent, int *bus_type,
 		}
 
 next_line:
-		line = strtok_r(NULL, "\n", &saveptr);
+		line = strtok_r(nullptr, "\n", &saveptr);
 	}
 
 	free(tmp);
@@ -272,8 +272,8 @@ static int get_device_string(hid_device *dev, enum device_string_id key, wchar_t
 	struct udev_device *udev_dev, *parent, *hid_dev;
 	struct stat s;
 	int ret = -1;
-        char *serial_number_utf8 = NULL;
-        char *product_name_utf8 = NULL;
+        char *serial_number_utf8 = nullptr;
+        char *product_name_utf8 = nullptr;
 
 	/* Create the udev object */
 	udev = udev_new();
@@ -290,7 +290,7 @@ static int get_device_string(hid_device *dev, enum device_string_id key, wchar_t
 		hid_dev = udev_device_get_parent_with_subsystem_devtype(
 			udev_dev,
 			"hid",
-			NULL);
+			nullptr);
 		if (hid_dev) {
 			unsigned short dev_vid;
 			unsigned short dev_pid;
@@ -333,7 +333,7 @@ static int get_device_string(hid_device *dev, enum device_string_id key, wchar_t
 					   "usb_device");
 				if (parent) {
 					const char *str;
-					const char *key_str = NULL;
+					const char *key_str = nullptr;
 
 					if (key >= 0 && key < DEVICE_STRING_COUNT) {
 						key_str = device_string_names[key];
@@ -371,7 +371,7 @@ int HID_API_EXPORT hid_init(void)
 	const char *locale;
 
 	/* Set the locale if it's not set. */
-	locale = setlocale(LC_CTYPE, NULL);
+	locale = setlocale(LC_CTYPE, nullptr);
 	if (!locale)
 		setlocale(LC_CTYPE, "");
 
@@ -393,9 +393,9 @@ struct hid_device_info  HID_API_EXPORT *hid_enumerate(unsigned short vendor_id, 
 	struct udev_enumerate *enumerate;
 	struct udev_list_entry *devices, *dev_list_entry;
 
-	struct hid_device_info *root = NULL; /* return object */
-	struct hid_device_info *cur_dev = NULL;
-	struct hid_device_info *prev_dev = NULL; /* previous device */
+	struct hid_device_info *root = nullptr; /* return object */
+	struct hid_device_info *cur_dev = nullptr;
+	struct hid_device_info *prev_dev = nullptr; /* previous device */
 
 	hid_init();
 
@@ -403,7 +403,7 @@ struct hid_device_info  HID_API_EXPORT *hid_enumerate(unsigned short vendor_id, 
 	udev = udev_new();
 	if (!udev) {
 		printf("Can't create udev\n");
-		return NULL;
+		return nullptr;
 	}
 
 	/* Create a list of the devices in the 'hidraw' subsystem. */
@@ -424,8 +424,8 @@ struct hid_device_info  HID_API_EXPORT *hid_enumerate(unsigned short vendor_id, 
 		struct udev_device *intf_dev; /* The device's interface (in the USB sense). */
 		unsigned short dev_vid;
 		unsigned short dev_pid;
-		char *serial_number_utf8 = NULL;
-		char *product_name_utf8 = NULL;
+		char *serial_number_utf8 = nullptr;
+		char *product_name_utf8 = nullptr;
 		int bus_type;
 		int result;
 
@@ -438,13 +438,13 @@ struct hid_device_info  HID_API_EXPORT *hid_enumerate(unsigned short vendor_id, 
 		hid_dev = udev_device_get_parent_with_subsystem_devtype(
 			raw_dev,
 			"hid",
-			NULL);
+			nullptr);
 
 		if (!hid_dev) {
 
-            if (dev_path != NULL && strstr(dev_path, "js") != NULL)
+            if (dev_path != nullptr && strstr(dev_path, "js") != nullptr)
             {
-                hid_dev = udev_device_get_parent_with_subsystem_devtype(raw_dev, "input", NULL);
+                hid_dev = udev_device_get_parent_with_subsystem_devtype(raw_dev, "input", nullptr);
                 if (!hid_dev) {
                     /* Unable to find parent hid device. */
                     goto next;
@@ -489,8 +489,8 @@ struct hid_device_info  HID_API_EXPORT *hid_enumerate(unsigned short vendor_id, 
 			cur_dev = tmp;
 
 			/* Fill out the record */
-			cur_dev->next = NULL;
-			cur_dev->path = dev_path? strdup(dev_path): NULL;
+			cur_dev->next = nullptr;
+			cur_dev->path = dev_path? strdup(dev_path): nullptr;
 
 			/* VID/PID */
 			cur_dev->vendor_id = dev_vid;
@@ -526,11 +526,11 @@ struct hid_device_info  HID_API_EXPORT *hid_enumerate(unsigned short vendor_id, 
 
 						/* Take it off the device list. */
 						if (prev_dev) {
-							prev_dev->next = NULL;
+							prev_dev->next = nullptr;
 							cur_dev = prev_dev;
 						}
 						else {
-							cur_dev = root = NULL;
+							cur_dev = root = nullptr;
 						}
 
 						goto next;
@@ -542,7 +542,7 @@ struct hid_device_info  HID_API_EXPORT *hid_enumerate(unsigned short vendor_id, 
 
 					/* Release Number */
 					str = udev_device_get_sysattr_value(usb_dev, "bcdDevice");
-					cur_dev->release_number = (str)? strtol(str, NULL, 16): 0x0;
+					cur_dev->release_number = (str)? strtol(str, nullptr, 16): 0x0;
 
 					/* Get a handle to the interface's udev node. */
 					intf_dev = udev_device_get_parent_with_subsystem_devtype(
@@ -551,7 +551,7 @@ struct hid_device_info  HID_API_EXPORT *hid_enumerate(unsigned short vendor_id, 
 							"usb_interface");
 					if (intf_dev) {
 						str = udev_device_get_sysattr_value(intf_dev, "bInterfaceNumber");
-						cur_dev->interface_number = (str)? strtol(str, NULL, 16): -1;
+						cur_dev->interface_number = (str)? strtol(str, nullptr, 16): -1;
 					}
 
 					break;
@@ -602,8 +602,8 @@ void  HID_API_EXPORT hid_free_enumeration(struct hid_device_info *devs)
 hid_device * hid_open(unsigned short vendor_id, unsigned short product_id, const wchar_t *serial_number)
 {
 	struct hid_device_info *devs, *cur_dev;
-	const char *path_to_open = NULL;
-	hid_device *handle = NULL;
+	const char *path_to_open = nullptr;
+	hid_device *handle = nullptr;
 
 	devs = hid_enumerate(vendor_id, product_id);
 	cur_dev = devs;
@@ -636,7 +636,7 @@ hid_device * hid_open(unsigned short vendor_id, unsigned short product_id, const
 
 hid_device * HID_API_EXPORT hid_open_path(const char *path)
 {
-	hid_device *dev = NULL;
+	hid_device *dev = nullptr;
 
 	hid_init();
 
@@ -677,7 +677,7 @@ hid_device * HID_API_EXPORT hid_open_path(const char *path)
 	else {
 		/* Unable to open any devices. */
 		free(dev);
-		return NULL;
+		return nullptr;
 	}
 }
 
@@ -810,5 +810,5 @@ int HID_API_EXPORT_CALL hid_get_indexed_string(hid_device *, int , wchar_t *, si
 
 HID_API_EXPORT const wchar_t * HID_API_CALL  hid_error(hid_device *)
 {
-	return NULL;
+	return nullptr;
 }

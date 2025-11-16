@@ -45,7 +45,7 @@ QHttpConnection::QHttpConnection(QTcpSocket *socket, QObject *parent)
       m_transmitPos(0),
       m_postPending(false),
       m_isWebSocket(false),
-      m_pollTimer(NULL)
+      m_pollTimer(nullptr)
 {
     m_parser = (http_parser *)malloc(sizeof(http_parser));
     http_parser_init(m_parser, HTTP_REQUEST);
@@ -95,7 +95,7 @@ void QHttpConnection::invalidateRequest()
         Q_EMIT m_request->end();
     }
 
-    m_request = NULL;
+    m_request = nullptr;
 }
 
 void QHttpConnection::updateWriteCount(qint64 count)
