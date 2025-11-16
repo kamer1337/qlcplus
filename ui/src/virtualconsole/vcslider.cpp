@@ -106,10 +106,10 @@ VCSlider::VCSlider(QWidget *parent, Doc *doc)
     /* Set the class name "VCSlider" as the object name as well */
     setObjectName(VCSlider::staticMetaObject.className());
 
-    m_hbox = NULL;
-    m_topLabel = NULL;
-    m_slider = NULL;
-    m_bottomLabel = NULL;
+    m_hbox = nullptr;
+    m_topLabel = nullptr;
+    m_slider = nullptr;
+    m_bottomLabel = nullptr;
 
     setType(VCWidget::SliderWidget);
     setCaption(QString());
@@ -176,8 +176,8 @@ VCSlider::VCSlider(QWidget *parent, Doc *doc)
     connect(this, SIGNAL(monitorDMXValueChanged(int)),
             this, SLOT(slotMonitorDMXValueChanged(int)));
 
-    m_resetButton = NULL;
-    m_flashButton = NULL;
+    m_resetButton = nullptr;
+    m_flashButton = nullptr;
 
     /* Bottom label */
     m_bottomLabel = new QLabel(this);
@@ -211,7 +211,7 @@ VCSlider::VCSlider(QWidget *parent, Doc *doc)
 
 VCSlider::~VCSlider()
 {
-    /* When application exits these are already NULL and unregistration
+    /* When application exits these are already nullptr and unregistration
        is no longer necessary. But a normal deletion of a VCSlider in
        design mode must unregister the slider. */
     m_doc->masterTimer()->unregisterDMXSource(this);
@@ -239,13 +239,13 @@ void VCSlider::setID(quint32 id)
 
 VCWidget* VCSlider::createCopy(VCWidget* parent)
 {
-    Q_ASSERT(parent != NULL);
+    Q_ASSERT(parent != nullptr);
 
     VCSlider* slider = new VCSlider(parent, m_doc);
     if (slider->copyFrom(this) == false)
     {
         delete slider;
-        slider = NULL;
+        slider = nullptr;
     }
 
     return slider;
@@ -254,7 +254,7 @@ VCWidget* VCSlider::createCopy(VCWidget* parent)
 bool VCSlider::copyFrom(const VCWidget* widget)
 {
     const VCSlider* slider = qobject_cast<const VCSlider*> (widget);
-    if (slider == NULL)
+    if (slider == nullptr)
         return false;
 
     /* Copy widget style */
@@ -297,7 +297,7 @@ void VCSlider::setCaption(const QString& text)
 {
     VCWidget::setCaption(text);
 
-    if (m_bottomLabel != NULL)
+    if (m_bottomLabel != nullptr)
         setBottomLabelText(text);
 }
 
@@ -581,7 +581,7 @@ QList <VCSlider::LevelChannel> VCSlider::levelChannels()
 void VCSlider::setLevelLowLimit(uchar value)
 {
     m_levelLowLimit = value;
-    if (m_cngWidget != NULL)
+    if (m_cngWidget != nullptr)
         m_cngWidget->setLevelLowLimit(value);
 }
 
@@ -593,7 +593,7 @@ uchar VCSlider::levelLowLimit() const
 void VCSlider::setLevelHighLimit(uchar value)
 {
     m_levelHighLimit = value;
-    if (m_cngWidget != NULL)
+    if (m_cngWidget != nullptr)
         m_cngWidget->setLevelHighLimit(value);
 }
 
@@ -606,12 +606,12 @@ void VCSlider::setChannelsMonitorEnabled(bool enable)
 {
     m_monitorEnabled = enable;
 
-    if (m_resetButton != NULL)
+    if (m_resetButton != nullptr)
     {
         disconnect(m_resetButton, SIGNAL(clicked(bool)),
                 this, SLOT(slotResetButtonClicked()));
         delete m_resetButton;
-        m_resetButton = NULL;
+        m_resetButton = nullptr;
     }
 
     if (enable)
@@ -705,7 +705,7 @@ void VCSlider::slotUniverseWritten(quint32 idx, const QByteArray &universeData)
     {
         LevelChannel lch(it.next());
         Fixture* fxi = m_doc->fixture(lch.fixture);
-        if (fxi == NULL || fxi->universe() != idx)
+        if (fxi == nullptr || fxi->universe() != idx)
             continue;
 
         if (lch.channel >= fxi->channels() ||
@@ -764,14 +764,14 @@ ClickAndGoWidget::ClickAndGo VCSlider::clickAndGoType() const
 
 void VCSlider::setupClickAndGoWidget()
 {
-    if (m_cngWidget != NULL)
+    if (m_cngWidget != nullptr)
     {
         qDebug() << Q_FUNC_INFO << "Level channel: " << m_levelChannels.size() << "type: " << m_cngType;
         if (m_cngType == ClickAndGoWidget::Preset && m_levelChannels.size() > 0)
         {
             LevelChannel lChan = m_levelChannels.first();
             Fixture *fxi = m_doc->fixture(lChan.fixture);
-            if (fxi != NULL)
+            if (fxi != nullptr)
             {
                 const QLCChannel *chan = fxi->channel(lChan.channel);
                 m_cngWidget->setType(m_cngType, chan);
@@ -780,7 +780,7 @@ void VCSlider::setupClickAndGoWidget()
             }
         }
         else
-            m_cngWidget->setType(m_cngType, NULL);
+            m_cngWidget->setType(m_cngType, nullptr);
     }
 }
 
@@ -791,7 +791,7 @@ ClickAndGoWidget *VCSlider::getClickAndGoWidget()
 
 void VCSlider::setClickAndGoWidgetFromLevel(uchar level)
 {
-    if (m_cngType == ClickAndGoWidget::None || m_cngWidget == NULL)
+    if (m_cngType == ClickAndGoWidget::None || m_cngWidget == nullptr)
         return;
 
     if (m_cngType == ClickAndGoWidget::RGB || m_cngType == ClickAndGoWidget::CMY)
@@ -947,7 +947,7 @@ void VCSlider::mouseReleaseEvent(QMouseEvent *e)
 void VCSlider::setPlaybackFunction(quint32 fid)
 {
     Function* old = m_doc->function(m_playbackFunction);
-    if (old != NULL)
+    if (old != nullptr)
     {
         /* Get rid of old function connections */
         disconnect(old, SIGNAL(running(quint32)),
@@ -964,7 +964,7 @@ void VCSlider::setPlaybackFunction(quint32 fid)
     }
 
     Function* function = m_doc->function(fid);
-    if (function != NULL)
+    if (function != nullptr)
     {
         /* Connect to the new function */
         connect(function, SIGNAL(running(quint32)),
@@ -1016,7 +1016,7 @@ void VCSlider::notifyFunctionStarting(quint32 fid, qreal functionIntensity)
     if (fid == playbackFunction())
         return;
 
-    if (m_slider != NULL)
+    if (m_slider != nullptr)
     {
         int value = SCALE(1.0 - functionIntensity, 0, 1.0,
                           m_slider->minimum(), m_slider->maximum());
@@ -1027,7 +1027,7 @@ void VCSlider::notifyFunctionStarting(quint32 fid, qreal functionIntensity)
             m_externalMovement = false;
 
             Function* function = m_doc->function(m_playbackFunction);
-            if (function != NULL)
+            if (function != nullptr)
             {
                 qreal pIntensity = qreal(value) / qreal(UCHAR_MAX);
                 adjustFunctionIntensity(function, pIntensity * intensity());
@@ -1047,12 +1047,12 @@ void VCSlider::setPlaybackFlashEnable(bool enable)
 {
     m_playbackFlashEnable = enable;
 
-    if (enable == false && m_flashButton != NULL)
+    if (enable == false && m_flashButton != nullptr)
     {
         delete m_flashButton;
-        m_flashButton = NULL;
+        m_flashButton = nullptr;
     }
-    else if (enable == true && m_flashButton == NULL)
+    else if (enable == true && m_flashButton == nullptr)
     {
         m_flashButton = new FlashButton(this);
         m_flashButton->setIconSize(QSize(32, 32));
@@ -1194,7 +1194,7 @@ void VCSlider::writeDMXLevel(MasterTimer *timer, QList<Universe *> universes)
         {
             LevelChannel lch(it.next());
             Fixture *fxi = m_doc->fixture(lch.fixture);
-            if (fxi == NULL)
+            if (fxi == nullptr)
                 continue;
 
             quint32 universe = fxi->universe();
@@ -1223,7 +1223,7 @@ void VCSlider::writeDMXLevel(MasterTimer *timer, QList<Universe *> universes)
 
             int chType = fc->flags();
             const QLCChannel *qlcch = fxi->channel(lch.channel);
-            if (qlcch == NULL)
+            if (qlcch == nullptr)
                 continue;
 
             // set override flag if needed
@@ -1277,7 +1277,7 @@ void VCSlider::writeDMXPlayback(MasterTimer* timer, QList<Universe *> ua)
         return;
 
     Function* function = m_doc->function(m_playbackFunction);
-    if (function == NULL || mode() == Doc::Design)
+    if (function == nullptr || mode() == Doc::Design)
         return;
 
     uchar value = m_playbackValue;
@@ -1346,7 +1346,7 @@ QString VCSlider::topLabelText()
 
 void VCSlider::setSliderValue(uchar value, bool scale, bool external)
 {
-    if (m_slider == NULL)
+    if (m_slider == nullptr)
         return;
 
     float val = value;
@@ -1422,13 +1422,13 @@ void VCSlider::setWidgetStyle(SliderWidgetStyle mode)
                 this, SLOT(slotSliderMoved(int)));
 
         QLayoutItem* item;
-        while ((item = m_hbox->takeAt(0)) != NULL)
+        while ((item = m_hbox->takeAt(0)) != nullptr)
         {
             delete item->widget();
             delete item;
         }
 
-        m_slider = NULL;
+        m_slider = nullptr;
 
         m_slider = new KnobWidget(this);
         m_slider->setEnabled(false);
@@ -1445,13 +1445,13 @@ void VCSlider::setWidgetStyle(SliderWidgetStyle mode)
                 this, SLOT(slotSliderMoved(int)));
 
         QLayoutItem* item;
-        while ((item = m_hbox->takeAt(0)) != NULL)
+        while ((item = m_hbox->takeAt(0)) != nullptr)
         {
             delete item->widget();
             delete item;
         }
 
-        m_slider = NULL;
+        m_slider = nullptr;
         m_hbox->addStretch();
         m_slider = new ClickAndGoSlider(this);
         m_slider->setEnabled(false);
@@ -1611,7 +1611,7 @@ void VCSlider::adjustIntensity(qreal val)
     if (sliderMode() == Playback)
     {
         Function* function = m_doc->function(m_playbackFunction);
-        if (function == NULL || mode() == Doc::Design)
+        if (function == nullptr || mode() == Doc::Design)
             return;
 
         qreal pIntensity = qreal(m_playbackValue) / qreal(UCHAR_MAX);
@@ -1829,7 +1829,7 @@ bool VCSlider::saveXML(QXmlStreamWriter *doc)
 {
     QString str;
 
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* VC Slider entry */
     doc->writeStartElement(KXMLQLCVCSlider);
@@ -1978,7 +1978,7 @@ bool VCSlider::LevelChannel::operator<(const LevelChannel& lc) const
 
 void VCSlider::LevelChannel::saveXML(QXmlStreamWriter *doc) const
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     doc->writeStartElement(KXMLQLCVCSliderChannel);
 

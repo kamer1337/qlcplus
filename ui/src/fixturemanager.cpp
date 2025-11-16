@@ -64,7 +64,7 @@
 #define KColumnChannels 1
 #define KColumnAddress  2
 
-FixtureManager* FixtureManager::s_instance = NULL;
+FixtureManager* FixtureManager::s_instance = nullptr;
 
 /*****************************************************************************
  * Initialization
@@ -73,32 +73,32 @@ FixtureManager* FixtureManager::s_instance = NULL;
 FixtureManager::FixtureManager(QWidget* parent, Doc* doc)
     : QWidget(parent)
     , m_doc(doc)
-    , m_splitter(NULL)
-    , m_fixtures_tree(NULL)
-    , m_channel_groups_tree(NULL)
-    , m_rdmManager(NULL)
-    , m_info(NULL)
-    , m_groupEditor(NULL)
+    , m_splitter(nullptr)
+    , m_fixtures_tree(nullptr)
+    , m_channel_groups_tree(nullptr)
+    , m_rdmManager(nullptr)
+    , m_info(nullptr)
+    , m_groupEditor(nullptr)
     , m_currentTabIndex(0)
-    , m_addAction(NULL)
-    , m_addRGBAction(NULL)
-    , m_removeAction(NULL)
-    , m_propertiesAction(NULL)
-    , m_fadeConfigAction(NULL)
-    , m_remapAction(NULL)
-    , m_groupAction(NULL)
-    , m_unGroupAction(NULL)
-    , m_newGroupAction(NULL)
-    , m_moveUpAction(NULL)
-    , m_moveDownAction(NULL)
-    , m_importAction(NULL)
-    , m_exportAction(NULL)
-    , m_groupMenu(NULL)
+    , m_addAction(nullptr)
+    , m_addRGBAction(nullptr)
+    , m_removeAction(nullptr)
+    , m_propertiesAction(nullptr)
+    , m_fadeConfigAction(nullptr)
+    , m_remapAction(nullptr)
+    , m_groupAction(nullptr)
+    , m_unGroupAction(nullptr)
+    , m_newGroupAction(nullptr)
+    , m_moveUpAction(nullptr)
+    , m_moveDownAction(nullptr)
+    , m_importAction(nullptr)
+    , m_exportAction(nullptr)
+    , m_groupMenu(nullptr)
 {
-    Q_ASSERT(s_instance == NULL);
+    Q_ASSERT(s_instance == nullptr);
     s_instance = this;
 
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     new QVBoxLayout(this);
     layout()->setContentsMargins(0, 0, 0, 0);
@@ -111,7 +111,7 @@ FixtureManager::FixtureManager(QWidget* parent, Doc* doc)
     updateChannelsGroupView();
 
     QTreeWidgetItem* grpItem = m_fixtures_tree->topLevelItem(0);
-    if (grpItem != NULL)
+    if (grpItem != nullptr)
         grpItem->setExpanded(true);
 
     /* Connect fixture list change signals from the new document object */
@@ -147,9 +147,9 @@ FixtureManager::~FixtureManager()
 {
     QSettings settings;
     settings.setValue(SETTINGS_SPLITTER, m_splitter->saveState());
-    FixtureManager::s_instance = NULL;
+    FixtureManager::s_instance = nullptr;
 
-    s_instance = NULL;
+    s_instance = nullptr;
 }
 
 FixtureManager* FixtureManager::instance()
@@ -168,11 +168,11 @@ void FixtureManager::slotFixtureRemoved(quint32 id)
     for (int i = 0; i < m_fixtures_tree->topLevelItemCount(); i++)
     {
         QTreeWidgetItem* grpItem = m_fixtures_tree->topLevelItem(i);
-        Q_ASSERT(grpItem != NULL);
+        Q_ASSERT(grpItem != nullptr);
         for (int j = 0; j < grpItem->childCount(); j++)
         {
             QTreeWidgetItem* fxiItem = grpItem->child(j);
-            Q_ASSERT(fxiItem != NULL);
+            Q_ASSERT(fxiItem != nullptr);
             QVariant var = fxiItem->data(KColumnName, PROP_ID);
             if (var.isValid() == true && var.toUInt() == id)
             {
@@ -201,7 +201,7 @@ void FixtureManager::slotChannelsGroupRemoved(quint32 id)
     for (int i = 0; i < m_channel_groups_tree->topLevelItemCount(); i++)
     {
         QTreeWidgetItem* grpItem = m_channel_groups_tree->topLevelItem(i);
-        Q_ASSERT(grpItem != NULL);
+        Q_ASSERT(grpItem != nullptr);
         QVariant var = grpItem->data(KColumnName, PROP_ID);
         if (var.isValid() == true && var.toUInt() == id)
             delete grpItem;
@@ -215,7 +215,7 @@ void FixtureManager::slotModeChanged(Doc::Mode mode)
         int selected = m_fixtures_tree->selectedItems().size();
 
         QTreeWidgetItem* item = m_fixtures_tree->currentItem();
-        if (item == NULL)
+        if (item == nullptr)
         {
             m_addAction->setEnabled(true);
             m_addRGBAction->setEnabled(true);
@@ -285,7 +285,7 @@ void FixtureManager::slotFixtureGroupRemoved(quint32 id)
     for (int i = 0; i < m_fixtures_tree->topLevelItemCount(); i++)
     {
         QTreeWidgetItem* item = m_fixtures_tree->topLevelItem(i);
-        Q_ASSERT(item != NULL);
+        Q_ASSERT(item != nullptr);
         QVariant var = item->data(KColumnName, PROP_GROUP);
         if (var.isValid() && var.toUInt() == id)
         {
@@ -300,11 +300,11 @@ void FixtureManager::slotFixtureGroupRemoved(quint32 id)
 void FixtureManager::slotFixtureGroupChanged(quint32 id)
 {
     QTreeWidgetItem* item = m_fixtures_tree->groupItem(id);
-    if (item == NULL)
+    if (item == nullptr)
         return;
 
     FixtureGroup* grp = m_doc->fixtureGroup(id);
-    Q_ASSERT(grp != NULL);
+    Q_ASSERT(grp != nullptr);
     m_fixtures_tree->updateGroupItem(item, grp);
     updateGroupMenu();
 }
@@ -458,11 +458,11 @@ void FixtureManager::updateChannelsGroupView()
         {
             SceneValue scv = grp->getChannels().at(0);
             Fixture *fxi = m_doc->fixture(scv.fxi);
-            if (fxi == NULL)
+            if (fxi == nullptr)
                 continue;
 
             const QLCChannel *ch = fxi->channel(scv.channel);
-            if (ch != NULL)
+            if (ch != nullptr)
                 grpItem->setIcon(KColumnName, ch->getIcon());
         }
         if (selGroupID == grp->id())
@@ -495,10 +495,10 @@ void FixtureManager::updateRDMView()
 void FixtureManager::fixtureSelected(quint32 id)
 {
     Fixture* fxi = m_doc->fixture(id);
-    if (fxi == NULL)
+    if (fxi == nullptr)
         return;
 
-    if (m_info == NULL)
+    if (m_info == nullptr)
         createInfo();
 
     m_info->setText(QString("%1<BODY>%2</BODY></HTML>")
@@ -513,16 +513,16 @@ void FixtureManager::fixtureGroupSelected(FixtureGroup* grp)
 {
     QByteArray state = m_splitter->saveState();
 
-    if (m_info != NULL)
+    if (m_info != nullptr)
     {
         delete m_info;
-        m_info = NULL;
+        m_info = nullptr;
     }
 
-    if (m_groupEditor != NULL)
+    if (m_groupEditor != nullptr)
     {
         delete m_groupEditor;
-        m_groupEditor = NULL;
+        m_groupEditor = nullptr;
     }
 
     m_groupEditor = new FixtureGroupEditor(grp, m_doc, this);
@@ -535,16 +535,16 @@ void FixtureManager::createInfo()
 {
     QByteArray state = m_splitter->saveState();
 
-    if (m_info != NULL)
+    if (m_info != nullptr)
     {
         delete m_info;
-        m_info = NULL;
+        m_info = nullptr;
     }
 
-    if (m_groupEditor != NULL)
+    if (m_groupEditor != nullptr)
     {
         delete m_groupEditor;
-        m_groupEditor = NULL;
+        m_groupEditor = nullptr;
     }
 
     m_info = new QTextBrowser(this);
@@ -559,7 +559,7 @@ void FixtureManager::slotSelectionChanged()
     if (selectedCount == 1)
     {
         QTreeWidgetItem* item = m_fixtures_tree->selectedItems().first();
-        Q_ASSERT(item != NULL);
+        Q_ASSERT(item != nullptr);
 
         // Set the text view's contents
         QVariant fxivar = item->data(KColumnName, PROP_ID);
@@ -572,7 +572,7 @@ void FixtureManager::slotSelectionChanged()
         else if (grpvar.isValid() == true)
         {
             FixtureGroup* grp = m_doc->fixtureGroup(grpvar.toUInt());
-            Q_ASSERT(grp != NULL);
+            Q_ASSERT(grp != nullptr);
             fixtureGroupSelected(grp);
         }
         else
@@ -587,7 +587,7 @@ void FixtureManager::slotSelectionChanged()
 
             foreach (Fixture *fixture, m_doc->fixtures())
             {
-                if (fixture == NULL || fixture->universe() != uniID.toUInt() || fixture->fixtureMode() == NULL)
+                if (fixture == nullptr || fixture->universe() != uniID.toUInt() || fixture->fixtureMode() == nullptr)
                     continue;
 
                 QLCFixtureMode *mode = fixture->fixtureMode();
@@ -595,7 +595,7 @@ void FixtureManager::slotSelectionChanged()
                 totalPower += mode->physical().powerConsumption();
             }
 
-            if (m_info == NULL)
+            if (m_info == nullptr)
                 createInfo();
 
             info += QString("<H1>%1</H1><P>%2 <B>%3</B></P>")
@@ -635,7 +635,7 @@ void FixtureManager::slotSelectionChanged()
 
                     Fixture *fixture = m_doc->fixture(fxID.toUInt());
 
-                    if (fixture == NULL || fixture->fixtureMode() == NULL)
+                    if (fixture == nullptr || fixture->fixtureMode() == nullptr)
                         continue;
 
                     QLCFixtureMode *mode = fixture->fixtureMode();
@@ -672,7 +672,7 @@ void FixtureManager::slotSelectionChanged()
         }
         info += "</BODY></HTML>";
 
-        if (m_info == NULL)
+        if (m_info == nullptr)
             createInfo();
         m_info->setText(info);
     }
@@ -683,7 +683,7 @@ void FixtureManager::slotSelectionChanged()
 
 void FixtureManager::slotChannelsGroupSelectionChanged()
 {
-    if (m_info == NULL)
+    if (m_info == nullptr)
         createInfo();
 
     int selectedCount = m_channel_groups_tree->selectedItems().size();
@@ -691,14 +691,14 @@ void FixtureManager::slotChannelsGroupSelectionChanged()
     if (selectedCount == 1)
     {
         QTreeWidgetItem* item = m_channel_groups_tree->selectedItems().first();
-        Q_ASSERT(item != NULL);
+        Q_ASSERT(item != nullptr);
 
         // Set the text view's contents
         QVariant grpvar = item->data(KColumnName, PROP_ID);
         if (grpvar.isValid() == true)
         {
             ChannelsGroup *chGroup = m_doc->channelsGroup(grpvar.toUInt());
-            if (chGroup != NULL)
+            if (chGroup != nullptr)
                 m_info->setText(QString("%1<BODY>%2</BODY></HTML>")
                                 .arg(channelsGroupInfoStyleSheetHeader())
                                 .arg(chGroup->status(m_doc)));
@@ -736,7 +736,7 @@ void FixtureManager::slotChannelsGroupSelectionChanged()
 
 void FixtureManager::slotDoubleClicked(QTreeWidgetItem* item)
 {
-    if (item != NULL && m_doc->mode() != Doc::Operate)
+    if (item != nullptr && m_doc->mode() != Doc::Operate)
         slotProperties();
 }
 
@@ -938,7 +938,7 @@ void FixtureManager::initActions()
 
 void FixtureManager::updateGroupMenu()
 {
-    if (m_groupMenu == NULL)
+    if (m_groupMenu == nullptr)
     {
         m_groupMenu = new QMenu(this);
         connect(m_groupMenu, SIGNAL(triggered(QAction*)),
@@ -985,7 +985,7 @@ void FixtureManager::initToolBar()
     toolbar->addAction(m_remapAction);
 
     QToolButton* btn = qobject_cast<QToolButton*> (toolbar->widgetForAction(m_groupAction));
-    Q_ASSERT(btn != NULL);
+    Q_ASSERT(btn != nullptr);
     btn->setPopupMode(QToolButton::InstantPopup);
 }
 
@@ -1014,11 +1014,11 @@ void FixtureManager::addFixture()
     QLCFixtureDef* fixtureDef = af.fixtureDef();
     QLCFixtureMode* mode = af.mode();
 
-    FixtureGroup* addToGroup = NULL;
+    FixtureGroup* addToGroup = nullptr;
     QTreeWidgetItem* current = m_fixtures_tree->currentItem();
-    if (current != NULL)
+    if (current != nullptr)
     {
-        if (current->parent() != NULL)
+        if (current->parent() != nullptr)
         {
             // Fixture selected
             QVariant var = current->parent()->data(KColumnName, PROP_GROUP);
@@ -1037,7 +1037,7 @@ void FixtureManager::addFixture()
     /* If an empty name was given use the model instead */
     if (name.simplified().isEmpty())
     {
-        if (fixtureDef != NULL)
+        if (fixtureDef != nullptr)
             name = fixtureDef->model();
         else
             name = tr("Generic Dimmer");
@@ -1066,7 +1066,7 @@ void FixtureManager::addFixture()
         /* Set a fixture definition & mode if they were
            selected. Otherwise create a fixture definition
            and mode for a generic dimmer. */
-        if (fixtureDef != NULL && mode != NULL)
+        if (fixtureDef != nullptr && mode != nullptr)
         {
             fxi->setFixtureDefinition(fixtureDef, mode);
         }
@@ -1079,12 +1079,12 @@ void FixtureManager::addFixture()
 
         m_doc->addFixture(fxi);
         latestFxi = fxi->id();
-        if (addToGroup != NULL)
+        if (addToGroup != nullptr)
             addToGroup->assignFixture(latestFxi);
     }
 
     QTreeWidgetItem* selectItem = m_fixtures_tree->fixtureItem(latestFxi);
-    if (selectItem != NULL)
+    if (selectItem != nullptr)
         m_fixtures_tree->setCurrentItem(selectItem);
 
     updateView();
@@ -1123,7 +1123,7 @@ void FixtureManager::slotAddRGBPanel()
         Fixture::Components components = rgb.components();
 
         FixtureGroup *grp = new FixtureGroup(m_doc);
-        Q_ASSERT(grp != NULL);
+        Q_ASSERT(grp != nullptr);
         grp->setName(rgb.name());
         QSize panelSize(columns, rows);
         grp->setSize(panelSize);
@@ -1139,8 +1139,8 @@ void FixtureManager::slotAddRGBPanel()
         	transpose = 1;
         }
 
-        QLCFixtureDef *rowDef = NULL;
-        QLCFixtureMode *rowMode = NULL;
+        QLCFixtureDef *rowDef = nullptr;
+        QLCFixtureMode *rowMode = nullptr;
         quint32 address = (quint32)rgb.address();
         int uniIndex = rgb.universeIndex();
         int currRow = 0;
@@ -1188,11 +1188,11 @@ void FixtureManager::slotAddRGBPanel()
         for (int i = 0; i < rows; i++)
         {
             Fixture *fxi = new Fixture(m_doc);
-            Q_ASSERT(fxi != NULL);
+            Q_ASSERT(fxi != nullptr);
             fxi->setName(tr("%1 - Row %2").arg(rgb.name()).arg(i + 1));
-            if (rowDef == NULL)
+            if (rowDef == nullptr)
                 rowDef = fxi->genericRGBPanelDef(columns, components, rgb.is16Bit());
-            if (rowMode == NULL)
+            if (rowMode == nullptr)
                 rowMode = fxi->genericRGBPanelMode(rowDef, components, rgb.is16Bit(), phyWidth, phyHeight);
             fxi->setFixtureDefinition(rowDef, rowMode);
 
@@ -1290,7 +1290,7 @@ void FixtureManager::removeFixture()
     while (it.hasNext() == true)
     {
         QTreeWidgetItem* item(it.next());
-        Q_ASSERT(item != NULL);
+        Q_ASSERT(item != nullptr);
 
         // Is the item a fixture ?
         QVariant var = item->data(KColumnName, PROP_ID);
@@ -1316,7 +1316,7 @@ void FixtureManager::removeFixture()
             this. However, FixtureManager is the only place to destroy fixtures,
             so it's rather safe to reset the fixture's address space here. */
         Fixture* fxi = m_doc->fixture(id);
-        Q_ASSERT(fxi != NULL);
+        Q_ASSERT(fxi != nullptr);
         QList<Universe*> ua = m_doc->inputOutputMap()->claimUniverses();
         int universe = fxi->universe();
         if (universe < ua.count())
@@ -1344,7 +1344,7 @@ void FixtureManager::removeChannelsGroup()
     while (it.hasNext() == true)
     {
         QTreeWidgetItem* item(it.next());
-        Q_ASSERT(item != NULL);
+        Q_ASSERT(item != nullptr);
 
         QVariant var = item->data(KColumnName, PROP_ID);
         if (var.isValid() == true)
@@ -1367,7 +1367,7 @@ void FixtureManager::slotRemove()
 void FixtureManager::editFixtureProperties()
 {
     QTreeWidgetItem* item = m_fixtures_tree->currentItem();
-    if (item == NULL)
+    if (item == nullptr)
         return;
 
     QVariant var = item->data(KColumnName, PROP_ID);
@@ -1376,14 +1376,14 @@ void FixtureManager::editFixtureProperties()
 
     quint32 id = var.toUInt();
     Fixture* fxi = m_doc->fixture(id);
-    if (fxi == NULL)
+    if (fxi == nullptr)
         return;
 
     QString manuf;
     QString model;
     QString mode;
 
-    if (fxi->fixtureDef() != NULL)
+    if (fxi->fixtureDef() != nullptr)
     {
         manuf = fxi->fixtureDef()->manufacturer();
         model = fxi->fixtureDef()->model();
@@ -1416,7 +1416,7 @@ void FixtureManager::editFixtureProperties()
             }
             fxi->blockSignals(false);
 
-            if (af.fixtureDef() != NULL && af.mode() != NULL)
+            if (af.fixtureDef() != nullptr && af.mode() != nullptr)
             {
                 if (af.fixtureDef()->manufacturer() == KXMLFixtureGeneric &&
                     af.fixtureDef()->model() == KXMLFixtureGeneric)
@@ -1436,7 +1436,7 @@ void FixtureManager::editFixtureProperties()
             else
             {
                 /* Generic dimmer */
-                fxi->setFixtureDefinition(NULL, NULL);
+                fxi->setFixtureDefinition(nullptr, nullptr);
                 fxi->setChannels(af.channels());
             }
 
@@ -1486,7 +1486,7 @@ int FixtureManager::headCount(const QList <QTreeWidgetItem*>& items) const
     while (it.hasNext() == true)
     {
         QTreeWidgetItem* item = it.next();
-        Q_ASSERT(item != NULL);
+        Q_ASSERT(item != nullptr);
 
         QVariant var = item->data(KColumnName, PROP_ID);
         if (var.isValid() == false)
@@ -1541,7 +1541,7 @@ void FixtureManager::slotUnGroup()
 
     foreach (QTreeWidgetItem* item, m_fixtures_tree->selectedItems())
     {
-        if (item->parent() == NULL)
+        if (item->parent() == nullptr)
             continue;
 
         QVariant var = item->parent()->data(KColumnName, PROP_GROUP);
@@ -1562,20 +1562,20 @@ void FixtureManager::slotUnGroup()
     {
         QPair <quint32,quint32> pair(it.next());
         FixtureGroup* grp = m_doc->fixtureGroup(pair.first);
-        Q_ASSERT(grp != NULL);
+        Q_ASSERT(grp != nullptr);
         grp->resignFixture(pair.second);
     }
 }
 
 void FixtureManager::slotGroupSelected(QAction* action)
 {
-    FixtureGroup* grp = NULL;
+    FixtureGroup* grp = nullptr;
 
     if (action->data().isValid() == true)
     {
         // Existing group selected
         grp = (FixtureGroup*) (action->data().toULongLong());
-        Q_ASSERT(grp != NULL);
+        Q_ASSERT(grp != nullptr);
     }
     else
     {
@@ -1592,7 +1592,7 @@ void FixtureManager::slotGroupSelected(QAction* action)
             return; // User pressed cancel
 
         grp = new FixtureGroup(m_doc);
-        Q_ASSERT(grp != NULL);
+        Q_ASSERT(grp != nullptr);
         grp->setName(cfg.name());
         grp->setSize(cfg.size());
         m_doc->addFixtureGroup(grp);
@@ -1687,7 +1687,7 @@ void FixtureManager::slotImport()
     QString fileName = createDialog(true);
 
     QXmlStreamReader *doc = QLCFile::getXMLReader(fileName);
-    if (doc == NULL || doc->device() == NULL || doc->hasError())
+    if (doc == nullptr || doc->device() == nullptr || doc->hasError())
     {
         qWarning() << Q_FUNC_INFO << "Unable to read from" << fileName;
         return;
@@ -1719,7 +1719,7 @@ void FixtureManager::slotImport()
             if (doc->name() == KXMLFixture)
             {
                 Fixture* fxi = new Fixture(m_doc);
-                Q_ASSERT(fxi != NULL);
+                Q_ASSERT(fxi != nullptr);
 
                 if (fxi->loadXML(*doc, m_doc, m_doc->fixtureDefCache()) == true)
                 {
@@ -1744,7 +1744,7 @@ void FixtureManager::slotImport()
             else if (doc->name() == KXMLQLCFixtureGroup)
             {
                 FixtureGroup* grp = new FixtureGroup(m_doc);
-                Q_ASSERT(grp != NULL);
+                Q_ASSERT(grp != nullptr);
 
                 if (grp->loadXML(*doc) == true)
                 {
@@ -1787,7 +1787,7 @@ void FixtureManager::slotExport()
     while (fxit.hasNext() == true)
     {
         Fixture* fxi(fxit.next());
-        Q_ASSERT(fxi != NULL);
+        Q_ASSERT(fxi != nullptr);
         fxi->saveXML(&doc);
     }
 
@@ -1795,7 +1795,7 @@ void FixtureManager::slotExport()
     while (grpit.hasNext() == true)
     {
         FixtureGroup *fxgrp(grpit.next());
-        Q_ASSERT(fxgrp != NULL);
+        Q_ASSERT(fxgrp != nullptr);
         fxgrp->saveXML(&doc);
     }
 

@@ -86,7 +86,7 @@ VCMatrix::VCMatrix(QWidget *parent, Doc *doc)
 
     QWidgetAction* scAction = new QWidgetAction(this);
     m_mtxColor1CnGWidget = new ClickAndGoWidget();
-    m_mtxColor1CnGWidget->setType(ClickAndGoWidget::RGB, NULL);
+    m_mtxColor1CnGWidget->setType(ClickAndGoWidget::RGB, nullptr);
     scAction->setDefaultWidget(m_mtxColor1CnGWidget);
     QMenu *color1Menu = new QMenu();
     color1Menu->addAction(scAction);
@@ -103,7 +103,7 @@ VCMatrix::VCMatrix(QWidget *parent, Doc *doc)
 
     QWidgetAction* ecAction2 = new QWidgetAction(this);
     m_mtxColor2CnGWidget = new ClickAndGoWidget();
-    m_mtxColor2CnGWidget->setType(ClickAndGoWidget::RGB, NULL);
+    m_mtxColor2CnGWidget->setType(ClickAndGoWidget::RGB, nullptr);
     ecAction2->setDefaultWidget(m_mtxColor2CnGWidget);
     QMenu *color2Menu = new QMenu();
     color2Menu->addAction(ecAction2);
@@ -120,7 +120,7 @@ VCMatrix::VCMatrix(QWidget *parent, Doc *doc)
 
     QWidgetAction* ecAction3 = new QWidgetAction(this);
     m_mtxColor3CnGWidget = new ClickAndGoWidget();
-    m_mtxColor3CnGWidget->setType(ClickAndGoWidget::RGB, NULL);
+    m_mtxColor3CnGWidget->setType(ClickAndGoWidget::RGB, nullptr);
     ecAction3->setDefaultWidget(m_mtxColor3CnGWidget);
     QMenu *color3Menu = new QMenu();
     color3Menu->addAction(ecAction3);
@@ -137,7 +137,7 @@ VCMatrix::VCMatrix(QWidget *parent, Doc *doc)
 
     QWidgetAction* ecAction4 = new QWidgetAction(this);
     m_mtxColor4CnGWidget = new ClickAndGoWidget();
-    m_mtxColor4CnGWidget->setType(ClickAndGoWidget::RGB, NULL);
+    m_mtxColor4CnGWidget->setType(ClickAndGoWidget::RGB, nullptr);
     ecAction4->setDefaultWidget(m_mtxColor4CnGWidget);
     QMenu *color4Menu = new QMenu();
     color4Menu->addAction(ecAction4);
@@ -154,7 +154,7 @@ VCMatrix::VCMatrix(QWidget *parent, Doc *doc)
 
     QWidgetAction* ecAction5 = new QWidgetAction(this);
     m_mtxColor5CnGWidget = new ClickAndGoWidget();
-    m_mtxColor5CnGWidget->setType(ClickAndGoWidget::RGB, NULL);
+    m_mtxColor5CnGWidget->setType(ClickAndGoWidget::RGB, nullptr);
     ecAction5->setDefaultWidget(m_mtxColor5CnGWidget);
     QMenu *color5Menu = new QMenu();
     color5Menu->addAction(ecAction5);
@@ -234,13 +234,13 @@ void VCMatrix::setID(quint32 id)
 
 VCWidget *VCMatrix::createCopy(VCWidget *parent)
 {
-    Q_ASSERT(parent != NULL);
+    Q_ASSERT(parent != nullptr);
 
     VCMatrix* matrix = new VCMatrix(parent, m_doc);
     if (matrix->copyFrom(this) == false)
     {
         delete matrix;
-        matrix = NULL;
+        matrix = nullptr;
     }
 
     return matrix;
@@ -249,7 +249,7 @@ VCWidget *VCMatrix::createCopy(VCWidget *parent)
 bool VCMatrix::copyFrom(const VCWidget* widget)
 {
     const VCMatrix* matrix = qobject_cast <const VCMatrix*> (widget);
-    if (matrix == NULL)
+    if (matrix == nullptr)
         return false;
 
     /* Copy vcmatrix-specific stuff */
@@ -304,7 +304,7 @@ void VCMatrix::slotSetSliderValue(int value)
 void VCMatrix::slotSliderMoved(int value)
 {
     Function* function = m_doc->function(m_matrixID);
-    if (function == NULL || mode() == Doc::Design)
+    if (function == nullptr || mode() == Doc::Design)
         return;
 
     if (m_sliderExternalMovement)
@@ -343,7 +343,7 @@ int VCMatrix::sliderValue()
 void VCMatrix::slotSetColor1(QColor color)
 {
     RGBMatrix *matrix = qobject_cast<RGBMatrix*>(m_doc->function(m_matrixID));
-    if (matrix == NULL)
+    if (matrix == nullptr)
         return;
 
     if (matrix->getColor(0) != color)
@@ -356,7 +356,7 @@ void VCMatrix::slotSetColor1(QColor color)
 void VCMatrix::slotSetColor2(QColor color)
 {
     RGBMatrix *matrix = qobject_cast<RGBMatrix*>(m_doc->function(m_matrixID));
-    if (matrix == NULL)
+    if (matrix == nullptr)
         return;
 
     if (matrix->getColor(1) != color)
@@ -369,7 +369,7 @@ void VCMatrix::slotSetColor2(QColor color)
 void VCMatrix::slotSetColor3(QColor color)
 {
     RGBMatrix *matrix = qobject_cast<RGBMatrix*>(m_doc->function(m_matrixID));
-    if (matrix == NULL)
+    if (matrix == nullptr)
         return;
 
     if (matrix->getColor(2) != color)
@@ -382,7 +382,7 @@ void VCMatrix::slotSetColor3(QColor color)
 void VCMatrix::slotSetColor4(QColor color)
 {
     RGBMatrix *matrix = qobject_cast<RGBMatrix*>(m_doc->function(m_matrixID));
-    if (matrix == NULL)
+    if (matrix == nullptr)
         return;
 
     if (matrix->getColor(3) != color)
@@ -395,7 +395,7 @@ void VCMatrix::slotSetColor4(QColor color)
 void VCMatrix::slotSetColor5(QColor color)
 {
     RGBMatrix *matrix = qobject_cast<RGBMatrix*>(m_doc->function(m_matrixID));
-    if (matrix == NULL)
+    if (matrix == nullptr)
         return;
 
     if (matrix->getColor(4) != color)
@@ -408,7 +408,7 @@ void VCMatrix::slotSetColor5(QColor color)
 QColor VCMatrix::mtxColor(int id)
 {
     RGBMatrix *matrix = qobject_cast<RGBMatrix*>(m_doc->function(m_matrixID));
-    if (matrix == NULL)
+    if (matrix == nullptr)
         return QColor();
 
     return matrix->getColor(id);
@@ -423,7 +423,7 @@ void VCMatrix::slotColor1Changed(QRgb color)
     m_mtxColor1Button->setIcon(px);
 
     RGBMatrix* matrix = qobject_cast<RGBMatrix*>(m_doc->function(m_matrixID));
-    if (matrix == NULL || mode() == Doc::Design)
+    if (matrix == nullptr || mode() == Doc::Design)
         return;
 
     matrix->setColor(0, col);
@@ -440,7 +440,7 @@ void VCMatrix::slotColor2Changed(QRgb color)
     m_mtxColor2Button->setIcon(px);
 
     RGBMatrix* matrix = qobject_cast<RGBMatrix*>(m_doc->function(m_matrixID));
-    if (matrix == NULL || mode() == Doc::Design)
+    if (matrix == nullptr || mode() == Doc::Design)
         return;
 
     matrix->setColor(1, col);
@@ -457,7 +457,7 @@ void VCMatrix::slotColor3Changed(QRgb color)
     m_mtxColor3Button->setIcon(px);
 
     RGBMatrix* matrix = qobject_cast<RGBMatrix*>(m_doc->function(m_matrixID));
-    if (matrix == NULL || mode() == Doc::Design)
+    if (matrix == nullptr || mode() == Doc::Design)
         return;
 
     matrix->setColor(2, col);
@@ -472,7 +472,7 @@ void VCMatrix::slotColor4Changed(QRgb color)
     m_mtxColor4Button->setIcon(px);
 
     RGBMatrix* matrix = qobject_cast<RGBMatrix*>(m_doc->function(m_matrixID));
-    if (matrix == NULL || mode() == Doc::Design)
+    if (matrix == nullptr || mode() == Doc::Design)
         return;
 
     matrix->setColor(3, col);
@@ -487,7 +487,7 @@ void VCMatrix::slotColor5Changed(QRgb color)
     m_mtxColor5Button->setIcon(px);
 
     RGBMatrix* matrix = qobject_cast<RGBMatrix*>(m_doc->function(m_matrixID));
-    if (matrix == NULL || mode() == Doc::Design)
+    if (matrix == nullptr || mode() == Doc::Design)
         return;
 
     matrix->setColor(4, col);
@@ -509,7 +509,7 @@ void VCMatrix::slotSetAnimationValue(QString name)
 void VCMatrix::slotAnimationChanged(int index)
 {
     RGBMatrix* matrix = qobject_cast<RGBMatrix*>(m_doc->function(m_matrixID));
-    if (matrix == NULL || mode() == Doc::Design)
+    if (matrix == nullptr || mode() == Doc::Design)
         return;
 
     QString pValue = m_presetCombo->itemText(index);
@@ -601,7 +601,7 @@ void VCMatrix::adjustIntensity(qreal val)
 void VCMatrix::setFunction(quint32 id)
 {
     Function *old = m_doc->function(m_matrixID);
-    if (old != NULL)
+    if (old != nullptr)
     {
         disconnect(old, SIGNAL(stopped(quint32)),
                 this, SLOT(slotFunctionStopped()));
@@ -611,7 +611,7 @@ void VCMatrix::setFunction(quint32 id)
 
     RGBMatrix* matrix = qobject_cast<RGBMatrix*> (m_doc->function(id));
 
-    if (matrix == NULL)
+    if (matrix == nullptr)
         m_matrixID = Function::invalidId();
     else
     {
@@ -648,7 +648,7 @@ void VCMatrix::notifyFunctionStarting(quint32 fid, qreal functionIntensity)
         m_sliderExternalMovement = false;
 
         Function* function = m_doc->function(m_matrixID);
-        if (function != NULL)
+        if (function != nullptr)
         {
             qreal pIntensity = qreal(value) / qreal(UCHAR_MAX);
             adjustFunctionIntensity(function, pIntensity * intensity());
@@ -680,7 +680,7 @@ void VCMatrix::slotUpdate()
         return;
 
     RGBMatrix *matrix = qobject_cast<RGBMatrix*>(m_doc->function(m_matrixID));
-    if (matrix == NULL)
+    if (matrix == nullptr)
         return;
 
     QString algorithmName;
@@ -692,7 +692,7 @@ void VCMatrix::slotUpdate()
         QMutexLocker locker(&matrix->algorithmMutex());
 
         RGBAlgorithm *algo = matrix->algorithm();
-        if (algo != NULL)
+        if (algo != nullptr)
         {
             algorithmName = algo->name();
             algorithmType = algo->type();
@@ -896,7 +896,7 @@ bool VCMatrix::instantChanges() const
 
 void VCMatrix::addCustomControl(VCMatrixControl const& control)
 {
-    QWidget *controlWidget = NULL;
+    QWidget *controlWidget = nullptr;
 
     if (control.m_type == VCMatrixControl::Color1)
     {
@@ -1098,7 +1098,7 @@ void VCMatrix::addCustomControl(VCMatrixControl const& control)
         controlKnob->setToolTip(knobLabel);
     }
 
-    Q_ASSERT(controlWidget != NULL);
+    Q_ASSERT(controlWidget != nullptr);
 
     if (control.widgetType() == VCMatrixControl::Knob)
     {
@@ -1121,7 +1121,7 @@ void VCMatrix::addCustomControl(VCMatrixControl const& control)
 
     m_controlsLayout->addWidget(controlWidget);
 
-    if (m_controls[controlWidget]->m_inputSource != NULL)
+    if (m_controls[controlWidget]->m_inputSource != nullptr)
     {
         setInputSource(m_controls[controlWidget]->m_inputSource, m_controls[controlWidget]->m_id);
     }
@@ -1173,10 +1173,10 @@ void VCMatrix::slotCustomControlClicked()
 {
     QPushButton *btn = qobject_cast<QPushButton*>(sender());
     VCMatrixControl *control = m_controls[btn];
-    if (control != NULL)
+    if (control != nullptr)
     {
         RGBMatrix* matrix = qobject_cast<RGBMatrix*>(m_doc->function(m_matrixID));
-        if (matrix == NULL || mode() == Doc::Design)
+        if (matrix == nullptr || mode() == Doc::Design)
             return;
 
         if (control->m_type == VCMatrixControl::Color1)
@@ -1271,10 +1271,10 @@ void VCMatrix::slotCustomControlValueChanged()
 {
     KnobWidget *knob = qobject_cast<KnobWidget*>(sender());
     VCMatrixControl *control = m_controls[knob];
-    if (control != NULL)
+    if (control != nullptr)
     {
         RGBMatrix* matrix = qobject_cast<RGBMatrix*>(m_doc->function(m_matrixID));
-        if (matrix == NULL || mode() == Doc::Design)
+        if (matrix == nullptr || mode() == Doc::Design)
             return;
 
         if (control->m_type == VCMatrixControl::Color1Knob)
@@ -1410,7 +1410,7 @@ void VCMatrix::updateFeedback()
             it != m_controls.end(); ++it)
     {
         VCMatrixControl *control = it.value();
-        if (control->m_inputSource != NULL)
+        if (control->m_inputSource != nullptr)
         {
             if (control->widgetType() == VCMatrixControl::Knob)
             {
@@ -1447,7 +1447,7 @@ void VCMatrix::slotInputValueChanged(quint32 universe, quint32 channel, uchar va
             it != m_controls.end(); ++it)
     {
         VCMatrixControl *control = it.value();
-        if (control->m_inputSource != NULL &&
+        if (control->m_inputSource != nullptr &&
                 control->m_inputSource->universe() == universe &&
                 control->m_inputSource->channel() == pagedCh)
         {
@@ -1533,7 +1533,7 @@ bool VCMatrix::loadXML(QXmlStreamReader &root)
 
 bool VCMatrix::saveXML(QXmlStreamWriter *doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* VC button entry */
     doc->writeStartElement(KXMLQLCVCMatrix);

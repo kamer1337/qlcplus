@@ -61,7 +61,7 @@
 
 #define SETTINGS_VC_SIZE "virtualconsole/size"
 
-VirtualConsole* VirtualConsole::s_instance = NULL;
+VirtualConsole* VirtualConsole::s_instance = nullptr;
 
 /****************************************************************************
  * Initialization
@@ -73,73 +73,73 @@ VirtualConsole::VirtualConsole(QWidget* parent, Doc* doc)
     , m_latestWidgetId(0)
 
     , m_editAction(EditNone)
-    , m_toolbar(NULL)
+    , m_toolbar(nullptr)
 
-    , m_addActionGroup(NULL)
-    , m_editActionGroup(NULL)
-    , m_bgActionGroup(NULL)
-    , m_fgActionGroup(NULL)
-    , m_fontActionGroup(NULL)
-    , m_frameActionGroup(NULL)
-    , m_stackingActionGroup(NULL)
+    , m_addActionGroup(nullptr)
+    , m_editActionGroup(nullptr)
+    , m_bgActionGroup(nullptr)
+    , m_fgActionGroup(nullptr)
+    , m_fontActionGroup(nullptr)
+    , m_frameActionGroup(nullptr)
+    , m_stackingActionGroup(nullptr)
 
-    , m_addButtonAction(NULL)
-    , m_addButtonMatrixAction(NULL)
-    , m_addSliderAction(NULL)
-    , m_addSliderMatrixAction(NULL)
-    , m_addKnobAction(NULL)
-    , m_addSpeedDialAction(NULL)
-    , m_addXYPadAction(NULL)
-    , m_addCueListAction(NULL)
-    , m_addFrameAction(NULL)
-    , m_addSoloFrameAction(NULL)
-    , m_addLabelAction(NULL)
-    , m_addAudioTriggersAction(NULL)
-    , m_addClockAction(NULL)
-    , m_addAnimationAction(NULL)
+    , m_addButtonAction(nullptr)
+    , m_addButtonMatrixAction(nullptr)
+    , m_addSliderAction(nullptr)
+    , m_addSliderMatrixAction(nullptr)
+    , m_addKnobAction(nullptr)
+    , m_addSpeedDialAction(nullptr)
+    , m_addXYPadAction(nullptr)
+    , m_addCueListAction(nullptr)
+    , m_addFrameAction(nullptr)
+    , m_addSoloFrameAction(nullptr)
+    , m_addLabelAction(nullptr)
+    , m_addAudioTriggersAction(nullptr)
+    , m_addClockAction(nullptr)
+    , m_addAnimationAction(nullptr)
 
-    , m_toolsSettingsAction(NULL)
-    , m_functionWizardAction(NULL)
+    , m_toolsSettingsAction(nullptr)
+    , m_functionWizardAction(nullptr)
 
-    , m_editCutAction(NULL)
-    , m_editCopyAction(NULL)
-    , m_editPasteAction(NULL)
-    , m_editDeleteAction(NULL)
-    , m_editPropertiesAction(NULL)
-    , m_editRenameAction(NULL)
+    , m_editCutAction(nullptr)
+    , m_editCopyAction(nullptr)
+    , m_editPasteAction(nullptr)
+    , m_editDeleteAction(nullptr)
+    , m_editPropertiesAction(nullptr)
+    , m_editRenameAction(nullptr)
 
-    , m_bgColorAction(NULL)
-    , m_bgImageAction(NULL)
-    , m_bgDefaultAction(NULL)
+    , m_bgColorAction(nullptr)
+    , m_bgImageAction(nullptr)
+    , m_bgDefaultAction(nullptr)
 
-    , m_fgColorAction(NULL)
-    , m_fgDefaultAction(NULL)
+    , m_fgColorAction(nullptr)
+    , m_fgDefaultAction(nullptr)
 
-    , m_fontAction(NULL)
-    , m_resetFontAction(NULL)
+    , m_fontAction(nullptr)
+    , m_resetFontAction(nullptr)
 
-    , m_frameSunkenAction(NULL)
-    , m_frameRaisedAction(NULL)
-    , m_frameNoneAction(NULL)
+    , m_frameSunkenAction(nullptr)
+    , m_frameRaisedAction(nullptr)
+    , m_frameNoneAction(nullptr)
 
-    , m_stackingRaiseAction(NULL)
-    , m_stackingLowerAction(NULL)
+    , m_stackingRaiseAction(nullptr)
+    , m_stackingLowerAction(nullptr)
 
-    , m_customMenu(NULL)
-    , m_editMenu(NULL)
-    , m_addMenu(NULL)
+    , m_customMenu(nullptr)
+    , m_editMenu(nullptr)
+    , m_addMenu(nullptr)
 
-    , m_dockArea(NULL)
-    , m_contentsLayout(NULL)
-    , m_scrollArea(NULL)
-    , m_contents(NULL)
+    , m_dockArea(nullptr)
+    , m_contentsLayout(nullptr)
+    , m_scrollArea(nullptr)
+    , m_contents(nullptr)
 
     , m_liveEdit(false)
 {
-    Q_ASSERT(s_instance == NULL);
+    Q_ASSERT(s_instance == nullptr);
     s_instance = this;
 
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* Main layout */
     new QHBoxLayout(this);
@@ -166,7 +166,7 @@ VirtualConsole::VirtualConsole(QWidget* parent, Doc* doc)
 
 VirtualConsole::~VirtualConsole()
 {
-    s_instance = NULL;
+    s_instance = nullptr;
 }
 
 VirtualConsole* VirtualConsole::instance()
@@ -222,7 +222,7 @@ const QList <VCWidget*> VirtualConsole::selectedWidgets() const
 
 void VirtualConsole::setWidgetSelected(VCWidget* widget, bool select)
 {
-    Q_ASSERT(widget != NULL);
+    Q_ASSERT(widget != nullptr);
 
     if (select == false)
     {
@@ -244,7 +244,7 @@ void VirtualConsole::setWidgetSelected(VCWidget* widget, bool select)
 
 bool VirtualConsole::isWidgetSelected(VCWidget* widget) const
 {
-    if (widget == NULL || m_selectedWidgets.indexOf(widget) == -1)
+    if (widget == nullptr || m_selectedWidgets.indexOf(widget) == -1)
         return false;
     else
         return true;
@@ -596,10 +596,10 @@ void VirtualConsole::updateCustomMenu()
 {
     /* Get rid of the custom menu, but delete it later because this might
        be called from the very menu that is being deleted. */
-    if (m_customMenu != NULL)
+    if (m_customMenu != nullptr)
     {
         delete m_customMenu;
-        m_customMenu = NULL;
+        m_customMenu = nullptr;
     }
 
     if (m_selectedWidgets.size() > 0)
@@ -607,15 +607,15 @@ void VirtualConsole::updateCustomMenu()
         /* Change the custom menu to the last selected widget's menu */
         VCWidget* latestWidget = m_selectedWidgets.last();
         m_customMenu = latestWidget->customMenu(m_editMenu);
-        if (m_customMenu != NULL)
+        if (m_customMenu != nullptr)
             m_editMenu->addMenu(m_customMenu);
     }
     else
     {
         /* Change the custom menu to the bottom frame's menu */
-        Q_ASSERT(contents() != NULL);
+        Q_ASSERT(contents() != nullptr);
         m_customMenu = contents()->customMenu(m_editMenu);
-        if (m_customMenu != NULL)
+        if (m_customMenu != nullptr)
             m_editMenu->addMenu(m_customMenu);
     }
 }
@@ -696,7 +696,7 @@ VCWidget* VirtualConsole::closestParent() const
 
     /* Find the next VCWidget in the hierarchy that accepts children */
     VCWidget* widget = m_selectedWidgets.last();
-    while (widget != NULL)
+    while (widget != nullptr)
     {
         if (widget->allowChildren() == true)
             return widget;
@@ -704,7 +704,7 @@ VCWidget* VirtualConsole::closestParent() const
             widget = qobject_cast<VCWidget*> (widget->parentWidget());
     }
 
-    return NULL;
+    return nullptr;
 }
 
 void VirtualConsole::connectWidgetToParent(VCWidget *widget, VCWidget *parent)
@@ -713,7 +713,7 @@ void VirtualConsole::connectWidgetToParent(VCWidget *widget, VCWidget *parent)
             || parent->type() == VCWidget::SoloFrameWidget)
     {
         VCFrame *frame = qobject_cast<VCFrame *>(parent);
-        if (frame != NULL)
+        if (frame != nullptr)
         {
             widget->setPage(frame->currentPage());
             frame->addWidgetToPageMap(widget);
@@ -725,7 +725,7 @@ void VirtualConsole::connectWidgetToParent(VCWidget *widget, VCWidget *parent)
     if (widget->type() == VCWidget::SliderWidget)
     {
         VCSlider *slider = qobject_cast<VCSlider *>(widget);
-        if (slider != NULL)
+        if (slider != nullptr)
         {
             connect(slider, SIGNAL(submasterValueChanged(qreal)),
                     parent, SLOT(slotSubmasterValueChanged(qreal)));
@@ -739,14 +739,14 @@ void VirtualConsole::disconnectWidgetFromParent(VCWidget *widget, VCWidget *pare
             || parent->type() == VCWidget::SoloFrameWidget)
     {
         VCFrame *frame = qobject_cast<VCFrame *>(parent);
-        if (frame != NULL)
+        if (frame != nullptr)
             frame->removeWidgetFromPageMap(widget);
     }
 
     if (widget->type() == VCWidget::SliderWidget)
     {
         VCSlider *slider = qobject_cast<VCSlider *>(widget);
-        if (slider != NULL)
+        if (slider != nullptr)
         {
             disconnect(slider, SIGNAL(submasterValueChanged(qreal)),
                        parent, SLOT(slotSubmasterValueChanged(qreal)));
@@ -757,7 +757,7 @@ void VirtualConsole::disconnectWidgetFromParent(VCWidget *widget, VCWidget *pare
 void VirtualConsole::slotAddButton()
 {
     VCWidget* parent(closestParent());
-    if (parent == NULL)
+    if (parent == nullptr)
         return;
 
     VCButton* button = new VCButton(parent, m_doc);
@@ -768,7 +768,7 @@ void VirtualConsole::slotAddButton()
 void VirtualConsole::slotAddButtonMatrix()
 {
     VCWidget* parent(closestParent());
-    if (parent == NULL)
+    if (parent == nullptr)
         return;
 
     AddVCButtonMatrix abm(this, m_doc);
@@ -779,12 +779,12 @@ void VirtualConsole::slotAddButtonMatrix()
     int v = abm.verticalCount();
     int sz = abm.buttonSize();
 
-    VCFrame* frame = NULL;
+    VCFrame* frame = nullptr;
     if (abm.frameStyle() == AddVCButtonMatrix::NormalFrame)
         frame = new VCFrame(parent, m_doc);
     else
         frame = new VCSoloFrame(parent, m_doc);
-    Q_ASSERT(frame != NULL);
+    Q_ASSERT(frame != nullptr);
     addWidgetInMap(frame);
     frame->setHeaderVisible(false);
     connectWidgetToParent(frame, parent);
@@ -798,7 +798,7 @@ void VirtualConsole::slotAddButtonMatrix()
         for (int x = 0; x < h; x++)
         {
             VCButton* button = new VCButton(frame, m_doc);
-            Q_ASSERT(button != NULL);
+            Q_ASSERT(button != nullptr);
             addWidgetInMap(button);
             connectWidgetToParent(button, frame);
             button->move(QPoint(10 + (x * sz), 10 + (y * sz)));
@@ -810,7 +810,7 @@ void VirtualConsole::slotAddButtonMatrix()
             {
                 quint32 fid = abm.functions().at(index);
                 Function* function = m_doc->function(fid);
-                if (function != NULL)
+                if (function != nullptr)
                 {
                     button->setFunction(fid);
                     button->setCaption(function->name());
@@ -831,7 +831,7 @@ void VirtualConsole::slotAddButtonMatrix()
 void VirtualConsole::slotAddSlider()
 {
     VCWidget* parent(closestParent());
-    if (parent == NULL)
+    if (parent == nullptr)
         return;
 
     VCSlider* slider = new VCSlider(parent, m_doc);
@@ -842,7 +842,7 @@ void VirtualConsole::slotAddSlider()
 void VirtualConsole::slotAddSliderMatrix()
 {
     VCWidget* parent(closestParent());
-    if (parent == NULL)
+    if (parent == nullptr)
         return;
 
     AddVCSliderMatrix avsm(this);
@@ -854,7 +854,7 @@ void VirtualConsole::slotAddSliderMatrix()
     int count = avsm.amount();
 
     VCFrame* frame = new VCFrame(parent, m_doc);
-    Q_ASSERT(frame != NULL);
+    Q_ASSERT(frame != nullptr);
     addWidgetInMap(frame);
     frame->setHeaderVisible(false);
     connectWidgetToParent(frame, parent);
@@ -866,7 +866,7 @@ void VirtualConsole::slotAddSliderMatrix()
     for (int i = 0; i < count; i++)
     {
         VCSlider* slider = new VCSlider(frame, m_doc);
-        Q_ASSERT(slider != NULL);
+        Q_ASSERT(slider != nullptr);
         addWidgetInMap(slider);
         connectWidgetToParent(slider, frame);
         slider->move(QPoint(10 + (width * i), 10));
@@ -886,7 +886,7 @@ void VirtualConsole::slotAddSliderMatrix()
 void VirtualConsole::slotAddKnob()
 {
     VCWidget* parent(closestParent());
-    if (parent == NULL)
+    if (parent == nullptr)
         return;
 
     VCSlider* knob = new VCSlider(parent, m_doc);
@@ -900,7 +900,7 @@ void VirtualConsole::slotAddKnob()
 void VirtualConsole::slotAddSpeedDial()
 {
     VCWidget* parent(closestParent());
-    if (parent == NULL)
+    if (parent == nullptr)
         return;
 
     VCSpeedDial* dial = new VCSpeedDial(parent, m_doc);
@@ -911,7 +911,7 @@ void VirtualConsole::slotAddSpeedDial()
 void VirtualConsole::slotAddXYPad()
 {
     VCWidget* parent(closestParent());
-    if (parent == NULL)
+    if (parent == nullptr)
         return;
 
     VCXYPad* xypad = new VCXYPad(parent, m_doc);
@@ -922,7 +922,7 @@ void VirtualConsole::slotAddXYPad()
 void VirtualConsole::slotAddCueList()
 {
     VCWidget* parent(closestParent());
-    if (parent == NULL)
+    if (parent == nullptr)
         return;
 
     VCCueList* cuelist = new VCCueList(parent, m_doc);
@@ -933,7 +933,7 @@ void VirtualConsole::slotAddCueList()
 void VirtualConsole::slotAddFrame()
 {
     VCWidget* parent(closestParent());
-    if (parent == NULL)
+    if (parent == nullptr)
         return;
 
     VCFrame* frame = new VCFrame(parent, m_doc, true);
@@ -944,7 +944,7 @@ void VirtualConsole::slotAddFrame()
 void VirtualConsole::slotAddSoloFrame()
 {
     VCWidget* parent(closestParent());
-    if (parent == NULL)
+    if (parent == nullptr)
         return;
 
     VCSoloFrame* soloframe = new VCSoloFrame(parent, m_doc, true);
@@ -955,7 +955,7 @@ void VirtualConsole::slotAddSoloFrame()
 void VirtualConsole::slotAddLabel()
 {
     VCWidget* parent(closestParent());
-    if (parent == NULL)
+    if (parent == nullptr)
         return;
 
     VCLabel* label = new VCLabel(parent, m_doc);
@@ -966,7 +966,7 @@ void VirtualConsole::slotAddLabel()
 void VirtualConsole::slotAddAudioTriggers()
 {
     VCWidget* parent(closestParent());
-    if (parent == NULL)
+    if (parent == nullptr)
         return;
 
     VCAudioTriggers* triggers = new VCAudioTriggers(parent, m_doc);
@@ -977,7 +977,7 @@ void VirtualConsole::slotAddAudioTriggers()
 void VirtualConsole::slotAddClock()
 {
     VCWidget* parent(closestParent());
-    if (parent == NULL)
+    if (parent == nullptr)
         return;
 
     VCClock* clock = new VCClock(parent, m_doc);
@@ -988,7 +988,7 @@ void VirtualConsole::slotAddClock()
 void VirtualConsole::slotAddAnimation()
 {
     VCWidget* parent(closestParent());
-    if (parent == NULL)
+    if (parent == nullptr)
         return;
 
     VCMatrix* matrix = new VCMatrix(parent, m_doc);
@@ -1009,7 +1009,7 @@ void VirtualConsole::slotToolsSettings()
         contents()->resize(m_properties.size());
         m_doc->inputOutputMap()->setGrandMasterChannelMode(m_properties.grandMasterChannelMode());
         m_doc->inputOutputMap()->setGrandMasterValueMode(m_properties.grandMasterValueMode());
-        if (m_dockArea != NULL)
+        if (m_dockArea != nullptr)
         {
             m_dockArea->setGrandMasterVisible(m_properties.grandMasterVisible());
             m_dockArea->setGrandMasterInvertedAppearance(m_properties.grandMasterSliderMode());
@@ -1098,7 +1098,7 @@ void VirtualConsole::slotEditPaste()
     VCWidget* widget;
     QRect bounds;
 
-    Q_ASSERT(contents() != NULL);
+    Q_ASSERT(contents() != nullptr);
 
     /* Select the parent that gets the cut clipboard contents */
     parent = closestParent();
@@ -1108,7 +1108,7 @@ void VirtualConsole::slotEditPaste()
     while (it.hasNext() == true)
     {
         widget = it.next();
-        Q_ASSERT(widget != NULL);
+        Q_ASSERT(widget != nullptr);
         bounds = bounds.united(widget->geometry());
     }
 
@@ -1121,12 +1121,12 @@ void VirtualConsole::slotEditPaste()
         while (it.hasNext() == true)
         {
             widget = it.next();
-            Q_ASSERT(widget != NULL);
+            Q_ASSERT(widget != nullptr);
             if (widget == parent)
                 continue;
 
             VCWidget* prevParent = qobject_cast<VCWidget*> (widget->parentWidget());
-            if (prevParent != NULL)
+            if (prevParent != nullptr)
                 disconnectWidgetFromParent(widget, prevParent);
 
             /* Get widget's relative pos to the bounding rect */
@@ -1150,7 +1150,7 @@ void VirtualConsole::slotEditPaste()
         while (it.hasNext() == true)
         {
             widget = it.next();
-            Q_ASSERT(widget != NULL);
+            Q_ASSERT(widget != nullptr);
             if (widget == parent)
                 continue;
 
@@ -1160,7 +1160,7 @@ void VirtualConsole::slotEditPaste()
 
             /* Create a copy and move to correct place */
             VCWidget* copy = widget->createCopy(parent);
-            Q_ASSERT(copy != NULL);
+            Q_ASSERT(copy != nullptr);
             addWidgetInMap(copy);
             connectWidgetToParent(copy, parent);
             copy->move(p);
@@ -1191,7 +1191,7 @@ void VirtualConsole::slotEditDelete()
             VCWidget* parent = qobject_cast<VCWidget*> (widget->parentWidget());
             widget->deleteLater();
 
-            if (parent != NULL)
+            if (parent != nullptr)
                 disconnectWidgetFromParent(widget, parent);
 
             /* Remove the widget from clipboard as well so that
@@ -1209,14 +1209,14 @@ void VirtualConsole::slotEditProperties()
 {
     VCWidget* widget;
 
-    Q_ASSERT(contents() != NULL);
+    Q_ASSERT(contents() != nullptr);
 
     if (m_selectedWidgets.isEmpty() == true)
         widget = contents();
     else
         widget = m_selectedWidgets.last();
 
-    if (widget != NULL)
+    if (widget != nullptr)
         widget->editProperties();
 }
 
@@ -1245,7 +1245,7 @@ void VirtualConsole::slotBackgroundColor()
 {
     QColor color;
 
-    Q_ASSERT(contents() != NULL);
+    Q_ASSERT(contents() != nullptr);
 
     if (m_selectedWidgets.isEmpty() == true)
         color = contents()->backgroundColor();
@@ -1272,7 +1272,7 @@ void VirtualConsole::slotBackgroundImage()
 {
     QString path;
 
-    Q_ASSERT(contents() != NULL);
+    Q_ASSERT(contents() != nullptr);
 
     if (m_selectedWidgets.isEmpty() == true)
         path = contents()->backgroundImage();
@@ -1300,7 +1300,7 @@ void VirtualConsole::slotBackgroundImage()
 
 void VirtualConsole::slotBackgroundNone()
 {
-    Q_ASSERT(contents() != NULL);
+    Q_ASSERT(contents() != nullptr);
 
     if (m_selectedWidgets.isEmpty() == true)
     {
@@ -1320,7 +1320,7 @@ void VirtualConsole::slotBackgroundNone()
 
 void VirtualConsole::slotForegroundColor()
 {
-    Q_ASSERT(contents() != NULL);
+    Q_ASSERT(contents() != nullptr);
 
     if (m_selectedWidgets.isEmpty() == true)
         return;
@@ -1337,7 +1337,7 @@ void VirtualConsole::slotForegroundColor()
 
 void VirtualConsole::slotForegroundNone()
 {
-    Q_ASSERT(contents() != NULL);
+    Q_ASSERT(contents() != nullptr);
 
     if (m_selectedWidgets.isEmpty() == true)
         return;
@@ -1356,7 +1356,7 @@ void VirtualConsole::slotFont()
     bool ok = false;
     QFont font;
 
-    Q_ASSERT(contents() != NULL);
+    Q_ASSERT(contents() != nullptr);
 
     if (m_selectedWidgets.isEmpty() == true)
         font = contents()->font();
@@ -1382,7 +1382,7 @@ void VirtualConsole::slotFont()
 
 void VirtualConsole::slotResetFont()
 {
-    Q_ASSERT(contents() != NULL);
+    Q_ASSERT(contents() != nullptr);
 
     if (m_selectedWidgets.isEmpty() == true)
     {
@@ -1402,7 +1402,7 @@ void VirtualConsole::slotResetFont()
 
 void VirtualConsole::slotStackingRaise()
 {
-    Q_ASSERT(contents() != NULL);
+    Q_ASSERT(contents() != nullptr);
 
     if (m_selectedWidgets.isEmpty() == true)
         return;
@@ -1416,7 +1416,7 @@ void VirtualConsole::slotStackingRaise()
 
 void VirtualConsole::slotStackingLower()
 {
-    Q_ASSERT(contents() != NULL);
+    Q_ASSERT(contents() != nullptr);
 
     if (m_selectedWidgets.isEmpty() == true)
         return;
@@ -1434,7 +1434,7 @@ void VirtualConsole::slotStackingLower()
 
 void VirtualConsole::slotFrameSunken()
 {
-    Q_ASSERT(contents() != NULL);
+    Q_ASSERT(contents() != nullptr);
 
     if (m_selectedWidgets.isEmpty() == true)
         return;
@@ -1446,7 +1446,7 @@ void VirtualConsole::slotFrameSunken()
 
 void VirtualConsole::slotFrameRaised()
 {
-    Q_ASSERT(contents() != NULL);
+    Q_ASSERT(contents() != nullptr);
 
     if (m_selectedWidgets.isEmpty() == true)
         return;
@@ -1458,7 +1458,7 @@ void VirtualConsole::slotFrameRaised()
 
 void VirtualConsole::slotFrameNone()
 {
-    Q_ASSERT(contents() != NULL);
+    Q_ASSERT(contents() != nullptr);
 
     if (m_selectedWidgets.isEmpty() == true)
         return;
@@ -1479,7 +1479,7 @@ VCDockArea* VirtualConsole::dockArea() const
 
 void VirtualConsole::initDockArea()
 {
-    if (m_dockArea != NULL)
+    if (m_dockArea != nullptr)
         delete m_dockArea;
 
     m_dockArea = new VCDockArea(this, m_doc->inputOutputMap());
@@ -1503,10 +1503,10 @@ VCFrame* VirtualConsole::contents() const
 
 void VirtualConsole::resetContents()
 {
-    if (m_contents != NULL)
+    if (m_contents != nullptr)
         delete m_contents;
 
-    Q_ASSERT(m_scrollArea != NULL);
+    Q_ASSERT(m_scrollArea != nullptr);
     m_contents = new VCFrame(m_scrollArea, m_doc);
     m_contents->setFrameStyle(0);
 
@@ -1582,8 +1582,8 @@ void VirtualConsole::addWidgetInMap(VCWidget* widget)
 
 void VirtualConsole::setupWidget(VCWidget *widget, VCWidget *parent)
 {
-    Q_ASSERT(widget != NULL);
-    Q_ASSERT(parent != NULL);
+    Q_ASSERT(widget != nullptr);
+    Q_ASSERT(parent != nullptr);
 
     addWidgetInMap(widget);
     connectWidgetToParent(widget, parent);
@@ -1596,14 +1596,14 @@ void VirtualConsole::setupWidget(VCWidget *widget, VCWidget *parent)
 VCWidget *VirtualConsole::widget(quint32 id)
 {
     if (id == VCWidget::invalidId())
-        return NULL;
+        return nullptr;
 
-    return m_widgetsMap.value(id, NULL);
+    return m_widgetsMap.value(id, nullptr);
 }
 
 void VirtualConsole::initContents()
 {
-    Q_ASSERT(layout() != NULL);
+    Q_ASSERT(layout() != nullptr);
 
     m_scrollArea = new QScrollArea(this);
     m_contentsLayout->addWidget(m_scrollArea);
@@ -1849,7 +1849,7 @@ bool VirtualConsole::loadXML(QXmlStreamReader &root)
         else if (root.name() == KXMLQLCVCFrame)
         {
             /* Contents */
-            Q_ASSERT(m_contents != NULL);
+            Q_ASSERT(m_contents != nullptr);
             m_contents->loadXML(root);
         }
         else
@@ -1865,13 +1865,13 @@ bool VirtualConsole::loadXML(QXmlStreamReader &root)
 
 bool VirtualConsole::saveXML(QXmlStreamWriter *doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* Virtual Console entry */
     doc->writeStartElement(KXMLQLCVirtualConsole);
 
     /* Contents */
-    Q_ASSERT(m_contents != NULL);
+    Q_ASSERT(m_contents != nullptr);
     m_contents->saveXML(doc);
 
     /* Properties */
@@ -1886,7 +1886,7 @@ bool VirtualConsole::saveXML(QXmlStreamWriter *doc)
 QList<VCWidget *> VirtualConsole::getChildren(VCWidget *obj)
 {
     QList<VCWidget *> list;
-    if (obj == NULL)
+    if (obj == nullptr)
         return list;
     QListIterator <VCWidget*> it(obj->findChildren<VCWidget*>());
     while (it.hasNext() == true)

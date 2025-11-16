@@ -49,10 +49,10 @@ VCSliderProperties::VCSliderProperties(VCSlider* slider, Doc* doc)
     : QDialog(slider)
     , m_doc(doc)
 {
-    Q_ASSERT(doc != NULL);
-    Q_ASSERT(slider != NULL);
+    Q_ASSERT(doc != nullptr);
+    Q_ASSERT(slider != nullptr);
     m_slider = slider;
-    m_ovrResetSelWidget = NULL;
+    m_ovrResetSelWidget = nullptr;
 
     setupUi(this);
     m_levelList->sortByColumn(0, Qt::AscendingOrder);
@@ -295,7 +295,7 @@ void VCSliderProperties::setLevelPageVisibility(bool visible)
     m_levelByGroupButton->setVisible(visible);
     m_clickngoGroup->setVisible(visible);
     m_monitorValuesCheck->setVisible(visible);
-    if (m_monitorValuesCheck->isChecked() && m_ovrResetSelWidget != NULL)
+    if (m_monitorValuesCheck->isChecked() && m_ovrResetSelWidget != nullptr)
         m_ovrResetSelWidget->setVisible(visible);
 
     if (visible == true)
@@ -352,7 +352,7 @@ void VCSliderProperties::levelUpdateFixtures()
 {
     foreach (Fixture* fixture, m_doc->fixtures())
     {
-        Q_ASSERT(fixture != NULL);
+        Q_ASSERT(fixture != nullptr);
         levelUpdateFixtureNode(fixture->id());
     }
     m_levelList->header()->resizeSections(QHeaderView::ResizeToContents);
@@ -365,10 +365,10 @@ void VCSliderProperties::levelUpdateFixtureNode(quint32 id)
     QString str;
 
     fxi = m_doc->fixture(id);
-    Q_ASSERT(fxi != NULL);
+    Q_ASSERT(fxi != nullptr);
 
     item = levelFixtureNode(id);
-    if (item == NULL)
+    if (item == nullptr)
     {
         item = new QTreeWidgetItem(m_levelList);
         item->setText(KColumnID, str.setNum(id));
@@ -392,7 +392,7 @@ QTreeWidgetItem* VCSliderProperties::levelFixtureNode(quint32 id)
             return item;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 void VCSliderProperties::levelUpdateChannels(QTreeWidgetItem* parent,
@@ -401,8 +401,8 @@ void VCSliderProperties::levelUpdateChannels(QTreeWidgetItem* parent,
     quint32 channels = 0;
     quint32 ch = 0;
 
-    Q_ASSERT(parent != NULL);
-    Q_ASSERT(fxi != NULL);
+    Q_ASSERT(parent != nullptr);
+    Q_ASSERT(fxi != nullptr);
 
     channels = fxi->channels();
     for (ch = 0; ch < channels; ch++)
@@ -412,17 +412,17 @@ void VCSliderProperties::levelUpdateChannels(QTreeWidgetItem* parent,
 void VCSliderProperties::levelUpdateChannelNode(QTreeWidgetItem* parent,
                                                 Fixture* fxi, quint32 ch)
 {
-    Q_ASSERT(parent != NULL);
+    Q_ASSERT(parent != nullptr);
 
-    if (fxi == NULL)
+    if (fxi == nullptr)
         return;
 
     const QLCChannel* channel = fxi->channel(ch);
-    if (channel == NULL)
+    if (channel == nullptr)
         return;
 
     QTreeWidgetItem* item = levelChannelNode(parent, ch);
-    if (item == NULL)
+    if (item == nullptr)
     {
         item = new QTreeWidgetItem(parent);
         item->setText(KColumnID, QString::number(ch));
@@ -446,7 +446,7 @@ void VCSliderProperties::levelUpdateChannelNode(QTreeWidgetItem* parent,
 QTreeWidgetItem* VCSliderProperties::levelChannelNode(QTreeWidgetItem* parent,
                                                       quint32 ch)
 {
-    Q_ASSERT(parent != NULL);
+    Q_ASSERT(parent != nullptr);
 
     for (int i = 0; i < parent->childCount(); i++)
     {
@@ -455,14 +455,14 @@ QTreeWidgetItem* VCSliderProperties::levelChannelNode(QTreeWidgetItem* parent,
             return item;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 void VCSliderProperties::levelUpdateCapabilities(QTreeWidgetItem* parent,
                                                  const QLCChannel* channel)
 {
-    Q_ASSERT(parent != NULL);
-    Q_ASSERT(channel != NULL);
+    Q_ASSERT(parent != nullptr);
+    Q_ASSERT(channel != nullptr);
 
     QListIterator <QLCCapability*> it(channel->capabilities());
     while (it.hasNext() == true)
@@ -475,8 +475,8 @@ void VCSliderProperties::levelUpdateCapabilityNode(QTreeWidgetItem* parent,
     QTreeWidgetItem* item;
     QString str;
 
-    Q_ASSERT(parent != NULL);
-    Q_ASSERT(cap != NULL);
+    Q_ASSERT(parent != nullptr);
+    Q_ASSERT(cap != nullptr);
 
     item = new QTreeWidgetItem(parent);
     item->setText(KColumnName, cap->name());
@@ -497,11 +497,11 @@ void VCSliderProperties::levelUpdateChannelSelections()
         VCSlider::LevelChannel lch(it.next());
 
         QTreeWidgetItem* fxiNode = levelFixtureNode(lch.fixture);
-        if (fxiNode == NULL)
+        if (fxiNode == nullptr)
             continue;
 
         QTreeWidgetItem* chNode = levelChannelNode(fxiNode, lch.channel);
-        if (chNode == NULL)
+        if (chNode == nullptr)
             continue;
 
         chNode->setCheckState(KColumnName, Qt::Checked);
@@ -520,12 +520,12 @@ void VCSliderProperties::levelSelectChannelsByGroup(QString group)
     for (i = 0; i < m_levelList->topLevelItemCount(); i++)
     {
         fxi_item = m_levelList->topLevelItem(i);
-        Q_ASSERT(fxi_item != NULL);
+        Q_ASSERT(fxi_item != nullptr);
 
         for (j = 0; j < fxi_item->childCount(); j++)
         {
             ch_item = fxi_item->child(j);
-            Q_ASSERT(ch_item != NULL);
+            Q_ASSERT(ch_item != nullptr);
 
             if (ch_item->text(KColumnType) == group)
                 ch_item->setCheckState(KColumnName, Qt::Checked);
@@ -551,8 +551,8 @@ void VCSliderProperties::slotLevelCapabilityClicked()
     QStringList list;
 
     item = m_levelList->currentItem();
-    if (item == NULL || item->parent() == NULL ||
-            item->parent()->parent() == NULL)
+    if (item == nullptr || item->parent() == nullptr ||
+            item->parent()->parent() == nullptr)
         return;
 
     list = item->text(KColumnRange).split("-");
@@ -565,8 +565,8 @@ void VCSliderProperties::slotLevelCapabilityClicked()
 void VCSliderProperties::slotLevelListClicked(QTreeWidgetItem* item)
 {
     /* Enable the capability button if a capability has been selected */
-    if (item != NULL && item->parent() != NULL &&
-            item->parent()->parent() != NULL)
+    if (item != nullptr && item->parent() != nullptr &&
+            item->parent()->parent() != nullptr)
     {
         m_levelCapabilityButton->setEnabled(true);
     }
@@ -583,7 +583,7 @@ void VCSliderProperties::slotLevelAllClicked()
     for (int i = 0; i < m_levelList->topLevelItemCount(); i++)
     {
         QTreeWidgetItem *fxi_item = m_levelList->topLevelItem(i);
-        Q_ASSERT(fxi_item != NULL);
+        Q_ASSERT(fxi_item != nullptr);
 
         fxi_item->setCheckState(KColumnName, Qt::Checked);
     }
@@ -596,7 +596,7 @@ void VCSliderProperties::slotLevelNoneClicked()
     for (int i = 0; i < m_levelList->topLevelItemCount(); i++)
     {
         QTreeWidgetItem *fxi_item = m_levelList->topLevelItem(i);
-        Q_ASSERT(fxi_item != NULL);
+        Q_ASSERT(fxi_item != nullptr);
 
         fxi_item->setCheckState(KColumnName, Qt::Unchecked);
     }
@@ -609,12 +609,12 @@ void VCSliderProperties::slotLevelInvertClicked()
     for (int i = 0; i < m_levelList->topLevelItemCount(); i++)
     {
         QTreeWidgetItem *fxi_item = m_levelList->topLevelItem(i);
-        Q_ASSERT(fxi_item != NULL);
+        Q_ASSERT(fxi_item != nullptr);
 
         for (int j = 0; j < fxi_item->childCount(); j++)
         {
             QTreeWidgetItem *ch_item = fxi_item->child(j);
-            Q_ASSERT(ch_item != NULL);
+            Q_ASSERT(ch_item != nullptr);
 
             if (ch_item->checkState(KColumnName) == Qt::Checked)
                 ch_item->setCheckState(KColumnName,
@@ -634,7 +634,7 @@ void VCSliderProperties::slotLevelByGroupClicked()
 
     foreach (Fixture* fixture, m_doc->fixtures())
     {
-        Q_ASSERT(fixture != NULL);
+        Q_ASSERT(fixture != nullptr);
 
         for (quint32 i = 0; i < fixture->channels(); i++)
         {
@@ -713,7 +713,7 @@ void VCSliderProperties::slotFlashCheckClicked(bool checked)
 void VCSliderProperties::updatePlaybackFunctionName()
 {
     Function* function = m_doc->function(m_playbackFunctionId);
-    if (function != NULL)
+    if (function != nullptr)
     {
         m_playbackFunctionEdit->setText(function->name());
         if (m_nameEdit->text().simplified().isEmpty() == true)
@@ -751,7 +751,7 @@ void VCSliderProperties::storeLevelChannels()
     for (int i = 0; i < m_levelList->topLevelItemCount(); i++)
     {
         QTreeWidgetItem* fxi_item = m_levelList->topLevelItem(i);
-        Q_ASSERT(fxi_item != NULL);
+        Q_ASSERT(fxi_item != nullptr);
 
         quint32 fxi_id = fxi_item->text(KColumnID).toUInt();
         Fixture *fxi = m_doc->fixture(fxi_id);
@@ -759,12 +759,12 @@ void VCSliderProperties::storeLevelChannels()
         for (int j = 0; j < fxi_item->childCount(); j++)
         {
             QTreeWidgetItem* ch_item = fxi_item->child(j);
-            Q_ASSERT(ch_item != NULL);
+            Q_ASSERT(ch_item != nullptr);
 
             if (ch_item->checkState(KColumnName) == Qt::Checked)
             {
                 quint32 ch_num = ch_item->text(KColumnID).toUInt();
-                if (fxi != NULL)
+                if (fxi != nullptr)
                 {
                     const QLCChannel *ch = fxi->channel(ch_num);
                     if (ch->group() == QLCChannel::Intensity &&

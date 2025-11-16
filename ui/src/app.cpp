@@ -100,37 +100,37 @@ typedef BOOL (WINAPI *SetProcessInformationType)(
 
 App::App()
     : QMainWindow()
-    , m_tab(NULL)
+    , m_tab(nullptr)
     , m_overscan(false)
     , m_noGui(false)
-    , m_progressDialog(NULL)
-    , m_doc(NULL)
+    , m_progressDialog(nullptr)
+    , m_doc(nullptr)
 
-    , m_fileNewAction(NULL)
-    , m_fileOpenAction(NULL)
-    , m_fileSaveAction(NULL)
-    , m_fileSaveAsAction(NULL)
+    , m_fileNewAction(nullptr)
+    , m_fileOpenAction(nullptr)
+    , m_fileSaveAction(nullptr)
+    , m_fileSaveAsAction(nullptr)
 
-    , m_modeToggleAction(NULL)
-    , m_controlMonitorAction(NULL)
-    , m_addressToolAction(NULL)
-    , m_controlFullScreenAction(NULL)
-    , m_controlBlackoutAction(NULL)
-    , m_controlPanicAction(NULL)
-    , m_dumpDmxAction(NULL)
-    , m_liveEditAction(NULL)
-    , m_liveEditVirtualConsoleAction(NULL)
+    , m_modeToggleAction(nullptr)
+    , m_controlMonitorAction(nullptr)
+    , m_addressToolAction(nullptr)
+    , m_controlFullScreenAction(nullptr)
+    , m_controlBlackoutAction(nullptr)
+    , m_controlPanicAction(nullptr)
+    , m_dumpDmxAction(nullptr)
+    , m_liveEditAction(nullptr)
+    , m_liveEditVirtualConsoleAction(nullptr)
 
-    , m_helpIndexAction(NULL)
-    , m_helpAboutAction(NULL)
-    , m_quitAction(NULL)
-    , m_fileOpenMenu(NULL)
-    , m_fadeAndStopMenu(NULL)
+    , m_helpIndexAction(nullptr)
+    , m_helpAboutAction(nullptr)
+    , m_quitAction(nullptr)
+    , m_fileOpenMenu(nullptr)
+    , m_fadeAndStopMenu(nullptr)
 
-    , m_toolbar(NULL)
+    , m_toolbar(nullptr)
 
-    , m_dumpProperties(NULL)
-    , m_videoProvider(NULL)
+    , m_dumpProperties(nullptr)
+    , m_videoProvider(nullptr)
 {
     QCoreApplication::setOrganizationName("qlcplus");
     QCoreApplication::setOrganizationDomain("sf.net");
@@ -147,37 +147,37 @@ App::~App()
     else
         settings.setValue(SETTINGS_GEOMETRY, QVariant());
 
-    if (Monitor::instance() != NULL)
+    if (Monitor::instance() != nullptr)
         delete Monitor::instance();
 
-    if (FixtureManager::instance() != NULL)
+    if (FixtureManager::instance() != nullptr)
         delete FixtureManager::instance();
 
-    if (FunctionManager::instance() != NULL)
+    if (FunctionManager::instance() != nullptr)
         delete FunctionManager::instance();
 
-    if (ShowManager::instance() != NULL)
+    if (ShowManager::instance() != nullptr)
         delete ShowManager::instance();
 
-    if (InputOutputManager::instance() != NULL)
+    if (InputOutputManager::instance() != nullptr)
         delete InputOutputManager::instance();
 
-    if (VirtualConsole::instance() != NULL)
+    if (VirtualConsole::instance() != nullptr)
         delete VirtualConsole::instance();
 
-    if (SimpleDesk::instance() != NULL)
+    if (SimpleDesk::instance() != nullptr)
         delete SimpleDesk::instance();
 
-    if (m_dumpProperties != NULL)
+    if (m_dumpProperties != nullptr)
         delete m_dumpProperties;
 
-    if (m_videoProvider != NULL)
+    if (m_videoProvider != nullptr)
         delete m_videoProvider;
 
-    if (m_doc != NULL)
+    if (m_doc != nullptr)
         delete m_doc;
 
-    m_doc = NULL;
+    m_doc = nullptr;
 }
 
 void App::startup()
@@ -336,7 +336,7 @@ void App::setActiveWindow(const QString& name)
     for (int i = 0; i < m_tab->count(); i++)
     {
         QWidget* widget = m_tab->widget(i);
-        if (widget != NULL && widget->metaObject()->className() == name)
+        if (widget != nullptr && widget->metaObject()->className() == name)
         {
             m_tab->setCurrentIndex(i);
             break;
@@ -366,12 +366,12 @@ void App::disableTimerResolutionThrottling()
     // can ignore.
     
     HMODULE hKernel32 = LoadLibrary(L"kernel32.dll");
-    Q_ASSERT(hKernel32 != NULL); // Shouldn't ever fail because kernel32 already loaded into every process
+    Q_ASSERT(hKernel32 != nullptr); // Shouldn't ever fail because kernel32 already loaded into every process
 
     // Extra void* cast to avoid -Wcast-function-type warning.
     SetProcessInformationType pfnSetProcessInformation = (SetProcessInformationType)(void *)GetProcAddress(hKernel32, "SetProcessInformation");
 
-    if (pfnSetProcessInformation != NULL)
+    if (pfnSetProcessInformation != nullptr)
     {
         PROCESS_POWER_THROTTLING_STATE pwrState = {
                 .Version = PROCESS_POWER_THROTTLING_CURRENT_VERSION,
@@ -440,7 +440,7 @@ void App::closeEvent(QCloseEvent* e)
 void App::createProgressDialog()
 {
     m_progressDialog = new QProgressDialog;
-    m_progressDialog->setCancelButton(NULL);
+    m_progressDialog->setCancelButton(nullptr);
     m_progressDialog->show();
     m_progressDialog->raise();
     m_progressDialog->setRange(0, 10);
@@ -451,12 +451,12 @@ void App::createProgressDialog()
 void App::destroyProgressDialog()
 {
     delete m_progressDialog;
-    m_progressDialog = NULL;
+    m_progressDialog = nullptr;
 }
 
 void App::slotSetProgressText(const QString& text)
 {
-    if (m_progressDialog == NULL)
+    if (m_progressDialog == nullptr)
         return;
 
     static int progress = 0;
@@ -477,7 +477,7 @@ void App::clearDocument()
     VirtualConsole::instance()->resetContents();
     ShowManager::instance()->clearContents();
     m_doc->clearContents();
-    if (Monitor::instance() != NULL)
+    if (Monitor::instance() != nullptr)
         Monitor::instance()->updateView();
     SimpleDesk::instance()->clearContents();
     m_doc->inputOutputMap()->resetUniverses();
@@ -494,7 +494,7 @@ Doc *App::doc()
 
 void App::initDoc()
 {
-    Q_ASSERT(m_doc == NULL);
+    Q_ASSERT(m_doc == nullptr);
     m_doc = new Doc(this);
 
     connect(m_doc, SIGNAL(modified(bool)), this, SLOT(slotDocModified(bool)));
@@ -527,7 +527,7 @@ void App::initDoc()
     m_doc->audioPluginCache()->load(QLCFile::systemDirectory(AUDIOPLUGINDIR, KExtPlugin));
 
     /* Restore outputmap settings */
-    Q_ASSERT(m_doc->inputOutputMap() != NULL);
+    Q_ASSERT(m_doc->inputOutputMap() != nullptr);
 
     /* Load input plugins & profiles */
     m_doc->inputOutputMap()->loadProfiles(InputOutputMap::userProfileDirectory());
@@ -595,7 +595,7 @@ void App::enableKioskMode()
 
     // No need for the toolbar
     delete m_toolbar;
-    m_toolbar = NULL;
+    m_toolbar = nullptr;
 }
 
 void App::createKioskCloseButton(const QRect& rect)
@@ -810,12 +810,12 @@ void App::initToolBar()
     m_toolbar->addAction(m_modeToggleAction);
 
     QToolButton* btn = qobject_cast<QToolButton*> (m_toolbar->widgetForAction(m_fileOpenAction));
-    Q_ASSERT(btn != NULL);
+    Q_ASSERT(btn != nullptr);
     btn->setPopupMode(QToolButton::DelayedPopup);
     updateFileOpenMenu("");
 
     btn = qobject_cast<QToolButton*> (m_toolbar->widgetForAction(m_controlPanicAction));
-    Q_ASSERT(btn != NULL);
+    Q_ASSERT(btn != nullptr);
     btn->setPopupMode(QToolButton::DelayedPopup);
 }
 
@@ -905,7 +905,7 @@ void App::updateFileOpenMenu(QString addRecent)
     QSettings settings;
     QStringList menuRecentList;
 
-    if (m_fileOpenMenu == NULL)
+    if (m_fileOpenMenu == nullptr)
     {
         m_fileOpenMenu = new QMenu(this);
         QPalette p = palette();
@@ -1031,13 +1031,13 @@ QFile::FileError App::slotFileOpen()
 
     /* Update these in any case, since they are at least emptied now as
        a result of calling clearDocument() a few lines ago. */
-    //if (FunctionManager::instance() != NULL)
+    //if (FunctionManager::instance() != nullptr)
     //    FunctionManager::instance()->updateTree();
-    if (FixtureManager::instance() != NULL)
+    if (FixtureManager::instance() != nullptr)
         FixtureManager::instance()->updateView();
-    if (InputOutputManager::instance() != NULL)
+    if (InputOutputManager::instance() != nullptr)
         InputOutputManager::instance()->updateList();
-    if (Monitor::instance() != NULL)
+    if (Monitor::instance() != nullptr)
         Monitor::instance()->updateView();
 
     updateFileOpenMenu(fn);
@@ -1286,7 +1286,7 @@ void App::slotHelpAbout()
 
 void App::slotRecentFileClicked(QAction *recent)
 {
-    if (recent == NULL)
+    if (recent == nullptr)
         return;
 
     QString recentAbsPath = recent->text();
@@ -1330,13 +1330,13 @@ void App::slotRecentFileClicked(QAction *recent)
 
     /* Update these in any case, since they are at least emptied now as
        a result of calling clearDocument() a few lines ago. */
-    //if (FunctionManager::instance() != NULL)
+    //if (FunctionManager::instance() != nullptr)
     //    FunctionManager::instance()->updateTree();
-    if (FixtureManager::instance() != NULL)
+    if (FixtureManager::instance() != nullptr)
         FixtureManager::instance()->updateView();
-    if (InputOutputManager::instance() != NULL)
+    if (InputOutputManager::instance() != nullptr)
         InputOutputManager::instance()->updateList();
-    if (Monitor::instance() != NULL)
+    if (Monitor::instance() != nullptr)
         Monitor::instance()->updateView();
 }
 
@@ -1377,7 +1377,7 @@ QFile::FileError App::loadXML(const QString& fileName)
         return QFile::OpenError;
 
     QXmlStreamReader *doc = QLCFile::getXMLReader(fileName);
-    if (doc == NULL || doc->device() == NULL || doc->hasError())
+    if (doc == nullptr || doc->device() == nullptr || doc->hasError())
     {
         qWarning() << Q_FUNC_INFO << "Unable to read from" << fileName;
         return QFile::ReadError;
@@ -1522,7 +1522,7 @@ QFile::FileError App::saveXML(const QString& fileName, bool autosave)
     doc.writeAttribute("xmlns", QString("%1%2").arg(KXMLQLCplusNamespace).arg(KXMLQLCWorkspace));
     /* Currently active window */
     QWidget* widget = m_tab->currentWidget();
-    if (widget != NULL)
+    if (widget != nullptr)
         doc.writeAttribute(KXMLQLCWorkspaceWindow, QString(widget->metaObject()->className()));
 
     doc.writeStartElement(KXMLQLCCreator);

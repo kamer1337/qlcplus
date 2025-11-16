@@ -62,12 +62,12 @@ EFXEditor::EFXEditor(QWidget* parent, EFX* efx, Doc* doc)
     : QWidget(parent)
     , m_doc(doc)
     , m_efx(efx)
-    , m_previewArea(NULL)
-    , m_points(NULL)
-    , m_speedDials(NULL)
+    , m_previewArea(nullptr)
+    , m_points(nullptr)
+    , m_speedDials(nullptr)
 {
-    Q_ASSERT(doc != NULL);
-    Q_ASSERT(efx != NULL);
+    Q_ASSERT(doc != nullptr);
+    Q_ASSERT(efx != nullptr);
 
     setupUi(this);
 
@@ -123,9 +123,9 @@ void EFXEditor::slotFunctionManagerActive(bool active)
     }
     else
     {
-        if (m_speedDials != NULL)
+        if (m_speedDials != nullptr)
             m_speedDials->deleteLater();
-        m_speedDials = NULL;
+        m_speedDials = nullptr;
     }
 }
 
@@ -400,7 +400,7 @@ void EFXEditor::updateFixtureTree()
 QTreeWidgetItem* EFXEditor::fixtureItem(EFXFixture* ef)
 {
     QTreeWidgetItemIterator it(m_tree);
-    while (*it != NULL)
+    while (*it != nullptr)
     {
         QTreeWidgetItem* item = *it;
         EFXFixture* ef_item = reinterpret_cast<EFXFixture*>
@@ -410,7 +410,7 @@ QTreeWidgetItem* EFXEditor::fixtureItem(EFXFixture* ef)
         ++it;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 const QList <EFXFixture*> EFXEditor::selectedFixtures() const
@@ -434,7 +434,7 @@ void EFXEditor::updateIndices(int from, int to)
     for (int i = from; i <= to; i++)
     {
         QTreeWidgetItem *item = m_tree->topLevelItem(i);
-        Q_ASSERT(item != NULL);
+        Q_ASSERT(item != nullptr);
 
         item->setText(KColumnNumber,
                       QString("%1").arg(i + 1, 3, 10, QChar('0')));
@@ -446,10 +446,10 @@ void EFXEditor::addFixtureItem(EFXFixture* ef)
     QTreeWidgetItem* item;
     Fixture* fxi;
 
-    Q_ASSERT(ef != NULL);
+    Q_ASSERT(ef != nullptr);
 
     fxi = m_doc->fixture(ef->head().fxi);
-    if (fxi == NULL)
+    if (fxi == nullptr)
         return;
 
     item = new QTreeWidgetItem(m_tree);
@@ -482,10 +482,10 @@ void EFXEditor::addFixtureItem(EFXFixture* ef)
 
 void EFXEditor::updateModeColumn(QTreeWidgetItem* item, EFXFixture* ef)
 {
-    Q_ASSERT(item != NULL);
-    Q_ASSERT(ef != NULL);
+    Q_ASSERT(item != nullptr);
+    Q_ASSERT(ef != nullptr);
 
-    if (m_tree->itemWidget(item, KColumnMode) == NULL)
+    if (m_tree->itemWidget(item, KColumnMode) == nullptr)
     {
         QComboBox* combo = new QComboBox(m_tree);
         combo->setAutoFillBackground(true);
@@ -503,10 +503,10 @@ void EFXEditor::updateModeColumn(QTreeWidgetItem* item, EFXFixture* ef)
 
 void EFXEditor::updateStartOffsetColumn(QTreeWidgetItem* item, EFXFixture* ef)
 {
-    Q_ASSERT(item != NULL);
-    Q_ASSERT(ef != NULL);
+    Q_ASSERT(item != nullptr);
+    Q_ASSERT(ef != nullptr);
 
-    if (m_tree->itemWidget(item, KColumnStartOffset) == NULL)
+    if (m_tree->itemWidget(item, KColumnStartOffset) == nullptr)
     {
         QSpinBox* spin = new QSpinBox(m_tree);
         spin->setAutoFillBackground(true);
@@ -525,10 +525,10 @@ void EFXEditor::removeFixtureItem(EFXFixture* ef)
     QTreeWidgetItem* item;
     int from;
 
-    Q_ASSERT(ef != NULL);
+    Q_ASSERT(ef != nullptr);
 
     item = fixtureItem(ef);
-    Q_ASSERT(item != NULL);
+    Q_ASSERT(item != nullptr);
 
     from = m_tree->indexOfTopLevelItem(item);
     delete item;
@@ -546,7 +546,7 @@ void EFXEditor::slotDialDestroyed(QObject *)
 
 void EFXEditor::createSpeedDials()
 {
-    if (m_speedDials == NULL)
+    if (m_speedDials == nullptr)
     {
         m_speedDials = new SpeedDialWidget(this);
         m_speedDials->setAttribute(Qt::WA_DeleteOnClose);
@@ -590,9 +590,9 @@ void EFXEditor::slotSpeedDialToggle(bool state)
     }
     else
     {
-        if (m_speedDials != NULL)
+        if (m_speedDials != nullptr)
             m_speedDials->deleteLater();
-        m_speedDials = NULL;
+        m_speedDials = nullptr;
     }
 
     m_efx->setUiStateValue(UI_STATE_SHOW_DIAL, state);
@@ -604,7 +604,7 @@ void EFXEditor::slotFixtureItemChanged(QTreeWidgetItem* item, int column)
     {
         EFXFixture* ef = reinterpret_cast <EFXFixture*>
                          (item->data(0, Qt::UserRole).toULongLong());
-        Q_ASSERT(ef != NULL);
+        Q_ASSERT(ef != nullptr);
 
         if (item->checkState(column) == Qt::Checked)
             ef->setDirection(Function::Backward);
@@ -618,10 +618,10 @@ void EFXEditor::slotFixtureItemChanged(QTreeWidgetItem* item, int column)
 void EFXEditor::slotFixtureModeChanged(int index)
 {
     QComboBox *combo = qobject_cast<QComboBox*>(QObject::sender());
-    Q_ASSERT(combo != NULL);
+    Q_ASSERT(combo != nullptr);
 
     EFXFixture *ef = (EFXFixture*) combo->property(PROPERTY_FIXTURE).toULongLong();
-    Q_ASSERT(ef != NULL);
+    Q_ASSERT(ef != nullptr);
 
     ef->setMode(ef->stringToMode (combo->itemText(index)));
 
@@ -632,9 +632,9 @@ void EFXEditor::slotFixtureModeChanged(int index)
 void EFXEditor::slotFixtureStartOffsetChanged(int startOffset)
 {
     QSpinBox *spin = qobject_cast<QSpinBox*>(QObject::sender());
-    Q_ASSERT(spin != NULL);
+    Q_ASSERT(spin != nullptr);
     EFXFixture *ef = (EFXFixture*) spin->property(PROPERTY_FIXTURE).toULongLong();
-    Q_ASSERT(ef != NULL);
+    Q_ASSERT(ef != nullptr);
     ef->setStartOffset(startOffset);
 
     redrawPreview();
@@ -653,11 +653,11 @@ void EFXEditor::slotAddFixtureClicked()
     QList <GroupHead> disabled;
     QTreeWidgetItemIterator twit(m_tree);
     /*
-    while (*twit != NULL)
+    while (*twit != nullptr)
     {
         EFXFixture* ef = reinterpret_cast <EFXFixture*>
                          ((*twit)->data(0, Qt::UserRole).toULongLong());
-        Q_ASSERT(ef != NULL);
+        Q_ASSERT(ef != nullptr);
 
         disabled.append(ef->head());
         twit++;
@@ -670,7 +670,7 @@ void EFXEditor::slotAddFixtureClicked()
     while (fxit.hasNext() == true)
     {
         Fixture* fixture(fxit.next());
-        Q_ASSERT(fixture != NULL);
+        Q_ASSERT(fixture != nullptr);
 
         // If a channel with pan or tilt group exists, don't disable this fixture
         if (fixture->channel(QLCChannel::Pan) == QLCChannel::invalid() &&
@@ -743,7 +743,7 @@ void EFXEditor::slotRemoveFixtureClicked()
         while (it.hasNext() == true)
         {
             EFXFixture* ef = it.next();
-            Q_ASSERT(ef != NULL);
+            Q_ASSERT(ef != nullptr);
 
             removeFixtureItem(ef);
             if (m_efx->removeFixture(ef) == true)
@@ -763,7 +763,7 @@ void EFXEditor::slotRaiseFixtureClicked()
     bool running = interruptRunning();
 
     QTreeWidgetItem* item = m_tree->currentItem();
-    if (item != NULL)
+    if (item != nullptr)
     {
         int index = m_tree->indexOfTopLevelItem(item);
         if (index == 0)
@@ -771,7 +771,7 @@ void EFXEditor::slotRaiseFixtureClicked()
 
         EFXFixture* ef = reinterpret_cast <EFXFixture*>
                          (item->data(0, Qt::UserRole).toULongLong());
-        Q_ASSERT(ef != NULL);
+        Q_ASSERT(ef != nullptr);
 
         if (m_efx->raiseFixture(ef) == true)
         {
@@ -798,7 +798,7 @@ void EFXEditor::slotLowerFixtureClicked()
     bool running = interruptRunning();
 
     QTreeWidgetItem* item = m_tree->currentItem();
-    if (item != NULL)
+    if (item != nullptr)
     {
         int index = m_tree->indexOfTopLevelItem(item);
         if (index == (m_tree->topLevelItemCount() - 1))
@@ -806,7 +806,7 @@ void EFXEditor::slotLowerFixtureClicked()
 
         EFXFixture* ef = reinterpret_cast <EFXFixture*>
                          (item->data(0, Qt::UserRole).toULongLong());
-        Q_ASSERT(ef != NULL);
+        Q_ASSERT(ef != nullptr);
 
         if (m_efx->lowerFixture(ef) == true)
         {
@@ -828,7 +828,7 @@ void EFXEditor::slotLowerFixtureClicked()
 
 void EFXEditor::slotParallelRadioToggled(bool state)
 {
-    Q_ASSERT(m_efx != NULL);
+    Q_ASSERT(m_efx != nullptr);
     if (state == true)
     {
         m_efx->setPropagationMode(EFX::Parallel);
@@ -838,7 +838,7 @@ void EFXEditor::slotParallelRadioToggled(bool state)
 
 void EFXEditor::slotSerialRadioToggled(bool state)
 {
-    Q_ASSERT(m_efx != NULL);
+    Q_ASSERT(m_efx != nullptr);
     if (state == true)
     {
 
@@ -849,7 +849,7 @@ void EFXEditor::slotSerialRadioToggled(bool state)
 
 void EFXEditor::slotAsymmetricRadioToggled(bool state)
 {
-    Q_ASSERT(m_efx != NULL);
+    Q_ASSERT(m_efx != nullptr);
     if (state == true)
     {
 
@@ -899,7 +899,7 @@ void EFXEditor::slotFixtureChanged()
 
 void EFXEditor::slotAlgorithmSelected(int algoIndex)
 {
-    Q_ASSERT(m_efx != NULL);
+    Q_ASSERT(m_efx != nullptr);
 
     m_efx->setAlgorithm(EFX::Algorithm(algoIndex));
 
@@ -942,76 +942,76 @@ void EFXEditor::slotAlgorithmSelected(int algoIndex)
 
 void EFXEditor::slotWidthSpinChanged(int value)
 {
-    Q_ASSERT(m_efx != NULL);
+    Q_ASSERT(m_efx != nullptr);
     m_efx->setWidth(value);
     redrawPreview();
 }
 
 void EFXEditor::slotHeightSpinChanged(int value)
 {
-    Q_ASSERT(m_efx != NULL);
+    Q_ASSERT(m_efx != nullptr);
     m_efx->setHeight(value);
     redrawPreview();
 }
 
 void EFXEditor::slotRotationSpinChanged(int value)
 {
-    Q_ASSERT(m_efx != NULL);
+    Q_ASSERT(m_efx != nullptr);
     m_efx->setRotation(value);
     redrawPreview();
 }
 
 void EFXEditor::slotStartOffsetSpinChanged(int value)
 {
-    Q_ASSERT(m_efx != NULL);
+    Q_ASSERT(m_efx != nullptr);
     m_efx->setStartOffset(value);
     redrawPreview();
 }
 
 void EFXEditor::slotIsRelativeCheckboxChanged(int value)
 {
-    Q_ASSERT(m_efx != NULL);
+    Q_ASSERT(m_efx != nullptr);
     m_efx->setIsRelative(value == Qt::Checked);
 }
 
 void EFXEditor::slotXOffsetSpinChanged(int value)
 {
-    Q_ASSERT(m_efx != NULL);
+    Q_ASSERT(m_efx != nullptr);
     m_efx->setXOffset(value);
     redrawPreview();
 }
 
 void EFXEditor::slotYOffsetSpinChanged(int value)
 {
-    Q_ASSERT(m_efx != NULL);
+    Q_ASSERT(m_efx != nullptr);
     m_efx->setYOffset(value);
     redrawPreview();
 }
 
 void EFXEditor::slotXFrequencySpinChanged(int value)
 {
-    Q_ASSERT(m_efx != NULL);
+    Q_ASSERT(m_efx != nullptr);
     m_efx->setXFrequency(value);
     redrawPreview();
 }
 
 void EFXEditor::slotYFrequencySpinChanged(int value)
 {
-    Q_ASSERT(m_efx != NULL);
+    Q_ASSERT(m_efx != nullptr);
     m_efx->setYFrequency(value);
     redrawPreview();
 }
 
 void EFXEditor::slotXPhaseSpinChanged(int value)
 {
-    Q_ASSERT(m_efx != NULL);
+    Q_ASSERT(m_efx != nullptr);
     m_efx->setXPhase(value);
     redrawPreview();
 }
 
 void EFXEditor::slotYPhaseSpinChanged(int value)
 {
-    Q_ASSERT(m_efx != NULL);
+    Q_ASSERT(m_efx != nullptr);
     m_efx->setYPhase(value);
     redrawPreview();
 }
@@ -1022,19 +1022,19 @@ void EFXEditor::slotYPhaseSpinChanged(int value)
 
 void EFXEditor::slotLoopClicked()
 {
-    Q_ASSERT(m_efx != NULL);
+    Q_ASSERT(m_efx != nullptr);
     m_efx->setRunOrder(Function::Loop);
 }
 
 void EFXEditor::slotSingleShotClicked()
 {
-    Q_ASSERT(m_efx != NULL);
+    Q_ASSERT(m_efx != nullptr);
     m_efx->setRunOrder(Function::SingleShot);
 }
 
 void EFXEditor::slotPingPongClicked()
 {
-    Q_ASSERT(m_efx != NULL);
+    Q_ASSERT(m_efx != nullptr);
     m_efx->setRunOrder(Function::PingPong);
 }
 
@@ -1044,21 +1044,21 @@ void EFXEditor::slotPingPongClicked()
 
 void EFXEditor::slotForwardClicked()
 {
-    Q_ASSERT(m_efx != NULL);
+    Q_ASSERT(m_efx != nullptr);
     m_efx->setDirection(Function::Forward);
     redrawPreview();
 }
 
 void EFXEditor::slotBackwardClicked()
 {
-    Q_ASSERT(m_efx != NULL);
+    Q_ASSERT(m_efx != nullptr);
     m_efx->setDirection(Function::Backward);
     redrawPreview();
 }
 
 void EFXEditor::redrawPreview()
 {
-    if (m_previewArea == NULL)
+    if (m_previewArea == nullptr)
         return;
 
     QPolygonF polygon;
