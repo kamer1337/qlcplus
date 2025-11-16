@@ -118,7 +118,7 @@ bool ChaserEditor::addStep(int insertIndex)
 
     if (currScene == nullptr)
     {
-        qDebug() << "The Sequence bound Scene is NULL";
+        qDebug() << "The Sequence bound Scene is nullptr";
         return false;
     }
 

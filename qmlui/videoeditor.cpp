@@ -153,7 +153,7 @@ void VideoEditor::slotMetaDataChanged(QString key, QVariant data)
 #else
 void VideoEditor::slotMetaDataChanged()
 {
-    if (m_video == NULL)
+    if (m_video == nullptr)
         return;
 
     QMediaMetaData md = m_mediaPlayer->metaData();

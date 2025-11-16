@@ -686,7 +686,7 @@ void VCAudioTriggers::writeDMX(MasterTimer *timer, QList<Universe *> universes)
                 if (universe != lastUniverse)
                 {
                     fader = m_fadersMap.value(universe, QSharedPointer<GenericFader>());
-                    if (fader == NULL)
+                    if (fader == nullptr)
                     {
                         fader = universes[universe]->requestFader();
                         fader->adjustIntensity(intensity());
@@ -743,7 +743,7 @@ bool VCAudioTriggers::loadBarXML(QXmlStreamReader &root)
             {
                 bar.m_functionId = attrs.value(KXMLQLCAudioBarFunction).toUInt();
                 Function *func = m_doc->function(bar.m_functionId);
-                if (func != NULL)
+                if (func != nullptr)
                     bar.m_function = func;
             }
         }
@@ -798,7 +798,7 @@ bool VCAudioTriggers::loadBarXML(QXmlStreamReader &root)
 
 bool VCAudioTriggers::saveBarXML(QXmlStreamWriter *doc, int index)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     if (index < 0 || index >= m_spectrumBars.count())
     {

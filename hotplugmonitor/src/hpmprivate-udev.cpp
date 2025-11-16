@@ -42,7 +42,7 @@ HPMPrivate::HPMPrivate(HotPlugMonitor* parent)
     : QThread(parent)
     , m_run(false)
 {
-    Q_ASSERT(parent != NULL);
+    Q_ASSERT(parent != nullptr);
 }
 
 HPMPrivate::~HPMPrivate()
@@ -63,10 +63,10 @@ void HPMPrivate::stop()
 void HPMPrivate::run()
 {
     udev *udev_ctx = udev_new();
-    Q_ASSERT(udev_ctx != NULL);
+    Q_ASSERT(udev_ctx != nullptr);
 
     udev_monitor *mon = udev_monitor_new_from_netlink(udev_ctx, UDEV_NETLINK_SOURCE);
-    Q_ASSERT(mon != NULL);
+    Q_ASSERT(mon != nullptr);
 
     if (udev_monitor_filter_add_match_subsystem_devtype(mon, USB_SUBSYSTEM, USB_DEVICE_TYPE) < 0)
     {
@@ -96,7 +96,7 @@ void HPMPrivate::run()
         tv.tv_usec = 0;
 
         FD_SET(fd, &readfs);
-        int retval = select(fd + 1, &readfs, NULL, NULL, &tv);
+        int retval = select(fd + 1, &readfs, nullptr, nullptr, &tv);
         if (retval == -1)
         {
             qWarning() << Q_FUNC_INFO << strerror(errno);
@@ -105,7 +105,7 @@ void HPMPrivate::run()
         else if (retval > 0 && FD_ISSET(fd, &readfs))
         {
             udev_device *dev = udev_monitor_receive_device(mon);
-            if (dev != NULL)
+            if (dev != nullptr)
             {
                 QString action = QString(udev_device_get_action(dev));
                 QString vendor = QString(udev_device_get_property_value(dev, PROPERTY_VID));
@@ -132,7 +132,7 @@ void HPMPrivate::run()
                     uint vid = vendor.toUInt(0, 16);
                     uint pid = product.toUInt(0, 16);
                     HotPlugMonitor* hpm = qobject_cast<HotPlugMonitor*> (parent());
-                    Q_ASSERT(hpm != NULL);
+                    Q_ASSERT(hpm != nullptr);
                     hpm->emitDeviceAdded(vid, pid);
                 }
                 else if (action == QString(DEVICE_ACTION_REMOVE))
@@ -140,7 +140,7 @@ void HPMPrivate::run()
                     uint vid = vendor.toUInt(0, 16);
                     uint pid = product.toUInt(0, 16);
                     HotPlugMonitor* hpm = qobject_cast<HotPlugMonitor*> (parent());
-                    Q_ASSERT(hpm != NULL);
+                    Q_ASSERT(hpm != nullptr);
                     hpm->emitDeviceRemoved(vid, pid);
                 }
                 else

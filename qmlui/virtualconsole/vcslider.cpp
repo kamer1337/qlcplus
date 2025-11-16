@@ -78,7 +78,7 @@ VCSlider::VCSlider(Doc *doc, QObject *parent)
 
 VCSlider::~VCSlider()
 {
-    /* When application exits these are already NULL and unregistration
+    /* When application exits these are already nullptr and unregistration
        is no longer necessary. But a normal deletion of a VCSlider in
        design mode must unregister the slider. */
     m_doc->masterTimer()->unregisterDMXSource(this);

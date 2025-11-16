@@ -365,7 +365,7 @@ void VCSpeedDial::applyFunctionsTime()
     for (const VCSpeedDialFunction &func : m_functions)
     {
         Function *function = m_doc->function(func.m_fId);
-        if (function != NULL)
+        if (function != nullptr)
         {
             if (func.m_fadeInFactor != VCSpeedDial::None)
                 function->setFadeInSpeed(factoredTime * (m_multiplierCache[func.m_fadeInFactor] / 1000.0));

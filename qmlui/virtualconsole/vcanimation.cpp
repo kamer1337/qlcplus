@@ -159,7 +159,7 @@ void VCAnimation::setFunctionID(quint32 newFunctionID)
         return;
 
     RGBMatrix *matrix = qobject_cast<RGBMatrix*>(m_doc->function(newFunctionID));
-    if (matrix == NULL)
+    if (matrix == nullptr)
         return;
 
     if (m_matrix != nullptr)
@@ -186,7 +186,7 @@ void VCAnimation::setFaderLevel(int level)
     if (m_faderLevel == level)
         return;
 
-    if (m_matrix == NULL)
+    if (m_matrix == nullptr)
         return;
 
     if (level == 0)
@@ -233,7 +233,7 @@ void VCAnimation::setInstantChanges(bool newInstantChanges)
 
 QColor VCAnimation::getColor1() const
 {
-    if (m_matrix == NULL)
+    if (m_matrix == nullptr)
         return QColor();
 
     return m_matrix->getColor(0);
@@ -241,7 +241,7 @@ QColor VCAnimation::getColor1() const
 
 void VCAnimation::setColor1(QColor color)
 {
-    if (m_matrix == NULL)
+    if (m_matrix == nullptr)
         return;
 
     if (m_matrix->getColor(0) != color)
@@ -255,7 +255,7 @@ void VCAnimation::setColor1(QColor color)
 
 QColor VCAnimation::getColor2() const
 {
-    if (m_matrix == NULL)
+    if (m_matrix == nullptr)
         return QColor();
 
     return m_matrix->getColor(1);
@@ -263,7 +263,7 @@ QColor VCAnimation::getColor2() const
 
 void VCAnimation::setColor2(QColor color)
 {
-    if (m_matrix == NULL)
+    if (m_matrix == nullptr)
         return;
 
     if (m_matrix->getColor(1) != color)
@@ -277,7 +277,7 @@ void VCAnimation::setColor2(QColor color)
 
 QColor VCAnimation::getColor3() const
 {
-    if (m_matrix == NULL)
+    if (m_matrix == nullptr)
         return QColor();
 
     return m_matrix->getColor(2);
@@ -285,7 +285,7 @@ QColor VCAnimation::getColor3() const
 
 void VCAnimation::setColor3(QColor color)
 {
-    if (m_matrix == NULL)
+    if (m_matrix == nullptr)
         return;
 
     if (m_matrix->getColor(2) != color)
@@ -297,7 +297,7 @@ void VCAnimation::setColor3(QColor color)
 
 QColor VCAnimation::getColor4() const
 {
-    if (m_matrix == NULL)
+    if (m_matrix == nullptr)
         return QColor();
 
     return m_matrix->getColor(3);
@@ -305,7 +305,7 @@ QColor VCAnimation::getColor4() const
 
 void VCAnimation::setColor4(QColor color)
 {
-    if (m_matrix == NULL)
+    if (m_matrix == nullptr)
         return;
 
     if (m_matrix->getColor(3) != color)
@@ -317,7 +317,7 @@ void VCAnimation::setColor4(QColor color)
 
 QColor VCAnimation::getColor5() const
 {
-    if (m_matrix == NULL)
+    if (m_matrix == nullptr)
         return QColor();
 
     return m_matrix->getColor(4);
@@ -325,7 +325,7 @@ QColor VCAnimation::getColor5() const
 
 void VCAnimation::setColor5(QColor color)
 {
-    if (m_matrix == NULL)
+    if (m_matrix == nullptr)
         return;
 
     if (m_matrix->getColor(4) != color)
@@ -342,7 +342,7 @@ QStringList VCAnimation::algorithms() const
 
 int VCAnimation::algorithmIndex() const
 {
-    if (m_matrix == NULL)
+    if (m_matrix == nullptr)
         return 0;
 
     QStringList algoList = algorithms();
@@ -351,7 +351,7 @@ int VCAnimation::algorithmIndex() const
 
 void VCAnimation::setAlgorithmIndex(int index)
 {
-    if (m_matrix == NULL)
+    if (m_matrix == nullptr)
         return;
 
     QStringList algoList = algorithms();

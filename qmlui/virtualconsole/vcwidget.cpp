@@ -679,7 +679,7 @@ QVariant VCWidget::inputSourceFullInfo(quint32 universe, quint32 channel)
     infoMap["monitorValue"] = monitorValue;
 
     InputPatch *ip = m_doc->inputOutputMap()->inputPatch(source->universe());
-    if (ip != NULL && ip->profile() != NULL)
+    if (ip != nullptr && ip->profile() != nullptr)
     {
         QLCInputProfile *profile = ip->profile();
         if (profile->hasColorTable())

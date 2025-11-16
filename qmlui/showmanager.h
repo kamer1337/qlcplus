@@ -228,7 +228,7 @@ public:
 
     /** Add a new Item to the timeline.
      *  This happens when dragging an existing Function from the Function Manager.
-     *  If the current Show is NULL, a new Show is created.
+     *  If the current Show is nullptr, a new Show is created.
      *  If the provided $trackIdx is not valid, a new Track is created
      */
     Q_INVOKABLE void addItems(QQuickItem *parent, int trackIdx, int startTime, QVariantList idsList);

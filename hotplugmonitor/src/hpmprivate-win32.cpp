@@ -49,9 +49,9 @@ static const GUID USBClassGUID =
 HPMPrivate::HPMPrivate(HotPlugMonitor* parent)
     : QObject(parent)
     , m_hpm(parent)
-    , m_hDeviceNotify(NULL)
+    , m_hDeviceNotify(nullptr)
 {
-    Q_ASSERT(parent != NULL);
+    Q_ASSERT(parent != nullptr);
 }
 
 HPMPrivate::~HPMPrivate()
@@ -65,11 +65,11 @@ void HPMPrivate::start()
 
 void HPMPrivate::stop()
 {
-    if (m_hDeviceNotify == NULL)
+    if (m_hDeviceNotify == nullptr)
         return;
     else if (UnregisterDeviceNotification(m_hDeviceNotify) == FALSE)
         qWarning() << Q_FUNC_INFO << "Unable to unregister device notification.";
-    m_hDeviceNotify = NULL;
+    m_hDeviceNotify = nullptr;
 }
 
 void HPMPrivate::setWinId(WId id)
@@ -87,14 +87,14 @@ void HPMPrivate::setWinId(WId id)
                                                  DEVICE_NOTIFY_WINDOW_HANDLE |
                                                  DEVICE_NOTIFY_ALL_INTERFACE_CLASSES);
 
-    if (m_hDeviceNotify == NULL)
+    if (m_hDeviceNotify == nullptr)
         qWarning() << Q_FUNC_INFO << "Unable to register device notification." << GetLastError();
 }
 
 bool HPMPrivate::extractVidPid(const QString& dbccName, uint* vid, uint* pid)
 {
-    Q_ASSERT(vid != NULL);
-    Q_ASSERT(pid != NULL);
+    Q_ASSERT(vid != nullptr);
+    Q_ASSERT(pid != nullptr);
 
     // This function assumes $dbccName contains something like:
     // "\\?\USB#Vid_xxxx&Pid_yyyy#zzzzzzzzz#{sssssssssssssssssss}"
@@ -127,7 +127,7 @@ bool HPMPrivate::extractVidPid(const QString& dbccName, uint* vid, uint* pid)
 bool HPMPrivate::processWinEvent(MSG* message, long* RESULT)
 {
     Q_UNUSED(RESULT)
-    Q_ASSERT(message != NULL);
+    Q_ASSERT(message != nullptr);
 
     UINT msg = message->message;
     WPARAM wParam = message->wParam;
@@ -143,7 +143,7 @@ bool HPMPrivate::processWinEvent(MSG* message, long* RESULT)
     if (wParam == DBT_DEVICEARRIVAL)
     {
         // A new device has been added to the system
-        Q_ASSERT(hdr != NULL);
+        Q_ASSERT(hdr != nullptr);
         if (hdr->dbch_devicetype == DBT_DEVTYP_DEVICEINTERFACE)
         {
             PDEV_BROADCAST_DEVICEINTERFACE dev = (PDEV_BROADCAST_DEVICEINTERFACE) hdr;
@@ -160,7 +160,7 @@ bool HPMPrivate::processWinEvent(MSG* message, long* RESULT)
     else if (wParam == DBT_DEVICEREMOVECOMPLETE)
     {
         // An existing device has been removed from the system
-        Q_ASSERT(hdr != NULL);
+        Q_ASSERT(hdr != nullptr);
         if (hdr->dbch_devicetype == DBT_DEVTYP_DEVICEINTERFACE)
         {
             PDEV_BROADCAST_DEVICEINTERFACE dev = (PDEV_BROADCAST_DEVICEINTERFACE) hdr;
