@@ -62,7 +62,7 @@ private:
      *
      * @param path The path to a .qxf file to load
      * @param errorMsg An optional error message
-     * @return A newly-created QLCFixtureDef if successful, otherwise NULL.
+     * @return A newly-created QLCFixtureDef if successful, otherwise nullptr.
      *         Ownership of the pointer is transferred to the caller.
      */
     QLCFixtureDef* loadQXF(const QString& path, QString& errorMsg) const;
@@ -72,7 +72,7 @@ private:
      *
      * @param path The path to a .d4 file to load
      * @param errorMsg An optional error message
-     * @return A newly-created QLCFixtureDef if successful, otherwise NULL.
+     * @return A newly-created QLCFixtureDef if successful, otherwise nullptr.
      *         Ownership of the pointer is transferred to the caller.
      */
     QLCFixtureDef* loadD4(const QString& path, QString& errorMsg) const;

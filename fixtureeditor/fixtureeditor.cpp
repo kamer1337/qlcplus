@@ -101,7 +101,7 @@ QLCFixtureEditor::~QLCFixtureEditor()
     settings.setValue(SETTINGS_GEOMETRY, parentWidget()->saveGeometry());
 
     delete m_fixtureDef;
-    m_fixtureDef = NULL;
+    m_fixtureDef = nullptr;
 }
 
 void QLCFixtureEditor::init()
@@ -418,7 +418,7 @@ void QLCFixtureEditor::slotTypeActivated(int)
 
 void QLCFixtureEditor::slotChannelListSelectionChanged(QTreeWidgetItem *item)
 {
-    if (item == NULL)
+    if (item == nullptr)
     {
         m_removeChannelButton->setEnabled(false);
         m_editChannelButton->setEnabled(false);
@@ -441,7 +441,7 @@ void QLCFixtureEditor::slotAddChannel()
     {
         if (ec.exec() == QDialog::Accepted)
         {
-            if (m_fixtureDef->channel(ec.channel()->name()) != NULL)
+            if (m_fixtureDef->channel(ec.channel()->name()) != nullptr)
             {
                 QMessageBox::warning(this,
                                      tr("Channel already exists"),
@@ -487,7 +487,7 @@ void QLCFixtureEditor::slotAddChannel()
 void QLCFixtureEditor::slotRemoveChannel()
 {
     QLCChannel *channel = currentChannel();
-    Q_ASSERT(channel != NULL);
+    Q_ASSERT(channel != nullptr);
 
     if (QMessageBox::question(this, "Remove Channel",
                               tr("Are you sure you wish to remove channel: %1?")
@@ -498,12 +498,12 @@ void QLCFixtureEditor::slotRemoveChannel()
         QTreeWidgetItem *next;
 
         item = m_channelList->currentItem();
-        if (m_channelList->itemBelow(item) != NULL)
+        if (m_channelList->itemBelow(item) != nullptr)
             next = m_channelList->itemBelow(item);
-        else if (m_channelList->itemAbove(item) != NULL)
+        else if (m_channelList->itemAbove(item) != nullptr)
             next = m_channelList->itemAbove(item);
         else
-            next = NULL;
+            next = nullptr;
 
         // Remove the selected channel from the fixture (also deleted)
         m_fixtureDef->removeChannel(currentChannel());
@@ -528,18 +528,18 @@ void QLCFixtureEditor::slotRemoveChannel()
 
 void QLCFixtureEditor::slotEditChannel()
 {
-    QLCChannel *real = NULL;
+    QLCChannel *real = nullptr;
 
     // Initialize the dialog with the selected logical channel or
     // bail out if there is no current selection
     real = currentChannel();
-    if (real == NULL)
+    if (real == nullptr)
         return;
 
     EditChannel ec(this, real);
     if (ec.exec() == QDialog::Accepted)
     {
-        if (m_fixtureDef->channel(ec.channel()->name()) != NULL && ec.channel()->name() != real->name())
+        if (m_fixtureDef->channel(ec.channel()->name()) != nullptr && ec.channel()->name() != real->name())
         {
             QMessageBox::warning(this,
                                  tr("Channel already exists"),
@@ -576,7 +576,7 @@ void QLCFixtureEditor::slotCopyChannel()
 void QLCFixtureEditor::slotPasteChannel()
 {
     QLCChannel *ch = _app->copyChannel();
-    if (ch != NULL && m_fixtureDef != NULL)
+    if (ch != nullptr && m_fixtureDef != nullptr)
     {
         /* Create new mode and an item for it */
         QTreeWidgetItem *item;
@@ -591,7 +591,7 @@ void QLCFixtureEditor::slotPasteChannel()
         {
             copyName = QString("%1 %2").arg(ch->name()).arg(cpIdx);
             cpIdx++;
-        } while (m_fixtureDef->channel(copyName) != NULL);
+        } while (m_fixtureDef->channel(copyName) != nullptr);
 
         copy->setName(copyName);
 
@@ -631,8 +631,8 @@ void QLCFixtureEditor::refreshChannelList()
 
 void QLCFixtureEditor::updateChannelItem(const QLCChannel *channel, QTreeWidgetItem *item)
 {
-    Q_ASSERT(channel != NULL);
-    Q_ASSERT(item != NULL);
+    Q_ASSERT(channel != nullptr);
+    Q_ASSERT(item != nullptr);
 
     item->setText(CH_COL_NAME, channel->name());
     item->setIcon(CH_COL_NAME, channel->getIcon());
@@ -649,7 +649,7 @@ void QLCFixtureEditor::updateChannelItem(const QLCChannel *channel, QTreeWidgetI
     while (capit.hasNext() == true)
     {
         QLCCapability *cap = capit.next();
-        Q_ASSERT(cap != NULL);
+        Q_ASSERT(cap != nullptr);
 
         QTreeWidgetItem *capitem = new QTreeWidgetItem(item);
         capitem->setText(CH_COL_NAME,
@@ -685,17 +685,17 @@ void QLCFixtureEditor::slotChannelListContextMenuRequested()
     menu.addSeparator();
     menu.addMenu(&groupMenu);
 
-    if (m_channelList->currentItem() == NULL)
+    if (m_channelList->currentItem() == nullptr)
     {
         copyAction.setEnabled(false);
         removeAction.setEnabled(false);
     }
 
-    if (_app->copyChannel() == NULL)
+    if (_app->copyChannel() == nullptr)
         pasteAction.setEnabled(false);
 
     QAction *selectedAction = menu.exec(QCursor::pos());
-    if (selectedAction == NULL)
+    if (selectedAction == nullptr)
         return;
     else if (selectedAction->text() == tr("Edit"))
         slotEditChannel();
@@ -708,14 +708,14 @@ void QLCFixtureEditor::slotChannelListContextMenuRequested()
     else
     {
         /* Group menu hook */
-        QLCChannel *ch = NULL;
-        QTreeWidgetItem *node = NULL;
+        QLCChannel *ch = nullptr;
+        QTreeWidgetItem *node = nullptr;
 
         ch = currentChannel();
-        if (ch != NULL)
+        if (ch != nullptr)
             ch->setGroup(QLCChannel::stringToGroup(selectedAction->text()));
         node = m_channelList->currentItem();
-        if (node != NULL)
+        if (node != nullptr)
             node->setText(CH_COL_GRP, selectedAction->text());
         setModified();
     }
@@ -729,12 +729,12 @@ void QLCFixtureEditor::slotChannelItemExpanded()
 
 QLCChannel *QLCFixtureEditor::currentChannel()
 {
-    QLCChannel *ch = NULL;
-    QTreeWidgetItem *item = NULL;
+    QLCChannel *ch = nullptr;
+    QTreeWidgetItem *item = nullptr;
 
     // Convert the QVariant to a QLCChannel pointer and return it
     item = m_channelList->currentItem();
-    if (item != NULL)
+    if (item != nullptr)
         ch = (QLCChannel*) item->data(CH_COL_NAME, PROP_PTR).value<void *>();
 
     return ch;
@@ -746,7 +746,7 @@ QLCChannel *QLCFixtureEditor::currentChannel()
 
 void QLCFixtureEditor::slotModeListSelectionChanged(QTreeWidgetItem *item)
 {
-    if (item == NULL)
+    if (item == nullptr)
     {
         m_removeModeButton->setEnabled(false);
         m_editModeButton->setEnabled(false);
@@ -771,7 +771,7 @@ void QLCFixtureEditor::slotAddMode()
     {
         if (em.exec() == QDialog::Accepted)
         {
-            if (m_fixtureDef->mode(em.mode()->name()) != NULL)
+            if (m_fixtureDef->mode(em.mode()->name()) != nullptr)
             {
                 QMessageBox::warning(this,
                                      tr("Unable to add mode"),
@@ -834,9 +834,9 @@ void QLCFixtureEditor::slotRemoveMode()
 void QLCFixtureEditor::slotEditMode()
 {
     QLCFixtureMode *mode = currentMode();
-    QTreeWidgetItem *item = NULL;
+    QTreeWidgetItem *item = nullptr;
 
-    if (mode == NULL)
+    if (mode == nullptr)
         return;
 
     QString origName = mode->name();
@@ -870,12 +870,12 @@ void QLCFixtureEditor::slotEditMode()
 
 void QLCFixtureEditor::slotCloneMode()
 {
-    QLCFixtureMode *mode = NULL;
+    QLCFixtureMode *mode = nullptr;
     bool ok = false;
     QString text;
 
     mode = currentMode();
-    if (mode == NULL)
+    if (mode == nullptr)
         return;
 
     while (1)
@@ -890,7 +890,7 @@ void QLCFixtureEditor::slotCloneMode()
         {
             /* User entered a name that is already found from
                the fixture definition -> again */
-            if (mode->fixtureDef()->mode(text) != NULL)
+            if (mode->fixtureDef()->mode(text) != nullptr)
             {
                 QMessageBox::information(this,
                                          tr("Invalid name"),
@@ -951,7 +951,7 @@ void QLCFixtureEditor::slotModeListContextMenuRequested()
     menu.addSeparator();
     menu.addAction(&removeAction);
 
-    if (m_modeList->currentItem() == NULL)
+    if (m_modeList->currentItem() == nullptr)
     {
         editAction.setEnabled(false);
         cloneAction.setEnabled(false);
@@ -985,8 +985,8 @@ void QLCFixtureEditor::refreshModeList()
 void QLCFixtureEditor::updateModeItem(const QLCFixtureMode *mode,
                                       QTreeWidgetItem *item)
 {
-    Q_ASSERT(mode != NULL);
-    Q_ASSERT(item != NULL);
+    Q_ASSERT(mode != nullptr);
+    Q_ASSERT(item != nullptr);
 
     item->setText(MODE_COL_NAME, mode->name());
     item->setData(MODE_COL_NAME, PROP_PTR, (qulonglong) mode);
@@ -1005,7 +1005,7 @@ void QLCFixtureEditor::updateModeItem(const QLCFixtureMode *mode,
     for (int i = 0; i < mode->channels().size(); i++)
     {
         QLCChannel *ch = mode->channel(i);
-        Q_ASSERT(ch != NULL);
+        Q_ASSERT(ch != nullptr);
 
         QTreeWidgetItem *chitem = new QTreeWidgetItem(item);
         chitem->setText(MODE_COL_NAME, ch->name());
@@ -1017,12 +1017,12 @@ void QLCFixtureEditor::updateModeItem(const QLCFixtureMode *mode,
 
 QLCFixtureMode *QLCFixtureEditor::currentMode()
 {
-    QLCFixtureMode *mode = NULL;
-    QTreeWidgetItem *item = NULL;
+    QLCFixtureMode *mode = nullptr;
+    QTreeWidgetItem *item = nullptr;
 
     // Convert the string-form ulong to a QLCChannel pointer and return it
     item = m_modeList->currentItem();
-    if (item != NULL)
+    if (item != nullptr)
         mode = (QLCFixtureMode*) item->data(MODE_COL_NAME, PROP_PTR).toULongLong();
 
     return mode;
@@ -1065,12 +1065,12 @@ void QLCFixtureEditor::refreshAliasModes()
         return;
 
     QLCChannel *selChannel = (QLCChannel *)m_aliasCapCombo->itemData(currIndex, Qt::UserRole).value<void *>();
-    if (selChannel == NULL)
+    if (selChannel == nullptr)
         return;
 
     foreach (QLCFixtureMode *mode, m_fixtureDef->modes())
     {
-        if (mode->channel(selChannel->name()) != NULL)
+        if (mode->channel(selChannel->name()) != nullptr)
             m_modesCombo->addItem(mode->name(), QVariant::fromValue((void *)mode));
     }
     refreshAliasModeChannels();
@@ -1111,7 +1111,7 @@ void QLCFixtureEditor::refreshAliasModeChannels()
         return;
 
     QLCFixtureMode *selMode = (QLCFixtureMode *)m_modesCombo->itemData(currIndex, Qt::UserRole).value<void *>();
-    if (selMode == NULL)
+    if (selMode == nullptr)
         return;
 
     foreach (QLCChannel *channel, selMode->channels())
@@ -1196,10 +1196,10 @@ void QLCFixtureEditor::slotAddAliasClicked()
 void QLCFixtureEditor::slotRemoveAliasClicked()
 {
     QTreeWidgetItem *item = m_aliasTree->currentItem();
-    if (item != NULL)
+    if (item != nullptr)
     {
         QLCCapability *cap = (QLCCapability *)item->data(0, Qt::UserRole).value<void *>();
-        if (cap == NULL)
+        if (cap == nullptr)
             return;
 
         AliasInfo alias;
@@ -1218,7 +1218,7 @@ void QLCFixtureEditor::slotRemoveAliasClicked()
 
 void QLCFixtureEditor::slotClipboardChanged()
 {
-    if (_app->copyChannel() != NULL)
+    if (_app->copyChannel() != nullptr)
         m_pasteChannelButton->setEnabled(true);
     else
         m_pasteChannelButton->setEnabled(false);

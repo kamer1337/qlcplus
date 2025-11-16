@@ -56,7 +56,7 @@ EditMode::EditMode(QWidget *parent, QLCFixtureMode *mode)
     : QDialog(parent)
     , m_mode(new QLCFixtureMode(mode->fixtureDef(), mode))
 {
-    Q_ASSERT(mode != NULL);
+    Q_ASSERT(mode != nullptr);
     setupUi(this);
     init();
 }
@@ -65,7 +65,7 @@ EditMode::EditMode(QWidget *parent, QLCFixtureDef *fixtureDef)
     : QDialog(parent)
     , m_mode(new QLCFixtureMode(fixtureDef))
 {
-    Q_ASSERT(fixtureDef != NULL);
+    Q_ASSERT(fixtureDef != nullptr);
     setupUi(this);
     init();
 }
@@ -159,16 +159,16 @@ void EditMode::slotRemoveChannelClicked()
 {
     QLCChannel *ch = currentChannel();
 
-    if (ch != NULL)
+    if (ch != nullptr)
     {
         QTreeWidgetItem *item;
         QString select;
 
         // Pick the item above or below to be selected next
         item = m_channelList->itemAbove(m_channelList->currentItem());
-        if (item == NULL)
+        if (item == nullptr)
             item = m_channelList->itemBelow(m_channelList->currentItem());
-        if (item != NULL)
+        if (item != nullptr)
             select = item->text(COL_NAME);
 
         // Remove the channel and the listview item
@@ -189,7 +189,7 @@ void EditMode::slotRaiseChannelClicked()
     QLCChannel *ch = currentChannel();
     int index = 0;
 
-    if (ch == NULL)
+    if (ch == nullptr)
         return;
 
     index = m_mode->channelNumber(ch) - 1;
@@ -210,7 +210,7 @@ void EditMode::slotLowerChannelClicked()
     QLCChannel *ch = currentChannel();
     int index = 0;
 
-    if (ch == NULL)
+    if (ch == nullptr)
         return;
 
     index = m_mode->channelNumber(ch) + 1;
@@ -248,7 +248,7 @@ void EditMode::refreshChannelList()
         QLCChannel *ch = m_mode->channel(i);
         quint32 actsOnChannelIndex = m_mode->channelActsOn(i);
 
-        Q_ASSERT(ch != NULL);
+        Q_ASSERT(ch != nullptr);
 
         QString str;
         item->setText(COL_NUM, str.asprintf("%.3d", (i + 1)));
@@ -284,11 +284,11 @@ void EditMode::refreshChannelList()
 QLCChannel* EditMode::currentChannel()
 {
     QTreeWidgetItem *item;
-    QLCChannel *ch = NULL;
+    QLCChannel *ch = nullptr;
 
     // Convert the string-form ulong to a QLCChannel pointer and return it
     item = m_channelList->currentItem();
-    if (item != NULL)
+    if (item != nullptr)
         ch = (QLCChannel*)item->data(COL_NAME, PROP_PTR).toULongLong();
 
     return ch;
@@ -297,7 +297,7 @@ QLCChannel* EditMode::currentChannel()
 void EditMode::selectChannel(const QString &name)
 {
     QTreeWidgetItemIterator it(m_channelList);
-    while (*it != NULL)
+    while (*it != nullptr)
     {
         if ((*it)->text(COL_NAME) == name)
         {
@@ -334,7 +334,7 @@ void EditMode::slotAddHeadClicked()
 void EditMode::slotRemoveHeadClicked()
 {
     QTreeWidgetItem *item = m_headList->currentItem();
-    if (item == NULL)
+    if (item == nullptr)
         return;
 
     int index = m_headList->indexOfTopLevelItem(item);
@@ -345,7 +345,7 @@ void EditMode::slotRemoveHeadClicked()
 void EditMode::slotEditHeadClicked()
 {
     QTreeWidgetItem *item = m_headList->currentItem();
-    if (item == NULL)
+    if (item == nullptr)
         return;
 
     EditHead eh(this, currentHead(), m_mode);
@@ -360,7 +360,7 @@ void EditMode::slotEditHeadClicked()
 void EditMode::slotRaiseHeadClicked()
 {
     QTreeWidgetItem *item = m_headList->currentItem();
-    if (item == NULL)
+    if (item == nullptr)
         return;
 
     int index = m_headList->indexOfTopLevelItem(item);
@@ -380,7 +380,7 @@ void EditMode::slotRaiseHeadClicked()
 void EditMode::slotLowerHeadClicked()
 {
     QTreeWidgetItem *item = m_headList->currentItem();
-    if (item == NULL)
+    if (item == nullptr)
         return;
 
     int index = m_headList->indexOfTopLevelItem(item);
@@ -416,7 +416,7 @@ void EditMode::refreshHeadList()
             quint32 chnum = it.next();
             const QLCChannel *ch = m_mode->channel(chnum);
             QTreeWidgetItem *chitem = new QTreeWidgetItem(item);
-            if (ch != NULL)
+            if (ch != nullptr)
                 chitem->setText(0, QString("%1: %2").arg(chnum + 1).arg(ch->name()));
             else
                 chitem->setText(0, QString("%1: INVALID!"));
@@ -435,7 +435,7 @@ void EditMode::refreshHeadList()
 QLCFixtureHead EditMode::currentHead()
 {
     QTreeWidgetItem *item = m_headList->currentItem();
-    if (item == NULL)
+    if (item == nullptr)
         return QLCFixtureHead();
 
     int index = m_headList->indexOfTopLevelItem(item);

@@ -54,7 +54,7 @@ EditChannel::EditChannel(QWidget *parent, QLCChannel *channel)
     : QDialog(parent)
 {
     m_channel = channel ? channel->createCopy() : new QLCChannel();
-    m_currentCapability = NULL;
+    m_currentCapability = nullptr;
 
     setupUi(this);
     init();
@@ -75,7 +75,7 @@ EditChannel::~EditChannel()
     QSettings settings;
     settings.setValue(SETTINGS_GEOMETRY, saveGeometry());
 
-    if (m_channel != NULL)
+    if (m_channel != nullptr)
         delete m_channel;
 }
 
@@ -86,7 +86,7 @@ QLCChannel *EditChannel::channel()
 
 void EditChannel::init()
 {
-    Q_ASSERT(m_channel != NULL);
+    Q_ASSERT(m_channel != nullptr);
 
     /* Set window title */
     setWindowTitle(tr("Edit Channel: ") + m_channel->name());
@@ -293,11 +293,11 @@ void EditChannel::slotLsbRadioToggled(bool toggled)
 void EditChannel::slotCapabilityCellChanged(int row, int column)
 {
     QTableWidgetItem *item = m_capabilityList->item(row, column);
-    if (item == NULL)
+    if (item == nullptr)
         return;
 
     QLCCapability *cap = getRowCapability(row);
-    if (cap == NULL)
+    if (cap == nullptr)
         return;
 
     bool restore = false;
@@ -367,7 +367,7 @@ void EditChannel::slotCapabilityCellSelected(int currentRow, int currentColumn,
                     // maximum already reached. Nothing to do here
                     if (min == 255)
                     {
-                        m_currentCapability = NULL;
+                        m_currentCapability = nullptr;
                         updateCapabilityPresetGroup(false);
                         return;
                     }
@@ -417,15 +417,15 @@ void EditChannel::slotRemoveCapabilityClicked()
     int row = m_capabilityList->currentRow();
 
     item = m_capabilityList->item(row, COL_MIN);
-    if (item != NULL)
+    if (item != nullptr)
         delete item;
 
     item = m_capabilityList->item(row, COL_MAX);
-    if (item != NULL)
+    if (item != nullptr)
         delete item;
 
     item = m_capabilityList->item(row, COL_NAME);
-    if (item != NULL)
+    if (item != nullptr)
     {
         // This also deletes the capability
         QLCCapability *cap = (QLCCapability *) item->data(Qt::UserRole).value<void *>();
@@ -434,7 +434,7 @@ void EditChannel::slotRemoveCapabilityClicked()
     }
 
     m_currentCapability = currentCapability();
-    if (m_currentCapability != NULL)
+    if (m_currentCapability != nullptr)
         setupCapabilityGroup();
     else
     {
@@ -445,7 +445,7 @@ void EditChannel::slotRemoveCapabilityClicked()
 void EditChannel::slotEditCapabilityClicked()
 {
     m_currentCapability = currentCapability();
-    if (m_currentCapability == NULL)
+    if (m_currentCapability == nullptr)
     {
         updateCapabilityPresetGroup(false);
         return;
@@ -621,11 +621,11 @@ void EditChannel::refreshCapabilities()
 
 QLCCapability *EditChannel::currentCapability()
 {
-    QLCCapability *cap = NULL;
+    QLCCapability *cap = nullptr;
     int row = m_capabilityList->currentRow();
     QTableWidgetItem *item = m_capabilityList->item(row, COL_NAME);
 
-    if (item != NULL)
+    if (item != nullptr)
         cap = (QLCCapability*) item->data(Qt::UserRole).value<void *>();
 
     return cap;
@@ -633,7 +633,7 @@ QLCCapability *EditChannel::currentCapability()
 
 QLCCapability *EditChannel::getRowCapability(int row)
 {
-    QLCCapability *cap = NULL;
+    QLCCapability *cap = nullptr;
     QTableWidgetItem *item = m_capabilityList->item(row, COL_NAME);
     if (item)
         cap = (QLCCapability*) item->data(Qt::UserRole).value<void *>();
