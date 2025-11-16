@@ -55,7 +55,7 @@
 ConfigureArtNet::ConfigureArtNet(ArtNetPlugin* plugin, QWidget* parent)
         : QDialog(parent)
 {
-    Q_ASSERT(plugin != NULL);
+    Q_ASSERT(plugin != nullptr);
     m_plugin = plugin;
 
     /* Setup UI controls */
@@ -76,7 +76,7 @@ ConfigureArtNet::ConfigureArtNet(ArtNetPlugin* plugin, QWidget* parent)
 
 void ConfigureArtNet::fillNodesTree()
 {
-    ArtNetController *prevController = NULL;
+    ArtNetController *prevController = nullptr;
 
     QList<ArtNetIO> IOmap = m_plugin->getIOMapping();
 
@@ -84,7 +84,7 @@ void ConfigureArtNet::fillNodesTree()
     {
         ArtNetController *controller = IOmap.at(i).controller;
 
-        if (controller != NULL && controller != prevController)
+        if (controller != nullptr && controller != prevController)
         {
             QTreeWidgetItem* pitem = new QTreeWidgetItem(m_nodesTree);
             pitem->setText(KNodesColumnIP, tr("%1 nodes").arg(controller->getNetworkIP()));
@@ -108,27 +108,27 @@ void ConfigureArtNet::fillNodesTree()
 
 void ConfigureArtNet::fillMappingTree()
 {
-    QTreeWidgetItem* inputItem = NULL;
-    QTreeWidgetItem* outputItem = NULL;
+    QTreeWidgetItem* inputItem = nullptr;
+    QTreeWidgetItem* outputItem = nullptr;
 
     QList<ArtNetIO> IOmap = m_plugin->getIOMapping();
     foreach (ArtNetIO io, IOmap)
     {
-        if (io.controller == NULL)
+        if (io.controller == nullptr)
             continue;
 
         ArtNetController *controller = io.controller;
-        if (controller == NULL)
+        if (controller == nullptr)
             continue;
 
         qDebug() << "[ArtNet] controller IP" << controller->getNetworkIP() << "type:" << controller->type();
-        if ((controller->type() & ArtNetController::Input) && inputItem == NULL)
+        if ((controller->type() & ArtNetController::Input) && inputItem == nullptr)
         {
             inputItem = new QTreeWidgetItem(m_uniMapTree);
             inputItem->setText(KMapColumnInterface, tr("Inputs"));
             inputItem->setExpanded(true);
         }
-        if ((controller->type() & ArtNetController::Output) && outputItem == NULL)
+        if ((controller->type() & ArtNetController::Output) && outputItem == nullptr)
         {
             outputItem = new QTreeWidgetItem(m_uniMapTree);
             outputItem->setText(KMapColumnInterface, tr("Outputs"));
@@ -231,7 +231,7 @@ void ConfigureArtNet::accept()
                 cap = QLCIOPlugin::Output;
 
             QLineEdit *ipEdit = qobject_cast<QLineEdit*>(m_uniMapTree->itemWidget(item, KMapColumnIPAddress));
-            if (ipEdit != NULL)
+            if (ipEdit != nullptr)
             {
                 Q_ASSERT(cap == QLCIOPlugin::Output);
                 QHostAddress newHostAddress(ipEdit->text());
@@ -246,12 +246,12 @@ void ConfigureArtNet::accept()
             }
 
             QSpinBox *spin = qobject_cast<QSpinBox*>(m_uniMapTree->itemWidget(item, KMapColumnArtNetUni));
-            Q_ASSERT(spin != NULL);
+            Q_ASSERT(spin != nullptr);
 
             m_plugin->setParameter(universe, line, cap, (cap == QLCIOPlugin::Output ? ARTNET_OUTPUTUNI : ARTNET_INPUTUNI), spin->value());
 
             QComboBox *combo = qobject_cast<QComboBox*>(m_uniMapTree->itemWidget(item, KMapColumnTransmitMode));
-            if (combo != NULL)
+            if (combo != nullptr)
             {
                 ArtNetController::TransmissionMode transmissionMode;
                 if (combo->currentIndex() == 0)

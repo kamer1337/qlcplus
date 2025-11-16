@@ -140,13 +140,13 @@ void VCButton::setID(quint32 id)
 
 VCWidget* VCButton::createCopy(VCWidget* parent)
 {
-    Q_ASSERT(parent != NULL);
+    Q_ASSERT(parent != nullptr);
 
     VCButton* button = new VCButton(parent, m_doc);
     if (button->copyFrom(this) == false)
     {
         delete button;
-        button = NULL;
+        button = nullptr;
     }
 
     return button;
@@ -155,7 +155,7 @@ VCWidget* VCButton::createCopy(VCWidget* parent)
 bool VCButton::copyFrom(const VCWidget* widget)
 {
     const VCButton* button = qobject_cast <const VCButton*> (widget);
-    if (button == NULL)
+    if (button == nullptr)
         return false;
 
     /* Copy button-specific stuff */
@@ -304,7 +304,7 @@ void VCButton::slotChooseIcon()
 {
     /* No point coming here if there is no VC */
     VirtualConsole *vc = VirtualConsole::instance();
-    if (vc == NULL)
+    if (vc == nullptr)
         return;
 
     QString formats;
@@ -320,7 +320,7 @@ void VCButton::slotChooseIcon()
         foreach (VCWidget *widget, vc->selectedWidgets())
         {
             VCButton *button = qobject_cast<VCButton*> (widget);
-            if (button != NULL)
+            if (button != nullptr)
                 button->setIconPath(path);
         }
     }
@@ -363,7 +363,7 @@ void VCButton::slotResetIcon()
 void VCButton::setFunction(quint32 fid)
 {
     Function* old = m_doc->function(m_function);
-    if (old != NULL)
+    if (old != nullptr)
     {
         /* Get rid of old function connections */
         disconnect(old, SIGNAL(running(quint32)),
@@ -375,7 +375,7 @@ void VCButton::setFunction(quint32 fid)
     }
 
     Function* function = m_doc->function(fid);
-    if (function != NULL)
+    if (function != nullptr)
     {
         /* Connect to the new function */
         connect(function, SIGNAL(running(quint32)),
@@ -426,7 +426,7 @@ void VCButton::notifyFunctionStarting(quint32 fid, qreal intensity)
     if (action() == VCButton::Toggle)
     {
         Function *f = m_doc->function(m_function);
-        if (f != NULL)
+        if (f != nullptr)
         {
             f->stop(functionParent());
             resetIntensityOverrideAttribute();
@@ -479,7 +479,7 @@ void VCButton::updateState()
     else if (m_action == Toggle)
     {
         Function* function = m_doc->function(m_function);
-        if (function != NULL && function->isRunning())
+        if (function != nullptr && function->isRunning())
             state = Active;
     }
 
@@ -669,7 +669,7 @@ void VCButton::slotAttributeChanged(int value)
     int idx = slider->property("attrIdx").toInt();
 
     Function* func = m_doc->function(m_function);
-    if (func != NULL)
+    if (func != nullptr)
         func->adjustAttribute((qreal)value / 100, idx);
 #else
     Q_UNUSED(value)
@@ -714,11 +714,11 @@ void VCButton::pressFunction()
     if (mode() == Doc::Design)
         return;
 
-    Function* f = NULL;
+    Function* f = nullptr;
     if (m_action == Toggle)
     {
         f = m_doc->function(m_function);
-        if (f == NULL)
+        if (f == nullptr)
             return;
 
         // if the button is in a SoloFrame and the function is running but was
@@ -757,7 +757,7 @@ void VCButton::pressFunction()
     else if (m_action == Flash && state() == Inactive)
     {
         f = m_doc->function(m_function);
-        if (f != NULL)
+        if (f != nullptr)
         {
             adjustFunctionIntensity(f, intensity());
             f->flash(m_doc->masterTimer(), flashOverrides(), flashForceLTP());
@@ -791,7 +791,7 @@ void VCButton::releaseFunction()
     if (m_action == Flash && state() == Active)
     {
         Function* f = m_doc->function(m_function);
-        if (f != NULL)
+        if (f != nullptr)
         {
             f->unFlash(m_doc->masterTimer());
             resetIntensityOverrideAttribute();
@@ -831,7 +831,7 @@ void VCButton::slotFunctionFlashing(quint32 fid, bool state)
 
     // if the function was flashed by another button, and the function is still running, keep the button pushed
     Function* f = m_doc->function(m_function);
-    if (state == false && m_action == Toggle && f != NULL && f->isRunning())
+    if (state == false && m_action == Toggle && f != nullptr && f->isRunning())
     {
         return;
     }
@@ -864,9 +864,9 @@ void VCButton::slotBlackoutChanged(bool state)
 bool VCButton::isChildOfSoloFrame() const
 {
     QWidget* parent = parentWidget();
-    while (parent != NULL)
+    while (parent != nullptr)
     {
-        if (qobject_cast<VCSoloFrame*>(parent) != NULL)
+        if (qobject_cast<VCSoloFrame*>(parent) != nullptr)
             return true;
         parent = parent->parentWidget();
     }
@@ -892,7 +892,7 @@ void VCButton::adjustIntensity(qreal val)
     if (state() == Active)
     {
         Function* func = m_doc->function(m_function);
-        if (func != NULL)
+        if (func != nullptr)
             adjustFunctionIntensity(func, val);
     }
 
@@ -988,7 +988,7 @@ bool VCButton::loadXML(QXmlStreamReader &root)
 
 bool VCButton::saveXML(QXmlStreamWriter *doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* VC button entry */
     doc->writeStartElement(KXMLQLCVCButton);
@@ -1187,7 +1187,7 @@ void VCButton::mousePressEvent(QMouseEvent* e)
     else if (e->button() == Qt::RightButton)
     {
         Function* func = m_doc->function(m_function);
-        if (func != NULL)
+        if (func != nullptr)
         {
             QString menuStyle = "QMenu { background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #B9D9E8, stop:1 #A4C0CE);"
                             "border: 1px solid black; border-radius: 4px; font:bold; }";

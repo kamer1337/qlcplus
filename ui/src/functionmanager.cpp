@@ -69,7 +69,7 @@
 
 #define SETTINGS_SPLITTER "functionmanager/splitter"
 
-FunctionManager* FunctionManager::s_instance = NULL;
+FunctionManager* FunctionManager::s_instance = nullptr;
 
 /*****************************************************************************
  * Initialization
@@ -78,31 +78,31 @@ FunctionManager* FunctionManager::s_instance = NULL;
 FunctionManager::FunctionManager(QWidget* parent, Doc* doc)
     : QWidget(parent)
     , m_doc(doc)
-    , m_hsplitter(NULL)
-    , m_vsplitter(NULL)
-    , m_tree(NULL)
-    , m_toolbar(NULL)
-    , m_addSceneAction(NULL)
-    , m_addChaserAction(NULL)
-    , m_addCollectionAction(NULL)
-    , m_addEFXAction(NULL)
-    , m_addRGBMatrixAction(NULL)
-    , m_addScriptAction(NULL)
-    , m_addAudioAction(NULL)
-    , m_addVideoAction(NULL)
-    , m_autostartAction(NULL)
-    , m_wizardAction(NULL)
-    , m_addFolderAction(NULL)
-    , m_cloneAction(NULL)
-    , m_deleteAction(NULL)
-    , m_selectAllAction(NULL)
-    , m_editor(NULL)
-    , m_scene_editor(NULL)
+    , m_hsplitter(nullptr)
+    , m_vsplitter(nullptr)
+    , m_tree(nullptr)
+    , m_toolbar(nullptr)
+    , m_addSceneAction(nullptr)
+    , m_addChaserAction(nullptr)
+    , m_addCollectionAction(nullptr)
+    , m_addEFXAction(nullptr)
+    , m_addRGBMatrixAction(nullptr)
+    , m_addScriptAction(nullptr)
+    , m_addAudioAction(nullptr)
+    , m_addVideoAction(nullptr)
+    , m_autostartAction(nullptr)
+    , m_wizardAction(nullptr)
+    , m_addFolderAction(nullptr)
+    , m_cloneAction(nullptr)
+    , m_deleteAction(nullptr)
+    , m_selectAllAction(nullptr)
+    , m_editor(nullptr)
+    , m_scene_editor(nullptr)
 {
-    Q_ASSERT(s_instance == NULL);
+    Q_ASSERT(s_instance == nullptr);
     s_instance = this;
 
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     new QVBoxLayout(this);
     layout()->setContentsMargins(0, 0, 0, 0);
@@ -135,7 +135,7 @@ FunctionManager::~FunctionManager()
     QSettings settings;
     settings.setValue(SETTINGS_SPLITTER, m_hsplitter->saveState());
 
-    FunctionManager::s_instance = NULL;
+    FunctionManager::s_instance = nullptr;
 }
 
 FunctionManager* FunctionManager::instance()
@@ -321,7 +321,7 @@ void FunctionManager::slotAddScene()
     if (m_doc->addFunction(f) == true)
     {
         QTreeWidgetItem* item = m_tree->functionItem(f);
-        Q_ASSERT(item != NULL);
+        Q_ASSERT(item != nullptr);
         f->setName(QString("%1 %2").arg(tr("New Scene")).arg(f->id()));
         m_tree->scrollToItem(item);
         m_tree->setCurrentItem(item);
@@ -334,7 +334,7 @@ void FunctionManager::slotAddChaser()
     if (m_doc->addFunction(f) == true)
     {
         QTreeWidgetItem* item = m_tree->functionItem(f);
-        Q_ASSERT(item != NULL);
+        Q_ASSERT(item != nullptr);
         f->setName(QString("%1 %2").arg(tr("New Chaser")).arg(f->id()));
         m_tree->scrollToItem(item);
         m_tree->setCurrentItem(item);
@@ -357,7 +357,7 @@ void FunctionManager::slotAddSequence()
         if (m_doc->addFunction(sequence) == true)
         {
             QTreeWidgetItem* item = m_tree->functionItem(f);
-            Q_ASSERT(item != NULL);
+            Q_ASSERT(item != nullptr);
             f->setName(QString("%1 %2").arg(tr("New Sequence")).arg(f->id()));
             m_tree->scrollToItem(item);
             m_tree->setCurrentItem(item);
@@ -371,7 +371,7 @@ void FunctionManager::slotAddCollection()
     if (m_doc->addFunction(f) == true)
     {
         QTreeWidgetItem* item = m_tree->functionItem(f);
-        Q_ASSERT(item != NULL);
+        Q_ASSERT(item != nullptr);
         f->setName(QString("%1 %2").arg(tr("New Collection")).arg(f->id()));
         m_tree->scrollToItem(item);
         m_tree->setCurrentItem(item);
@@ -384,7 +384,7 @@ void FunctionManager::slotAddEFX()
     if (m_doc->addFunction(f) == true)
     {
         QTreeWidgetItem* item = m_tree->functionItem(f);
-        Q_ASSERT(item != NULL);
+        Q_ASSERT(item != nullptr);
         f->setName(QString("%1 %2").arg(tr("New EFX")).arg(f->id()));
         m_tree->scrollToItem(item);
         m_tree->setCurrentItem(item);
@@ -397,7 +397,7 @@ void FunctionManager::slotAddRGBMatrix()
     if (m_doc->addFunction(f) == true)
     {
         QTreeWidgetItem* item = m_tree->functionItem(f);
-        Q_ASSERT(item != NULL);
+        Q_ASSERT(item != nullptr);
         f->setName(QString("%1 %2").arg(tr("New RGB Matrix")).arg(f->id()));
         m_tree->scrollToItem(item);
         m_tree->setCurrentItem(item);
@@ -410,7 +410,7 @@ void FunctionManager::slotAddScript()
     if (m_doc->addFunction(f) == true)
     {
         QTreeWidgetItem* item = m_tree->functionItem(f);
-        Q_ASSERT(item != NULL);
+        Q_ASSERT(item != nullptr);
         f->setName(QString("%1 %2").arg(tr("New Script")).arg(f->id()));
         m_tree->scrollToItem(item);
         m_tree->setCurrentItem(item);
@@ -460,7 +460,7 @@ void FunctionManager::slotAddAudio()
         if (m_doc->addFunction(f) == true)
         {
             QTreeWidgetItem* item = m_tree->functionItem(f);
-            Q_ASSERT(item != NULL);
+            Q_ASSERT(item != nullptr);
             if (fn == dialog.selectedFiles().last())
             {
                 m_tree->scrollToItem(item);
@@ -513,7 +513,7 @@ void FunctionManager::slotAddVideo()
         if (m_doc->addFunction(f) == true)
         {
             QTreeWidgetItem* item = m_tree->functionItem(f);
-            Q_ASSERT(item != NULL);
+            Q_ASSERT(item != nullptr);
             if (fn == dialog.selectedFiles().last())
             {
                 m_tree->scrollToItem(item);
@@ -708,7 +708,7 @@ void FunctionManager::initSplitterView()
 void FunctionManager::initTree()
 {
     m_tree = new FunctionsTreeWidget(m_doc, this);
-    Q_ASSERT(m_hsplitter != NULL);
+    Q_ASSERT(m_hsplitter != nullptr);
     m_hsplitter->addWidget(m_tree);
 
     QStringList labels;
@@ -736,10 +736,10 @@ void FunctionManager::initTree()
 void FunctionManager::selectFunction(quint32 id)
 {
     Function* function = m_doc->function(id);
-    if (function == NULL)
+    if (function == nullptr)
         return;
     QTreeWidgetItem* item = m_tree->functionItem(function);
-    if (item != NULL)
+    if (item != nullptr)
         m_tree->setCurrentItem(item);
 }
 
@@ -751,11 +751,11 @@ void FunctionManager::deleteSelectedFunctions()
         QTreeWidgetItem* item(it.next());
         quint32 fid = m_tree->itemFunctionId(item);
         Function *func = m_doc->function(fid);
-        if (func == NULL)
+        if (func == nullptr)
             continue;
 
         // Stop running tests before deleting function
-        if (m_editor != NULL)
+        if (m_editor != nullptr)
         {
             if (func->type() == Function::RGBMatrixType)
                 static_cast<RGBMatrixEditor*>(m_editor)->stopTest();
@@ -784,7 +784,7 @@ void FunctionManager::deleteSelectedFunctions()
 
         QTreeWidgetItem* parent = item->parent();
         delete item;
-        if (parent != NULL && parent->childCount() == 0)
+        if (parent != nullptr && parent->childCount() == 0)
         {
             if (m_tree->indexOfTopLevelItem(parent) >= 0)
                 m_tree->deleteFolder(parent);
@@ -804,7 +804,7 @@ void FunctionManager::slotTreeSelectionChanged()
     }
     else
     {
-        editFunction(NULL);
+        editFunction(nullptr);
     }
 }
 
@@ -841,11 +841,11 @@ void FunctionManager::slotTreeContextMenuRequested()
 void FunctionManager::copyFunction(quint32 fid)
 {
     Function* function = m_doc->function(fid);
-    Q_ASSERT(function != NULL);
+    Q_ASSERT(function != nullptr);
 
     /* Attempt to create a copy of the function to Doc */
     Function* copy = function->createCopy(m_doc);
-    if (copy != NULL)
+    if (copy != nullptr)
     {
         copy->setName(copy->name() + tr(" (Copy)"));
 
@@ -856,10 +856,10 @@ void FunctionManager::copyFunction(quint32 fid)
             Sequence *sequence = qobject_cast<Sequence *>(copy);
             quint32 sceneID = sequence->boundSceneID();
             Function *scene = m_doc->function(sceneID);
-            if (scene != NULL)
+            if (scene != nullptr)
             {
                 Function *sceneCopy = scene->createCopy(m_doc);
-                if (sceneCopy != NULL)
+                if (sceneCopy != nullptr)
                     sequence->setBoundSceneID(sceneCopy->id());
             }
         }
@@ -873,7 +873,7 @@ void FunctionManager::editFunction(Function* function)
 {
     deleteCurrentEditor();
 
-    if (function == NULL)
+    if (function == nullptr)
         return;
 
     // Choose the editor by the selected function's type
@@ -895,7 +895,7 @@ void FunctionManager::editFunction(Function* function)
         Sequence *sequence = qobject_cast<Sequence*> (function);
         Function *sfunc = m_doc->function(sequence->boundSceneID());
 
-        if (sfunc == NULL)
+        if (sfunc == nullptr)
         {
             // The bound Scene no longer exists. Invalidate the Sequence
             sequence->setBoundSceneID(Function::invalidId());
@@ -954,18 +954,18 @@ void FunctionManager::editFunction(Function* function)
     }
     else
     {
-        m_editor = NULL;
-        m_scene_editor = NULL;
+        m_editor = nullptr;
+        m_scene_editor = nullptr;
     }
 
     // Show the editor
-    if (m_editor != NULL)
+    if (m_editor != nullptr)
     {
         m_hsplitter->widget(1)->show();
         m_hsplitter->widget(1)->layout()->addWidget(m_editor);
         m_editor->show();
     }
-    if (m_scene_editor != NULL)
+    if (m_scene_editor != nullptr)
     {
         m_vsplitter->widget(1)->show();
         m_vsplitter->widget(1)->layout()->addWidget(m_scene_editor);
@@ -986,8 +986,8 @@ void FunctionManager::deleteCurrentEditor(bool async)
         delete m_scene_editor;
     }
 
-    m_editor = NULL;
-    m_scene_editor = NULL;
+    m_editor = nullptr;
+    m_scene_editor = nullptr;
 
     m_hsplitter->widget(1)->hide();
     m_vsplitter->widget(1)->hide();

@@ -33,9 +33,9 @@
 
 MidiEnumeratorPrivate::MidiEnumeratorPrivate(MidiEnumerator* parent)
     : QObject(parent)
-    , m_alsa(NULL)
-    , m_address(NULL)
-    , m_inputThread(NULL)
+    , m_alsa(nullptr)
+    , m_address(nullptr)
+    , m_inputThread(nullptr)
 {
     qDebug() << Q_FUNC_INFO;
     initAlsa();
@@ -45,7 +45,7 @@ MidiEnumeratorPrivate::~MidiEnumeratorPrivate()
 {
     qDebug() << Q_FUNC_INFO;
 
-    if (m_inputThread != NULL)
+    if (m_inputThread != nullptr)
     {
         m_inputThread->stop();
 
@@ -56,7 +56,7 @@ MidiEnumeratorPrivate::~MidiEnumeratorPrivate()
             delete m_inputDevices.takeFirst();
 
         delete m_inputThread;
-        m_inputThread = NULL;
+        m_inputThread = nullptr;
     }
 }
 
@@ -67,12 +67,12 @@ void MidiEnumeratorPrivate::initAlsa()
     if (snd_seq_open(&m_alsa, "default", SND_SEQ_OPEN_DUPLEX, 0) != 0)
     {
         qWarning() << "Unable to open ALSA interface!";
-        m_alsa = NULL;
+        m_alsa = nullptr;
         return;
     }
 
     /* Set current client information */
-    snd_seq_client_info_t* client = NULL;
+    snd_seq_client_info_t* client = nullptr;
     snd_seq_client_info_alloca(&client);
     snd_seq_set_client_name(m_alsa, "qlcplus");
     snd_seq_get_client_info(m_alsa, client);
@@ -93,17 +93,17 @@ void MidiEnumeratorPrivate::rescan()
 {
     qDebug() << Q_FUNC_INFO;
 
-    if (m_alsa == NULL)
+    if (m_alsa == nullptr)
         return;
 
     bool changed = false;
     QList <MidiOutputDevice*> destroyOutputs(m_outputDevices);
     QList <MidiInputDevice*> destroyInputs(m_inputDevices);
 
-    snd_seq_client_info_t* clientInfo = NULL;
+    snd_seq_client_info_t* clientInfo = nullptr;
     snd_seq_client_info_alloca(&clientInfo);
 
-    snd_seq_port_info_t* portInfo = NULL;
+    snd_seq_port_info_t* portInfo = nullptr;
     snd_seq_port_info_alloca(&portInfo);
 
     snd_seq_client_info_set_client(clientInfo, 0);
@@ -122,7 +122,7 @@ void MidiEnumeratorPrivate::rescan()
         while (snd_seq_query_next_port(m_alsa, portInfo) == 0)
         {
             const snd_seq_addr_t* address = snd_seq_port_info_get_addr(portInfo);
-            if (address == NULL)
+            if (address == nullptr)
                 continue;
 
             uint caps = snd_seq_port_info_get_capability(portInfo);
@@ -135,7 +135,7 @@ void MidiEnumeratorPrivate::rescan()
 
                 QVariant uid = AlsaMidiUtil::addressToVariant(address);
                 MidiInputDevice* dev = inputDevice(uid);
-                if (dev == NULL)
+                if (dev == nullptr)
                 {
                     AlsaMidiInputDevice* dev = new AlsaMidiInputDevice(
                             uid, name, address, m_alsa, m_inputThread, this);
@@ -157,7 +157,7 @@ void MidiEnumeratorPrivate::rescan()
 
                 QVariant uid = AlsaMidiUtil::addressToVariant(address);
                 MidiOutputDevice* dev = outputDevice(uid);
-                if (dev == NULL)
+                if (dev == nullptr)
                 {
                     AlsaMidiOutputDevice* dev = new AlsaMidiOutputDevice(
                                     uid, name, address, m_alsa, m_address, this);
@@ -200,7 +200,7 @@ MidiOutputDevice* MidiEnumeratorPrivate::outputDevice(const QVariant& uid) const
             return dev;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 MidiInputDevice* MidiEnumeratorPrivate::inputDevice(const QVariant& uid) const
@@ -213,7 +213,7 @@ MidiInputDevice* MidiEnumeratorPrivate::inputDevice(const QVariant& uid) const
             return dev;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 QList <MidiOutputDevice*> MidiEnumeratorPrivate::outputDevices() const
@@ -242,7 +242,7 @@ MidiEnumerator::~MidiEnumerator()
 {
     qDebug() << Q_FUNC_INFO;
     delete d_ptr;
-    d_ptr = NULL;
+    d_ptr = nullptr;
 }
 
 void MidiEnumerator::rescan()

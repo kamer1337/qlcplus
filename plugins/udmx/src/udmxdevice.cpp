@@ -49,13 +49,13 @@ UDMXDevice::UDMXDevice(struct libusb_device* device, libusb_device_descriptor *d
     : QThread(parent)
     , m_device(device)
     , m_descriptor(desc)
-    , m_handle(NULL)
+    , m_handle(nullptr)
     , m_running(false)
     , m_universe(QByteArray(DMX_CHANNELS, 0))
     , m_frequency(30)
     , m_granularity(Unknown)
 {
-    Q_ASSERT(device != NULL);
+    Q_ASSERT(device != nullptr);
 
     QSettings settings;
     QVariant var = settings.value(SETTINGS_FREQUENCY);
@@ -85,7 +85,7 @@ UDMXDevice::~UDMXDevice()
 
 bool UDMXDevice::isUDMXDevice(const struct libusb_device_descriptor* desc)
 {
-    if (desc == NULL)
+    if (desc == nullptr)
         return false;
 
     if (desc->idVendor != UDMX_SHARED_VENDOR &&
@@ -101,9 +101,9 @@ bool UDMXDevice::isUDMXDevice(const struct libusb_device_descriptor* desc)
 
 void UDMXDevice::extractName()
 {
-    Q_ASSERT(m_device != NULL);
+    Q_ASSERT(m_device != nullptr);
 
-    libusb_device_handle* handle = NULL;
+    libusb_device_handle* handle = nullptr;
     int r = libusb_open(m_device, &handle);
     if (r == 0)
     {
@@ -136,7 +136,7 @@ QString UDMXDevice::infoText() const
     QString info;
     QString gran;
 
-    if (m_device != NULL && m_handle != NULL)
+    if (m_device != nullptr && m_handle != nullptr)
     {
         info += QString("<P>");
         info += QString("<B>%1:</B> %2").arg(tr("Device name")).arg(name());
@@ -168,17 +168,17 @@ QString UDMXDevice::infoText() const
 
 bool UDMXDevice::open()
 {
-    if (m_device != NULL && m_handle == NULL)
+    if (m_device != nullptr && m_handle == nullptr)
     {
         int ret = libusb_open(m_device, &m_handle);
         if (ret < 0)
         {
             qWarning() << "Unable to open uDMX with idProduct:" << m_descriptor->idProduct;
-            m_handle = NULL;
+            m_handle = nullptr;
         }
     }
 
-    if (m_handle == NULL)
+    if (m_handle == nullptr)
         return false;
 
     start();
@@ -190,10 +190,10 @@ void UDMXDevice::close()
 {
     stop();
 
-    if (m_device != NULL && m_handle != NULL)
+    if (m_device != nullptr && m_handle != nullptr)
         libusb_close(m_handle);
 
-    m_handle = NULL;
+    m_handle = nullptr;
 }
 
 const struct libusb_device* UDMXDevice::device() const
@@ -242,7 +242,7 @@ void UDMXDevice::run()
     m_running = true;
     while (m_running == true)
     {
-        if (m_handle == NULL)
+        if (m_handle == nullptr)
             goto framesleep;
 
         time.restart();

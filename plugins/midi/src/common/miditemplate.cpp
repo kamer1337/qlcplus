@@ -85,10 +85,10 @@ QByteArray MidiTemplate::initMessage() const
 MidiTemplate* MidiTemplate::loader(const QString& path)
 {
     QXmlStreamReader *doc = QLCFile::getXMLReader(path);
-    if (doc == NULL || doc->device() == NULL || doc->hasError())
+    if (doc == nullptr || doc->device() == nullptr || doc->hasError())
     {
         qWarning() << Q_FUNC_INFO << "Unable to load midi template from" << path;
-        return NULL;
+        return nullptr;
     }
 
     MidiTemplate* midiTemplate = new MidiTemplate();
@@ -100,7 +100,7 @@ MidiTemplate* MidiTemplate::loader(const QString& path)
                     .arg(doc->columnNumber());
 
         delete midiTemplate;
-        midiTemplate = NULL;
+        midiTemplate = nullptr;
     }
     doc->device()->close();
     delete doc->device();

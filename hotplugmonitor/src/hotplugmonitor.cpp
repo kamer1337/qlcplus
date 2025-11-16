@@ -32,7 +32,7 @@
 #   include "hpmprivate-udev.h"
 #endif
 
-HotPlugMonitor* HotPlugMonitor::s_instance = NULL;
+HotPlugMonitor* HotPlugMonitor::s_instance = nullptr;
 
 HotPlugMonitor::HotPlugMonitor(QObject* parent)
     : QObject(parent)
@@ -47,7 +47,7 @@ HotPlugMonitor::~HotPlugMonitor()
 
     stop();
     delete d_ptr;
-    d_ptr = NULL;
+    d_ptr = nullptr;
 }
 
 void HotPlugMonitor::connectListener(QObject* listener)
@@ -78,9 +78,9 @@ bool HotPlugMonitor::parseWinEvent(void *message, long *result)
 
 HotPlugMonitor* HotPlugMonitor::instance()
 {
-    if (s_instance == NULL)
+    if (s_instance == nullptr)
     {
-        Q_ASSERT(QCoreApplication::instance() != NULL);
+        Q_ASSERT(QCoreApplication::instance() != nullptr);
         s_instance = new HotPlugMonitor(QCoreApplication::instance());
         s_instance->start();
     }

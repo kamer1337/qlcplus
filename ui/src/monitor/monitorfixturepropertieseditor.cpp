@@ -32,9 +32,9 @@ MonitorFixturePropertiesEditor::MonitorFixturePropertiesEditor(
   , m_gfxView(gfxView)
   , m_props(props)
 {
-    Q_ASSERT(fxItem != NULL);
-    Q_ASSERT(gfxView != NULL);
-    Q_ASSERT(props != NULL);
+    Q_ASSERT(fxItem != nullptr);
+    Q_ASSERT(gfxView != nullptr);
+    Q_ASSERT(props != nullptr);
 
     setupUi(this);
 

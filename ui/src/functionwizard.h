@@ -112,7 +112,7 @@ protected:
                        QTreeWidgetItem *fxGrpItem, quint32 *chan/* , QLCChannel* channel */);
 
     VCWidget *createWidget(int type, VCWidget *parent, int xpos, int ypos,
-                           Function *func = NULL, int pType = 0, QTreeWidgetItem* fxGrpItem = NULL,
+                           Function *func = nullptr, int pType = 0, QTreeWidgetItem* fxGrpItem = nullptr,
                            quint32 chan = 0, qint32 fixtureNr = -1, qint32 headId = -1);
 
     QSize recursiveCreateWidget(QTreeWidgetItem *item, VCWidget *parent, int type);

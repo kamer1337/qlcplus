@@ -27,7 +27,7 @@
 
 RGBAudio::RGBAudio(Doc * doc)
     : RGBAlgorithm(doc)
-    , m_audioInput(NULL)
+    , m_audioInput(nullptr)
     , m_bandsNumber(-1)
     , m_maxMagnitude(0)
 {
@@ -36,7 +36,7 @@ RGBAudio::RGBAudio(Doc * doc)
 RGBAudio::RGBAudio(const RGBAudio& a, QObject *parent)
     : QObject(parent)
     , RGBAlgorithm(a.doc())
-    , m_audioInput(NULL)
+    , m_audioInput(nullptr)
     , m_bandsNumber(-1)
     , m_maxMagnitude(0)
 {
@@ -196,7 +196,7 @@ void RGBAudio::postRun()
         if (m_bandsNumber > 0)
             m_audioInput->unregisterBandsNumber(m_bandsNumber);
     }
-    m_audioInput = NULL;
+    m_audioInput = nullptr;
     m_bandsNumber = -1;
 }
 
@@ -255,7 +255,7 @@ bool RGBAudio::loadXML(QXmlStreamReader &root)
 
 bool RGBAudio::saveXML(QXmlStreamWriter *doc) const
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     doc->writeStartElement(KXMLQLCRGBAlgorithm);
     doc->writeAttribute(KXMLQLCRGBAlgorithmType, KXMLQLCRGBAudio);

@@ -48,8 +48,8 @@ Fixture::Fixture(QObject* parent) : QObject(parent)
     m_channels = 0;
     m_crossUniverse = false;
 
-    m_fixtureDef = NULL;
-    m_fixtureMode = NULL;
+    m_fixtureDef = nullptr;
+    m_fixtureMode = nullptr;
 }
 
 Fixture::~Fixture()
@@ -105,7 +105,7 @@ QString Fixture::name() const
 
 QString Fixture::typeString()
 {
-    if (m_fixtureDef != NULL)
+    if (m_fixtureDef != nullptr)
         return m_fixtureDef->typeToString(m_fixtureDef->type());
     else
         return QString(KXMLFixtureDimmer);
@@ -113,7 +113,7 @@ QString Fixture::typeString()
 
 QLCFixtureDef::FixtureType Fixture::type() const
 {
-    if (m_fixtureDef != NULL)
+    if (m_fixtureDef != nullptr)
         return m_fixtureDef->type();
     else
         return QLCFixtureDef::Dimmer;
@@ -180,7 +180,7 @@ quint32 Fixture::universeAddress() const
 
 void Fixture::setChannels(quint32 channels)
 {
-    if (m_fixtureDef == NULL && m_fixtureMode == NULL)
+    if (m_fixtureDef == nullptr && m_fixtureMode == nullptr)
     {
         QLCFixtureDef *fixtureDef = genericDimmerDef(channels);
         QLCFixtureMode *fixtureMode = genericDimmerMode(fixtureDef, channels);
@@ -203,7 +203,7 @@ void Fixture::setChannels(quint32 channels)
 
 quint32 Fixture::channels() const
 {
-    if (m_fixtureDef != NULL && m_fixtureMode != NULL)
+    if (m_fixtureDef != nullptr && m_fixtureMode != nullptr)
         return m_fixtureMode->channels().size();
     else
         return m_channels;
@@ -211,10 +211,10 @@ quint32 Fixture::channels() const
 
 const QLCChannel* Fixture::channel(quint32 channel) const
 {
-    if (m_fixtureDef != NULL && m_fixtureMode != NULL)
+    if (m_fixtureDef != nullptr && m_fixtureMode != nullptr)
         return m_fixtureMode->channel(channel);
     else
-        return NULL;
+        return nullptr;
 }
 
 quint32 Fixture::channelAddress(quint32 channel) const
@@ -228,7 +228,7 @@ quint32 Fixture::channelAddress(quint32 channel) const
 quint32 Fixture::channel(QLCChannel::Group group,
     QLCChannel::PrimaryColour color) const
 {
-    if (m_fixtureDef == NULL && m_fixtureMode == NULL)
+    if (m_fixtureDef == nullptr && m_fixtureMode == nullptr)
     {
         /* There's just one generic channel object with "Intensity" as
            its name that is the same for all channel numbers. So
@@ -243,7 +243,7 @@ quint32 Fixture::channel(QLCChannel::Group group,
         for (quint32 i = 0; i < quint32(m_fixtureMode->channels().size()); i++)
         {
             const QLCChannel* ch = m_fixtureMode->channel(i);
-            Q_ASSERT(ch != NULL);
+            Q_ASSERT(ch != nullptr);
 
             if (group != QLCChannel::NoGroup && ch->group() != group)
             {
@@ -265,13 +265,13 @@ quint32 Fixture::channel(QLCChannel::Group group,
 QSet <quint32> Fixture::channels(QLCChannel::Group group, QLCChannel::PrimaryColour color) const
 {
     QSet <quint32> set;
-    if (m_fixtureDef != NULL && m_fixtureMode != NULL)
+    if (m_fixtureDef != nullptr && m_fixtureMode != nullptr)
     {
         /* Search for the channel name (and group) from our list */
         for (quint32 i = 0; i < quint32(m_fixtureMode->channels().size()); i++)
         {
             const QLCChannel* ch = m_fixtureMode->channel(i);
-            Q_ASSERT(ch != NULL);
+            Q_ASSERT(ch != nullptr);
 
             if (group != QLCChannel::NoGroup && ch->group() != group)
             {
@@ -291,7 +291,7 @@ QSet <quint32> Fixture::channels(QLCChannel::Group group, QLCChannel::PrimaryCol
 
 quint32 Fixture::channelNumber(int type, int controlByte, int head) const
 {
-    if (m_fixtureMode == NULL || head < 0 || head >= m_fixtureMode->heads().size())
+    if (m_fixtureMode == nullptr || head < 0 || head >= m_fixtureMode->heads().size())
         return QLCChannel::invalid();
 
     return m_fixtureMode->heads().at(head).channelNumber(type, controlByte);
@@ -299,7 +299,7 @@ quint32 Fixture::channelNumber(int type, int controlByte, int head) const
 
 quint32 Fixture::masterIntensityChannel() const
 {
-    if (m_fixtureMode == NULL)
+    if (m_fixtureMode == nullptr)
         return QLCChannel::invalid();
 
     return m_fixtureMode->masterIntensityChannel();
@@ -307,7 +307,7 @@ quint32 Fixture::masterIntensityChannel() const
 
 QVector <quint32> Fixture::rgbChannels(int head) const
 {
-    if (m_fixtureMode == NULL || head < 0 || head >= m_fixtureMode->heads().size())
+    if (m_fixtureMode == nullptr || head < 0 || head >= m_fixtureMode->heads().size())
         return QVector <quint32> ();
 
     return m_fixtureMode->heads().at(head).rgbChannels();
@@ -315,7 +315,7 @@ QVector <quint32> Fixture::rgbChannels(int head) const
 
 QVector <quint32> Fixture::cmyChannels(int head) const
 {
-    if (m_fixtureMode == NULL || head < 0 || head >= m_fixtureMode->heads().size())
+    if (m_fixtureMode == nullptr || head < 0 || head >= m_fixtureMode->heads().size())
         return QVector <quint32> ();
 
     return m_fixtureMode->heads().at(head).cmyChannels();
@@ -327,7 +327,7 @@ QList<SceneValue> Fixture::positionToValues(int type, float degrees, bool isRela
     // cache a list of channels processed, to avoid duplicates
     QList<quint32> chDone;
 
-    if (m_fixtureMode == NULL)
+    if (m_fixtureMode == nullptr)
         return posList;
 
     QLCPhysical phy = fixtureMode()->physical();
@@ -416,7 +416,7 @@ QList<SceneValue> Fixture::zoomToValues(float degrees, bool isRelative)
 {
     QList<SceneValue> chList;
 
-    if (m_fixtureMode == NULL)
+    if (m_fixtureMode == nullptr)
         return chList;
 
     QLCPhysical phy = fixtureMode()->physical();
@@ -544,7 +544,7 @@ void Fixture::setChannelModifier(quint32 idx, ChannelModifier *mod)
     if (idx >= channels())
         return;
 
-    if (mod == NULL)
+    if (mod == nullptr)
     {
         m_channelModifiers.remove(idx);
         return;
@@ -556,7 +556,7 @@ void Fixture::setChannelModifier(quint32 idx, ChannelModifier *mod)
 
 ChannelModifier *Fixture::channelModifier(quint32 idx)
 {
-    return m_channelModifiers.value(idx, NULL);
+    return m_channelModifiers.value(idx, nullptr);
 }
 
 /*********************************************************************
@@ -614,7 +614,7 @@ void Fixture::checkAlias(int chIndex, uchar value)
     // If the channel @chIndex has aliases, check
     // if replacements are to be done
     QLCCapability *cap = m_fixtureMode->channel(chIndex)->searchCapability(value);
-    if (cap == NULL || cap == m_aliasInfo[chIndex].m_currCap)
+    if (cap == nullptr || cap == m_aliasInfo[chIndex].m_currCap)
         return;
 
     // first, revert any channel replaced to the original channel set
@@ -656,11 +656,11 @@ void Fixture::checkAlias(int chIndex, uchar value)
 void Fixture::setFixtureDefinition(QLCFixtureDef* fixtureDef,
                                    QLCFixtureMode* fixtureMode)
 {
-    if (fixtureDef != NULL && fixtureMode != NULL)
+    if (fixtureDef != nullptr && fixtureMode != nullptr)
     {
         int i, chNum;
 
-        if (m_fixtureDef != NULL && m_fixtureDef != fixtureDef &&
+        if (m_fixtureDef != nullptr && m_fixtureDef != fixtureDef &&
             m_fixtureDef->manufacturer() == KXMLFixtureGeneric &&
             m_fixtureDef->model() == KXMLFixtureGeneric)
         {
@@ -695,7 +695,7 @@ void Fixture::setFixtureDefinition(QLCFixtureDef* fixtureDef,
 
             // look for aliases
             m_aliasInfo[i].m_hasAlias = false;
-            m_aliasInfo[i].m_currCap = capsList.count() ? capsList.at(0) : NULL;
+            m_aliasInfo[i].m_currCap = capsList.count() ? capsList.at(0) : nullptr;
 
             foreach (QLCCapability *cap, capsList)
             {
@@ -709,8 +709,8 @@ void Fixture::setFixtureDefinition(QLCFixtureDef* fixtureDef,
     }
     else
     {
-        m_fixtureDef = NULL;
-        m_fixtureMode = NULL;
+        m_fixtureDef = nullptr;
+        m_fixtureMode = nullptr;
     }
 
     emit changed(m_id);
@@ -774,7 +774,7 @@ QRectF Fixture::degreesRange(int head) const
 {
     // TODO: handle fixtures with only pan or tilt
 
-    if (m_fixtureMode != NULL && head < m_fixtureMode->heads().size())
+    if (m_fixtureMode != nullptr && head < m_fixtureMode->heads().size())
     {
         QLCPhysical physical(m_fixtureMode->physical());
         qreal pan = physical.focusPanMax();
@@ -815,7 +815,7 @@ QLCFixtureDef *Fixture::genericDimmerDef(int channels)
 
 QLCFixtureMode *Fixture::genericDimmerMode(QLCFixtureDef *def, int channels)
 {
-    Q_ASSERT(def != NULL);
+    Q_ASSERT(def != nullptr);
     QLCFixtureMode *mode = new QLCFixtureMode(def);
 
     mode->setName(QString("%1 Channel").arg(channels));
@@ -924,9 +924,9 @@ QLCFixtureDef *Fixture::genericRGBPanelDef(int columns, Components components, b
         blue->setGroup(QLCChannel::Intensity);
         blue->setColour(QLCChannel::Blue);
 
-        QLCChannel *redFine = NULL;
-        QLCChannel *greenFine = NULL;
-        QLCChannel *blueFine = NULL;
+        QLCChannel *redFine = nullptr;
+        QLCChannel *greenFine = nullptr;
+        QLCChannel *blueFine = nullptr;
 
         if (is16bit)
         {
@@ -1036,7 +1036,7 @@ QLCFixtureDef *Fixture::genericRGBPanelDef(int columns, Components components, b
 QLCFixtureMode *Fixture::genericRGBPanelMode(QLCFixtureDef *def, Components components, bool is16bit,
                                              quint32 width, quint32 height)
 {
-    Q_ASSERT(def != NULL);
+    Q_ASSERT(def != nullptr);
 
     QLCFixtureMode *mode = new QLCFixtureMode(def);
     QString modeName = componentsToString(components, is16bit);
@@ -1085,7 +1085,7 @@ bool Fixture::loader(QXmlStreamReader &root, Doc* doc)
     bool result = false;
 
     Fixture* fxi = new Fixture(doc);
-    Q_ASSERT(fxi != NULL);
+    Q_ASSERT(fxi != nullptr);
 
     if (fxi->loadXML(root, doc, doc->fixtureDefCache()) == true)
     {
@@ -1114,8 +1114,8 @@ bool Fixture::loader(QXmlStreamReader &root, Doc* doc)
 bool Fixture::loadXML(QXmlStreamReader &xmlDoc, Doc *doc,
                       QLCFixtureDefCache *fixtureDefCache)
 {
-    QLCFixtureDef* fixtureDef = NULL;
-    QLCFixtureMode* fixtureMode = NULL;
+    QLCFixtureDef* fixtureDef = nullptr;
+    QLCFixtureMode* fixtureMode = nullptr;
     QString manufacturer;
     QString model;
     QString modeName;
@@ -1217,7 +1217,7 @@ bool Fixture::loadXML(QXmlStreamReader &xmlDoc, Doc *doc,
                 quint32 chIdx = attrs.value(KXMLFixtureChannelIndex).toString().toUInt();
                 QString modName = attrs.value(KXMLFixtureModifierName).toString();
                 ChannelModifier *chMod = doc->modifiersCache()->modifier(modName);
-                if (chMod != NULL)
+                if (chMod != nullptr)
                 {
                     modifierIndices.append(chIdx);
                     modifierPointers.append(chMod);
@@ -1236,7 +1236,7 @@ bool Fixture::loadXML(QXmlStreamReader &xmlDoc, Doc *doc,
     if (model != KXMLFixtureGeneric && model != KXMLFixtureRGBPanel)
     {
         fixtureDef = fixtureDefCache->fixtureDef(manufacturer, model);
-        if (fixtureDef == NULL)
+        if (fixtureDef == nullptr)
         {
             // fallback to project local path
             QString man(manufacturer);
@@ -1251,25 +1251,25 @@ bool Fixture::loadXML(QXmlStreamReader &xmlDoc, Doc *doc,
                 qDebug() << "Failed to load definition" << path;
 
             fixtureDef = fixtureDefCache->fixtureDef(manufacturer, model);
-            if (fixtureDef == NULL)
+            if (fixtureDef == nullptr)
             {
                 doc->appendToErrorLog(QString("No fixture definition found for <b>%1</b> <b>%2</b>")
                                       .arg(manufacturer).arg(model));
             }
         }
 
-        if (fixtureDef != NULL)
+        if (fixtureDef != nullptr)
         {
             /* Find the given fixture mode */
             fixtureMode = fixtureDef->mode(modeName);
-            if (fixtureMode == NULL)
+            if (fixtureMode == nullptr)
             {
                 doc->appendToErrorLog(QString("Fixture mode <b>%1</b> not found for <b>%2</b> <b>%3</b>")
                                       .arg(modeName).arg(manufacturer).arg(model));
 
-                /* Set this also NULL so that a generic dimmer will be
+                /* Set this also nullptr so that a generic dimmer will be
                    created instead as a backup. */
-                fixtureDef = NULL;
+                fixtureDef = nullptr;
             }
         }
     }
@@ -1316,9 +1316,9 @@ bool Fixture::loadXML(QXmlStreamReader &xmlDoc, Doc *doc,
         fixtureMode = genericRGBPanelMode(fixtureDef, components, is16bit, width, height);
     }
 
-    if (fixtureDef != NULL && fixtureMode != NULL)
+    if (fixtureDef != nullptr && fixtureMode != nullptr)
     {
-        /* Assign fixtureDef & mode only if BOTH are not NULL */
+        /* Assign fixtureDef & mode only if BOTH are not nullptr */
         setFixtureDefinition(fixtureDef, fixtureMode);
     }
     else
@@ -1342,31 +1342,31 @@ bool Fixture::loadXML(QXmlStreamReader &xmlDoc, Doc *doc,
 
 bool Fixture::saveXML(QXmlStreamWriter *doc) const
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* Fixture Instance entry */
     doc->writeStartElement(KXMLFixture);
 
     /* Manufacturer */
-    if (m_fixtureDef != NULL)
+    if (m_fixtureDef != nullptr)
         doc->writeTextElement(KXMLQLCFixtureDefManufacturer, m_fixtureDef->manufacturer());
     else
         doc->writeTextElement(KXMLQLCFixtureDefManufacturer, KXMLFixtureGeneric);
 
     /* Model */
-    if (m_fixtureDef != NULL)
+    if (m_fixtureDef != nullptr)
         doc->writeTextElement(KXMLQLCFixtureDefModel, m_fixtureDef->model());
     else
         doc->writeTextElement(KXMLQLCFixtureDefModel, KXMLFixtureGeneric);
 
     /* Fixture mode */
-    if (m_fixtureMode != NULL)
+    if (m_fixtureMode != nullptr)
         doc->writeTextElement(KXMLQLCFixtureMode, m_fixtureMode->name());
     else
         doc->writeTextElement(KXMLQLCFixtureMode, KXMLFixtureGeneric);
 
     /* RGB Panel physical dimensions */
-    if (m_fixtureDef != NULL && m_fixtureDef->model() == KXMLFixtureRGBPanel && m_fixtureMode != NULL)
+    if (m_fixtureDef != nullptr && m_fixtureDef->model() == KXMLFixtureRGBPanel && m_fixtureMode != nullptr)
     {
         doc->writeTextElement(KXMLQLCPhysicalDimensionsWidth,
                               QString::number(m_fixtureMode->physical().width()));
@@ -1431,7 +1431,7 @@ bool Fixture::saveXML(QXmlStreamWriter *doc) const
             it.next();
             quint32 ch = it.key();
             ChannelModifier *mod = it.value();
-            if (mod != NULL)
+            if (mod != nullptr)
             {
                 doc->writeStartElement(KXMLFixtureChannelModifier);
                 doc->writeAttribute(KXMLFixtureChannelIndex, QString::number(ch));
@@ -1469,7 +1469,7 @@ QString Fixture::status() const
     // Fixture title
     info += title.arg(name());
 
-    if (m_fixtureDef != NULL && m_fixtureMode != NULL)
+    if (m_fixtureDef != nullptr && m_fixtureMode != nullptr)
     {
         // Manufacturer
         info += genInfo.arg(tr("Manufacturer")).arg(m_fixtureDef->manufacturer());
@@ -1527,7 +1527,7 @@ QString Fixture::status() const
      * Extended device information
      ********************************************************************/
 
-    if (m_fixtureMode != NULL)
+    if (m_fixtureMode != nullptr)
     {
         QLCPhysical physical = m_fixtureMode->physical();
         info += title.arg(tr("Physical"));
@@ -1591,7 +1591,7 @@ QString Fixture::status() const
     // HTML document & table closure
     info += "</TABLE>";
 
-    if (m_fixtureDef != NULL)
+    if (m_fixtureDef != nullptr)
     {
         info += "<HR>";
         info += "<DIV CLASS='author' ALIGN='right'>";

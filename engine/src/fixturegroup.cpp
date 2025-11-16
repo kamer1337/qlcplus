@@ -39,7 +39,7 @@ FixtureGroup::FixtureGroup(Doc* parent)
     : QObject(parent)
     , m_id(FixtureGroup::invalidId())
 {
-    Q_ASSERT(parent != NULL);
+    Q_ASSERT(parent != nullptr);
 
     // Listen to fixture removals
     connect(parent, SIGNAL(fixtureRemoved(quint32)),
@@ -108,7 +108,7 @@ QString FixtureGroup::name() const
 bool FixtureGroup::assignFixture(quint32 id, const QLCPoint& pt)
 {
     Fixture* fxi = doc()->fixture(id);
-    Q_ASSERT(fxi != NULL);
+    Q_ASSERT(fxi != nullptr);
     QLCPoint tmp = pt;
     int headAddedcount = 0;
 
@@ -283,7 +283,7 @@ bool FixtureGroup::loader(QXmlStreamReader &xmlDoc, Doc* doc)
     bool result = false;
 
     FixtureGroup* grp = new FixtureGroup(doc);
-    Q_ASSERT(grp != NULL);
+    Q_ASSERT(grp != nullptr);
 
     if (grp->loadXML(xmlDoc) == true)
     {
@@ -360,7 +360,7 @@ bool FixtureGroup::loadXML(QXmlStreamReader &xmlDoc)
 
 bool FixtureGroup::saveXML(QXmlStreamWriter *doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* Fixture Group entry */
     doc->writeStartElement(KXMLQLCFixtureGroup);

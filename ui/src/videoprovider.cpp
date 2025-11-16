@@ -35,7 +35,7 @@ VideoProvider::VideoProvider(Doc *doc, QObject *parent)
     : QObject(parent)
     , m_doc(doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
     connect(m_doc, SIGNAL(functionAdded(quint32)),
             this, SLOT(slotFunctionAdded(quint32)));
     connect(m_doc, SIGNAL(functionRemoved(quint32)),
@@ -50,7 +50,7 @@ VideoProvider::~VideoProvider()
 void VideoProvider::slotFunctionAdded(quint32 id)
 {
     Function *func = m_doc->function(id);
-    if (func == NULL)
+    if (func == nullptr)
         return;
 
     if (func->type() == Function::VideoType)
@@ -76,10 +76,10 @@ void VideoProvider::slotFunctionRemoved(quint32 id)
 VideoWidget::VideoWidget(Video *video, QObject *parent)
     : QObject(parent)
     , m_video(video)
-    , m_videoPlayer(NULL)
-    , m_videoWidget(NULL)
+    , m_videoPlayer(nullptr)
+    , m_videoWidget(nullptr)
 {
-    Q_ASSERT(video != NULL);
+    Q_ASSERT(video != nullptr);
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     m_videoPlayer = new QMediaPlayer(this, QMediaPlayer::VideoSurface);
@@ -90,7 +90,7 @@ VideoWidget::VideoWidget(Video *video, QObject *parent)
 #endif
     m_videoPlayer->moveToThread(QCoreApplication::instance()->thread());
 
-    if (QLCFile::getQtRuntimeVersion() >= 50700 && m_videoWidget == NULL)
+    if (QLCFile::getQtRuntimeVersion() >= 50700 && m_videoWidget == nullptr)
     {
         m_videoWidget = new QVideoWidget;
         m_videoWidget->setStyleSheet("background-color:black;");
@@ -177,7 +177,7 @@ void VideoWidget::slotStatusChanged(QMediaPlayer::MediaStatus status)
         break;
         case QMediaPlayer::EndOfMedia:
         {
-            if (m_videoPlayer != NULL)
+            if (m_videoPlayer != nullptr)
                 m_videoPlayer->stop();
 
             if (m_video->runOrder() == Video::Loop)
@@ -186,7 +186,7 @@ void VideoWidget::slotStatusChanged(QMediaPlayer::MediaStatus status)
                 break;
             }
 
-            if (m_videoWidget != NULL)
+            if (m_videoWidget != nullptr)
                 m_videoWidget->hide();
 
             m_video->stop(functionParent());
@@ -202,7 +202,7 @@ void VideoWidget::slotStatusChanged(QMediaPlayer::MediaStatus status)
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 void VideoWidget::slotMetaDataChanged(QString key, QVariant data)
 {
-    if (m_video == NULL)
+    if (m_video == nullptr)
         return;
 
     qDebug() << Q_FUNC_INFO << "Got meta data:" << key;
@@ -216,7 +216,7 @@ void VideoWidget::slotMetaDataChanged(QString key, QVariant data)
 #else
 void VideoWidget::slotMetaDataChanged()
 {
-    if (m_video == NULL)
+    if (m_video == nullptr)
         return;
 
     QMediaMetaData md = m_videoPlayer->metaData();
@@ -248,7 +248,7 @@ void VideoWidget::slotPlaybackVideo()
     QScreen *scr = screens.count() > screen ? screens.at(screen) : screens.first();
     QRect rect = scr->availableGeometry();
 
-    if (QLCFile::getQtRuntimeVersion() < 50700 && m_videoWidget == NULL)
+    if (QLCFile::getQtRuntimeVersion() < 50700 && m_videoWidget == nullptr)
     {
         m_videoWidget = new QVideoWidget;
         m_videoWidget->setStyleSheet("background-color:black;");
@@ -297,10 +297,10 @@ void VideoWidget::slotSetPause(bool enable)
 
 void VideoWidget::slotStopVideo()
 {
-    if (m_videoPlayer != NULL)
+    if (m_videoPlayer != nullptr)
         m_videoPlayer->stop();
 
-    if (m_videoWidget != NULL)
+    if (m_videoWidget != nullptr)
     {
         if (m_video->fullscreen())
             m_videoWidget->setFullScreen(false);
@@ -313,7 +313,7 @@ void VideoWidget::slotStopVideo()
 void VideoWidget::slotBrightnessAdjust(int value)
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    if (m_videoWidget != NULL)
+    if (m_videoWidget != nullptr)
         m_videoWidget->setBrightness(value);
     if (m_videoPlayer)
         m_videoPlayer->setVolume(value + 100);

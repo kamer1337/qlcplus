@@ -64,8 +64,8 @@ VCWidget::VCWidget(QWidget* parent, Doc* doc)
     , m_intensity(1.0)
     , m_liveEdit(VirtualConsole::instance()->liveEdit())
 {
-    Q_ASSERT(parent != NULL);
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(parent != nullptr);
+    Q_ASSERT(doc != nullptr);
 
     /* Set the class name "VCWidget" as the object name as well */
     setObjectName(VCWidget::staticMetaObject.className());
@@ -225,7 +225,7 @@ int VCWidget::page()
 
 bool VCWidget::copyFrom(const VCWidget* widget)
 {
-    if (widget == NULL)
+    if (widget == nullptr)
         return false;
 
     setBackgroundImage(widget->m_backgroundImage);
@@ -523,7 +523,7 @@ void VCWidget::editProperties()
 
 void VCWidget::adjustFunctionIntensity(Function *f, qreal value)
 {
-    if (f == NULL)
+    if (f == nullptr)
         return;
 
     //qDebug() << "adjustFunctionIntensity" << caption() << "value" << value;
@@ -611,14 +611,14 @@ void VCWidget::setInputSource(QSharedPointer<QLCInputSource> const& source, quin
         // now check if the source is defined in the associated universe
         // profile and if it has specific settings
         InputPatch *ip = m_doc->inputOutputMap()->inputPatch(source->universe());
-        if (ip != NULL)
+        if (ip != nullptr)
         {
             QLCInputProfile *profile = ip->profile();
-            if (profile != NULL)
+            if (profile != nullptr)
             {
                 // Do not care about the page since input profiles don't do either
                 QLCInputChannel *ich = profile->channel(source->channel() & 0xFFFF);
-                if (ich != NULL)
+                if (ich != nullptr)
                 {
                     // retrieve plugin specific params for feedback
                     if (source->feedbackExtraParams(QLCInputFeedback::LowerValue).toInt() == -1)
@@ -741,14 +741,14 @@ void VCWidget::slotInputProfileChanged(quint32 universe, const QString &profileN
         {
             // if the profile has been unset, reset all the valid
             // input sources to work in absolute mode
-            if (profile == NULL)
+            if (profile == nullptr)
             {
                 source->setWorkingMode(QLCInputSource::Absolute);
             }
             else
             {
                 QLCInputChannel *ich = profile->channel(source->channel());
-                if (ich != NULL)
+                if (ich != nullptr)
                 {
                     if (ich->movementType() == QLCInputChannel::Absolute)
                         source->setWorkingMode(QLCInputSource::Absolute);
@@ -815,7 +815,7 @@ void VCWidget::postLoad()
 
 bool VCWidget::loadXMLCommon(QXmlStreamReader &root)
 {
-    if (root.device() == NULL || root.hasError())
+    if (root.device() == nullptr || root.hasError())
         return false;
 
     QXmlStreamAttributes attrs = root.attributes();
@@ -837,7 +837,7 @@ bool VCWidget::loadXMLCommon(QXmlStreamReader &root)
 
 bool VCWidget::loadXMLAppearance(QXmlStreamReader &root)
 {
-    if (root.device() == NULL || root.hasError())
+    if (root.device() == nullptr || root.hasError())
         return false;
 
     if (root.name() != KXMLQLCVCWidgetAppearance)
@@ -926,7 +926,7 @@ QSharedPointer<QLCInputSource> VCWidget::getXMLInput(QXmlStreamReader &root)
 
 bool VCWidget::loadXMLInput(QXmlStreamReader &root, const quint8 &id)
 {
-    if (root.device() == NULL || root.hasError())
+    if (root.device() == nullptr || root.hasError())
         return false;
 
     if (root.name() != KXMLQLCVCWidgetInput)
@@ -998,7 +998,7 @@ QString VCWidget::extraParamToString(QVariant param)
 
 bool VCWidget::saveXMLCommon(QXmlStreamWriter *doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* Caption */
     doc->writeAttribute(KXMLQLCVCCaption, caption());
@@ -1016,7 +1016,7 @@ bool VCWidget::saveXMLCommon(QXmlStreamWriter *doc)
 
 bool VCWidget::saveXMLAppearance(QXmlStreamWriter *doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     QString str;
 
@@ -1068,9 +1068,9 @@ bool VCWidget::saveXMLInput(QXmlStreamWriter *doc)
 bool VCWidget::saveXMLInput(QXmlStreamWriter *doc,
                             const QLCInputSource *src)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
-    if (src == NULL)
+    if (src == nullptr)
         return false;
 
     if (src->isValid() == true)
@@ -1115,7 +1115,7 @@ bool VCWidget::saveXMLInput(QXmlStreamWriter *doc,
 
 bool VCWidget::saveXMLWindowState(QXmlStreamWriter *doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* Window state tag */
     doc->writeStartElement(KXMLQLCWindowState);
@@ -1139,8 +1139,8 @@ bool VCWidget::saveXMLWindowState(QXmlStreamWriter *doc)
 bool VCWidget::loadXMLWindowState(QXmlStreamReader &tag, int* x, int* y,
                                   int* w, int* h, bool* visible)
 {
-    if (tag.device() == NULL || x == NULL || y == NULL || w == NULL || h == NULL ||
-            visible == NULL)
+    if (tag.device() == nullptr || x == nullptr || y == nullptr || w == nullptr || h == nullptr ||
+            visible == nullptr)
         return false;
 
     if (tag.name() == KXMLQLCWindowState)
@@ -1206,7 +1206,7 @@ void VCWidget::slotModeChanged(Doc::Mode mode)
 
 Doc::Mode VCWidget::mode() const
 {
-    Q_ASSERT(m_doc != NULL);
+    Q_ASSERT(m_doc != nullptr);
     if (m_liveEdit)
         return Doc::Design;
     return m_doc->mode();
@@ -1220,11 +1220,11 @@ void VCWidget::invokeMenu(const QPoint& point)
 {
     /* No point coming here if there is no VC instance */
     VirtualConsole* vc = VirtualConsole::instance();
-    if (vc == NULL)
+    if (vc == nullptr)
         return;
 
     QMenu* menu = vc->editMenu();
-    Q_ASSERT(menu != NULL);
+    Q_ASSERT(menu != nullptr);
     menu->exec(point);
 }
 
@@ -1235,7 +1235,7 @@ void VCWidget::invokeMenu(const QPoint& point)
 QMenu* VCWidget::customMenu(QMenu* parentMenu)
 {
     Q_UNUSED(parentMenu);
-    return NULL;
+    return nullptr;
 }
 
 /*****************************************************************************
@@ -1295,7 +1295,7 @@ void VCWidget::paintEvent(QPaintEvent* e)
 
     /* No point coming here if there is no VC instance */
     VirtualConsole* vc = VirtualConsole::instance();
-    if (vc == NULL)
+    if (vc == nullptr)
         return;
 
     QPainter painter(this);
@@ -1343,7 +1343,7 @@ void VCWidget::paintEvent(QPaintEvent* e)
 
 void VCWidget::mousePressEvent(QMouseEvent* e)
 {
-    Q_ASSERT(e != NULL);
+    Q_ASSERT(e != nullptr);
 
     if (mode() == Doc::Operate)
     {
@@ -1389,7 +1389,7 @@ void VCWidget::handleWidgetSelection(QMouseEvent* e)
 {
     /* No point coming here if there is no VC */
     VirtualConsole* vc = VirtualConsole::instance();
-    if (vc == NULL)
+    if (vc == nullptr)
         return;
 
     /* Widget selection logic (like in Qt Designer) */

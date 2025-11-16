@@ -45,7 +45,7 @@ ChannelsSelection::ChannelsSelection(Doc *doc, QWidget *parent, ChannelSelection
     , m_doc(doc)
     , m_mode(mode)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     setupUi(this);
 
@@ -112,7 +112,7 @@ void ChannelsSelection::updateFixturesTree()
 
     foreach (Fixture *fxi, m_doc->fixtures())
     {
-        QTreeWidgetItem *topItem = NULL;
+        QTreeWidgetItem *topItem = nullptr;
         quint32 uni = fxi->universe();
         for (int i = 0; i < m_channelsTree->topLevelItemCount(); i++)
         {
@@ -125,7 +125,7 @@ void ChannelsSelection::updateFixturesTree()
             }
         }
         // Haven't found this universe node ? Create it.
-        if (topItem == NULL)
+        if (topItem == nullptr)
         {
             topItem = new QTreeWidgetItem(m_channelsTree);
             topItem->setText(KColumnName, m_doc->inputOutputMap()->universes().at(uni)->name());
@@ -183,7 +183,7 @@ void ChannelsSelection::updateFixturesTree()
 
                 QPushButton *button = new QPushButton();
                 ChannelModifier *mod = fxi->channelModifier(c);
-                if (mod == NULL)
+                if (mod == nullptr)
                     button->setText("...");
                 else
                     button->setText(mod->name());
@@ -214,11 +214,11 @@ QList<QTreeWidgetItem *> ChannelsSelection::getSameChannels(QTreeWidgetItem *ite
 {
     QList<QTreeWidgetItem *> sameChannelsList;
     Fixture *fixture = m_doc->fixture(item->text(KColumnID).toUInt());
-    if (fixture == NULL)
+    if (fixture == nullptr)
         return sameChannelsList;
 
     const QLCFixtureDef *def = fixture->fixtureDef();
-    if (def == NULL)
+    if (def == nullptr)
         return sameChannelsList;
 
     QString manufacturer = def->manufacturer();
@@ -235,17 +235,17 @@ QList<QTreeWidgetItem *> ChannelsSelection::getSameChannels(QTreeWidgetItem *ite
             QTreeWidgetItem *fixItem = uniItem->child(f);
             quint32 fxID = fixItem->text(KColumnID).toUInt();
             Fixture *fxi = m_doc->fixture(fxID);
-            if (fxi != NULL)
+            if (fxi != nullptr)
             {
                 const QLCFixtureDef *tmpDef = fxi->fixtureDef();
-                if (tmpDef != NULL)
+                if (tmpDef != nullptr)
                 {
                     QString tmpManuf = tmpDef->manufacturer();
                     QString tmpModel = tmpDef->model();
                     if (tmpManuf == manufacturer && tmpModel == model)
                     {
                         QTreeWidgetItem* chItem = fixItem->child(chIdx);
-                        if (chItem != NULL)
+                        if (chItem != nullptr)
                             sameChannelsList.append(chItem);
                     }
                 }
@@ -281,7 +281,7 @@ void ChannelsSelection::slotComboChanged(int idx)
 {
     Q_UNUSED(idx)
     QComboBox *combo = (QComboBox *)sender();
-    if (combo != NULL)
+    if (combo != nullptr)
     {
         combo->setStyleSheet("QWidget {color:red}");
         if (m_applyAllCheck->isChecked() == true)
@@ -292,7 +292,7 @@ void ChannelsSelection::slotComboChanged(int idx)
             foreach (QTreeWidgetItem *chItem, getSameChannels(item))
             {
                 QComboBox *chCombo = qobject_cast<QComboBox *>(m_channelsTree->itemWidget(chItem, KColumnBehaviour));
-                if (chCombo != NULL)
+                if (chCombo != nullptr)
                 {
                     chCombo->blockSignals(true);
                     chCombo->setCurrentIndex(idx);
@@ -307,7 +307,7 @@ void ChannelsSelection::slotComboChanged(int idx)
 void ChannelsSelection::slotModifierButtonClicked()
 {
     QPushButton *button = (QPushButton *)sender();
-    if (button == NULL)
+    if (button == nullptr)
         return;
 
     ChannelModifierEditor cme(m_doc, button->text(), this);
@@ -316,7 +316,7 @@ void ChannelsSelection::slotModifierButtonClicked()
 
     QString displayName = "...";
     ChannelModifier *modif = cme.selectedModifier();
-    if (modif != NULL)
+    if (modif != nullptr)
         displayName = modif->name();
 
     button->setText(displayName);
@@ -328,7 +328,7 @@ void ChannelsSelection::slotModifierButtonClicked()
         foreach (QTreeWidgetItem *chItem, getSameChannels(item))
         {
             QPushButton *chButton = qobject_cast<QPushButton *>(m_channelsTree->itemWidget(chItem, KColumnModifier));
-            if (chButton != NULL)
+            if (chButton != nullptr)
                 chButton->setText(displayName);
         }
     }
@@ -349,7 +349,7 @@ void ChannelsSelection::accept()
             QTreeWidgetItem *fixItem = uniItem->child(f);
             quint32 fxID = fixItem->text(KColumnID).toUInt();
             Fixture *fxi = m_doc->fixture(fxID);
-            if (fxi != NULL)
+            if (fxi != nullptr)
             {
                 excludeList.clear();
                 forcedHTPList.clear();
@@ -365,7 +365,7 @@ void ChannelsSelection::accept()
                             excludeList.append(c);
 
                         QComboBox *combo = (QComboBox *)m_channelsTree->itemWidget(chanItem, KColumnBehaviour);
-                        if (combo != NULL)
+                        if (combo != nullptr)
                         {
                             if (combo->currentIndex() == 0) // HTP
                             {
@@ -381,7 +381,7 @@ void ChannelsSelection::accept()
                             }
                         }
                         QPushButton *button = (QPushButton *)m_channelsTree->itemWidget(chanItem, KColumnModifier);
-                        if (button != NULL)
+                        if (button != nullptr)
                         {
                             ChannelModifier *mod = m_doc->modifiersCache()->modifier(button->text());
                             fxi->setChannelModifier((quint32)c, mod);

@@ -107,7 +107,7 @@ bool QHttpServer::listen(const QHostAddress &address, quint16 port)
     if (!m_tcpServer->listen(address, port))
     {
         delete m_tcpServer;
-        m_tcpServer = NULL;
+        m_tcpServer = nullptr;
         return false;
     }
     return true;

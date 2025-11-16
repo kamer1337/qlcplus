@@ -192,7 +192,7 @@ void Collection_Test::loadSuccess()
     xmlWriter.writeTextElement("Step", "87");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -221,7 +221,7 @@ void Collection_Test::loadWrongType()
     xmlWriter.writeTextElement("Step", "87");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -246,7 +246,7 @@ void Collection_Test::loadWrongRoot()
     xmlWriter.writeTextElement("Step", "87");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -271,7 +271,7 @@ void Collection_Test::loadWrongMemberTag()
     xmlWriter.writeTextElement("Bar", "87");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -295,7 +295,7 @@ void Collection_Test::loadPostLoad()
     xmlWriter.writeTextElement("Step", "12");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -323,7 +323,7 @@ void Collection_Test::save()
 
     QVERIFY(c.saveXML(&xmlWriter) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -409,12 +409,12 @@ void Collection_Test::createCopy()
     QVERIFY(c1->id() != Function::invalidId());
 
     Function* f = c1->createCopy(&doc);
-    QVERIFY(f != NULL);
+    QVERIFY(f != nullptr);
     QVERIFY(f != c1);
     QVERIFY(f->id() != c1->id());
 
     Collection* copy = qobject_cast<Collection*> (f);
-    QVERIFY(copy != NULL);
+    QVERIFY(copy != nullptr);
     QVERIFY(copy->functions().size() == 3);
     QVERIFY(copy->functions().at(0) == 20);
     QVERIFY(copy->functions().at(1) == 30);

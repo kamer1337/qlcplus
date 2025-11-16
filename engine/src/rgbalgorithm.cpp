@@ -105,12 +105,12 @@ RGBAlgorithm* RGBAlgorithm::algorithm(Doc * doc, const QString& name)
 
 RGBAlgorithm* RGBAlgorithm::loader(Doc * doc, QXmlStreamReader &root)
 {
-    RGBAlgorithm* algo = NULL;
+    RGBAlgorithm* algo = nullptr;
 
     if (root.name() != KXMLQLCRGBAlgorithm)
     {
         qWarning() << Q_FUNC_INFO << "RGB Algorithm node not found";
-        return NULL;
+        return nullptr;
     }
 
     QString type = root.attributes().value(KXMLQLCRGBAlgorithmType).toString();

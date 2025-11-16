@@ -50,7 +50,7 @@ void OSCPlugin::init()
             {
                 OSCIO tmpIO;
                 tmpIO.IPAddress = entry.ip().toString();
-                tmpIO.controller = NULL;
+                tmpIO.controller = nullptr;
 
                 bool alreadyInList = false;
                 for (int j = 0; j < m_IOmapping.count(); j++)
@@ -143,7 +143,7 @@ QString OSCPlugin::outputInfo(quint32 output)
     str += QString("<H3>%1 %2</H3>").arg(tr("Output")).arg(outputs()[output]);
     str += QString("<P>");
     OSCController *ctrl = m_IOmapping.at(output).controller;
-    if (ctrl == NULL || ctrl->type() == OSCController::Input)
+    if (ctrl == nullptr || ctrl->type() == OSCController::Input)
         str += tr("Status: Not open");
     else
     {
@@ -167,7 +167,7 @@ bool OSCPlugin::openOutput(quint32 output, quint32 universe)
     qDebug() << "[OSC] Open output with address :" << m_IOmapping.at(output).IPAddress;
 
     // if the controller doesn't exist, create it
-    if (m_IOmapping[output].controller == NULL)
+    if (m_IOmapping[output].controller == nullptr)
     {
         OSCController *controller = new OSCController(m_IOmapping.at(output).IPAddress,
                                                         OSCController::Output, output, this);
@@ -187,13 +187,13 @@ void OSCPlugin::closeOutput(quint32 output, quint32 universe)
 
     removeFromMap(output, universe, Output);
     OSCController *controller = m_IOmapping.at(output).controller;
-    if (controller != NULL)
+    if (controller != nullptr)
     {
         controller->removeUniverse(universe, OSCController::Output);
         if (controller->universesList().count() == 0)
         {
             delete m_IOmapping[output].controller;
-            m_IOmapping[output].controller = NULL;
+            m_IOmapping[output].controller = nullptr;
         }
     }
 }
@@ -206,7 +206,7 @@ void OSCPlugin::writeUniverse(quint32 universe, quint32 output, const QByteArray
         return;
 
     OSCController *controller = m_IOmapping[output].controller;
-    if (controller != NULL)
+    if (controller != nullptr)
         controller->sendDmx(universe, data);
 }
 
@@ -233,7 +233,7 @@ bool OSCPlugin::openInput(quint32 input, quint32 universe)
     qDebug() << "[OSC] Open input on address :" << m_IOmapping.at(input).IPAddress;
 
     // if the controller doesn't exist, create it
-    if (m_IOmapping[input].controller == NULL)
+    if (m_IOmapping[input].controller == nullptr)
     {
         OSCController *controller = new OSCController(m_IOmapping.at(input).IPAddress,
                                                         OSCController::Input, input, this);
@@ -255,13 +255,13 @@ void OSCPlugin::closeInput(quint32 input, quint32 universe)
 
     removeFromMap(input, universe, Input);
     OSCController *controller = m_IOmapping.at(input).controller;
-    if (controller != NULL)
+    if (controller != nullptr)
     {
         controller->removeUniverse(universe, OSCController::Input);
         if (controller->universesList().count() == 0)
         {
             delete m_IOmapping[input].controller;
-            m_IOmapping[input].controller = NULL;
+            m_IOmapping[input].controller = nullptr;
         }
     }
 }
@@ -276,7 +276,7 @@ QString OSCPlugin::inputInfo(quint32 input)
     str += QString("<H3>%1 %2</H3>").arg(tr("Input")).arg(inputs()[input]);
     str += QString("<P>");
     OSCController *ctrl = m_IOmapping.at(input).controller;
-    if (ctrl == NULL || ctrl->type() == OSCController::Output)
+    if (ctrl == nullptr || ctrl->type() == OSCController::Output)
         str += tr("Status: Not open");
     else
     {
@@ -299,7 +299,7 @@ void OSCPlugin::sendFeedBack(quint32 universe, quint32 input,
         return;
 
     OSCController *controller = m_IOmapping[input].controller;
-    if (controller != NULL)
+    if (controller != nullptr)
         controller->sendFeedback(universe, channel, value, params.toString());
 }
 
@@ -324,7 +324,7 @@ void OSCPlugin::setParameter(quint32 universe, quint32 line, Capability type,
         return;
 
     OSCController *controller = m_IOmapping.at(line).controller;
-    if (controller == NULL)
+    if (controller == nullptr)
         return;
 
     // If the Controller parameter is restored to its default value,

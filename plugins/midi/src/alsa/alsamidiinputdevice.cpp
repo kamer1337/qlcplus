@@ -41,10 +41,10 @@ AlsaMidiInputDevice::AlsaMidiInputDevice(const QVariant& uid,
     , m_open(false)
     , m_mbc_counter(UINT_MAX)
 {
-    Q_ASSERT(alsa != NULL);
-    Q_ASSERT(thread != NULL);
+    Q_ASSERT(alsa != nullptr);
+    Q_ASSERT(thread != nullptr);
 
-    Q_ASSERT(address != NULL);
+    Q_ASSERT(address != nullptr);
     m_address->client = address->client;
     m_address->port = address->port;
     qDebug() << "[AlsaMidiInputDevice] client: " << m_address->client << ", port: " << m_address->port;
@@ -56,7 +56,7 @@ AlsaMidiInputDevice::~AlsaMidiInputDevice()
     close();
 
     delete m_address;
-    m_address = NULL;
+    m_address = nullptr;
 }
 
 bool AlsaMidiInputDevice::open()

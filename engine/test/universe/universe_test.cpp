@@ -48,9 +48,9 @@ void Universe_Test::initial()
     QCOMPARE(m_uni->totalChannels(), ushort(0));
     QCOMPARE(m_uni->hasChanged(), false);
     QCOMPARE(m_uni->passthrough(), false);
-    QVERIFY(m_uni->inputPatch() == NULL);
-    QVERIFY(m_uni->outputPatch(0) == NULL);
-    QVERIFY(m_uni->feedbackPatch() == NULL);
+    QVERIFY(m_uni->inputPatch() == nullptr);
+    QVERIFY(m_uni->outputPatch(0) == nullptr);
+    QVERIFY(m_uni->feedbackPatch() == nullptr);
     QVERIFY(m_uni->intensityChannels().isEmpty());
 
     QByteArray const preGM = m_uni->preGMValues();
@@ -58,7 +58,7 @@ void Universe_Test::initial()
     QCOMPARE(preGM.length(), 512);
 
     QByteArray const *postGM = m_uni->postGMValues();
-    QVERIFY(postGM != NULL);
+    QVERIFY(postGM != nullptr);
     QCOMPARE(postGM->length(), 512);
 
     for (ushort i = 0; i < 512; ++i)
@@ -467,7 +467,7 @@ void Universe_Test::loadEmpty()
     //xmlWriter.writeAttribute("ID", "1");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -492,7 +492,7 @@ void Universe_Test::loadPassthroughTrue()
     xmlWriter.writeAttribute("Passthrough", "True");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -517,7 +517,7 @@ void Universe_Test::loadPassthrough1()
     xmlWriter.writeAttribute("Passthrough", "1");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -542,7 +542,7 @@ void Universe_Test::loadWrong()
     xmlWriter.writeAttribute("Passthrough", "1");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -564,7 +564,7 @@ void Universe_Test::loadPassthroughFalse()
     xmlWriter.writeAttribute("Passthrough", "False");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -588,7 +588,7 @@ void Universe_Test::saveEmpty()
 
     QVERIFY(m_uni->saveXML(&xmlWriter) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -613,7 +613,7 @@ void Universe_Test::savePasthroughTrue()
 
     QVERIFY(m_uni->saveXML(&xmlWriter) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);

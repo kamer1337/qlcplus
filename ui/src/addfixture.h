@@ -55,7 +55,7 @@ public:
      * @param doc QLC engine instance
      * @param fxi Fixture to edit (optional)
      */
-    AddFixture(QWidget* parent, const Doc* doc, const Fixture* fxi = NULL);
+    AddFixture(QWidget* parent, const Doc* doc, const Fixture* fxi = nullptr);
 
     /** Destructor */
     ~AddFixture();

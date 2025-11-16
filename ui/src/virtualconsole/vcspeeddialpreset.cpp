@@ -48,7 +48,7 @@ VCSpeedDialPreset &VCSpeedDialPreset::operator=(const VCSpeedDialPreset &preset)
         m_value = preset.m_value;
         m_keySequence = preset.m_keySequence;
 
-        if (preset.m_inputSource != NULL)
+        if (preset.m_inputSource != nullptr)
         {
             m_inputSource = QSharedPointer<QLCInputSource>(new QLCInputSource(preset.m_inputSource->universe(),
                                                            preset.m_inputSource->channel()));
@@ -118,7 +118,7 @@ bool VCSpeedDialPreset::loadXML(QXmlStreamReader &root)
 
 bool VCSpeedDialPreset::saveXML(QXmlStreamWriter *doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     doc->writeStartElement(KXMLQLCVCSpeedDialPreset);
     doc->writeAttribute(KXMLQLCVCSpeedDialPresetID, QString::number(m_id));

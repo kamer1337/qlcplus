@@ -164,7 +164,7 @@ void QLCFixtureHead::setMapIndex(int chType, int controlByte, quint32 index)
 
 void QLCFixtureHead::cacheChannels(const QLCFixtureMode* mode)
 {
-    Q_ASSERT(mode != NULL);
+    Q_ASSERT(mode != nullptr);
 
     // Allow only one caching round per fixture mode instance
     if (m_channelsCached == true)
@@ -183,7 +183,7 @@ void QLCFixtureHead::cacheChannels(const QLCFixtureMode* mode)
         }
 
         const QLCChannel* ch = mode->channels().at(i);
-        Q_ASSERT(ch != NULL);
+        Q_ASSERT(ch != nullptr);
 
         if (ch->group() == QLCChannel::Pan)
         {
@@ -260,7 +260,7 @@ bool QLCFixtureHead::loadXML(QXmlStreamReader &doc)
 
 bool QLCFixtureHead::saveXML(QXmlStreamWriter *doc) const
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     doc->writeStartElement(KXMLQLCFixtureHead);
 

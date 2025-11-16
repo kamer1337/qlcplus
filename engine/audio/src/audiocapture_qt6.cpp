@@ -27,15 +27,15 @@
 
 AudioCaptureQt6::AudioCaptureQt6(QObject * parent)
     : AudioCapture(parent)
-    , m_audioSource(NULL)
-    , m_input(NULL)
+    , m_audioSource(nullptr)
+    , m_input(nullptr)
 {
 }
 
 AudioCaptureQt6::~AudioCaptureQt6()
 {
     stop();
-    Q_ASSERT(m_audioSource == NULL);
+    Q_ASSERT(m_audioSource == nullptr);
 }
 
 bool AudioCaptureQt6::initialize()
@@ -71,11 +71,11 @@ bool AudioCaptureQt6::initialize()
         m_sampleRate = m_format.sampleRate();
     }
 
-    Q_ASSERT(m_audioSource == NULL);
+    Q_ASSERT(m_audioSource == nullptr);
 
     m_audioSource = new QAudioSource(audioDevice, m_format);
 
-    if (m_audioSource == NULL)
+    if (m_audioSource == nullptr)
     {
         qWarning() << "Cannot open audio input stream from device" << audioDevice.description();
         return false;
@@ -87,8 +87,8 @@ bool AudioCaptureQt6::initialize()
     {
         qWarning() << "Could not start input capture on device" << audioDevice.description();
         delete m_audioSource;
-        m_audioSource = NULL;
-        m_input = NULL;
+        m_audioSource = nullptr;
+        m_input = nullptr;
         return false;
     }
 
@@ -99,11 +99,11 @@ bool AudioCaptureQt6::initialize()
 
 void AudioCaptureQt6::uninitialize()
 {
-    Q_ASSERT(m_audioSource != NULL);
+    Q_ASSERT(m_audioSource != nullptr);
 
     m_audioSource->stop();
     delete m_audioSource;
-    m_audioSource = NULL;
+    m_audioSource = nullptr;
 }
 
 qint64 AudioCaptureQt6::latency()
@@ -117,7 +117,7 @@ void AudioCaptureQt6::setVolume(qreal volume)
         return;
 
     m_volume = volume;
-    if (m_audioSource != NULL)
+    if (m_audioSource != nullptr)
         m_audioSource->setVolume(volume);
 
     emit volumeChanged(volume * 100.0);
@@ -133,7 +133,7 @@ void AudioCaptureQt6::resume()
 
 bool AudioCaptureQt6::readAudio(int maxSize)
 {
-    if (m_audioSource == NULL || m_input == NULL)
+    if (m_audioSource == nullptr || m_input == nullptr)
         return false;
 
     int bufferSize = maxSize * sizeof(*m_audioBuffer);

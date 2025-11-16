@@ -135,7 +135,7 @@ void RGBText_Test::clone()
     RGBAlgorithm* algo = text.clone();
     QCOMPARE(algo->type(), RGBAlgorithm::Text);
     RGBText* text3 = static_cast<RGBText*> (algo);
-    QVERIFY(text3 != NULL);
+    QVERIFY(text3 != nullptr);
     QCOMPARE(text3->text(), QString("Foo"));
     QCOMPARE(text3->font(), text.font());
     QCOMPARE(text3->animationStyle(), RGBText::Vertical);
@@ -159,7 +159,7 @@ void RGBText_Test::save()
 
     QVERIFY(text.saveXML(&xmlWriter) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -233,7 +233,7 @@ void RGBText_Test::load()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
 
     buffer.seek(0);
     QXmlStreamReader xmlReader(&buffer);
@@ -291,7 +291,7 @@ void RGBText_Test::load()
     xmlWriter.setDevice(&buffer);
     xmlWriter.writeStartElement("Foo");
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.seek(0);
 
     xmlReader.setDevice(&buffer);
@@ -306,7 +306,7 @@ void RGBText_Test::load()
     xmlWriter.writeStartElement("Algorithm");
     xmlWriter.writeAttribute("Type", "Script"); // Invalid type
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.seek(0);
 
     xmlReader.setDevice(&buffer);

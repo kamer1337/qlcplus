@@ -144,7 +144,7 @@ QFile::FileError ChannelModifier::loadXML(const QString &fileName, Type type)
         return QFile::OpenError;
 
     QXmlStreamReader *doc = QLCFile::getXMLReader(fileName);
-    if (doc == NULL || doc->device() == NULL || doc->hasError())
+    if (doc == nullptr || doc->device() == nullptr || doc->hasError())
     {
         qWarning() << Q_FUNC_INFO << "Unable to read from" << fileName;
         return QFile::ReadError;

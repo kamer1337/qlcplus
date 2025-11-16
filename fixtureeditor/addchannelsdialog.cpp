@@ -66,7 +66,7 @@ QList<QLCChannel *> AddChannelsDialog::getModeChannelsList()
     for (int i = 0; i < m_modeTree->topLevelItemCount(); i++)
     {
         QTreeWidgetItem *item = m_modeTree->topLevelItem(i);
-        if (item == NULL)
+        if (item == nullptr)
             continue;
         int idx = item->data(0, Qt::UserRole).toInt();
         if (idx < 0 || idx >= m_channelsList.count())

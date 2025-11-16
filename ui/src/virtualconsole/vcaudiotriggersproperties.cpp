@@ -91,7 +91,7 @@ void AudioTriggersConfiguration::accept()
 
 void AudioTriggersConfiguration::updateTreeItem(QTreeWidgetItem *item, int idx)
 {
-    if (item == NULL)
+    if (item == nullptr)
         return;
 
     AudioBar *bar = m_triggers->getSpectrumBar(idx);
@@ -99,7 +99,7 @@ void AudioTriggersConfiguration::updateTreeItem(QTreeWidgetItem *item, int idx)
 
     bar->debugInfo();
     QComboBox *currCombo = (QComboBox *)m_tree->itemWidget(item, KColumnType);
-    if (currCombo != NULL)
+    if (currCombo != nullptr)
     {
         disconnect(currCombo, SIGNAL(currentIndexChanged(int)),
                    this, SLOT(slotTypeComboChanged(int)));
@@ -136,7 +136,7 @@ void AudioTriggersConfiguration::updateTreeItem(QTreeWidgetItem *item, int idx)
         btn->setProperty("index", idx);
         m_tree->setItemWidget(item, KColumnAssign, btn);
         connect(btn, SIGNAL(clicked()), this, SLOT(slotFunctionSelectionClicked()));
-        if (bar->m_function != NULL)
+        if (bar->m_function != nullptr)
         {
             item->setText(KColumnInfo, bar->m_function->name());
             item->setIcon(KColumnInfo, bar->m_function->getIcon());
@@ -154,7 +154,7 @@ void AudioTriggersConfiguration::updateTreeItem(QTreeWidgetItem *item, int idx)
         btn->setProperty("index", idx);
         m_tree->setItemWidget(item, KColumnAssign, btn);
         connect(btn, SIGNAL(clicked()), this, SLOT(slotWidgetSelectionClicked()));
-        if (bar->widget() != NULL)
+        if (bar->widget() != nullptr)
         {
             item->setText(KColumnInfo, bar->widget()->caption());
             item->setIcon(KColumnInfo, VCWidget::typeToIcon(bar->widget()->type()));
@@ -172,7 +172,7 @@ void AudioTriggersConfiguration::updateTreeItem(QTreeWidgetItem *item, int idx)
     }
 
     if (bar->m_type == AudioBar::FunctionBar
-        || (bar->m_type == AudioBar::VCWidgetBar && ((bar->widget() == NULL) || bar->widget()->type() != VCWidget::SliderWidget)))
+        || (bar->m_type == AudioBar::VCWidgetBar && ((bar->widget() == nullptr) || bar->widget()->type() != VCWidget::SliderWidget)))
     {
         QSpinBox *minspin = new QSpinBox();
         minspin->setMinimum(5);
@@ -196,7 +196,7 @@ void AudioTriggersConfiguration::updateTreeItem(QTreeWidgetItem *item, int idx)
     }
 
     if (bar->m_type == AudioBar::VCWidgetBar
-        && bar->widget() != NULL
+        && bar->widget() != nullptr
         && (bar->widget()->type() == VCWidget::SpeedDialWidget || bar->widget()->type() == VCWidget::CueListWidget))
     {
         QSpinBox *divisor = new QSpinBox();
@@ -242,7 +242,7 @@ void AudioTriggersConfiguration::slotTypeComboChanged(int comboIndex)
 {
     QComboBox *combo = (QComboBox *)sender();
     int index = combo->itemData(comboIndex).toInt();
-    QTreeWidgetItem *item = NULL;
+    QTreeWidgetItem *item = nullptr;
     if (index == 1000)
         item = m_tree->topLevelItem(0);
     else
@@ -261,15 +261,15 @@ void AudioTriggersConfiguration::slotDmxSelectionClicked()
     {
         AudioBar *bar = m_triggers->getSpectrumBar(prop.toInt());
         ChannelsSelection cfg(m_doc, this);
-        if (bar != NULL)
+        if (bar != nullptr)
             cfg.setChannelsList(bar->m_dmxChannels);
         if (cfg.exec() == QDialog::Rejected)
             return; // User pressed cancel
 
         QList<SceneValue> dmxList = cfg.channelsList();
-        if (bar != NULL)
+        if (bar != nullptr)
             bar->attachDmxChannels(m_doc, dmxList);
-        QTreeWidgetItem *item = NULL;
+        QTreeWidgetItem *item = nullptr;
         if (prop.toInt() == 1000)
             item = m_tree->topLevelItem(0);
         else
@@ -290,10 +290,10 @@ void AudioTriggersConfiguration::slotFunctionSelectionClicked()
             return; // User pressed cancel or made an invalid selection
         AudioBar *bar = m_triggers->getSpectrumBar(prop.toInt());
         Function *f = m_doc->function(fs.selection().first());
-        if (bar != NULL && f != NULL)
+        if (bar != nullptr && f != nullptr)
             bar->attachFunction(f);
 
-        QTreeWidgetItem *item = NULL;
+        QTreeWidgetItem *item = nullptr;
         if (prop.toInt() == 1000)
             item = m_tree->topLevelItem(0);
         else
@@ -317,12 +317,12 @@ void AudioTriggersConfiguration::slotWidgetSelectionClicked()
         if (ws.exec() == QDialog::Rejected || ws.getSelectedWidget() == 0)
             return; // User pressed cancel or did not select any widget
         AudioBar *bar = m_triggers->getSpectrumBar(prop.toInt());
-        if (bar != NULL)
+        if (bar != nullptr)
         {
             bar->attachWidget(ws.getSelectedWidget()->id());
         }
 
-        QTreeWidgetItem *item = NULL;
+        QTreeWidgetItem *item = nullptr;
         if (prop.toInt() == 1000)
             item = m_tree->topLevelItem(0);
         else
@@ -339,7 +339,7 @@ void AudioTriggersConfiguration::slotMinThresholdChanged(int val)
     {
         AudioBar *bar = m_triggers->getSpectrumBar(prop.toInt());
         uchar scaledVal = SCALE(float(val), 0.0, 100.0, 0.0, 255.0);
-        if (bar != NULL)
+        if (bar != nullptr)
             bar->setMinThreshold(scaledVal);
     }
 }
@@ -352,7 +352,7 @@ void AudioTriggersConfiguration::slotMaxThresholdChanged(int val)
     {
         AudioBar *bar = m_triggers->getSpectrumBar(prop.toInt());
         uchar scaledVal = SCALE(float(val), 0.0, 100.0, 0.0, 255.0);
-        if (bar != NULL)
+        if (bar != nullptr)
             bar->setMaxThreshold(scaledVal);
     }
 }
@@ -364,7 +364,7 @@ void AudioTriggersConfiguration::slotDivisorChanged(int val)
     if (prop.isValid())
     {
         AudioBar *bar = m_triggers->getSpectrumBar(prop.toInt());
-        if (bar != NULL)
+        if (bar != nullptr)
             bar->setDivisor(val);
     }
 }

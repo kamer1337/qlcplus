@@ -39,11 +39,11 @@
 AudioDecoderMAD::~AudioDecoderMAD()
 {
     deinit();
-    if (m_input_buf != NULL)
+    if (m_input_buf != nullptr)
     {
         qDebug("AudioDecoderMAD: deleting input_buf");
         delete [] m_input_buf;
-        m_input_buf = NULL;
+        m_input_buf = nullptr;
     }
 }
 
@@ -66,7 +66,7 @@ bool AudioDecoderMAD::initialize(const QString &path)
     m_bitrate = 0;
     m_freq = 0;
     m_len = 0;
-    m_input_buf = NULL;
+    m_input_buf = nullptr;
     m_input_bytes = 0;
     m_output_bytes = 0;
     m_output_at = 0;

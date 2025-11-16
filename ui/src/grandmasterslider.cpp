@@ -35,7 +35,7 @@ GrandMasterSlider::GrandMasterSlider(QWidget* parent, InputOutputMap *ioMap)
     : QFrame(parent)
     , m_ioMap(ioMap)
 {
-    Q_ASSERT(ioMap != NULL);
+    Q_ASSERT(ioMap != nullptr);
 
     QString sStyle = AppUtil::getStyleSheet("GRANDMASTER");
     if (sStyle.isEmpty())
@@ -112,13 +112,13 @@ GrandMasterSlider::~GrandMasterSlider()
 
 bool GrandMasterSlider::invertedAppearance() const
 {
-    Q_ASSERT(m_slider != NULL);
+    Q_ASSERT(m_slider != nullptr);
     return m_slider->invertedAppearance();
 }
 
 void GrandMasterSlider::setInvertedAppearance(bool invert)
 {
-    Q_ASSERT(m_slider != NULL);
+    Q_ASSERT(m_slider != nullptr);
     m_slider->setInvertedAppearance(invert);
     sendFeedback();
 }
@@ -209,13 +209,13 @@ void GrandMasterSlider::sendFeedback()
         return;
 
     InputPatch* pat = m_ioMap->inputPatch(universe);
-    if (pat != NULL)
+    if (pat != nullptr)
     {
         QLCInputProfile* profile = pat->profile();
-        if (profile != NULL)
+        if (profile != nullptr)
         {
             QLCInputChannel* ich = profile->channel(channel);
-            if (ich != NULL)
+            if (ich != nullptr)
                 chName = ich->name();
         }
     }

@@ -114,7 +114,7 @@ protected:
      * @param address The address of the physical wing board
      * @param data A UDP datagram packet originating from a wing
      *
-     * @return A new Wing object or NULL if an error occurred
+     * @return A new Wing object or nullptr if an error occurred
      */
     static Wing* createWing(QObject* parent, const QHostAddress& address,
                             const QByteArray& data);

@@ -28,7 +28,7 @@ MonitorGraphicsView::MonitorGraphicsView(Doc *doc, QWidget *parent)
     , m_doc(doc)
     , m_unitValue(1000)
     , m_gridEnabled(true)
-    , m_bgItem(NULL)
+    , m_bgItem(nullptr)
 {
     m_scene = new QGraphicsScene();
     m_scene->setSceneRect(this->rect());
@@ -70,7 +70,7 @@ void MonitorGraphicsView::setGridMetrics(float value)
 quint32 MonitorGraphicsView::selectedFixtureID()
 {
     MonitorFixtureItem *item = getSelectedItem();
-    if (item != NULL)
+    if (item != nullptr)
         return item->fixtureID();
     else
         return Fixture::invalidId();
@@ -84,14 +84,14 @@ QList<quint32> MonitorGraphicsView::fixturesID() const
 void MonitorGraphicsView::setFixtureGelColor(quint32 id, QColor col)
 {
     MonitorFixtureItem *item = m_fixtures[id];
-    if (item != NULL)
+    if (item != nullptr)
         item->setGelColor(col);
 }
 
 void MonitorGraphicsView::setFixtureRotation(quint32 id, ushort degrees)
 {
     MonitorFixtureItem *item = m_fixtures[id];
-    if (item != NULL)
+    if (item != nullptr)
         item->setRotation(degrees);
 }
 
@@ -104,7 +104,7 @@ void MonitorGraphicsView::showFixturesLabels(bool visible)
 QColor MonitorGraphicsView::fixtureGelColor(quint32 id)
 {
     MonitorFixtureItem *item = m_fixtures[id];
-    if (item == NULL)
+    if (item == nullptr)
         return QColor();
 
     return item->getColor();
@@ -121,7 +121,7 @@ QPointF MonitorGraphicsView::realPositionToPixels(qreal xpos, qreal ypos)
 void MonitorGraphicsView::updateFixture(quint32 id)
 {
     Fixture *fxi = m_doc->fixture(id);
-    if (fxi == NULL || m_fixtures.contains(id) == false)
+    if (fxi == nullptr || m_fixtures.contains(id) == false)
         return;
 
     const QLCFixtureMode *mode = fxi->fixtureMode();
@@ -147,11 +147,11 @@ void MonitorGraphicsView::updateFixture(quint32 id)
 void MonitorGraphicsView::setBackgroundImage(QString filename)
 {
     m_backgroundImage = filename;
-    if (m_bgItem != NULL)
+    if (m_bgItem != nullptr)
     {
         m_scene->removeItem(m_bgItem);
         delete m_bgItem;
-        m_bgItem = NULL;
+        m_bgItem = nullptr;
     }
     if (filename.isEmpty() == false)
     {
@@ -173,7 +173,7 @@ MonitorFixtureItem *MonitorGraphicsView::getSelectedItem()
         if (item->isSelected() == true)
             return item;
     }
-    return NULL;
+    return nullptr;
 }
 
 void MonitorGraphicsView::addFixture(quint32 id, QPointF pos)
@@ -181,7 +181,7 @@ void MonitorGraphicsView::addFixture(quint32 id, QPointF pos)
     if (id == Fixture::invalidId() || m_fixtures.contains(id) == true)
         return;
 
-    if (m_doc->fixture(id) == NULL)
+    if (m_doc->fixture(id) == nullptr)
         return;
 
     MonitorFixtureItem *item = new MonitorFixtureItem(m_doc, id);
@@ -196,18 +196,18 @@ void MonitorGraphicsView::addFixture(quint32 id, QPointF pos)
 
 bool MonitorGraphicsView::removeFixture(quint32 id)
 {
-    MonitorFixtureItem *item = NULL;
+    MonitorFixtureItem *item = nullptr;
 
     if (id == Fixture::invalidId())
     {
         item = getSelectedItem();
-        if (item != NULL)
+        if (item != nullptr)
             id = item->fixtureID();
     }
     else
         item = m_fixtures[id];
 
-    if (item == NULL)
+    if (item == nullptr)
         return false;
 
     m_scene->removeItem(item);
@@ -266,7 +266,7 @@ void MonitorGraphicsView::updateGrid()
             yPos += m_cellPixels;
             m_gridItems.append(item);
         }
-        if (m_bgItem != NULL)
+        if (m_bgItem != nullptr)
         {
             m_bgItem->setX(m_xOffset);
             m_bgItem->setY(m_yOffset);

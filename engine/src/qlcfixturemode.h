@@ -165,7 +165,7 @@ public:
      * channel names should be unique and this should never happen).
      *
      * @param name The name of the channel to get
-     * @return The channel or NULL if not found
+     * @return The channel or nullptr if not found
      */
     QLCChannel *channel(const QString& name) const;
 
@@ -174,7 +174,7 @@ public:
      * represented by exactly one QLCChannel.
      *
      * @param ch The number of the channel to get
-     * @return The channel or NULL if ch >= size.
+     * @return The channel or nullptr if ch >= size.
      */
     QLCChannel *channel(quint32 ch) const;
 

@@ -284,7 +284,7 @@ QList<SceneValue> QLCPalette::valuesFromFixtures(Doc *doc, QList<quint32> fixtur
     foreach (quint32 id, fixtures)
     {
         Fixture *fixture = doc->fixture(id);
-        if (fixture == NULL)
+        if (fixture == nullptr)
             continue;
 
         qreal factor = valueFactor(progress);
@@ -432,7 +432,7 @@ QList<SceneValue> QLCPalette::valuesFromFixtureGroups(Doc *doc, QList<quint32> g
     foreach (quint32 id, groups)
     {
         FixtureGroup *group = doc->fixtureGroup(id);
-        if (group == NULL)
+        if (group == nullptr)
             continue;
 
         fixturesList.append(group->fixtureList());
@@ -658,7 +658,7 @@ bool QLCPalette::stringToColor(QString str, QColor &rgb, QColor &wauv)
 bool QLCPalette::loader(QXmlStreamReader &xmlDoc, Doc *doc)
 {
     QLCPalette *palette = new QLCPalette(Dimmer, doc);
-    Q_ASSERT(palette != NULL);
+    Q_ASSERT(palette != nullptr);
 
     if (palette->loadXML(xmlDoc) == true)
     {
@@ -771,7 +771,7 @@ bool QLCPalette::loadXML(QXmlStreamReader &doc)
 
 bool QLCPalette::saveXML(QXmlStreamWriter *doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     if (m_values.isEmpty())
     {

@@ -32,7 +32,7 @@ FadeChannel::FadeChannel()
     , m_universe(Universe::invalid())
     , m_primaryChannel(QLCChannel::invalid())
     , m_address(QLCChannel::invalid())
-    , m_channelRef(NULL)
+    , m_channelRef(nullptr)
     , m_start(0)
     , m_target(0)
     , m_current(0)
@@ -63,7 +63,7 @@ FadeChannel::FadeChannel(const FadeChannel& ch)
 FadeChannel::FadeChannel(const Doc *doc, quint32 fxi, quint32 channel)
     : m_flags(0)
     , m_fixture(fxi)
-    , m_channelRef(NULL)
+    , m_channelRef(nullptr)
     , m_start(0)
     , m_target(0)
     , m_current(0)
@@ -142,7 +142,7 @@ void FadeChannel::autoDetect(const Doc *doc)
     }
 
     Fixture *fixture = doc->fixture(m_fixture);
-    if (fixture == NULL)
+    if (fixture == nullptr)
     {
         m_universe = Universe::invalid();
         m_address = QLCChannel::invalid();
@@ -164,7 +164,7 @@ void FadeChannel::autoDetect(const Doc *doc)
         m_channelRef = fixture->channel(chIndex);
 
         // non existing channel within fixture
-        if (m_channelRef == NULL)
+        if (m_channelRef == nullptr)
         {
             addFlag(FadeChannel::HTP | FadeChannel::Intensity | FadeChannel::CanFade);
             return;
@@ -174,7 +174,7 @@ void FadeChannel::autoDetect(const Doc *doc)
         if (fixture->channelCanFade(chIndex))
             addFlag(FadeChannel::CanFade);
 
-        if (m_channelRef != NULL && m_channelRef->group() == QLCChannel::Intensity)
+        if (m_channelRef != nullptr && m_channelRef->group() == QLCChannel::Intensity)
             addFlag(FadeChannel::HTP | FadeChannel::Intensity);
         else
             addFlag(FadeChannel::LTP);

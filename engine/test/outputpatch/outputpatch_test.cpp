@@ -47,13 +47,13 @@ void OutputPatch_Test::initTestCase()
 void OutputPatch_Test::cleanupTestCase()
 {
     delete m_doc;
-    m_doc = NULL;
+    m_doc = nullptr;
 }
 
 void OutputPatch_Test::defaults()
 {
     OutputPatch op(this);
-    QVERIFY(op.m_plugin == NULL);
+    QVERIFY(op.m_plugin == nullptr);
     QVERIFY(op.m_pluginLine == QLCIOPlugin::invalidLine());
     QVERIFY(op.pluginName() == KOutputNone);
     QVERIFY(op.outputName() == KOutputNone);
@@ -65,7 +65,7 @@ void OutputPatch_Test::patch()
 
     IOPluginStub* stub = static_cast<IOPluginStub*>
                                 (m_doc->ioPluginCache()->plugins().at(0));
-    QVERIFY(stub != NULL);
+    QVERIFY(stub != nullptr);
 
     OutputPatch* op = new OutputPatch(0, this);
     op->set(stub, 0);
@@ -107,7 +107,7 @@ void OutputPatch_Test::dump()
 
     IOPluginStub* stub = static_cast<IOPluginStub*>
                                 (m_doc->ioPluginCache()->plugins().at(0));
-    QVERIFY(stub != NULL);
+    QVERIFY(stub != nullptr);
 
     op->set(stub, 0);
     QVERIFY(stub->m_universe[0] == (char) 0);

@@ -48,7 +48,7 @@ DMXUSBWidget::DMXUSBWidget(DMXInterface *iface, quint32 outputLine, int frequenc
     , m_outputBaseLine(outputLine)
     , m_inputBaseLine(0)
 {
-    Q_ASSERT(iface != NULL);
+    Q_ASSERT(iface != nullptr);
 
     QMap <QString, QVariant> freqMap(DMXInterface::frequencyMap());
     if (freqMap.contains(m_interface->serial()))
@@ -86,7 +86,7 @@ DMXInterface *DMXUSBWidget::iface() const
 
 QString DMXUSBWidget::interfaceTypeString() const
 {
-    if (m_interface == NULL)
+    if (m_interface == nullptr)
         return QString();
 
     return m_interface->typeString();
@@ -299,7 +299,7 @@ QList<DMXUSBWidget *> DMXUSBWidget::widgets()
 
 bool DMXUSBWidget::forceInterfaceDriver(DMXInterface::Type type)
 {
-    DMXInterface *forcedIface = NULL;
+    DMXInterface *forcedIface = nullptr;
 
     qDebug() << "[DMXUSBWidget] forcing widget" << m_interface->name() << "to type:" << type;
 
@@ -319,7 +319,7 @@ bool DMXUSBWidget::forceInterfaceDriver(DMXInterface::Type type)
                                           m_interface->vendorID(), m_interface->productID(), m_interface->id());
 #endif
 
-    if (forcedIface != NULL)
+    if (forcedIface != nullptr)
     {
         delete m_interface;
         m_interface = forcedIface;

@@ -109,11 +109,11 @@ void AboutBox::slotTimeout()
 
 void AboutBox::slotItemClicked()
 {
-    if (m_timer != NULL)
+    if (m_timer != nullptr)
     {
         m_timer->stop();
         delete m_timer;
-        m_timer = NULL;
+        m_timer = nullptr;
     }
 }
 

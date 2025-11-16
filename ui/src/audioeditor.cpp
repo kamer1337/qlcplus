@@ -35,10 +35,10 @@ AudioEditor::AudioEditor(QWidget* parent, Audio *audio, Doc* doc)
     : QWidget(parent)
     , m_doc(doc)
     , m_audio(audio)
-    , m_speedDials(NULL)
+    , m_speedDials(nullptr)
 {
-    Q_ASSERT(doc != NULL);
-    Q_ASSERT(audio != NULL);
+    Q_ASSERT(doc != nullptr);
+    Q_ASSERT(audio != nullptr);
 
     setupUi(this);
 
@@ -71,7 +71,7 @@ AudioEditor::AudioEditor(QWidget* parent, Audio *audio, Doc* doc)
     AudioDecoder *adec = m_audio->getAudioDecoder();
 
     m_filenameLabel->setText(m_audio->getSourceFileName());
-    if (adec != NULL)
+    if (adec != nullptr)
     {
         AudioParameters ap = adec->audioParameters();
         m_durationLabel->setText(Function::speedToString(m_audio->totalDuration()));
@@ -181,7 +181,7 @@ void AudioEditor::slotSourceFileClicked()
     m_filenameLabel->setText(m_audio->getSourceFileName());
 
     AudioDecoder *adec = m_audio->getAudioDecoder();
-    if (adec != NULL)
+    if (adec != nullptr)
     {
         AudioParameters ap = adec->audioParameters();
         m_durationLabel->setText(Function::speedToString(m_audio->totalDuration()));
@@ -269,7 +269,7 @@ FunctionParent AudioEditor::functionParent() const
 
 void AudioEditor::createSpeedDials()
 {
-    if (m_speedDials != NULL)
+    if (m_speedDials != nullptr)
         return;
 
     m_speedDials = new SpeedDialWidget(this);
@@ -291,9 +291,9 @@ void AudioEditor::slotSpeedDialToggle(bool state)
         createSpeedDials();
     else
     {
-        if (m_speedDials != NULL)
+        if (m_speedDials != nullptr)
             m_speedDials->deleteLater();
-        m_speedDials = NULL;
+        m_speedDials = nullptr;
     }
 }
 

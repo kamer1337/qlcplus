@@ -55,7 +55,7 @@ MidiPlugin::~MidiPlugin()
 {
     qDebug() << Q_FUNC_INFO;
 
-    Q_ASSERT(m_enumerator != NULL);
+    Q_ASSERT(m_enumerator != nullptr);
     delete m_enumerator;
 }
 
@@ -79,7 +79,7 @@ bool MidiPlugin::openOutput(quint32 output, quint32 universe)
 
     MidiOutputDevice* dev = outputDevice(output);
 
-    if (dev == NULL)
+    if (dev == nullptr)
         return false;
 
     addToMap(universe, output, Output);
@@ -92,7 +92,7 @@ bool MidiPlugin::openOutput(quint32 output, quint32 universe)
 
         MidiTemplate* templ = midiTemplate(dev->midiTemplateName());
 
-        if (templ != NULL)
+        if (templ != nullptr)
             sendSysEx(output, templ->initMessage());
     }
     return true;
@@ -103,7 +103,7 @@ void MidiPlugin::closeOutput(quint32 output, quint32 universe)
     qDebug() << Q_FUNC_INFO;
 
     MidiOutputDevice* dev = outputDevice(output);
-    if (dev != NULL)
+    if (dev != nullptr)
     {
         removeFromMap(output, universe, Output);
         dev->close();
@@ -154,7 +154,7 @@ QString MidiPlugin::outputInfo(quint32 output)
     }
 
     MidiOutputDevice* dev = outputDevice(output);
-    if (dev != NULL)
+    if (dev != nullptr)
     {
         QString status;
         str += QString("<H3>%1 %2</H3>").arg(tr("Output")).arg(outputs()[output]);
@@ -183,7 +183,7 @@ void MidiPlugin::writeUniverse(quint32 universe, quint32 output, const QByteArra
     Q_UNUSED(universe)
 
     MidiOutputDevice* dev = outputDevice(output);
-    if (dev != NULL && dataChanged)
+    if (dev != nullptr && dataChanged)
         dev->writeUniverse(data);
 }
 
@@ -192,7 +192,7 @@ MidiOutputDevice* MidiPlugin::outputDevice(quint32 output) const
     if (output < quint32(m_enumerator->outputDevices().size()))
         return m_enumerator->outputDevices().at(output);
     else
-        return NULL;
+        return nullptr;
 }
 
 /*****************************************************************************
@@ -205,7 +205,7 @@ bool MidiPlugin::openInput(quint32 input, quint32 universe)
     qDebug() << "[MIDI] Open Input: " << input;
 
     MidiInputDevice* dev = inputDevice(input);
-    if (dev != NULL && dev->isOpen() == false)
+    if (dev != nullptr && dev->isOpen() == false)
     {
         connect(dev, SIGNAL(valueChanged(QVariant,ushort,uchar)),
                 this, SLOT(slotValueChanged(QVariant,ushort,uchar)));
@@ -220,7 +220,7 @@ void MidiPlugin::closeInput(quint32 input, quint32 universe)
     qDebug() << Q_FUNC_INFO;
 
     MidiInputDevice* dev = inputDevice(input);
-    if (dev != NULL && dev->isOpen() == true)
+    if (dev != nullptr && dev->isOpen() == true)
     {
         removeFromMap(input, universe, Input);
         dev->close();
@@ -261,7 +261,7 @@ QString MidiPlugin::inputInfo(quint32 input)
     }
 
     MidiInputDevice* dev = inputDevice(input);
-    if (dev != NULL)
+    if (dev != nullptr)
     {
         QString status;
         str += QString("<H3>%1 %2</H3>").arg(tr("Input")).arg(inputs()[input]);
@@ -292,7 +292,7 @@ void MidiPlugin::sendFeedBack(quint32 universe, quint32 output, quint32 channel,
     qDebug() << "[sendFeedBack] universe:" << universe << ", output:" << output;
 
     MidiOutputDevice* dev = outputDevice(output);
-    if (dev != NULL)
+    if (dev != nullptr)
     {
         qDebug() << "[sendFeedBack] Dev:" << dev->name() << ", channel:" << channel << ", value:" << value << dev->sendNoteOff();
         uchar cmd = 0;
@@ -315,7 +315,7 @@ void MidiPlugin::sendSysEx(quint32 output, const QByteArray &data)
     qDebug() << "sendSysEx data: " << data;
 
     MidiOutputDevice* dev = outputDevice(output);
-    if (dev != NULL)
+    if (dev != nullptr)
         dev->writeSysEx(data);
 }
 
@@ -324,7 +324,7 @@ MidiInputDevice* MidiPlugin::inputDevice(quint32 input) const
     if (input < quint32(m_enumerator->inputDevices().size()))
         return m_enumerator->inputDevices().at(input);
     else
-        return NULL;
+        return nullptr;
 }
 
 void MidiPlugin::slotValueChanged(const QVariant& uid, ushort channel, uchar value)
@@ -364,7 +364,7 @@ void MidiPlugin::configure()
         if (inLine != UINT_MAX)
         {
             MidiInputDevice *dev = inputDevice(inLine);
-            if (dev != NULL)
+            if (dev != nullptr)
             {
                 if (dev->midiChannel() != 0)
                     QLCIOPlugin::setParameter(universe, inLine, Input,
@@ -395,7 +395,7 @@ void MidiPlugin::configure()
         if (outLine != UINT_MAX)
         {
             MidiOutputDevice *dev = outputDevice(outLine);
-            if (dev != NULL)
+            if (dev != nullptr)
             {
                 if (dev->midiChannel() != 0)
                     QLCIOPlugin::setParameter(universe, outLine, Output,
@@ -422,13 +422,13 @@ bool MidiPlugin::canConfigure()
 void MidiPlugin::setParameter(quint32 universe, quint32 line, Capability type,
                               QString name, QVariant value)
 {
-    MidiDevice *dev = NULL;
+    MidiDevice *dev = nullptr;
     if (type == Input)
         dev = qobject_cast<MidiDevice*>(inputDevice(line));
     else if (type == Output)
         dev = qobject_cast<MidiDevice*>(outputDevice(line));
 
-    if (dev != NULL)
+    if (dev != nullptr)
     {
         if (name == "midichannel")
             dev->setMidiChannel(value.toInt());
@@ -439,7 +439,7 @@ void MidiPlugin::setParameter(quint32 universe, quint32 line, Capability type,
         else if (name == "MIDISendNoteOff")
         {
             dev = qobject_cast<MidiDevice*>(outputDevice(line));
-            if (dev != NULL)
+            if (dev != nullptr)
                 dev->setSendNoteOff(value.toBool());
         }
 
@@ -464,7 +464,7 @@ QDir MidiPlugin::systemMidiTemplateDirectory()
 
 bool MidiPlugin::addMidiTemplate(MidiTemplate* templ)
 {
-    Q_ASSERT(templ != NULL);
+    Q_ASSERT(templ != nullptr);
 
     /* Don't add the same temlate twice */
     if (m_midiTemplates.contains(templ) == false)
@@ -491,7 +491,7 @@ MidiTemplate* MidiPlugin::midiTemplate(QString name)
             return templ;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 void MidiPlugin::loadMidiTemplates(const QDir& dir)
@@ -512,7 +512,7 @@ void MidiPlugin::loadMidiTemplates(const QDir& dir)
 
         templ = MidiTemplate::loader(path);
 
-        if (templ != NULL)
+        if (templ != nullptr)
         {
             addMidiTemplate(templ);
         } else

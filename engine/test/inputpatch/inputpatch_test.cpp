@@ -48,15 +48,15 @@ void InputPatch_Test::initTestCase()
 void InputPatch_Test::cleanupTestCase()
 {
     delete m_doc;
-    m_doc = NULL;
+    m_doc = nullptr;
 }
 
 void InputPatch_Test::defaults()
 {
     InputPatch ip(0, this);
-    QVERIFY(ip.m_plugin == NULL);
+    QVERIFY(ip.m_plugin == nullptr);
     QVERIFY(ip.m_pluginLine == QLCIOPlugin::invalidLine());
-    QVERIFY(ip.m_profile == NULL);
+    QVERIFY(ip.m_profile == nullptr);
     QVERIFY(ip.m_pageSetCh == USHRT_MAX);
     QVERIFY(ip.pluginName() == KInputNone);
     QVERIFY(ip.inputName() == KInputNone);
@@ -65,9 +65,9 @@ void InputPatch_Test::defaults()
     QVERIFY(ip.input() == QLCIOPlugin::invalidLine());
 
     InputPatch ip2(this);
-    QVERIFY(ip2.m_plugin == NULL);
+    QVERIFY(ip2.m_plugin == nullptr);
     QVERIFY(ip2.m_pluginLine == QLCIOPlugin::invalidLine());
-    QVERIFY(ip2.m_profile == NULL);
+    QVERIFY(ip2.m_profile == nullptr);
     QVERIFY(ip2.m_pageSetCh == USHRT_MAX);
     QVERIFY(ip2.pluginName() == KInputNone);
     QVERIFY(ip2.inputName() == KInputNone);
@@ -80,7 +80,7 @@ void InputPatch_Test::patch()
 {
     QCOMPARE(m_doc->ioPluginCache()->plugins().size(), 1);
     IOPluginStub* stub = static_cast<IOPluginStub*> (m_doc->ioPluginCache()->plugins().at(0));
-    QVERIFY(stub != NULL);
+    QVERIFY(stub != nullptr);
 
     QLCInputProfile prof1;
     prof1.setManufacturer("Foo");
@@ -143,9 +143,9 @@ void InputPatch_Test::parameters()
 {
     InputPatch* ip = new InputPatch(0, this);
     IOPluginStub* stub = static_cast<IOPluginStub*> (m_doc->ioPluginCache()->plugins().at(0));
-    QVERIFY(stub != NULL);
+    QVERIFY(stub != nullptr);
 
-    QVERIFY(ip->set(stub, 0, NULL) == true);
+    QVERIFY(ip->set(stub, 0, nullptr) == true);
     QVERIFY(ip->m_plugin == stub);
 
     ip->setPluginParameter("Foo", 42);

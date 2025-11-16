@@ -667,7 +667,7 @@ void VCCueList::updateFeedback()
     sendFeedback(m_sideFaderLevel, INPUT_SIDE_FADER_ID, VCWidget::ExactValue);
 
     Chaser *ch = chaser();
-    if (ch == NULL)
+    if (ch == nullptr)
         return;
 
     sendFeedback(ch->isRunning() ? UCHAR_MAX : 0, INPUT_PLAY_PAUSE_ID, VCWidget::ExactValue);
@@ -916,7 +916,7 @@ void VCCueList::slotProgressTimeout()
         return;
 
     ChaserRunnerStep step(ch->currentRunningStep());
-    if (step.m_function != NULL)
+    if (step.m_function != nullptr)
     {
         ProgressStatus status = ProgressIdle;
         double progress = 0;

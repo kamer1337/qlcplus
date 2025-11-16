@@ -80,7 +80,7 @@ public:
      *
      * @param plugin A plugin to assign
      * @param input An input line within that plugin to assign
-     * @param profile An input profile for a patch (NULL for none)
+     * @param profile An input profile for a patch (nullptr for none)
      * @return true if successful, otherwise false
      */
     bool set(QLCIOPlugin* plugin, quint32 input, QLCInputProfile* profile);
@@ -88,7 +88,7 @@ public:
     /**
      * Assign an input profile to the InputPatch
      *
-     * @param profile Th reference to an input profile (NULL to unset)
+     * @param profile Th reference to an input profile (nullptr to unset)
      * @return true if successful, otherwise false
      */
     bool set(QLCInputProfile* profile);
@@ -140,7 +140,7 @@ private:
     QLCIOPlugin* m_plugin;
     /** The plugin line open by this Input patch */
     quint32 m_pluginLine;
-    /** The reference of an input profile if activated by the user (otherwise NULL) */
+    /** The reference of an input profile if activated by the user (otherwise nullptr) */
     QLCInputProfile* m_profile;
     /** The patch parameters cache */
     QMap<QString, QVariant>m_parametersCache;

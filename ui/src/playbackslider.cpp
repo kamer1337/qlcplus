@@ -33,11 +33,11 @@
 
 PlaybackSlider::PlaybackSlider(QWidget* parent)
     : QWidget(parent)
-    , m_select(NULL)
-    , m_value(NULL)
-    , m_slider(NULL)
-    , m_label(NULL)
-    , m_flash(NULL)
+    , m_select(nullptr)
+    , m_value(nullptr)
+    , m_slider(nullptr)
+    , m_label(nullptr)
+    , m_flash(nullptr)
     , m_previousValue(-1)
 {
     new QVBoxLayout(this);

@@ -39,7 +39,7 @@ GPIOConfiguration::GPIOConfiguration(GPIOPlugin* plugin, QWidget* parent)
     : QDialog(parent)
     , m_plugin(plugin)
 {
-    Q_ASSERT(plugin != NULL);
+    Q_ASSERT(plugin != nullptr);
 
     /* Setup UI controls */
     setupUi(this);
@@ -102,7 +102,7 @@ void GPIOConfiguration::accept()
         QTreeWidgetItem *item = m_treeWidget->topLevelItem(i);
 
         QComboBox *combo = qobject_cast<QComboBox*>(m_treeWidget->itemWidget(item, KColumnGPIOUsage));
-        if (combo != NULL)
+        if (combo != nullptr)
         {
             GPIOPlugin::LineDirection usage = GPIOPlugin::LineDirection(combo->currentData().toInt());
 

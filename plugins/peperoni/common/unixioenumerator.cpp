@@ -26,7 +26,7 @@
 
 UnixIOEnumerator::UnixIOEnumerator(QObject* parent)
     : IOEnumerator(parent)
-    , m_ctx(NULL)
+    , m_ctx(nullptr)
 {
     qDebug() << Q_FUNC_INFO;
 
@@ -41,7 +41,7 @@ UnixIOEnumerator::~UnixIOEnumerator()
 {
     qDebug() << Q_FUNC_INFO;
 
-    if (m_ctx != NULL)
+    if (m_ctx != nullptr)
         libusb_exit(m_ctx);
 }
 
@@ -51,12 +51,12 @@ void UnixIOEnumerator::extractData(struct libusb_device* device,
 {
     qDebug() << Q_FUNC_INFO;
 
-    Q_ASSERT(device != NULL);
-    Q_ASSERT(desc != NULL);
-    Q_ASSERT(uid != NULL);
-    Q_ASSERT(name != NULL);
+    Q_ASSERT(device != nullptr);
+    Q_ASSERT(desc != nullptr);
+    Q_ASSERT(uid != nullptr);
+    Q_ASSERT(name != nullptr);
 
-    libusb_device_handle* handle = NULL;
+    libusb_device_handle* handle = nullptr;
     int r = libusb_open(device, &handle);
     if (r == 0)
     {
@@ -90,7 +90,7 @@ void UnixIOEnumerator::extractData(struct libusb_device* device,
 
 bool UnixIOEnumerator::isPeperoniDevice(const struct libusb_device_descriptor* descriptor)
 {
-    Q_ASSERT(descriptor != NULL);
+    Q_ASSERT(descriptor != nullptr);
 
     /* If it's not manufactured by them, we're not interested in it */
     if (descriptor->idVendor != PEPERONI_VID)
@@ -118,12 +118,12 @@ void UnixIOEnumerator::rescan()
     QList <OutputDevice*> destroyOutputs(m_outputDevices);
     bool changed = false;
 
-    libusb_device** devices = NULL;
+    libusb_device** devices = nullptr;
     ssize_t count = libusb_get_device_list(m_ctx, &devices);
     for (ssize_t i = 0; i < count; i++)
     {
         libusb_device* dev = devices[i];
-        Q_ASSERT(dev != NULL);
+        Q_ASSERT(dev != nullptr);
 
         libusb_device_descriptor desc;
         int r = libusb_get_device_descriptor(dev, &desc);
@@ -142,7 +142,7 @@ void UnixIOEnumerator::rescan()
         extractData(dev, &desc, &uid, &name);
 
         OutputDevice* od = outputDevice(uid);
-        if (od == NULL)
+        if (od == nullptr)
         {
             // New device
             od = new UnixPeperoniDevice(uid, name, dev, &desc, this);
@@ -191,11 +191,11 @@ OutputDevice* UnixIOEnumerator::outputDevice(const QVariant& uid) const
             return dev;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 InputDevice* UnixIOEnumerator::inputDevice(const QVariant& uid) const
 {
     Q_UNUSED(uid);
-    return NULL;
+    return nullptr;
 }

@@ -36,7 +36,7 @@ InputSelectionWidget::InputSelectionWidget(Doc *doc, QWidget *parent)
     , m_supportMonitoring(false)
     , m_signalsReceived(0)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     setupUi(this);
 

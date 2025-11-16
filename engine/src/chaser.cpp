@@ -52,7 +52,7 @@ Chaser::Chaser(Doc *doc)
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
     , m_runnerMutex(QMutex::Recursive)
 #endif
-    , m_runner(NULL)
+    , m_runner(nullptr)
 {
     setName(tr("New Chaser"));
 
@@ -82,18 +82,18 @@ QIcon Chaser::getIcon() const
 
 Function* Chaser::createCopy(Doc* doc, bool addToDoc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     Function* copy = new Chaser(doc);
     if (copy->copyFrom(this) == false)
     {
         delete copy;
-        copy = NULL;
+        copy = nullptr;
     }
     if (addToDoc == true && doc->addFunction(copy) == false)
     {
         delete copy;
-        copy = NULL;
+        copy = nullptr;
     }
 
     return copy;
@@ -102,7 +102,7 @@ Function* Chaser::createCopy(Doc* doc, bool addToDoc)
 bool Chaser::copyFrom(const Function* function)
 {
     const Chaser *chaser = qobject_cast<const Chaser*> (function);
-    if (chaser == NULL)
+    if (chaser == nullptr)
         return false;
 
     // Copy chaser stuff
@@ -208,7 +208,7 @@ ChaserStep *Chaser::stepAt(int idx)
     if (idx >= 0 && idx < m_steps.count())
         return &(m_steps[idx]);
 
-    return NULL;
+    return nullptr;
 }
 
 QList <ChaserStep> Chaser::steps() const
@@ -334,7 +334,7 @@ Chaser::SpeedMode Chaser::stringToSpeedMode(const QString& str)
 
 bool Chaser::saveXML(QXmlStreamWriter *doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* Function tag */
     doc->writeStartElement(KXMLQLCFunction);
@@ -470,7 +470,7 @@ void Chaser::postLoad()
     }
 
     Doc *doc = this->doc();
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     QMutableListIterator <ChaserStep> it(m_steps);
     while (it.hasNext() == true)
@@ -478,7 +478,7 @@ void Chaser::postLoad()
         ChaserStep step(it.next());
         Function *function = doc->function(step.fid);
 
-        if (function == NULL)
+        if (function == nullptr)
             it.remove();
         else if (function->contains(id())) // forbid self-containment
             it.remove();
@@ -493,14 +493,14 @@ void Chaser::postLoad()
 void Chaser::tap()
 {
     QMutexLocker runnerLocker(&m_runnerMutex);
-    if (m_runner != NULL && durationMode() == Common)
+    if (m_runner != nullptr && durationMode() == Common)
         m_runner->tap();
 }
 
 void Chaser::setAction(ChaserAction &action)
 {
     QMutexLocker runnerLocker(&m_runnerMutex);
-    if (m_runner != NULL)
+    if (m_runner != nullptr)
     {
         m_runner->setAction(action);
     }
@@ -523,7 +523,7 @@ int Chaser::currentStepIndex() const
 #else
         QMutexLocker runnerLocker(const_cast<QRecursiveMutex*>(&m_runnerMutex));
 #endif
-        if (m_runner != NULL)
+        if (m_runner != nullptr)
             ret = m_runner->currentStepIndex();
     }
     return ret;
@@ -538,7 +538,7 @@ int Chaser::computeNextStep(int currentStepIndex) const
 #else
         QMutexLocker runnerLocker(const_cast<QRecursiveMutex*>(&m_runnerMutex));
 #endif
-        if (m_runner != NULL)
+        if (m_runner != nullptr)
             ret = m_runner->computeNextStep(currentStepIndex);
     }
     return ret;
@@ -553,7 +553,7 @@ int Chaser::runningStepsNumber() const
 #else
         QMutexLocker runnerLocker(const_cast<QRecursiveMutex*>(&m_runnerMutex));
 #endif
-        if (m_runner != NULL)
+        if (m_runner != nullptr)
             ret = m_runner->runningStepsNumber();
     }
     return ret;
@@ -562,7 +562,7 @@ int Chaser::runningStepsNumber() const
 ChaserRunnerStep Chaser::currentRunningStep() const
 {
     ChaserRunnerStep ret;
-    ret.m_function = NULL;
+    ret.m_function = nullptr;
 
     {
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
@@ -570,10 +570,10 @@ ChaserRunnerStep Chaser::currentRunningStep() const
 #else
         QMutexLocker runnerLocker(const_cast<QRecursiveMutex*>(&m_runnerMutex));
 #endif
-        if (m_runner != NULL)
+        if (m_runner != nullptr)
         {
             ChaserRunnerStep *step = m_runner->currentRunningStep();
-            if (step != NULL)
+            if (step != nullptr)
                 ret = *step;
         }
     }
@@ -583,13 +583,13 @@ ChaserRunnerStep Chaser::currentRunningStep() const
 bool Chaser::contains(quint32 functionId)
 {
     Doc *doc = this->doc();
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     foreach (ChaserStep step, m_steps)
     {
         Function *function = doc->function(step.fid);
-        // contains() can be called during init, function may be NULL
-        if (function == NULL)
+        // contains() can be called during init, function may be nullptr
+        if (function == nullptr)
             continue;
 
         if (function->id() == functionId)
@@ -617,7 +617,7 @@ QList<quint32> Chaser::components()
 
 void Chaser::createRunner(quint32 startTime)
 {
-    Q_ASSERT(m_runner == NULL);
+    Q_ASSERT(m_runner == nullptr);
 
     {
         QMutexLocker stepListLocker(&m_stepListMutex);
@@ -643,7 +643,7 @@ void Chaser::preRun(MasterTimer* timer)
 void Chaser::setPause(bool enable)
 {
     QMutexLocker runnerLocker(&m_runnerMutex);
-    if (m_runner != NULL)
+    if (m_runner != nullptr)
     {
         // request a change of pause state at the next write call
         m_startupAction.m_action = ChaserPauseRequest;
@@ -668,7 +668,7 @@ void Chaser::write(MasterTimer* timer, QList<Universe *> universes)
     {
         QMutexLocker runnerLocker(&m_runnerMutex);
         QMutexLocker stepListLocker(&m_stepListMutex);
-        Q_ASSERT(m_runner != NULL);
+        Q_ASSERT(m_runner != nullptr);
 
         if (m_runner->write(timer, universes) == false)
             stop(FunctionParent::master());
@@ -681,7 +681,7 @@ void Chaser::postRun(MasterTimer* timer, QList<Universe *> universes)
 {
     {
         QMutexLocker runnerLocker(&m_runnerMutex);
-        Q_ASSERT(m_runner != NULL);
+        Q_ASSERT(m_runner != nullptr);
 
         if (isPaused())
             m_runner->setPause(false, universes);
@@ -689,7 +689,7 @@ void Chaser::postRun(MasterTimer* timer, QList<Universe *> universes)
         m_runner->postRun(timer, universes);
 
         delete m_runner;
-        m_runner = NULL;
+        m_runner = nullptr;
     }
 
     Function::postRun(timer, universes);
@@ -707,7 +707,7 @@ int Chaser::adjustAttribute(qreal fraction, int attributeId)
     {
         QMutexLocker runnerLocker(&m_runnerMutex);
         QMutexLocker stepListLocker(&m_stepListMutex);
-        if (m_runner != NULL)
+        if (m_runner != nullptr)
         {
             m_runner->adjustStepIntensity(getAttributeValue(Function::Intensity));
         }
@@ -723,7 +723,7 @@ int Chaser::adjustAttribute(qreal fraction, int attributeId)
 void Chaser::adjustStepIntensity(qreal fraction, int stepIndex, FadeControlMode fadeControl)
 {
     QMutexLocker runnerLocker(&m_runnerMutex);
-    if (m_runner != NULL)
+    if (m_runner != nullptr)
     {
         m_runner->adjustStepIntensity(fraction, stepIndex, fadeControl);
     }

@@ -127,7 +127,7 @@ bool RGBPlain::loadXML(QXmlStreamReader &root)
 
 bool RGBPlain::saveXML(QXmlStreamWriter *doc) const
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     doc->writeStartElement(KXMLQLCRGBAlgorithm);
     doc->writeAttribute(KXMLQLCRGBAlgorithmType, KXMLQLCRGBPlain);

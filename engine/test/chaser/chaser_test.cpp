@@ -47,7 +47,7 @@
 
 void Chaser_Test::initTestCase()
 {
-    m_doc = NULL;
+    m_doc = nullptr;
 }
 
 void Chaser_Test::cleanupTestCase()
@@ -79,7 +79,7 @@ void Chaser_Test::initial()
     QVERIFY(c.direction() == Chaser::Forward);
     QVERIFY(c.runOrder() == Chaser::Loop);
     QVERIFY(c.id() == Function::invalidId());
-    QVERIFY(c.m_runner == NULL);
+    QVERIFY(c.m_runner == nullptr);
     QCOMPARE(c.m_legacyHoldBus, Bus::invalid());
     QCOMPARE(c.fadeInMode(), Chaser::Default);
     QCOMPARE(c.fadeOutMode(), Chaser::Default);
@@ -205,9 +205,9 @@ void Chaser_Test::stepAt()
     QVERIFY(c.addStep(ChaserStep(0, 1000, 5000, 0)) == true);
     QVERIFY(c.stepsCount() == 1);
 
-    QVERIFY(c.stepAt(10) == NULL);
+    QVERIFY(c.stepAt(10) == nullptr);
     ChaserStep *cs = c.stepAt(0);
-    QVERIFY(cs != NULL);
+    QVERIFY(cs != nullptr);
 
     QVERIFY(cs->fadeIn == 1000);
     QVERIFY(cs->hold == 5000);
@@ -337,12 +337,12 @@ void Chaser_Test::createCopy()
     QVERIFY(c1->id() != Function::invalidId());
 
     Function* f = c1->createCopy(&doc);
-    QVERIFY(f != NULL);
+    QVERIFY(f != nullptr);
     QVERIFY(f != c1);
     QVERIFY(f->id() != c1->id());
 
     Chaser* copy = qobject_cast<Chaser*> (f);
-    QVERIFY(copy != NULL);
+    QVERIFY(copy != nullptr);
     QVERIFY(copy->fadeInSpeed() == 42);
     QVERIFY(copy->fadeOutSpeed() == 69);
     QVERIFY(copy->duration() == 1337);
@@ -429,7 +429,7 @@ void Chaser_Test::loadSuccessLegacy()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -508,7 +508,7 @@ void Chaser_Test::loadSuccess()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -576,7 +576,7 @@ void Chaser_Test::loadWrongType()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -620,7 +620,7 @@ void Chaser_Test::loadWrongRoot()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -725,7 +725,7 @@ void Chaser_Test::postLoad()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -772,7 +772,7 @@ void Chaser_Test::save()
 
     QVERIFY(c.saveXML(&xmlWriter) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -855,7 +855,7 @@ void Chaser_Test::tap()
     m_doc->addFunction(c);
 
     c->preRun(m_doc->masterTimer());
-    QVERIFY(c->m_runner != NULL);
+    QVERIFY(c->m_runner != nullptr);
     QCOMPARE(c->duration(), uint(0));
     c->write(m_doc->masterTimer(), QList<Universe*>());
     QCOMPARE(c->m_runner->m_pendingAction.m_action, ChaserNoAction);
@@ -877,7 +877,7 @@ void Chaser_Test::preRun()
     c->m_stop = true;
 
     c->preRun(&timer);
-    QVERIFY(c->m_runner != NULL);
+    QVERIFY(c->m_runner != nullptr);
     QCOMPARE(c->isRunning(), true); // Make sure Function::preRun() is called
     //QCOMPARE(c->m_runner->m_elapsed, uint(0)); // Make sure ChaserRunner::reset() is called
     c->postRun(&timer, ua);
@@ -937,10 +937,10 @@ void Chaser_Test::writeHTP()
 void Chaser_Test::writeLTP()
 {
     QLCFixtureDef* def = m_doc->fixtureDefCache()->fixtureDef("Clay Paky", "Sharpy");
-    QVERIFY(def != NULL);
+    QVERIFY(def != nullptr);
 
     QLCFixtureMode* mode = def->mode("Standard");
-    QVERIFY(mode != NULL);
+    QVERIFY(mode != nullptr);
 
     Fixture* fxi = new Fixture(m_doc);
     fxi->setFixtureDefinition(def, mode);

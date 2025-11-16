@@ -47,10 +47,10 @@ void GenericFader_Test::init()
 {
     Fixture *fxi = new Fixture(m_doc);
     QLCFixtureDef *def = m_doc->fixtureDefCache()->fixtureDef("Futurelight", "DJScan250");
-    QVERIFY(def != NULL);
+    QVERIFY(def != nullptr);
 
     QLCFixtureMode *mode = def->mode("Mode 1");
-    QVERIFY(mode != NULL);
+    QVERIFY(mode != nullptr);
 
     fxi->setFixtureDefinition(def, mode);
     fxi->setAddress(10);

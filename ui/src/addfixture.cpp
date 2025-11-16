@@ -54,8 +54,8 @@ AddFixture::AddFixture(QWidget* parent, const Doc* doc, const Fixture* fxi)
     m_amountValue = 1;
     m_gapValue = 0;
     m_channelsValue = 1;
-    m_fixtureDef = NULL;
-    m_mode = NULL;
+    m_fixtureDef = nullptr;
+    m_mode = nullptr;
     m_fxiCount = 0;
     m_fixtureID = Fixture::invalidId();
     m_invalidAddressFlag = false;
@@ -92,7 +92,7 @@ AddFixture::AddFixture(QWidget* parent, const Doc* doc, const Fixture* fxi)
             this, SLOT(slotDiptoolButtonClicked()));
 
     /* Fill fixture definition tree (and select a fixture def) */
-    if (fxi != NULL)
+    if (fxi != nullptr)
     {
         fillTree(fxi->fixtureDef()->manufacturer(), fxi->fixtureDef()->model());
         m_fixtureID = fxi->id();
@@ -108,7 +108,7 @@ AddFixture::AddFixture(QWidget* parent, const Doc* doc, const Fixture* fxi)
     /* Simulate first selection and find the next free address */
     slotSelectionChanged();
 
-    if (fxi != NULL)
+    if (fxi != nullptr)
     {
         // Universe
         m_universeCombo->setCurrentIndex(fxi->universe());
@@ -227,7 +227,7 @@ bool AddFixture::invalidAddress()
 void AddFixture::fillTree(const QString& selectManufacturer,
                           const QString& selectModel)
 {
-    QTreeWidgetItem* parent = NULL;
+    QTreeWidgetItem* parent = nullptr;
     QTreeWidgetItem* child;
     QString manuf;
     QString model;
@@ -333,12 +333,12 @@ void AddFixture::fillModeCombo(const QString& text)
 {
     m_modeCombo->clear();
 
-    if (m_fixtureDef == NULL)
+    if (m_fixtureDef == nullptr)
     {
         m_modeCombo->setEnabled(false);
         m_modeCombo->addItem(text);
         m_modeCombo->setCurrentIndex(0);
-        m_mode = NULL;
+        m_mode = nullptr;
     }
     else
     {
@@ -399,7 +399,7 @@ quint32 AddFixture::findAddress(quint32 universe, quint32 numChannels,
     while (fxit.hasNext() == true)
     {
         Fixture* fxi(fxit.next());
-        Q_ASSERT(fxi != NULL);
+        Q_ASSERT(fxi != nullptr);
 
         if (fxi->universe() != universe)
             continue;
@@ -456,11 +456,11 @@ bool AddFixture::checkAddressAvailability(int value, int channels)
 
 void AddFixture::slotModeActivated(int modeIndex)
 {
-    if (m_fixtureDef == NULL || m_fixtureDef->modes().isEmpty())
+    if (m_fixtureDef == nullptr || m_fixtureDef->modes().isEmpty())
         return;
 
     m_mode = m_fixtureDef->modes().at(modeIndex);
-    if (m_mode == NULL)
+    if (m_mode == nullptr)
     {
         /* Generic dimmers don't have modes, so bail out */
         // slotSelectionChanged();
@@ -474,7 +474,7 @@ void AddFixture::slotModeActivated(int modeIndex)
     for (int i = 0; i < m_mode->channels().size(); i++)
     {
         QLCChannel* channel = m_mode->channel(i);
-        Q_ASSERT(channel != NULL);
+        Q_ASSERT(channel != nullptr);
 
         new QListWidgetItem(
             QString("%1: %2").arg(i + 1).arg(channel->name()),
@@ -560,10 +560,10 @@ void AddFixture::slotSelectionChanged()
     /* If there is no valid selection (user has selected only a
        manufacturer or nothing at all) don't let him press OK. */
     QTreeWidgetItem* item = m_tree->currentItem();
-    if (item == NULL || item->parent() == NULL)
+    if (item == nullptr || item->parent() == nullptr)
     {
         /* Reset the selected fixture pointer */
-        m_fixtureDef = NULL;
+        m_fixtureDef = nullptr;
 
         /* Since there is no m_fixtureDef, mode combo is cleared */
         fillModeCombo();
@@ -601,24 +601,24 @@ void AddFixture::slotSelectionChanged()
         if (m_fixtureID != Fixture::invalidId())
         {
             Fixture *fxi = m_doc->fixture(m_fixtureID);
-            if (fxi != NULL)
+            if (fxi != nullptr)
             {
                 m_fixtureDef = fxi->fixtureDef();
                 m_mode = fxi->fixtureMode();
 
                 if (m_fixtureDef->manufacturer() != manuf || m_fixtureDef->model() != model)
                 {
-                    m_fixtureDef = NULL;
+                    m_fixtureDef = nullptr;
                 }
             }
             else
             {
-                m_fixtureDef = NULL;
+                m_fixtureDef = nullptr;
             }
         }
         else
         {
-            m_fixtureDef = NULL;
+            m_fixtureDef = nullptr;
         }
         fillModeCombo();
         m_modeCombo->setEnabled(false);
@@ -640,7 +640,7 @@ void AddFixture::slotSelectionChanged()
     {
         /* Specific fixture definition selected. */
         m_fixtureDef = m_doc->fixtureDefCache()->fixtureDef(manuf, model);
-        Q_ASSERT(m_fixtureDef != NULL);
+        Q_ASSERT(m_fixtureDef != nullptr);
 
         /* Put fixture def's modes to the mode combo */
         fillModeCombo();
@@ -690,7 +690,7 @@ void AddFixture::slotTreeDoubleClicked(QTreeWidgetItem* item)
 {
     /* Select and accept (click OK for the user) */
     slotSelectionChanged();
-    if (item != NULL && item->parent() != NULL)
+    if (item != nullptr && item->parent() != nullptr)
         accept();
 }
 

@@ -293,7 +293,7 @@ void QLCCapability::replaceAliases(QList<AliasInfo> list)
 
 bool QLCCapability::saveXML(QXmlStreamWriter *doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* QLCCapability entry */
     doc->writeStartElement(KXMLQLCCapability);

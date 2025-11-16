@@ -70,7 +70,7 @@ bool VCSpeedDialFunction::loadXML(QXmlStreamReader &root, SpeedMultiplier aFadeI
 
 bool VCSpeedDialFunction::saveXML(QXmlStreamWriter *doc) const
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* Function tag */
     doc->writeStartElement(KXMLQLCFunction);

@@ -59,7 +59,7 @@ EFXFixture::EFXFixture(const EFX* parent)
     , m_secondMsbChannel(QLCChannel::invalid())
     , m_secondLsbChannel(QLCChannel::invalid())
 {
-    Q_ASSERT(parent != NULL);
+    Q_ASSERT(parent != nullptr);
 
     if (m_rgbGradient.isNull ())
         m_rgbGradient = Gradient::getRGBGradient (256, 256);
@@ -96,7 +96,7 @@ void EFXFixture::setHead(GroupHead const & head)
     m_head = head;
 
     Fixture *fxi = doc()->fixture(head.fxi);
-    if (fxi == NULL)
+    if (fxi == nullptr)
         return;
 
     m_universe = fxi->universe();
@@ -166,7 +166,7 @@ bool EFXFixture::isValid() const
 {
     Fixture *fxi = doc()->fixture(head().fxi);
 
-    if (fxi == NULL)
+    if (fxi == nullptr)
         return false;
     else if (head().head >= fxi->heads())
         return false;
@@ -210,7 +210,7 @@ void EFXFixture::durationChanged()
 QStringList EFXFixture::modeList()
 {
     Fixture* fxi = doc()->fixture(head().fxi);
-    Q_ASSERT(fxi != NULL);
+    Q_ASSERT(fxi != nullptr);
 
     QStringList modes;
 
@@ -318,7 +318,7 @@ bool EFXFixture::loadXML(QXmlStreamReader &root)
 
 bool EFXFixture::saveXML(QXmlStreamWriter *doc) const
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* EFXFixture */
     doc->writeStartElement(KXMLQLCEFXFixture);
@@ -346,7 +346,7 @@ bool EFXFixture::saveXML(QXmlStreamWriter *doc) const
 
 const Doc* EFXFixture::doc() const
 {
-    Q_ASSERT(m_parent != NULL);
+    Q_ASSERT(m_parent != nullptr);
     return m_parent->doc();
 }
 
@@ -620,7 +620,7 @@ void EFXFixture::setPointRGB(QList<Universe *> universes, QSharedPointer<Generic
         return;
 
     Fixture* fxi = doc()->fixture(head().fxi);
-    Q_ASSERT(fxi != NULL);
+    Q_ASSERT(fxi != nullptr);
     Universe *uni = universes[universe()];
 
     QVector<quint32> rgbChannels = fxi->rgbChannels(head().head);

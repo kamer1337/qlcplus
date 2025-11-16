@@ -117,7 +117,7 @@ public:
 
     /**
      * Get the first step of the running list.
-     * If none is running this returns NULL
+     * If none is running this returns nullptr
      */
     ChaserRunnerStep *currentRunningStep() const;
 

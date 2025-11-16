@@ -29,14 +29,14 @@
 void onHPMPrivateRawDeviceAdded(void* refCon, io_iterator_t iterator)
 {
     HPMPrivate* self = (HPMPrivate*) refCon;
-    Q_ASSERT(self != NULL);
+    Q_ASSERT(self != nullptr);
     self->deviceAdded(iterator);
 }
 
 void onHPMPrivateRawDeviceRemoved(void* refCon, io_iterator_t iterator)
 {
     HPMPrivate* self = (HPMPrivate*) refCon;
-    Q_ASSERT(self != NULL);
+    Q_ASSERT(self != nullptr);
     self->deviceRemoved(iterator);
 }
 
@@ -47,7 +47,7 @@ void onHPMPrivateRawDeviceRemoved(void* refCon, io_iterator_t iterator)
 HPMPrivate::HPMPrivate(HotPlugMonitor* parent)
     : QThread(parent)
     , m_run(false)
-    , loop(NULL)
+    , loop(nullptr)
 {
 }
 
@@ -55,7 +55,7 @@ HPMPrivate::~HPMPrivate()
 {
     if (isRunning() == true)
         stop();
-    loop = NULL;
+    loop = nullptr;
 }
 
 void HPMPrivate::stop()
@@ -67,8 +67,8 @@ void HPMPrivate::stop()
 
 void HPMPrivate::extractVidPid(io_service_t usbDevice, UInt16* vid, UInt16* pid)
 {
-    Q_ASSERT(vid != NULL);
-    Q_ASSERT(pid != NULL);
+    Q_ASSERT(vid != nullptr);
+    Q_ASSERT(pid != nullptr);
 
     CFNumberRef number;
 
@@ -91,7 +91,7 @@ void HPMPrivate::deviceAdded(io_iterator_t iterator)
         UInt16 vid = 0, pid = 0;
         extractVidPid(usbDevice, &vid, &pid);
         HotPlugMonitor* hpm = qobject_cast<HotPlugMonitor*> (parent());
-        Q_ASSERT(hpm != NULL);
+        Q_ASSERT(hpm != nullptr);
         hpm->emitDeviceAdded(vid, pid);
         IOObjectRelease(usbDevice);
     }
@@ -105,7 +105,7 @@ void HPMPrivate::deviceRemoved(io_iterator_t iterator)
         UInt16 vid = 0, pid = 0;
         extractVidPid(usbDevice, &vid, &pid);
         HotPlugMonitor* hpm = qobject_cast<HotPlugMonitor*> (parent());
-        Q_ASSERT(hpm != NULL);
+        Q_ASSERT(hpm != nullptr);
         hpm->emitDeviceRemoved(vid, pid);
         IOObjectRelease(usbDevice);
     }

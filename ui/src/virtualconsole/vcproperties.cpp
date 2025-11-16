@@ -233,7 +233,7 @@ bool VCProperties::loadXML(QXmlStreamReader &root)
 
 bool VCProperties::saveXML(QXmlStreamWriter *doc) const
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* Properties entry */
     doc->writeStartElement(KXMLQLCVCProperties);

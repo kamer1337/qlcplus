@@ -50,8 +50,8 @@ Universe::Universe(quint32 id, GrandMaster *gm, QObject *parent)
     , m_grandMaster(gm)
     , m_passthrough(false)
     , m_monitor(false)
-    , m_inputPatch(NULL)
-    , m_fbPatch(NULL)
+    , m_inputPatch(nullptr)
+    , m_fbPatch(nullptr)
     , m_channelsMask(new QByteArray(UNIVERSE_SIZE, char(0)))
     , m_modifiedZeroValues(new QByteArray(UNIVERSE_SIZE, char(0)))
     , m_running(false)
@@ -68,7 +68,7 @@ Universe::Universe(quint32 id, GrandMaster *gm, QObject *parent)
     , m_blackoutValues(new QByteArray(UNIVERSE_SIZE, char(0)))
     , m_passthroughValues()
 {
-    m_modifiers.fill(NULL, UNIVERSE_SIZE);
+    m_modifiers.fill(nullptr, UNIVERSE_SIZE);
 
     m_name = QString("Universe %1").arg(id + 1);
 
@@ -387,7 +387,7 @@ void Universe::reset()
     else
         m_postGMValues->fill(0);
 
-    m_modifiers.fill(NULL, UNIVERSE_SIZE);
+    m_modifiers.fill(nullptr, UNIVERSE_SIZE);
     m_passthrough = false; // not releasing m_passthroughValues, see comment in setPassthrough
 }
 
@@ -520,7 +520,7 @@ uchar Universe::applyGM(int channel, uchar value)
 
 uchar Universe::applyModifiers(int channel, uchar value)
 {
-    if (m_modifiers.at(channel) != NULL)
+    if (m_modifiers.at(channel) != nullptr)
         return m_modifiers.at(channel)->getValue(value);
 
     return value;
@@ -559,7 +559,7 @@ void Universe::updatePostGMValue(int channel)
 
 bool Universe::isPatched()
 {
-    if (m_inputPatch != NULL || m_outputPatchList.count() || m_fbPatch != NULL)
+    if (m_inputPatch != nullptr || m_outputPatchList.count() || m_fbPatch != nullptr)
         return true;
 
     return false;
@@ -568,11 +568,11 @@ bool Universe::isPatched()
 bool Universe::setInputPatch(QLCIOPlugin *plugin,
                              quint32 input, QLCInputProfile *profile)
 {
-    qDebug() << "[Universe] setInputPatch - ID:" << m_id << ", plugin:" << ((plugin == NULL)?"None":plugin->name())
-             << ", input:" << input << ", profile:" << ((profile == NULL)?"None":profile->name());
-    if (m_inputPatch == NULL)
+    qDebug() << "[Universe] setInputPatch - ID:" << m_id << ", plugin:" << ((plugin == nullptr)?"None":plugin->name())
+             << ", input:" << input << ", profile:" << ((profile == nullptr)?"None":profile->name());
+    if (m_inputPatch == nullptr)
     {
-        if (plugin == NULL || input == QLCIOPlugin::invalidLine())
+        if (plugin == nullptr || input == QLCIOPlugin::invalidLine())
             return true;
 
         m_inputPatch = new InputPatch(m_id, this);
@@ -584,13 +584,13 @@ bool Universe::setInputPatch(QLCIOPlugin *plugin,
         {
             disconnectInputPatch();
             delete m_inputPatch;
-            m_inputPatch = NULL;
+            m_inputPatch = nullptr;
             emit inputPatchChanged();
             return true;
         }
     }
 
-    if (m_inputPatch != NULL)
+    if (m_inputPatch != nullptr)
     {
         bool result = m_inputPatch->set(plugin, input, profile);
         emit inputPatchChanged();
@@ -606,12 +606,12 @@ bool Universe::setOutputPatch(QLCIOPlugin *plugin, quint32 output, int index)
         return false;
 
     qDebug() << "[Universe] setOutputPatch - ID:" << m_id
-             << ", plugin:" << ((plugin == NULL) ? "None" : plugin->name()) << ", output:" << output;
+             << ", plugin:" << ((plugin == nullptr) ? "None" : plugin->name()) << ", output:" << output;
 
     // replace or delete an existing patch
     if (index < m_outputPatchList.count())
     {
-        if (plugin == NULL || output == QLCIOPlugin::invalidLine())
+        if (plugin == nullptr || output == QLCIOPlugin::invalidLine())
         {
             // need to delete an existing patch
             OutputPatch *patch = m_outputPatchList.takeAt(index);
@@ -627,7 +627,7 @@ bool Universe::setOutputPatch(QLCIOPlugin *plugin, quint32 output, int index)
     }
     else
     {
-        if (plugin == NULL || output == QLCIOPlugin::invalidLine())
+        if (plugin == nullptr || output == QLCIOPlugin::invalidLine())
             return false;
 
         // add a new patch
@@ -644,24 +644,24 @@ bool Universe::setOutputPatch(QLCIOPlugin *plugin, quint32 output, int index)
 bool Universe::setFeedbackPatch(QLCIOPlugin *plugin, quint32 output)
 {
     qDebug() << Q_FUNC_INFO << "plugin:" << plugin << "output:" << output;
-    if (m_fbPatch == NULL)
+    if (m_fbPatch == nullptr)
     {
-        if (plugin == NULL || output == QLCIOPlugin::invalidLine())
+        if (plugin == nullptr || output == QLCIOPlugin::invalidLine())
             return false;
 
         m_fbPatch = new OutputPatch(m_id, this);
     }
     else
     {
-        if (plugin == NULL || output == QLCIOPlugin::invalidLine())
+        if (plugin == nullptr || output == QLCIOPlugin::invalidLine())
         {
             delete m_fbPatch;
-            m_fbPatch = NULL;
+            m_fbPatch = nullptr;
             emit hasFeedbackChanged();
             return true;
         }
     }
-    if (m_fbPatch != NULL)
+    if (m_fbPatch != nullptr)
     {
         bool result = m_fbPatch->set(plugin, output);
         emit hasFeedbackChanged();
@@ -673,7 +673,7 @@ bool Universe::setFeedbackPatch(QLCIOPlugin *plugin, quint32 output)
 
 bool Universe::hasFeedback() const
 {
-    return m_fbPatch != NULL ? true : false;
+    return m_fbPatch != nullptr ? true : false;
 }
 
 InputPatch *Universe::inputPatch() const
@@ -684,7 +684,7 @@ InputPatch *Universe::inputPatch() const
 OutputPatch *Universe::outputPatch(int index) const
 {
     if (index < 0 || index >= m_outputPatchList.count())
-        return NULL;
+        return nullptr;
 
     return m_outputPatchList.at(index);
 }
@@ -719,7 +719,7 @@ void Universe::dumpOutput(const QByteArray &data, bool dataChanged)
 
 void Universe::flushInput()
 {
-    if (m_inputPatch == NULL)
+    if (m_inputPatch == nullptr)
         return;
 
     m_inputPatch->flush(m_id);
@@ -750,7 +750,7 @@ void Universe::slotInputValueChanged(quint32 universe, quint32 channel, uchar va
 
 void Universe::connectInputPatch()
 {
-    if (m_inputPatch == NULL)
+    if (m_inputPatch == nullptr)
         return;
 
     if (!m_passthrough)
@@ -763,7 +763,7 @@ void Universe::connectInputPatch()
 
 void Universe::disconnectInputPatch()
 {
-    if (m_inputPatch == NULL)
+    if (m_inputPatch == nullptr)
         return;
 
     if (!m_passthrough)
@@ -862,7 +862,7 @@ void Universe::setChannelModifier(ushort channel, ChannelModifier *modifier)
 
     m_modifiers[channel] = modifier;
 
-    if (modifier != NULL)
+    if (modifier != nullptr)
     {
         (*m_modifiedZeroValues)[channel] = modifier->getValue(0);
 
@@ -882,7 +882,7 @@ void Universe::setChannelModifier(ushort channel, ChannelModifier *modifier)
 ChannelModifier *Universe::channelModifier(ushort channel)
 {
     if (channel >= (ushort)m_modifiers.count())
-        return NULL;
+        return nullptr;
 
     return m_modifiers.at(channel);
 }
@@ -1212,19 +1212,19 @@ bool Universe::loadXMLPluginParameters(QXmlStreamReader &root, PatchTagType curr
         if (currentTag == InputPatchTag)
         {
             InputPatch *ip = inputPatch();
-            if (ip != NULL)
+            if (ip != nullptr)
                 ip->setPluginParameter(attr.name().toString(), attr.value().toString());
         }
         else if (currentTag == OutputPatchTag)
         {
             OutputPatch *op = outputPatch(patchIndex);
-            if (op != NULL)
+            if (op != nullptr)
                 op->setPluginParameter(attr.name().toString(), attr.value().toString());
         }
         else if (currentTag == FeedbackPatchTag)
         {
             OutputPatch *fbp = feedbackPatch();
-            if (fbp != NULL)
+            if (fbp != nullptr)
                 fbp->setPluginParameter(attr.name().toString(), attr.value().toString());
         }
     }
@@ -1235,7 +1235,7 @@ bool Universe::loadXMLPluginParameters(QXmlStreamReader &root, PatchTagType curr
 
 bool Universe::saveXML(QXmlStreamWriter *doc) const
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     doc->writeStartElement(KXMLQLCUniverse);
     doc->writeAttribute(KXMLQLCUniverseName, name());
@@ -1244,7 +1244,7 @@ bool Universe::saveXML(QXmlStreamWriter *doc) const
     if (passthrough() == true)
         doc->writeAttribute(KXMLQLCUniversePassthrough, KXMLQLCTrue);
 
-    if (inputPatch() != NULL)
+    if (inputPatch() != nullptr)
     {
         savePatchXML(doc, KXMLQLCUniverseInputPatch, inputPatch()->pluginName(), inputPatch()->inputName(),
             inputPatch()->input(), inputPatch()->profileName(), inputPatch()->getPluginParameters());
@@ -1254,7 +1254,7 @@ bool Universe::saveXML(QXmlStreamWriter *doc) const
         savePatchXML(doc, KXMLQLCUniverseOutputPatch, op->pluginName(), op->outputName(),
             op->output(), "", op->getPluginParameters());
     }
-    if (feedbackPatch() != NULL)
+    if (feedbackPatch() != nullptr)
     {
         savePatchXML(doc, KXMLQLCUniverseFeedbackPatch, feedbackPatch()->pluginName(), feedbackPatch()->outputName(),
             feedbackPatch()->output(), "", feedbackPatch()->getPluginParameters());
@@ -1293,7 +1293,7 @@ void Universe::savePatchXML(
 bool Universe::savePluginParametersXML(QXmlStreamWriter *doc,
                                        QMap<QString, QVariant> parameters) const
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     if (parameters.isEmpty())
         return false;

@@ -114,7 +114,7 @@ void Track_Test::load()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -167,7 +167,7 @@ void Track_Test::functions()
     t.addShowFunction(sf3);
 
     QVERIFY(t.showFunctions().count() == 3);
-    QVERIFY(t.showFunction(111) == NULL);
+    QVERIFY(t.showFunction(111) == nullptr);
     QVERIFY(t.showFunction(123) == sf1);
     QVERIFY(t.showFunction(456) == sf2);
     QVERIFY(t.showFunction(789) == sf3);
@@ -208,7 +208,7 @@ void Track_Test::save()
 
     QVERIFY(t.saveXML(&xmlWriter) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);

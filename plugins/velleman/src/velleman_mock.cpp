@@ -40,7 +40,7 @@ extern "C"
         _ChannelCount = Count;
     }
 
-    int* _SetAllData = NULL;
+    int* _SetAllData = nullptr;
     void SetAllData(int32_t Data[])
     {
         _SetAllData = Data;

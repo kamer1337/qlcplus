@@ -40,7 +40,7 @@ void MonitorFixture_Test::initTestCase()
 void MonitorFixture_Test::cleanupTestCase()
 {
     delete m_doc;
-    m_doc = NULL;
+    m_doc = nullptr;
 }
 
 void MonitorFixture_Test::initial()
@@ -49,11 +49,11 @@ void MonitorFixture_Test::initial()
 
     MonitorFixture mof(&w, m_doc);
     QCOMPARE(mof.fixture(), Fixture::invalidId());
-    QVERIFY(mof.m_fixtureLabel == NULL);
+    QVERIFY(mof.m_fixtureLabel == nullptr);
     QCOMPARE(mof.m_channelStyle, MonitorProperties::DMXChannels);
     QCOMPARE(mof.m_valueStyle, MonitorProperties::DMXValues);
     QCOMPARE(mof.frameStyle(), QFrame::StyledPanel | QFrame::Sunken);
-    QVERIFY(mof.layout() != NULL);
+    QVERIFY(mof.layout() != nullptr);
     QCOMPARE(mof.m_channelLabels.size(), 0);
     QCOMPARE(mof.m_valueLabels.size(), 0);
     QCOMPARE(mof.autoFillBackground(), true);
@@ -75,16 +75,16 @@ void MonitorFixture_Test::fixture()
     MonitorFixture mof(&w, m_doc);
     mof.setFixture(fxi->id());
     QCOMPARE(mof.fixture(), fxi->id());
-    QVERIFY(mof.m_fixtureLabel != NULL);
+    QVERIFY(mof.m_fixtureLabel != nullptr);
     QCOMPARE(mof.m_fixtureLabel->text(), QString("<B>Foobar</B>"));
     QCOMPARE(mof.m_channelLabels.size(), 6);
     QCOMPARE(mof.m_valueLabels.size(), 6);
     for (int i = 0; i < mof.m_channelLabels.size(); i++)
     {
-        QVERIFY(mof.m_channelLabels[i] != NULL);
+        QVERIFY(mof.m_channelLabels[i] != nullptr);
         QCOMPARE(mof.m_channelLabels[i]->text(), QString());
 
-        QVERIFY(mof.m_valueLabels[i] != NULL);
+        QVERIFY(mof.m_valueLabels[i] != nullptr);
         QCOMPARE(mof.m_valueLabels[i]->text(), QString("000"));
     }
 }
@@ -150,10 +150,10 @@ void MonitorFixture_Test::channelValueStyles()
     for (int i = 0; i < mof.m_channelLabels.size(); i++)
     {
         QString str;
-        QVERIFY(mof.m_channelLabels[i] != NULL);
+        QVERIFY(mof.m_channelLabels[i] != nullptr);
         QCOMPARE(mof.m_channelLabels[i]->text(), str.asprintf("<B>%.3d</B>", i + fxi->address() + 1));
 
-        QVERIFY(mof.m_valueLabels[i] != NULL);
+        QVERIFY(mof.m_valueLabels[i] != nullptr);
         QCOMPARE(mof.m_valueLabels[i]->text(), QString("000"));
     }
 
@@ -162,10 +162,10 @@ void MonitorFixture_Test::channelValueStyles()
     for (int i = 0; i < mof.m_channelLabels.size(); i++)
     {
         QString str;
-        QVERIFY(mof.m_channelLabels[i] != NULL);
+        QVERIFY(mof.m_channelLabels[i] != nullptr);
         QCOMPARE(mof.m_channelLabels[i]->text(), str.asprintf("<B>%.3d</B>", i + 1));
 
-        QVERIFY(mof.m_valueLabels[i] != NULL);
+        QVERIFY(mof.m_valueLabels[i] != nullptr);
         QCOMPARE(mof.m_valueLabels[i]->text(), QString("000"));
     }
 
@@ -173,10 +173,10 @@ void MonitorFixture_Test::channelValueStyles()
     for (int i = 0; i < mof.m_channelLabels.size(); i++)
     {
         QString str;
-        QVERIFY(mof.m_channelLabels[i] != NULL);
+        QVERIFY(mof.m_channelLabels[i] != nullptr);
         QCOMPARE(mof.m_channelLabels[i]->text(), str.asprintf("<B>%.3d</B>", i + fxi->address() + 1));
 
-        QVERIFY(mof.m_valueLabels[i] != NULL);
+        QVERIFY(mof.m_valueLabels[i] != nullptr);
         QCOMPARE(mof.m_valueLabels[i]->text(), QString("000"));
     }
 
@@ -190,10 +190,10 @@ void MonitorFixture_Test::channelValueStyles()
     for (int i = 0; i < mof.m_channelLabels.size(); i++)
     {
         QString str;
-        QVERIFY(mof.m_channelLabels[i] != NULL);
+        QVERIFY(mof.m_channelLabels[i] != nullptr);
         QCOMPARE(mof.m_channelLabels[i]->text(), str.asprintf("<B>%.3d</B>", i + fxi->address() + 1));
 
-        QVERIFY(mof.m_valueLabels[i] != NULL);
+        QVERIFY(mof.m_valueLabels[i] != nullptr);
         QCOMPARE(mof.m_valueLabels[i]->text(), str.asprintf("%.3d", (int) ceil(SCALE(qreal((i + 1) * 10),
                                                                                      qreal(0), qreal(UCHAR_MAX),
                                                                                      qreal(0), qreal(100)))));

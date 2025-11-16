@@ -269,7 +269,7 @@ private:
      * @param ok Tells if the line was parsed OK or not
      * @return A list of tokens parsed from the line
      */
-    static QList <QStringList> tokenizeLine(const QString& line, bool* ok = NULL);
+    static QList <QStringList> tokenizeLine(const QString& line, bool* ok = nullptr);
 
 protected slots:
     /** Triggered when the script's execution pauses to await the starting of a function */

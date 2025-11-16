@@ -37,8 +37,8 @@ AlsaMidiInputThread::AlsaMidiInputThread(snd_seq_t* alsa,
 {
     qDebug() << Q_FUNC_INFO;
 
-    Q_ASSERT(alsa != NULL);
-    Q_ASSERT(destinationAddress != NULL);
+    Q_ASSERT(alsa != nullptr);
+    Q_ASSERT(destinationAddress != nullptr);
     m_destinationAddress->client = destinationAddress->client;
     m_destinationAddress->port = destinationAddress->port;
 }
@@ -51,7 +51,7 @@ AlsaMidiInputThread::~AlsaMidiInputThread()
     stop();
 
     delete m_destinationAddress;
-    m_destinationAddress = NULL;
+    m_destinationAddress = nullptr;
 }
 
 /****************************************************************************
@@ -62,7 +62,7 @@ bool AlsaMidiInputThread::addDevice(AlsaMidiInputDevice* device)
 {
     qDebug() << Q_FUNC_INFO;
 
-    Q_ASSERT(device != NULL);
+    Q_ASSERT(device != nullptr);
 
     QMutexLocker locker(&m_mutex);
 
@@ -91,7 +91,7 @@ bool AlsaMidiInputThread::removeDevice(AlsaMidiInputDevice* device)
 {
     qDebug() << Q_FUNC_INFO;
 
-    Q_ASSERT(device != NULL);
+    Q_ASSERT(device != nullptr);
 
     bool empty = false;
 
@@ -118,11 +118,11 @@ void AlsaMidiInputThread::subscribeDevice(AlsaMidiInputDevice* device)
 {
     qDebug() << Q_FUNC_INFO;
 
-    Q_ASSERT(device != NULL);
+    Q_ASSERT(device != nullptr);
 
     /* Subscribe events coming from the the device's MIDI port to get
        patched to the plugin's own MIDI port */
-    snd_seq_port_subscribe_t* sub = NULL;
+    snd_seq_port_subscribe_t* sub = nullptr;
     snd_seq_port_subscribe_alloca(&sub);
     snd_seq_port_subscribe_set_sender(sub, device->address());
     snd_seq_port_subscribe_set_dest(sub, m_destinationAddress);
@@ -133,10 +133,10 @@ void AlsaMidiInputThread::unsubscribeDevice(AlsaMidiInputDevice* device)
 {
     qDebug() << Q_FUNC_INFO;
 
-    Q_ASSERT(device != NULL);
+    Q_ASSERT(device != nullptr);
 
     /* Unsubscribe events from the device */
-    snd_seq_port_subscribe_t* sub = NULL;
+    snd_seq_port_subscribe_t* sub = nullptr;
     snd_seq_port_subscribe_alloca(&sub);
     snd_seq_port_subscribe_set_sender(sub, device->address());
     snd_seq_port_subscribe_set_dest(sub, m_destinationAddress);
@@ -198,8 +198,8 @@ void AlsaMidiInputThread::readEvent()
     /* Wait for input data */
     do
     {
-        AlsaMidiInputDevice* device = NULL;
-        snd_seq_event_t* ev = NULL;
+        AlsaMidiInputDevice* device = nullptr;
+        snd_seq_event_t* ev = nullptr;
 
         /* Receive an event */
         snd_seq_event_input(m_alsa, &ev);
@@ -211,7 +211,7 @@ void AlsaMidiInputThread::readEvent()
             device = m_devices[uid];
         else
             continue;
-        Q_ASSERT(device != NULL);
+        Q_ASSERT(device != nullptr);
 
         uchar cmd = 0;
         uchar data1 = 0;

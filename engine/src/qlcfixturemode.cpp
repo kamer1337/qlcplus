@@ -35,7 +35,7 @@ QLCFixtureMode::QLCFixtureMode(QLCFixtureDef *fixtureDef)
     , m_masterIntensityChannel(QLCChannel::invalid())
     , m_useGlobalPhysical(true)
 {
-    Q_ASSERT(fixtureDef != NULL);
+    Q_ASSERT(fixtureDef != nullptr);
 }
 
 QLCFixtureMode::QLCFixtureMode(QLCFixtureDef *fixtureDef, const QLCFixtureMode *mode)
@@ -43,10 +43,10 @@ QLCFixtureMode::QLCFixtureMode(QLCFixtureDef *fixtureDef, const QLCFixtureMode *
     , m_masterIntensityChannel(QLCChannel::invalid())
     , m_useGlobalPhysical(true)
 {
-    Q_ASSERT(fixtureDef != NULL);
-    Q_ASSERT(mode != NULL);
+    Q_ASSERT(fixtureDef != nullptr);
+    Q_ASSERT(mode != nullptr);
 
-    if (mode != NULL)
+    if (mode != nullptr)
         *this = *mode;
 }
 
@@ -69,7 +69,7 @@ QLCFixtureMode& QLCFixtureMode::operator=(const QLCFixtureMode& mode)
         /* Clear the existing list of channels */
         m_channels.clear();
 
-        Q_ASSERT(m_fixtureDef != NULL);
+        Q_ASSERT(m_fixtureDef != nullptr);
 
         quint32 i = 0;
         QVectorIterator <QLCChannel*> it(mode.m_channels);
@@ -83,7 +83,7 @@ QLCFixtureMode& QLCFixtureMode::operator=(const QLCFixtureMode& mode)
                will be invalid and we end up in a crash. */
             QLCChannel* ch = it.next();
             QLCChannel* actual = m_fixtureDef->channel(ch->name());
-            if (actual != NULL)
+            if (actual != nullptr)
                 insertChannel(actual, i++);
             else
                 qWarning() << Q_FUNC_INFO << "Unable to find channel"
@@ -124,14 +124,14 @@ QLCFixtureDef* QLCFixtureMode::fixtureDef() const
 
 bool QLCFixtureMode::insertChannel(QLCChannel* channel, quint32 index)
 {
-    if (channel == NULL)
+    if (channel == nullptr)
     {
-        qWarning() << Q_FUNC_INFO << "Will not add a NULL channel to mode"
+        qWarning() << Q_FUNC_INFO << "Will not add a nullptr channel to mode"
                    << m_name;
         return false;
     }
 
-    Q_ASSERT(m_fixtureDef != NULL);
+    Q_ASSERT(m_fixtureDef != nullptr);
 
     if (m_fixtureDef->channels().contains(channel) == true)
     {
@@ -179,7 +179,7 @@ bool QLCFixtureMode::removeChannel(const QLCChannel* channel)
 
 bool QLCFixtureMode::replaceChannel(QLCChannel *currChannel, QLCChannel *newChannel)
 {
-    if (currChannel == NULL || newChannel == NULL)
+    if (currChannel == nullptr || newChannel == nullptr)
         return false;
 
     int chIndex = m_channels.indexOf(currChannel);
@@ -202,17 +202,17 @@ QLCChannel* QLCFixtureMode::channel(const QString& name) const
     while (it.hasNext() == true)
     {
         QLCChannel* ch = it.next();
-        Q_ASSERT(ch != NULL);
+        Q_ASSERT(ch != nullptr);
         if (ch->name() == name)
             return ch;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 QLCChannel* QLCFixtureMode::channel(quint32 ch) const
 {
-    return m_channels.value(ch, NULL);
+    return m_channels.value(ch, nullptr);
 }
 
 QVector <QLCChannel*> QLCFixtureMode::channels() const
@@ -222,7 +222,7 @@ QVector <QLCChannel*> QLCFixtureMode::channels() const
 
 quint32 QLCFixtureMode::channelNumber(QLCChannel *channel) const
 {
-    if (channel == NULL)
+    if (channel == nullptr)
         return QLCChannel::invalid();
 
     int idx = m_channels.indexOf(channel);
@@ -306,7 +306,7 @@ int QLCFixtureMode::headForChannel(quint32 chnum) const
 
 void QLCFixtureMode::cacheHeads()
 {
-    QLCChannel *lastChannel = NULL;
+    QLCChannel *lastChannel = nullptr;
 
     for (int i = 0; i < m_heads.size(); i++)
     {
@@ -329,7 +329,7 @@ void QLCFixtureMode::cacheHeads()
         }
 
         /** Map secondary channels */
-        if (lastChannel != NULL &&
+        if (lastChannel != nullptr &&
             channel->group() == lastChannel->group() &&
             lastChannel->controlByte() == QLCChannel::MSB &&
             channel->controlByte() == QLCChannel::LSB)
@@ -400,7 +400,7 @@ bool QLCFixtureMode::loadXML(QXmlStreamReader &doc)
         if (doc.name() == KXMLQLCFixtureModeChannel)
         {
             /* Channel */
-            Q_ASSERT(m_fixtureDef != NULL);
+            Q_ASSERT(m_fixtureDef != nullptr);
             str = doc.attributes().value(KXMLQLCFixtureModeChannelNumber).toString();
 
             quint32 actsOnChannelIndex = QLCChannel::invalid();
@@ -446,7 +446,7 @@ bool QLCFixtureMode::saveXML(QXmlStreamWriter *doc)
 {
     int i = 0;
 
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* Mode entry */
     doc->writeStartElement(KXMLQLCFixtureMode);

@@ -31,7 +31,7 @@ VCClockProperties::VCClockProperties(VCClock *clock, Doc *doc)
     , m_clock(clock)
     , m_doc(doc)
 {
-    Q_ASSERT(clock != NULL);
+    Q_ASSERT(clock != nullptr);
 
     setupUi(this);
 
@@ -108,7 +108,7 @@ void VCClockProperties::addScheduleItem(VCClockSchedule schedule)
         return;
 
     Function *func = m_doc->function(fid);
-    if (func != NULL)
+    if (func != nullptr)
     {
         QTreeWidgetItem *item = new QTreeWidgetItem(m_scheduleTree);
         item->setText(KColumnName, func->name());
@@ -141,7 +141,7 @@ void VCClockProperties::accept()
         VCClockSchedule sch;
         sch.setFunction(item->data(KColumnName, Qt::UserRole).toUInt());
         QTimeEdit *timeEdit = (QTimeEdit *)m_scheduleTree->itemWidget(item, KColumnTime);
-        if (timeEdit != NULL)
+        if (timeEdit != nullptr)
         {
             QDateTime dt;
             dt.setTime(timeEdit->time());

@@ -189,7 +189,7 @@ public:
     virtual QByteArray read(int size) = 0;
 
     /** Read exactly one byte. $ok tells if a byte was read or not. */
-    virtual uchar readByte(bool* ok = NULL) = 0;
+    virtual uchar readByte(bool* ok = nullptr) = 0;
 
 protected:
     /** Latency amount in ms for FTDI devices */

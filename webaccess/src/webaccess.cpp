@@ -71,11 +71,11 @@ WebAccess::WebAccess(Doc *doc, VirtualConsole *vcInstance, SimpleDesk *sdInstanc
   , m_doc(doc)
   , m_vc(vcInstance)
   , m_sd(sdInstance)
-  , m_auth(NULL)
+  , m_auth(nullptr)
   , m_pendingProjectLoaded(false)
 {
-    Q_ASSERT(m_doc != NULL);
-    Q_ASSERT(m_vc != NULL);
+    Q_ASSERT(m_doc != nullptr);
+    Q_ASSERT(m_vc != nullptr);
 
     if (enableAuth)
     {
@@ -141,7 +141,7 @@ void WebAccess::slotHandleHTTPRequest(QHttpRequest *req, QHttpResponse *resp)
     if (reqUrl == "/qlcplusWS")
     {
         QHttpConnection *conn = resp->enableWebSocket();
-        if (conn != NULL)
+        if (conn != nullptr)
         {
             // Allocate user for WS on heap so it doesn't go out of scope
             conn->userData = new WebAccessUser(user);
@@ -335,7 +335,7 @@ void WebAccess::slotHandleHTTPRequest(QHttpRequest *req, QHttpResponse *resp)
 
 void WebAccess::slotHandleWebSocketRequest(QHttpConnection *conn, QString data)
 {
-    if (conn == NULL)
+    if (conn == nullptr)
         return;
 
     WebAccessUser *user = static_cast<WebAccessUser*>(conn->userData);
@@ -384,7 +384,7 @@ void WebAccess::slotHandleWebSocketRequest(QHttpConnection *conn, QString data)
         else if (cmdList[1] == "PROFILE")
         {
             InputPatch *inPatch = m_doc->inputOutputMap()->inputPatch(universe);
-            if (inPatch != NULL)
+            if (inPatch != nullptr)
             {
                 m_doc->inputOutputMap()->setInputPatch(universe, inPatch->pluginName(), "", inPatch->input(), cmdList[3]);
                 m_doc->inputOutputMap()->saveDefaults();
@@ -590,7 +590,7 @@ void WebAccess::slotHandleWebSocketRequest(QHttpConnection *conn, QString data)
 
             quint32 fID = cmdList[2].toUInt();
             Function *f = m_doc->function(fID);
-            if (f != NULL)
+            if (f != nullptr)
                 wsAPIMessage.append(m_doc->function(fID)->typeString());
             else
                 wsAPIMessage.append(Function::typeToString(Function::Undefined));
@@ -602,7 +602,7 @@ void WebAccess::slotHandleWebSocketRequest(QHttpConnection *conn, QString data)
 
             quint32 fID = cmdList[2].toUInt();
             Function *f = m_doc->function(fID);
-            if (f != NULL)
+            if (f != nullptr)
             {
                 if (f->isRunning())
                     wsAPIMessage.append("Running");
@@ -621,7 +621,7 @@ void WebAccess::slotHandleWebSocketRequest(QHttpConnection *conn, QString data)
             quint32 newStatus = cmdList[3].toUInt();
             Function *f = m_doc->function(fID);
 
-            if (f != NULL)
+            if (f != nullptr)
             {
                 if (!f->isRunning() && newStatus)
                     f->start(m_doc->masterTimer(), FunctionParent::master());
@@ -651,7 +651,7 @@ void WebAccess::slotHandleWebSocketRequest(QHttpConnection *conn, QString data)
 
             quint32 wID = cmdList[2].toUInt();
             VCWidget *widget = m_vc->widget(wID);
-            if (widget != NULL)
+            if (widget != nullptr)
                 wsAPIMessage.append(QString("%1|%2").arg(wID).arg(widget->typeToString(widget->type())));
             else
                 wsAPIMessage.append(QString("%1|%2").arg(wID).arg(widget->typeToString(VCWidget::UnknownWidget)));
@@ -663,7 +663,7 @@ void WebAccess::slotHandleWebSocketRequest(QHttpConnection *conn, QString data)
 
             quint32 wID = cmdList[2].toUInt();
             VCWidget *widget = m_vc->widget(wID);
-            if (widget != NULL)
+            if (widget != nullptr)
             {
                 // add widget ID to the response
                 wsAPIMessage.append(QString("%1|").arg(wID));
@@ -692,7 +692,7 @@ void WebAccess::slotHandleWebSocketRequest(QHttpConnection *conn, QString data)
                         VCCueList *cue = qobject_cast<VCCueList*>(widget);
                         quint32 chaserID = cue->chaserID();
                         Function *f = m_doc->function(chaserID);
-                        if (f != NULL && f->isRunning())
+                        if (f != nullptr && f->isRunning())
                             wsAPIMessage.append(QString("PLAY|%2|").arg(cue->getCurrentIndex()));
                         else
                             wsAPIMessage.append("STOP");
@@ -841,7 +841,7 @@ void WebAccess::slotHandleWebSocketRequest(QHttpConnection *conn, QString data)
     if (cmdList.count() > 1)
         value = (uchar)cmdList[1].toInt();
 
-    if (widget != NULL)
+    if (widget != nullptr)
     {
         switch(widget->type())
         {
@@ -1010,7 +1010,7 @@ void WebAccess::sendWebSocketMessage(const QString &message)
 
 QString WebAccess::getWidgetBackgroundImage(VCWidget *widget)
 {
-    if (widget == NULL || widget->backgroundImage().isEmpty())
+    if (widget == nullptr || widget->backgroundImage().isEmpty())
         return QString();
 
     QString imgPath = widget->backgroundImage();
@@ -1049,7 +1049,7 @@ QString WebAccess::getWidgetHTML(VCWidget *widget)
 void WebAccess::slotFramePageChanged(int pageNum)
 {
     VCWidget *frame = qobject_cast<VCWidget *>(sender());
-    if (frame == NULL)
+    if (frame == nullptr)
         return;
 
     QString wsMessage = QString("%1|FRAME|%2").arg(frame->id()).arg(pageNum);
@@ -1059,7 +1059,7 @@ void WebAccess::slotFramePageChanged(int pageNum)
 void WebAccess::slotFrameDisableStateChanged(bool disable)
 {
     VCWidget *frame = qobject_cast<VCWidget *>(sender());
-    if (frame == NULL)
+    if (frame == nullptr)
         return;
 
     QString wsMessage = QString("%1|FRAME_DISABLE|%2").arg(frame->id()).arg(disable);
@@ -1287,7 +1287,7 @@ QString WebAccess::getSoloFrameHTML(VCSoloFrame *frame)
 void WebAccess::slotButtonStateChanged(int state)
 {
     VCButton *btn = qobject_cast<VCButton *>(sender());
-    if (btn == NULL)
+    if (btn == nullptr)
         return;
 
     qDebug() << "Button state changed" << state;
@@ -1306,7 +1306,7 @@ void WebAccess::slotButtonStateChanged(int state)
 void WebAccess::slotButtonDisableStateChanged(bool disable)
 {
     VCButton *btn = qobject_cast<VCButton *>(sender());
-    if (btn == NULL)
+    if (btn == nullptr)
         return;
 
     QString wsMessage = QString("%1|BUTTON_DISABLE|%2").arg(btn->id()).arg(disable);
@@ -1349,7 +1349,7 @@ QString WebAccess::getButtonHTML(VCButton *btn)
 void WebAccess::slotSliderValueChanged(QString val)
 {
     VCSlider *slider = qobject_cast<VCSlider *>(sender());
-    if (slider == NULL)
+    if (slider == nullptr)
         return;
 
     // <ID>|SLIDER|<SLIDER VALUE>|<DISPLAY VALUE>
@@ -1360,7 +1360,7 @@ void WebAccess::slotSliderValueChanged(QString val)
 void WebAccess::slotSliderDisableStateChanged(bool disable)
 {
     VCSlider *slider = qobject_cast<VCSlider *>(sender());
-    if (slider == NULL)
+    if (slider == nullptr)
         return;
 
     QString wsMessage = QString("%1|SLIDER_DISABLE|%2").arg(slider->id()).arg(disable);
@@ -1447,7 +1447,7 @@ QString WebAccess::getSliderHTML(VCSlider *slider)
 void WebAccess::slotLabelDisableStateChanged(bool disable)
 {
     VCLabel *label = qobject_cast<VCLabel *>(sender());
-    if (label == NULL)
+    if (label == nullptr)
         return;
 
     QString wsMessage = QString("%1|LABEL_DISABLE|%2").arg(label->id()).arg(disable);
@@ -1479,7 +1479,7 @@ QString WebAccess::getLabelHTML(VCLabel *label)
 void WebAccess::slotAudioTriggersToggled(bool toggle)
 {
     VCAudioTriggers *triggers = qobject_cast<VCAudioTriggers *>(sender());
-    if (triggers == NULL)
+    if (triggers == nullptr)
         return;
 
     qDebug() << "AudioTriggers state changed " << toggle;
@@ -1518,7 +1518,7 @@ QString WebAccess::getAudioTriggersHTML(VCAudioTriggers *triggers)
 void WebAccess::slotCueIndexChanged(int idx)
 {
     VCCueList *cue = qobject_cast<VCCueList *>(sender());
-    if (cue == NULL)
+    if (cue == nullptr)
         return;
 
     QString wsMessage = QString("%1|CUE|%2").arg(cue->id()).arg(idx);
@@ -1528,7 +1528,7 @@ void WebAccess::slotCueIndexChanged(int idx)
 void WebAccess::slotCueStepNoteChanged(int idx, QString note)
 {
     VCCueList *cue = qobject_cast<VCCueList *>(sender());
-    if (cue == NULL)
+    if (cue == nullptr)
         return;
 
     QString wsMessage = QString("%1|CUE_STEP_NOTE|%2|%3").arg(cue->id()).arg(idx).arg(note);
@@ -1538,7 +1538,7 @@ void WebAccess::slotCueStepNoteChanged(int idx, QString note)
 void WebAccess::slotCueProgressStateChanged()
 {
     VCCueList *cue = qobject_cast<VCCueList *>(sender());
-    if (cue == NULL)
+    if (cue == nullptr)
         return;
 
     QString wsMessage = QString("%1|CUE_PROGRESS|%2|%3").arg(cue->id()).arg(cue->progressPercent()).arg(cue->progressText());
@@ -1548,7 +1548,7 @@ void WebAccess::slotCueProgressStateChanged()
 void WebAccess::slotCueShowSideFaderPanel()
 {
     VCCueList *cue = qobject_cast<VCCueList *>(sender());
-    if (cue == NULL)
+    if (cue == nullptr)
         return;
 
     QString wsMessage = QString("%1|CUE_SHOWPANEL|%2").arg(cue->id()).arg(cue->sideFaderButtonIsChecked());
@@ -1558,7 +1558,7 @@ void WebAccess::slotCueShowSideFaderPanel()
 void WebAccess::slotCueSideFaderValueChanged()
 {
     VCCueList *cue = qobject_cast<VCCueList *>(sender());
-    if (cue == NULL)
+    if (cue == nullptr)
         return;
 
     QString wsMessage = QString("%1|CUE_SIDECHANGE|%2|%3|%4|%5|%6|%7|%8")
@@ -1577,7 +1577,7 @@ void WebAccess::slotCueSideFaderValueChanged()
 void WebAccess::slotCuePlaybackStateChanged()
 {
     VCCueList *cue = qobject_cast<VCCueList *>(sender());
-    if (cue == NULL)
+    if (cue == nullptr)
         return;
     Chaser *chaser = cue->chaser();
     QString playbackButtonImage = "player_play.png";
@@ -1619,7 +1619,7 @@ void WebAccess::slotCuePlaybackStateChanged()
 void WebAccess::slotCueDisableStateChanged(bool disable)
 {
     VCCueList *cue = qobject_cast<VCCueList *>(sender());
-    if (cue == NULL)
+    if (cue == nullptr)
         return;
 
     QString wsMessage = QString("%1|CUE_DISABLE|%2").arg(cue->id()).arg(disable);
@@ -1714,7 +1714,7 @@ QString WebAccess::getCueListHTML(VCCueList *cue)
     str += "<th>" + tr("Duration") + "</th>";
     str += "<th>" + tr("Notes") + "</th></tr>\n";
 
-    if (chaser != NULL)
+    if (chaser != nullptr)
     {
         for (int i = 0; i < chaser->stepsCount(); i++)
         {
@@ -1725,7 +1725,7 @@ QString WebAccess::getCueListHTML(VCCueList *cue)
             ChaserStep *step = chaser->stepAt(i);
             str += "<td>" + QString::number(i + 1) + "</td>";
             Function* function = doc->function(step->fid);
-            if (function != NULL)
+            if (function != nullptr)
             {
                 str += "<td>" + function->name() + "</td>";
 
@@ -1832,7 +1832,7 @@ QString WebAccess::getCueListHTML(VCCueList *cue)
     }
     str += "<div style=\"width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: space-between; \">";
 
-    if (chaser != NULL && chaser->isRunning())
+    if (chaser != nullptr && chaser->isRunning())
     {
         if (cue->playbackLayout() == VCCueList::PlayPauseStop)
         {
@@ -1915,7 +1915,7 @@ QString WebAccess::getCueListHTML(VCCueList *cue)
 void WebAccess::slotClockTimeChanged(quint32 time)
 {
     VCClock *clock = qobject_cast<VCClock *>(sender());
-    if (clock == NULL)
+    if (clock == nullptr)
         return;
 
     QString wsMessage = QString("%1|CLOCK|%2").arg(clock->id()).arg(time);
@@ -1925,7 +1925,7 @@ void WebAccess::slotClockTimeChanged(quint32 time)
 void WebAccess::slotClockDisableStateChanged(bool disable)
 {
     VCClock *clock = qobject_cast<VCClock *>(sender());
-    if (clock == NULL)
+    if (clock == nullptr)
         return;
 
     QString wsMessage = QString("%1|CLOCK_DISABLE|%2").arg(clock->id()).arg(disable);
@@ -1989,7 +1989,7 @@ QString WebAccess::getClockHTML(VCClock *clock)
 void WebAccess::slotMatrixSliderValueChanged(int value)
 {
     VCMatrix *matrix = qobject_cast<VCMatrix *>(sender());
-    if (matrix == NULL)
+    if (matrix == nullptr)
         return;
 
     QString wsMessage = QString("%1|MATRIX_SLIDER|%2").arg(matrix->id()).arg(value);
@@ -1999,7 +1999,7 @@ void WebAccess::slotMatrixSliderValueChanged(int value)
 void WebAccess::slotMatrixColor1Changed()
 {
     VCMatrix *matrix = qobject_cast<VCMatrix *>(sender());
-    if (matrix == NULL)
+    if (matrix == nullptr)
         return;
 
     QString wsMessage = QString("%1|MATRIX_COLOR_1|%2").arg(matrix->id()).arg(matrix->mtxColor(0).name());
@@ -2009,7 +2009,7 @@ void WebAccess::slotMatrixColor1Changed()
 void WebAccess::slotMatrixColor2Changed()
 {
     VCMatrix *matrix = qobject_cast<VCMatrix *>(sender());
-    if (matrix == NULL)
+    if (matrix == nullptr)
         return;
 
     QString wsMessage = QString("%1|MATRIX_COLOR_2|%2").arg(matrix->id()).arg(matrix->mtxColor(1).name());
@@ -2019,7 +2019,7 @@ void WebAccess::slotMatrixColor2Changed()
 void WebAccess::slotMatrixColor3Changed()
 {
     VCMatrix *matrix = qobject_cast<VCMatrix *>(sender());
-    if (matrix == NULL)
+    if (matrix == nullptr)
         return;
 
     QString wsMessage = QString("%1|MATRIX_COLOR_3|%2").arg(matrix->id()).arg(matrix->mtxColor(2).name());
@@ -2029,7 +2029,7 @@ void WebAccess::slotMatrixColor3Changed()
 void WebAccess::slotMatrixColor4Changed()
 {
     VCMatrix *matrix = qobject_cast<VCMatrix *>(sender());
-    if (matrix == NULL)
+    if (matrix == nullptr)
         return;
 
     QString wsMessage = QString("%1|MATRIX_COLOR_4|%2").arg(matrix->id()).arg(matrix->mtxColor(3).name());
@@ -2039,7 +2039,7 @@ void WebAccess::slotMatrixColor4Changed()
 void WebAccess::slotMatrixColor5Changed()
 {
     VCMatrix *matrix = qobject_cast<VCMatrix *>(sender());
-    if (matrix == NULL)
+    if (matrix == nullptr)
         return;
 
     QString wsMessage = QString("%1|MATRIX_COLOR_5|%2").arg(matrix->id()).arg(matrix->mtxColor(4).name());
@@ -2049,7 +2049,7 @@ void WebAccess::slotMatrixColor5Changed()
 void WebAccess::slotMatrixAnimationValueChanged(QString name)
 {
     VCMatrix *matrix = qobject_cast<VCMatrix *>(sender());
-    if (matrix == NULL)
+    if (matrix == nullptr)
         return;
 
     QString wsMessage = QString("%1|MATRIX_COMBO|%2").arg(matrix->id()).arg(name);
@@ -2059,7 +2059,7 @@ void WebAccess::slotMatrixAnimationValueChanged(QString name)
 void WebAccess::slotMatrixControlKnobValueChanged(int controlID, int value)
 {
     VCMatrix *matrix = qobject_cast<VCMatrix *>(sender());
-    if (matrix == NULL)
+    if (matrix == nullptr)
         return;
 
     QString wsMessage = QString("%1|MATRIX_KNOB|%2|%3").arg(matrix->id()).arg(controlID).arg(value);
@@ -2240,13 +2240,13 @@ QString WebAccess::getMatrixHTML(VCMatrix *matrix)
 
 QString WebAccess::getChildrenHTML(VCWidget *frame, int pagesNum, int currentPageIdx)
 {
-    if (frame == NULL)
+    if (frame == nullptr)
         return QString();
 
     QString unifiedHTML;
     QStringList pagesHTML;
     VCFrame *lframe = qobject_cast<VCFrame *>(frame);
-    if (lframe == NULL)
+    if (lframe == nullptr)
         return "";
 
     if (lframe->multipageMode() == true)

@@ -50,7 +50,7 @@ CueStack::CueStack(Doc* doc)
     , m_next(false)
 {
     //qDebug() << Q_FUNC_INFO << (void*) this;
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 }
 
 CueStack::~CueStack()
@@ -357,7 +357,7 @@ bool CueStack::loadXML(QXmlStreamReader &root)
 bool CueStack::saveXML(QXmlStreamWriter *doc, uint id) const
 {
     qDebug() << Q_FUNC_INFO;
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     doc->writeStartElement(KXMLQLCCueStack);
     doc->writeAttribute(KXMLQLCCueStackID, QString::number(id));

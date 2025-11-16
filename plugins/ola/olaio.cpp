@@ -40,12 +40,12 @@
 
 OlaIO::~OlaIO()
 {
-    if (m_thread != NULL)
+    if (m_thread != nullptr)
     {
         m_thread->stop();
         delete m_thread;
     }
-    ola::InitLogging(ola::OLA_LOG_WARN, NULL);
+    ola::InitLogging(ola::OLA_LOG_WARN, nullptr);
 }
 
 /**
@@ -55,7 +55,7 @@ OlaIO::~OlaIO()
 void OlaIO::init()
 {
     m_embedServer = false;
-    m_thread = NULL;
+    m_thread = nullptr;
     ola::InitLogging(ola::OLA_LOG_WARN, new ola::QLCLogDestination());
     // TODO: load this from a savefile at some point
     for (unsigned int i = 0; i < UNIVERSE_COUNT; ++i)
@@ -92,7 +92,7 @@ void OlaIO::setServerEmbedded(bool embedServer)
 {
     if (embedServer != m_embedServer)
     {
-        if (m_thread != NULL)
+        if (m_thread != nullptr)
         {
             m_thread->stop();
             delete m_thread;
@@ -212,7 +212,7 @@ void OlaIO::setOutputUniverse(quint32 output, unsigned int universe)
 
 void OlaIO::configure()
 {
-    ConfigureOlaIO conf(this, NULL);
+    ConfigureOlaIO conf(this, nullptr);
     conf.exec();
     emit configurationChanged();
 }

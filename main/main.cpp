@@ -104,7 +104,7 @@ namespace QLCArgs
 
 #if defined(WIN32) || defined(__APPLE__)
     /** The debug windows for Windows and OSX */
-    DebugBox *dbgBox = NULL;
+    DebugBox *dbgBox = nullptr;
 #endif
 }
 

@@ -70,13 +70,13 @@ public:
  * Initialization
  ****************************************************************************/
 
-Bus* Bus::s_instance = NULL;
+Bus* Bus::s_instance = nullptr;
 
 void Bus::init(QObject* parent)
 {
-    if (s_instance == NULL)
+    if (s_instance == nullptr)
     {
-        Q_ASSERT(parent != NULL);
+        Q_ASSERT(parent != nullptr);
         s_instance = new Bus(parent);
     }
 }
@@ -126,7 +126,7 @@ Bus::~Bus()
     while (m_buses.isEmpty() == false)
         delete m_buses.takeFirst();
 
-    s_instance = NULL;
+    s_instance = nullptr;
 }
 
 /****************************************************************************

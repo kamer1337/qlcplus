@@ -45,8 +45,8 @@ AddChannelsGroup::AddChannelsGroup(QWidget* parent, Doc* doc, ChannelsGroup *gro
     , m_checkedChannels(0)
     , m_isUpdating(false)
 {
-    Q_ASSERT(doc != NULL);
-    Q_ASSERT(m_chansGroup != NULL);
+    Q_ASSERT(doc != nullptr);
+    Q_ASSERT(m_chansGroup != nullptr);
 
     setupUi(this);
 
@@ -62,7 +62,7 @@ AddChannelsGroup::AddChannelsGroup(QWidget* parent, Doc* doc, ChannelsGroup *gro
 
     foreach (Fixture* fxi, m_doc->fixtures())
     {
-        QTreeWidgetItem *topItem = NULL;
+        QTreeWidgetItem *topItem = nullptr;
         quint32 uni = fxi->universe();
         for (int i = 0; i < m_tree->topLevelItemCount(); i++)
         {
@@ -75,7 +75,7 @@ AddChannelsGroup::AddChannelsGroup(QWidget* parent, Doc* doc, ChannelsGroup *gro
             }
         }
         // Haven't found this universe node ? Create it.
-        if (topItem == NULL)
+        if (topItem == nullptr)
         {
             topItem = new QTreeWidgetItem(m_tree);
             topItem->setText(KColumnName, m_doc->inputOutputMap()->universes().at(uni)->name());
@@ -163,7 +163,7 @@ void AddChannelsGroup::accept()
             QTreeWidgetItem *fixItem = uniItem->child(f);
             quint32 fxID = fixItem->text(KColumnID).toUInt();
             Fixture *fxi = m_doc->fixture(fxID);
-            if (fxi != NULL)
+            if (fxi != nullptr)
             {
                 for (int c = 0; c < fixItem->childCount(); c++)
                 {
@@ -201,11 +201,11 @@ void AddChannelsGroup::slotItemChecked(QTreeWidgetItem *item, int col)
     else
     {
         Fixture *fixture = m_doc->fixture(item->text(KColumnID).toUInt());
-        if (fixture == NULL)
+        if (fixture == nullptr)
             return;
 
         const QLCFixtureDef *def = fixture->fixtureDef();
-        if (def == NULL)
+        if (def == nullptr)
             return;
 
         QString manufacturer = def->manufacturer();
@@ -225,18 +225,18 @@ void AddChannelsGroup::slotItemChecked(QTreeWidgetItem *item, int col)
                 QTreeWidgetItem *fixItem = uniItem->child(f);
                 quint32 fxID = fixItem->text(KColumnID).toUInt();
                 Fixture *fxi = m_doc->fixture(fxID);
-                if (fxi != NULL)
+                if (fxi != nullptr)
                 {
                     QString tmpMode = fxi->fixtureMode() ? fxi->fixtureMode()->name() : "";
                     const QLCFixtureDef *tmpDef = fxi->fixtureDef();
-                    if (tmpDef != NULL)
+                    if (tmpDef != nullptr)
                     {
                         QString tmpManuf = tmpDef->manufacturer();
                         QString tmpModel = tmpDef->model();
                         if (tmpManuf == manufacturer && tmpModel == model && tmpMode == mode)
                         {
                             QTreeWidgetItem* item = fixItem->child(chIdx);
-                            if (item != NULL)
+                            if (item != nullptr)
                             {
                                 item->setCheckState(KColumnGroup, enable);
                                 if (enable == Qt::Checked)

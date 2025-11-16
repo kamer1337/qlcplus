@@ -76,18 +76,18 @@ quint32 Collection::totalDuration()
 
 Function* Collection::createCopy(Doc* doc, bool addToDoc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     Function* copy = new Collection(doc);
     if (copy->copyFrom(this) == false)
     {
         delete copy;
-        copy = NULL;
+        copy = nullptr;
     }
     if (addToDoc == true && doc->addFunction(copy) == false)
     {
         delete copy;
-        copy = NULL;
+        copy = nullptr;
     }
 
     return copy;
@@ -96,7 +96,7 @@ Function* Collection::createCopy(Doc* doc, bool addToDoc)
 bool Collection::copyFrom(const Function* function)
 {
     const Collection* coll = qobject_cast<const Collection*> (function);
-    if (coll == NULL)
+    if (coll == nullptr)
         return false;
 
     m_functions.clear();
@@ -170,7 +170,7 @@ bool Collection::saveXML(QXmlStreamWriter *doc)
 {
     int i = 0;
 
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* Function tag */
     doc->writeStartElement(KXMLQLCFunction);
@@ -232,7 +232,7 @@ bool Collection::loadXML(QXmlStreamReader &root)
 void Collection::postLoad()
 {
     Doc* doc = qobject_cast <Doc*> (parent());
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* Check that all member functions exist (nonexistent functions can
        be present only when a corrupted file has been loaded) */
@@ -242,7 +242,7 @@ void Collection::postLoad()
         /* Remove any nonexistent member functions */
         Function* function = doc->function(it.next());
 
-        if (function == NULL || function->contains(id())) // forbid self-containment
+        if (function == nullptr || function->contains(id())) // forbid self-containment
             it.remove();
     }
 }
@@ -250,13 +250,13 @@ void Collection::postLoad()
 bool Collection::contains(quint32 functionId)
 {
     Doc* doc = qobject_cast <Doc*> (parent());
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     foreach (quint32 fid, m_functions)
     {
         Function* function = doc->function(fid);
-        // contains() can be called during init, function may be NULL
-        if (function == NULL)
+        // contains() can be called during init, function may be nullptr
+        if (function == nullptr)
             continue;
 
         if (function->id() == functionId)
@@ -285,14 +285,14 @@ FunctionParent Collection::functionParent() const
 void Collection::preRun(MasterTimer *timer)
 {
     Doc *doc = this->doc();
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
     {
         QMutexLocker locker(&m_functionListMutex);
         m_runningChildren.clear();
         foreach (quint32 fid, m_functions)
         {
             Function *function = doc->function(fid);
-            Q_ASSERT(function != NULL);
+            Q_ASSERT(function != nullptr);
 
             m_intensityOverrideIds << function->requestAttributeOverride(Function::Intensity, getAttributeValue(Function::Intensity));
 
@@ -322,11 +322,11 @@ void Collection::preRun(MasterTimer *timer)
 void Collection::setPause(bool enable)
 {
     Doc *doc = this->doc();
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
     foreach (quint32 fid, m_runningChildren)
     {
         Function *function = doc->function(fid);
-        Q_ASSERT(function != NULL);
+        Q_ASSERT(function != nullptr);
         function->setPause(enable);
     }
     Function::setPause(enable);
@@ -347,13 +347,13 @@ void Collection::write(MasterTimer *timer, QList<Universe *> universes)
     {
         m_tick = 0;
         Doc *doc = this->doc();
-        Q_ASSERT(doc != NULL);
+        Q_ASSERT(doc != nullptr);
 
         QMutexLocker locker(&m_functionListMutex);
         foreach (quint32 fid, m_runningChildren)
         {
             Function *function = doc->function(fid);
-            Q_ASSERT(function != NULL);
+            Q_ASSERT(function != nullptr);
 
             // First tick may correspond to this collection starting the function
             // Now that first tick is over, stop listening to running signal
@@ -376,7 +376,7 @@ void Collection::write(MasterTimer *timer, QList<Universe *> universes)
 void Collection::postRun(MasterTimer* timer, QList<Universe *> universes)
 {
     Doc* doc = qobject_cast <Doc*> (parent());
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     {
         QMutexLocker locker(&m_functionListMutex);
@@ -386,7 +386,7 @@ void Collection::postRun(MasterTimer* timer, QList<Universe *> universes)
         while (it.hasNext() == true)
         {
             Function* function = doc->function(it.next());
-            Q_ASSERT(function != NULL);
+            Q_ASSERT(function != nullptr);
             function->stop(functionParent());
         }
 
@@ -395,7 +395,7 @@ void Collection::postRun(MasterTimer* timer, QList<Universe *> universes)
         for (int i = 0; i < m_functions.count(); i++)
         {
             Function* function = doc->function(m_functions.at(i));
-            Q_ASSERT(function != NULL);
+            Q_ASSERT(function != nullptr);
 
             disconnect(function, SIGNAL(stopped(quint32)),
                     this, SLOT(slotChildStopped(quint32)));
@@ -431,14 +431,14 @@ int Collection::adjustAttribute(qreal fraction, int attributeId)
     if (isRunning() && attrIndex == Intensity)
     {
         Doc* document = doc();
-        Q_ASSERT(document != NULL);
+        Q_ASSERT(document != nullptr);
 
         QMutexLocker locker(&m_functionListMutex);
 
         for (int i = 0; i < m_functions.count(); i++)
         {
             Function* function = document->function(m_functions.at(i));
-            Q_ASSERT(function != NULL);
+            Q_ASSERT(function != nullptr);
             function->adjustAttribute(getAttributeValue(Function::Intensity), m_intensityOverrideIds.at(i));
         }
     }
@@ -458,7 +458,7 @@ void Collection::setBlendMode(Universe::BlendMode mode)
         for (int i = 0; i < m_functions.count(); i++)
         {
             Function* function = doc()->function(m_functions.at(i));
-            Q_ASSERT(function != NULL);
+            Q_ASSERT(function != nullptr);
             function->setBlendMode(mode);
         }
     }

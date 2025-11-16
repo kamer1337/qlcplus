@@ -60,7 +60,7 @@
 #define DEFAULT_PAGE_CHANNELS   32
 #define DEFAULT_PAGE_PLAYBACKS  15
 
-SimpleDesk* SimpleDesk::s_instance = NULL;
+SimpleDesk* SimpleDesk::s_instance = nullptr;
 
 QString ssEven =  "QGroupBox { background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #C3D1C9, stop: 1 #AFBBB4); "
                  " border: 1px solid gray; border-radius: 4px; }";
@@ -80,17 +80,17 @@ SimpleDesk::SimpleDesk(QWidget* parent, Doc* doc)
     , m_engine(new SimpleDeskEngine(doc))
     , m_doc(doc)
     , m_docChanged(false)
-    , m_chGroupsArea(NULL)
+    , m_chGroupsArea(nullptr)
     , m_currentUniverse(0)
     , m_channelsPerPage(DEFAULT_PAGE_CHANNELS)
     , m_selectedPlayback(UINT_MAX)
     , m_playbacksPerPage(DEFAULT_PAGE_PLAYBACKS)
-    , m_speedDials(NULL)
+    , m_speedDials(nullptr)
 {
-    Q_ASSERT(s_instance == NULL);
+    Q_ASSERT(s_instance == nullptr);
     s_instance = this;
 
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     QSettings settings;
     QVariant var = settings.value(SETTINGS_PAGE_CHANNELS);
@@ -158,11 +158,11 @@ SimpleDesk::~SimpleDesk()
     QSettings settings;
     settings.setValue(SETTINGS_SPLITTER, m_splitter->saveState());
 
-    Q_ASSERT(m_engine != NULL);
+    Q_ASSERT(m_engine != nullptr);
     delete m_engine;
-    m_engine = NULL;
+    m_engine = nullptr;
 
-    s_instance = NULL;
+    s_instance = nullptr;
 }
 
 SimpleDesk* SimpleDesk::instance()
@@ -174,8 +174,8 @@ void SimpleDesk::clearContents()
 {
     //qDebug() << Q_FUNC_INFO;
     CueStackModel* model = qobject_cast<CueStackModel*> (m_cueStackView->model());
-    Q_ASSERT(model != NULL);
-    model->setCueStack(NULL);
+    Q_ASSERT(model != nullptr);
+    model->setCueStack(nullptr);
 
     resetUniverseSliders();
     resetPlaybackSliders();
@@ -424,11 +424,11 @@ void SimpleDesk::resetChannel(quint32 address)
             return;
 
         Fixture *fxi = m_doc->fixture(m_doc->fixtureForAddress(address));
-        ConsoleChannel *cc = m_universeSliders.value(address - start, NULL);
-        if (cc == NULL)
+        ConsoleChannel *cc = m_universeSliders.value(address - start, nullptr);
+        if (cc == nullptr)
             return;
 
-        if (fxi == NULL)
+        if (fxi == nullptr)
         {
             cc->setChannelStyleSheet(ssNone);
         }
@@ -443,11 +443,11 @@ void SimpleDesk::resetChannel(quint32 address)
     else
     {
         Fixture *fxi = m_doc->fixture(m_doc->fixtureForAddress(address));
-        if (fxi == NULL)
+        if (fxi == nullptr)
             return;
 
-        FixtureConsole *fc = m_consoleList.value(fxi->id(), NULL);
-        if (fc == NULL)
+        FixtureConsole *fc = m_consoleList.value(fxi->id(), nullptr);
+        if (fc == nullptr)
             return;
 
         quint32 ch = address - fxi->universeAddress();
@@ -499,9 +499,9 @@ void SimpleDesk::initUniverseSliders()
     quint32 start = m_universesPage.at(m_currentUniverse) * m_channelsPerPage;
     for (quint32 i = 0; i < m_channelsPerPage; i++)
     {
-        ConsoleChannel* slider = NULL;
+        ConsoleChannel* slider = nullptr;
         Fixture* fxi = m_doc->fixture(m_doc->fixtureForAddress(start + i));
-        if (fxi == NULL)
+        if (fxi == nullptr)
             slider = new ConsoleChannel(this, m_doc, Fixture::invalidId(), i, false);
         else
         {
@@ -538,7 +538,7 @@ void SimpleDesk::resetUniverseSliders()
     //qDebug() << Q_FUNC_INFO;
     foreach (ConsoleChannel *channel, m_universeSliders)
     {
-        if (channel != NULL)
+        if (channel != nullptr)
             channel->setValue(0);
     }
 }
@@ -564,7 +564,7 @@ void SimpleDesk::initSliderView(bool fullMode)
         {
             if (fixture->universe() != (quint32)m_universesCombo->currentIndex())
                 continue;
-            FixtureConsole* console = NULL;
+            FixtureConsole* console = nullptr;
             if (c%2 == 0)
                 console = new FixtureConsole(scrollArea, m_doc, FixtureConsole::GroupOdd, false);
             else
@@ -609,10 +609,10 @@ void SimpleDesk::initSliderView(bool fullMode)
 
 void SimpleDesk::initChannelGroupsView()
 {
-    if (m_chGroupsArea != NULL)
+    if (m_chGroupsArea != nullptr)
     {
         delete m_chGroupsArea;
-        m_chGroupsArea = NULL;
+        m_chGroupsArea = nullptr;
     }
 
     if (m_doc->channelsGroups().count() > 0)
@@ -656,7 +656,7 @@ void SimpleDesk::slotViewModeClicked(bool toggle)
         for (quint32 i = 0; i < m_channelsPerPage; i++)
         {
             ConsoleChannel* slider = m_universeSliders[i];
-            if (slider != NULL)
+            if (slider != nullptr)
             {
                 m_universeGroup->layout()->removeWidget(slider);
                 disconnect(slider, SIGNAL(valueChanged(quint32,quint32,uchar)),
@@ -666,14 +666,14 @@ void SimpleDesk::slotViewModeClicked(bool toggle)
                 if (fxRemoveList.contains(slider->fixture()) == false)
                 {
                     Fixture *currFx = m_doc->fixture(slider->fixture());
-                    if (currFx != NULL)
+                    if (currFx != nullptr)
                     {
                         disconnect(currFx, SIGNAL(aliasChanged()), this, SLOT(slotAliasChanged()));
                         fxRemoveList.append(slider->fixture());
                     }
                 }
                 delete slider;
-                m_universeSliders[i] = NULL;
+                m_universeSliders[i] = nullptr;
             }
         }
         initSliderView(true);
@@ -718,7 +718,7 @@ void SimpleDesk::slotUniversePageChanged(int page)
     for (quint32 i = 0; i < m_channelsPerPage; i++)
     {
         ConsoleChannel *slider = m_universeSliders[i];
-        if (slider != NULL)
+        if (slider != nullptr)
         {
             m_universeGroup->layout()->removeWidget(slider);
             disconnect(slider, SIGNAL(valueChanged(quint32,quint32,uchar)),
@@ -729,17 +729,17 @@ void SimpleDesk::slotUniversePageChanged(int page)
             if (fxRemoveList.contains(slider->fixture()) == false)
             {
                 Fixture *currFx = m_doc->fixture(slider->fixture());
-                if (currFx != NULL)
+                if (currFx != nullptr)
                 {
                     disconnect(currFx, SIGNAL(aliasChanged()), this, SLOT(slotAliasChanged()));
                     fxRemoveList.append(slider->fixture());
                 }
             }
             delete slider;
-            m_universeSliders[i] = NULL;
+            m_universeSliders[i] = nullptr;
         }
         Fixture *fx = m_doc->fixture(m_doc->fixtureForAddress(absoluteAddr + i));
-        if (fx == NULL)
+        if (fx == nullptr)
         {
             slider = new ConsoleChannel(this, m_doc, Fixture::invalidId(), start + i, false);
             slider->setVisible(false);
@@ -818,7 +818,7 @@ void SimpleDesk::slotUniverseResetClicked()
         {
             it.next();
             FixtureConsole *fc = it.value();
-            Q_ASSERT(fc != NULL);
+            Q_ASSERT(fc != nullptr);
             fc->resetChannelsStylesheet();
         }
     }
@@ -829,7 +829,7 @@ void SimpleDesk::slotChannelResetClicked(quint32 fxID, quint32 channel)
     if (fxID != Fixture::invalidId())
     {
         Fixture *fixture = m_doc->fixture(fxID);
-        if (fixture == NULL)
+        if (fixture == nullptr)
             return;
 
         quint32 absAddr = fixture->universeAddress() + channel;
@@ -838,13 +838,13 @@ void SimpleDesk::slotChannelResetClicked(quint32 fxID, quint32 channel)
         if (m_viewModeButton->isChecked() == true)
         {
             Fixture *fixture = m_doc->fixture(fxID);
-            if (fixture == NULL)
+            if (fixture == nullptr)
                 return;
 
             if (m_consoleList.contains(fxID))
             {
                 FixtureConsole *fc = m_consoleList[fxID];
-                if (fc != NULL)
+                if (fc != nullptr)
                 {
                     if (fixture->id() % 2 == 0)
                         fc->setChannelStylesheet(channel, ssOdd);
@@ -944,7 +944,7 @@ void SimpleDesk::slotUniverseSliderValueChanged(quint32 fid, quint32 chan, uchar
     else // calculate the absolute address from the given parameters
     {
         Fixture *fixture = m_doc->fixture(fid);
-        if (fixture == NULL)
+        if (fixture == nullptr)
             return;
 
         quint32 chanAbsAddr = fixture->universeAddress() + chan;
@@ -954,7 +954,7 @@ void SimpleDesk::slotUniverseSliderValueChanged(quint32 fid, quint32 chan, uchar
             if (m_consoleList.contains(fid))
             {
                 FixtureConsole *fc = m_consoleList[fid];
-                if (fc != NULL)
+                if (fc != nullptr)
                     fc->setChannelStylesheet(chan, ssOverride);
             }
         }
@@ -988,7 +988,7 @@ void SimpleDesk::slotUniverseWritten(quint32 idx, const QByteArray& universeData
 
             quint32 absAddr = i + (idx << 9);
             ConsoleChannel *cc = m_universeSliders[i - start];
-            if (cc == NULL)
+            if (cc == nullptr)
                 continue;
 
             if (m_engine->hasChannel(absAddr) == true)
@@ -1012,12 +1012,12 @@ void SimpleDesk::slotUniverseWritten(quint32 idx, const QByteArray& universeData
     {
         foreach (FixtureConsole *fc, m_consoleList)
         {
-            if (fc == NULL)
+            if (fc == nullptr)
                 continue;
 
             quint32 fxi = fc->fixture();
             Fixture *fixture = m_doc->fixture(fxi);
-            if (fixture != NULL)
+            if (fixture != nullptr)
             {
                 quint32 startAddr = fixture->address();
                 for (quint32 c = 0; c < fixture->channels(); c++)
@@ -1089,7 +1089,7 @@ void SimpleDesk::resetPlaybackSliders()
 void SimpleDesk::slotPlaybackSelected()
 {
     //qDebug() << Q_FUNC_INFO;
-    Q_ASSERT(sender() != NULL);
+    Q_ASSERT(sender() != nullptr);
     uint pb = sender()->property(PROP_PLAYBACK).toUInt();
     if (m_selectedPlayback == pb)
         return;
@@ -1109,10 +1109,10 @@ void SimpleDesk::slotSelectPlayback(uint pb)
     m_selectedPlayback = pb;
 
     CueStack* cueStack = m_engine->cueStack(pb);
-    Q_ASSERT(cueStack != NULL);
+    Q_ASSERT(cueStack != nullptr);
 
     CueStackModel* model = qobject_cast<CueStackModel*> (m_cueStackView->model());
-    Q_ASSERT(model != NULL);
+    Q_ASSERT(model != nullptr);
     model->setCueStack(cueStack);
 
     m_cueStackGroup->setTitle(tr("Cue Stack - Playback %1").arg(m_selectedPlayback + 1));
@@ -1125,7 +1125,7 @@ void SimpleDesk::slotPlaybackStarted()
     //qDebug() << Q_FUNC_INFO;
     int pb = sender()->property(PROP_PLAYBACK).toUInt();
     CueStack* cueStack = m_engine->cueStack(pb);
-    Q_ASSERT(cueStack != NULL);
+    Q_ASSERT(cueStack != nullptr);
 
     if (!cueStack->isRunning())
         cueStack->nextCue();
@@ -1136,7 +1136,7 @@ void SimpleDesk::slotPlaybackStopped()
     //qDebug() << Q_FUNC_INFO;
     int pb = sender()->property(PROP_PLAYBACK).toUInt();
     CueStack* cueStack = m_engine->cueStack(pb);
-    Q_ASSERT(cueStack != NULL);
+    Q_ASSERT(cueStack != nullptr);
 
     if (cueStack->isRunning())
         cueStack->stop();
@@ -1146,7 +1146,7 @@ void SimpleDesk::slotPlaybackFlashing(bool enabled)
 {
     int pb = sender()->property(PROP_PLAYBACK).toUInt();
     CueStack* cueStack = m_engine->cueStack(pb);
-    Q_ASSERT(cueStack != NULL);
+    Q_ASSERT(cueStack != nullptr);
 
     cueStack->setFlashing(enabled);
 }
@@ -1155,7 +1155,7 @@ void SimpleDesk::slotPlaybackValueChanged(uchar value)
 {
     int pb = sender()->property(PROP_PLAYBACK).toUInt();
     CueStack* cueStack = m_engine->cueStack(pb);
-    Q_ASSERT(cueStack != NULL);
+    Q_ASSERT(cueStack != nullptr);
 
     cueStack->adjustIntensity(qreal(value) / qreal(UCHAR_MAX));
 }
@@ -1163,14 +1163,14 @@ void SimpleDesk::slotPlaybackValueChanged(uchar value)
 void SimpleDesk::slotGroupValueChanged(quint32 groupID, uchar value)
 {
     ChannelsGroup *group = m_doc->channelsGroup(groupID);
-    if (group == NULL)
+    if (group == nullptr)
         return;
     quint32 start = (m_universePageSpin->value() - 1) * m_channelsPerPage;
 
     foreach (SceneValue scv, group->getChannels())
     {
         Fixture *fixture = m_doc->fixture(scv.fxi);
-        if (fixture == NULL)
+        if (fixture == nullptr)
             continue;
         quint32 absAddr = fixture->universeAddress() + scv.channel;
 
@@ -1182,7 +1182,7 @@ void SimpleDesk::slotGroupValueChanged(quint32 groupID, uchar value)
                 absAddr < start + m_channelsPerPage)
             {
                 ConsoleChannel *cc = m_universeSliders[absAddr - start];
-                if (cc != NULL)
+                if (cc != nullptr)
                 {
                     cc->blockSignals(true);
                     cc->setValue(value, false);
@@ -1195,7 +1195,7 @@ void SimpleDesk::slotGroupValueChanged(quint32 groupID, uchar value)
             if (m_consoleList.contains(fixture->id()))
             {
                 FixtureConsole *fc = m_consoleList[fixture->id()];
-                if (fc != NULL)
+                if (fc != nullptr)
                 {
                     fc->blockSignals(true);
                     if (m_engine->hasChannel(absAddr) == false)
@@ -1236,7 +1236,7 @@ void SimpleDesk::updateCueStackButtons()
 {
     //qDebug() << Q_FUNC_INFO;
     CueStack* cueStack = m_engine->cueStack(m_selectedPlayback);
-    if (cueStack == NULL)
+    if (cueStack == nullptr)
         return;
 
     m_stopCueStackButton->setEnabled(cueStack->isRunning());
@@ -1250,7 +1250,7 @@ void SimpleDesk::replaceCurrentCue()
     Q_ASSERT(m_selectedPlayback < uint(m_playbackSliders.size()));
 
     CueStack* cueStack = m_engine->cueStack(m_selectedPlayback);
-    Q_ASSERT(cueStack != NULL);
+    Q_ASSERT(cueStack != nullptr);
 
     QItemSelectionModel* selectionModel = m_cueStackView->selectionModel();
     if (selectionModel->hasSelection() == true)
@@ -1266,7 +1266,7 @@ void SimpleDesk::replaceCurrentCue()
 
 void SimpleDesk::createSpeedDials()
 {
-    if (m_speedDials != NULL)
+    if (m_speedDials != nullptr)
         return;
 
     m_speedDials = new SpeedDialWidget(this);
@@ -1289,15 +1289,15 @@ void SimpleDesk::updateSpeedDials()
 {
     qDebug() << Q_FUNC_INFO;
 
-    if (m_speedDials == NULL)
+    if (m_speedDials == nullptr)
         return;
 
-    Q_ASSERT(m_cueStackView != NULL);
-    Q_ASSERT(m_cueStackView->selectionModel() != NULL);
+    Q_ASSERT(m_cueStackView != nullptr);
+    Q_ASSERT(m_cueStackView->selectionModel() != nullptr);
     QModelIndexList selected(m_cueStackView->selectionModel()->selectedRows());
 
     CueStack* cueStack = m_engine->cueStack(m_selectedPlayback);
-    Q_ASSERT(cueStack != NULL);
+    Q_ASSERT(cueStack != nullptr);
 
     if (selected.size() == 0)
     {
@@ -1345,15 +1345,15 @@ void SimpleDesk::updateSpeedDials()
 
 CueStack* SimpleDesk::currentCueStack() const
 {
-    Q_ASSERT(m_engine != NULL);
+    Q_ASSERT(m_engine != nullptr);
     CueStack* cueStack = m_engine->cueStack(m_selectedPlayback);
-    Q_ASSERT(cueStack != NULL);
+    Q_ASSERT(cueStack != nullptr);
     return cueStack;
 }
 
 int SimpleDesk::currentCueIndex() const
 {
-    Q_ASSERT(m_cueStackView != NULL);
+    Q_ASSERT(m_cueStackView != nullptr);
     return m_cueStackView->currentIndex().row();
 }
 
@@ -1364,7 +1364,7 @@ void SimpleDesk::slotCueStackStarted(uint stack)
         return;
 
     PlaybackSlider* slider = m_playbackSliders[m_selectedPlayback];
-    Q_ASSERT(slider != NULL);
+    Q_ASSERT(slider != nullptr);
     if (slider->value() == 0)
         slider->setValue(UCHAR_MAX);
     updateCueStackButtons();
@@ -1377,7 +1377,7 @@ void SimpleDesk::slotCueStackStopped(uint stack)
         return;
 
     PlaybackSlider* slider = m_playbackSliders[m_selectedPlayback];
-    Q_ASSERT(slider != NULL);
+    Q_ASSERT(slider != nullptr);
     if (slider->value() != 0)
         slider->setValue(0);
     updateCueStackButtons();
@@ -1387,15 +1387,15 @@ void SimpleDesk::slotCueStackSelectionChanged()
 {
     qDebug() << Q_FUNC_INFO;
 
-    Q_ASSERT(m_cueStackView != NULL);
-    Q_ASSERT(m_cueStackView->selectionModel() != NULL);
+    Q_ASSERT(m_cueStackView != nullptr);
+    Q_ASSERT(m_cueStackView->selectionModel() != nullptr);
     QModelIndexList selected(m_cueStackView->selectionModel()->selectedRows());
 
     updateCueStackButtons();
 
     // Destroy the existing delete icon
     if (m_cueDeleteIconIndex.isValid() == true)
-        m_cueStackView->setIndexWidget(m_cueDeleteIconIndex, NULL);
+        m_cueStackView->setIndexWidget(m_cueDeleteIconIndex, nullptr);
     m_cueDeleteIconIndex = QModelIndex();
 
     if (m_editCueStackButton->isChecked() == true)
@@ -1452,7 +1452,7 @@ void SimpleDesk::slotPreviousCueClicked()
 {
     qDebug() << Q_FUNC_INFO;
     CueStack* cueStack = m_engine->cueStack(m_selectedPlayback);
-    Q_ASSERT(cueStack != NULL);
+    Q_ASSERT(cueStack != nullptr);
     cueStack->previousCue();
 }
 
@@ -1460,7 +1460,7 @@ void SimpleDesk::slotNextCueClicked()
 {
     qDebug() << Q_FUNC_INFO;
     CueStack* cueStack = m_engine->cueStack(m_selectedPlayback);
-    Q_ASSERT(cueStack != NULL);
+    Q_ASSERT(cueStack != nullptr);
     cueStack->nextCue();
 }
 
@@ -1468,7 +1468,7 @@ void SimpleDesk::slotStopCueStackClicked()
 {
     qDebug() << Q_FUNC_INFO;
     CueStack* cueStack = m_engine->cueStack(m_selectedPlayback);
-    Q_ASSERT(cueStack != NULL);
+    Q_ASSERT(cueStack != nullptr);
     cueStack->stop();
 }
 
@@ -1492,8 +1492,8 @@ void SimpleDesk::slotCloneCueStackClicked()
     uint pb = text.toUInt() - 1;
     CueStack* cs = m_engine->cueStack(m_selectedPlayback);
     CueStack* clone = m_engine->cueStack(pb);
-    Q_ASSERT(cs != NULL);
-    Q_ASSERT(clone != NULL);
+    Q_ASSERT(cs != nullptr);
+    Q_ASSERT(clone != nullptr);
 
     while (clone->cues().size() > 0)
         clone->removeCue(0);
@@ -1507,9 +1507,9 @@ void SimpleDesk::slotCloneCueStackClicked()
 
 void SimpleDesk::slotDialDestroyed(QObject *)
 {
-    if (m_speedDials != NULL)
+    if (m_speedDials != nullptr)
         m_speedDials->deleteLater();
-    m_speedDials = NULL;
+    m_speedDials = nullptr;
     m_editCueStackButton->setChecked(false);
 }
 
@@ -1527,9 +1527,9 @@ void SimpleDesk::slotEditCueStackClicked(bool state)
     else
     {
         resetUniverseSliders();
-        if (m_speedDials != NULL)
+        if (m_speedDials != nullptr)
             m_speedDials->deleteLater();
-        m_speedDials = NULL;
+        m_speedDials = nullptr;
     }
 }
 
@@ -1539,10 +1539,10 @@ void SimpleDesk::slotRecordCueClicked()
     Q_ASSERT(m_selectedPlayback < uint(m_playbackSliders.size()));
 
     CueStack* cueStack = m_engine->cueStack(m_selectedPlayback);
-    Q_ASSERT(cueStack != NULL);
+    Q_ASSERT(cueStack != nullptr);
 
     QItemSelectionModel* selModel = m_cueStackView->selectionModel();
-    Q_ASSERT(selModel != NULL);
+    Q_ASSERT(selModel != nullptr);
     int index = 0;
     if (selModel->hasSelection() == true)
         index = selModel->currentIndex().row() + 1;
@@ -1555,7 +1555,7 @@ void SimpleDesk::slotRecordCueClicked()
 
     // Select the newly-created Cue, all columns from 0 to last
     const QAbstractItemModel* itemModel = selModel->model();
-    Q_ASSERT(itemModel != NULL);
+    Q_ASSERT(itemModel != nullptr);
     int firstCol = 0;
     int lastCol = itemModel->columnCount() - 1;
     QItemSelection sel(itemModel->index(index, firstCol), itemModel->index(index, lastCol));
@@ -1567,12 +1567,12 @@ void SimpleDesk::slotRecordCueClicked()
 
 void SimpleDesk::slotDeleteCueClicked()
 {
-    Q_ASSERT(m_cueStackView != NULL);
-    Q_ASSERT(m_cueStackView->selectionModel() != NULL);
+    Q_ASSERT(m_cueStackView != nullptr);
+    Q_ASSERT(m_cueStackView->selectionModel() != nullptr);
     QModelIndexList selected(m_cueStackView->selectionModel()->selectedRows());
     QModelIndex current = m_cueStackView->selectionModel()->currentIndex();
     CueStack* cueStack = currentCueStack();
-    Q_ASSERT(cueStack != NULL);
+    Q_ASSERT(cueStack != nullptr);
     QList <int> indexes;
     foreach (QModelIndex index, selected)
         indexes << index.row();
@@ -1593,8 +1593,8 @@ void SimpleDesk::slotDeleteCueClicked()
 
 void SimpleDesk::slotFadeInDialChanged(int ms)
 {
-    Q_ASSERT(m_cueStackView != NULL);
-    Q_ASSERT(m_cueStackView->selectionModel() != NULL);
+    Q_ASSERT(m_cueStackView != nullptr);
+    Q_ASSERT(m_cueStackView->selectionModel() != nullptr);
     QModelIndexList selected(m_cueStackView->selectionModel()->selectedRows());
     CueStack* cueStack = currentCueStack();
     foreach (QModelIndex index, selected)
@@ -1603,8 +1603,8 @@ void SimpleDesk::slotFadeInDialChanged(int ms)
 
 void SimpleDesk::slotFadeOutDialChanged(int ms)
 {
-    Q_ASSERT(m_cueStackView != NULL);
-    Q_ASSERT(m_cueStackView->selectionModel() != NULL);
+    Q_ASSERT(m_cueStackView != nullptr);
+    Q_ASSERT(m_cueStackView->selectionModel() != nullptr);
     QModelIndexList selected(m_cueStackView->selectionModel()->selectedRows());
     CueStack* cueStack = currentCueStack();
     foreach (QModelIndex index, selected)
@@ -1613,8 +1613,8 @@ void SimpleDesk::slotFadeOutDialChanged(int ms)
 
 void SimpleDesk::slotHoldDialChanged(int ms)
 {
-    Q_ASSERT(m_cueStackView != NULL);
-    Q_ASSERT(m_cueStackView->selectionModel() != NULL);
+    Q_ASSERT(m_cueStackView != nullptr);
+    Q_ASSERT(m_cueStackView->selectionModel() != nullptr);
     QModelIndexList selected(m_cueStackView->selectionModel()->selectedRows());
     CueStack* cueStack = currentCueStack();
     foreach (QModelIndex index, selected)
@@ -1628,8 +1628,8 @@ void SimpleDesk::slotHoldDialChanged(int ms)
 
 void SimpleDesk::slotCueNameEdited(const QString& name)
 {
-    Q_ASSERT(m_cueStackView != NULL);
-    Q_ASSERT(m_cueStackView->selectionModel() != NULL);
+    Q_ASSERT(m_cueStackView != nullptr);
+    Q_ASSERT(m_cueStackView->selectionModel() != nullptr);
     QModelIndexList selected(m_cueStackView->selectionModel()->selectedRows());
     CueStack* cueStack = currentCueStack();
     if (selected.size() == 1)
@@ -1652,9 +1652,9 @@ void SimpleDesk::showEvent(QShowEvent* ev)
 
 void SimpleDesk::hideEvent(QHideEvent* ev)
 {
-    if (m_speedDials != NULL)
+    if (m_speedDials != nullptr)
         m_speedDials->deleteLater();
-    m_speedDials = NULL;
+    m_speedDials = nullptr;
     QWidget::hideEvent(ev);
 }
 
@@ -1685,14 +1685,14 @@ void SimpleDesk::resizeEvent(QResizeEvent *ev)
                 if (slidersDiff < 0)
                 {
                     for (int a = 0; a < -slidersDiff; a++)
-                        m_universeSliders.append(NULL);
+                        m_universeSliders.append(nullptr);
                 }
                 else if (slidersDiff > 0)
                 {
                     for (int r = 0; r < slidersDiff; r++)
                     {
                         ConsoleChannel* slider = m_universeSliders.takeLast();
-                        if (slider != NULL)
+                        if (slider != nullptr)
                         {
                             m_universeGroup->layout()->removeWidget(slider);
                             disconnect(slider, SIGNAL(valueChanged(quint32,quint32,uchar)),
@@ -1745,7 +1745,7 @@ void SimpleDesk::resizeEvent(QResizeEvent *ev)
             for (int r = 0; r < pbDiff; r++)
             {
                 PlaybackSlider* slider = m_playbackSliders.takeLast();
-                if (slider == NULL)
+                if (slider == nullptr)
                     continue;
                 disconnect(slider, SIGNAL(selected()), this, SLOT(slotPlaybackSelected()));
                 disconnect(slider, SIGNAL(started()), this, SLOT(slotPlaybackStarted()));
@@ -1766,7 +1766,7 @@ void SimpleDesk::resizeEvent(QResizeEvent *ev)
 
 bool SimpleDesk::loadXML(QXmlStreamReader &root)
 {
-    Q_ASSERT(m_engine != NULL);
+    Q_ASSERT(m_engine != nullptr);
 
     clearContents();
 
@@ -1796,8 +1796,8 @@ bool SimpleDesk::loadXML(QXmlStreamReader &root)
 
 bool SimpleDesk::saveXML(QXmlStreamWriter *doc) const
 {
-    Q_ASSERT(doc != NULL);
-    Q_ASSERT(m_engine != NULL);
+    Q_ASSERT(doc != nullptr);
+    Q_ASSERT(m_engine != nullptr);
 
     doc->writeStartElement(KXMLQLCSimpleDesk);
 

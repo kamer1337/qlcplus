@@ -45,7 +45,7 @@ ArtNetController::ArtNetController(QNetworkInterface const& iface, QNetworkAddre
     , m_line(line)
     , m_udpSocket(udpSocket)
     , m_packetizer(new ArtNetPacketizer())
-    , m_pollTimer(NULL)
+    , m_pollTimer(nullptr)
 {
     if (m_ipAddr == QHostAddress::LocalHost)
     {
@@ -269,7 +269,7 @@ UniverseInfo *ArtNetController::getUniverseInfo(quint32 universe)
     if (m_universeMap.contains(universe))
         return &m_universeMap[universe];
 
-    return NULL;
+    return nullptr;
 }
 
 void ArtNetController::slotSendAllUniverses()
@@ -311,7 +311,7 @@ void ArtNetController::sendDmx(const quint32 universe, const QByteArray &data, b
     TransmissionMode transmitMode = Standard;
     UniverseInfo *info = getUniverseInfo(universe);
 
-    if (info == NULL)
+    if (info == nullptr)
     {
         qWarning() << "sendDmx: universe" << universe << "not registered as output!";
         return;

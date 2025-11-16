@@ -169,7 +169,7 @@ public:
     void removeWidgetFromMap(VCWidget* widget);
 
     /** Return a reference to the VC widget with the specified $id.
-     *  On invalid $id, NULL is returned */
+     *  On invalid $id, nullptr is returned */
     VCWidget *widget(quint32 id);
 
     Q_INVOKABLE void setWidgetSelection(quint32 wID, QQuickItem *item, bool enable, bool multi);

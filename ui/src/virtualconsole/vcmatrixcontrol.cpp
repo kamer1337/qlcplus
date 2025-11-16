@@ -47,7 +47,7 @@ VCMatrixControl &VCMatrixControl::operator=(const VCMatrixControl &vcmc)
         m_properties = vcmc.m_properties;
         m_keySequence = vcmc.m_keySequence;
 
-        if (vcmc.m_inputSource != NULL)
+        if (vcmc.m_inputSource != nullptr)
         {
             m_inputSource = QSharedPointer<QLCInputSource>(new QLCInputSource(vcmc.m_inputSource->universe(),
                                                    vcmc.m_inputSource->channel()));
@@ -243,7 +243,7 @@ bool VCMatrixControl::loadXML(QXmlStreamReader &root)
 
 bool VCMatrixControl::saveXML(QXmlStreamWriter *doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     doc->writeStartElement(KXMLQLCVCMatrixControl);
     doc->writeAttribute(KXMLQLCVCMatrixControlID, QString::number(m_id));

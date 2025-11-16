@@ -35,10 +35,10 @@ PeperoniDevice::PeperoniDevice(Peperoni* parent, struct libusb_device* device,
     : QThread(parent)
     , m_baseLine(line)
     , m_device(device)
-    , m_handle(NULL)
+    , m_handle(nullptr)
     , m_descriptor(desc)
 {
-    Q_ASSERT(device != NULL);
+    Q_ASSERT(device != nullptr);
 
     /* Store fw version so we don't need to rely on libusb's volatile data */
     m_firmwareVersion = desc->bcdDevice;
@@ -63,7 +63,7 @@ PeperoniDevice::~PeperoniDevice()
 bool PeperoniDevice::isPeperoniDevice(const struct libusb_device_descriptor* desc)
 {
     /* If there's nothing to inspect, it can't be what we're looking for */
-    if (desc == NULL)
+    if (desc == nullptr)
         return false;
 
     /* If it's not manufactured by them, we're not interested in it */
@@ -94,7 +94,7 @@ bool PeperoniDevice::isPeperoniDevice(int vid, int pid)
 int PeperoniDevice::outputsNumber(libusb_device_descriptor *desc)
 {
     /* If there's nothing to inspect, it can't be what we're looking for */
-    if (desc == NULL)
+    if (desc == nullptr)
         return 0;
 
     /* If it's not manufactured by them, we're not interested in it */
@@ -119,9 +119,9 @@ int PeperoniDevice::outputsNumber(libusb_device_descriptor *desc)
 
 void PeperoniDevice::extractName()
 {
-    Q_ASSERT(m_device != NULL);
+    Q_ASSERT(m_device != nullptr);
 
-    libusb_device_handle *handle = NULL;
+    libusb_device_handle *handle = nullptr;
     int r = libusb_open(m_device, &handle);
     if (r == 0)
     {
@@ -165,7 +165,7 @@ QString PeperoniDevice::baseInfoText(quint32 line) const
 {
     QString info;
 
-    if (m_device != NULL)
+    if (m_device != nullptr)
     {
         info += QString("<B>%1</B>").arg(name(line));
         info += QString("<P>");
@@ -190,7 +190,7 @@ QString PeperoniDevice::inputInfoText(quint32 line) const
 {
     QString info;
 
-    if (m_device != NULL)
+    if (m_device != nullptr)
     {
         info += QString("<B>%1:</B> ").arg(tr("Input line"));
         if (m_operatingModes[line] & InputMode)
@@ -207,7 +207,7 @@ QString PeperoniDevice::outputInfoText(quint32 line) const
 {
     QString info;
 
-    if (m_device != NULL)
+    if (m_device != nullptr)
     {
         info += QString("<B>%1:</B> ").arg(tr("Output line"));
         if (m_operatingModes[line] & OutputMode)
@@ -228,7 +228,7 @@ bool PeperoniDevice::open(quint32 line, OperatingMode mode)
 {
     m_operatingModes[line] |= mode;
 
-    if (m_device != NULL && m_handle == NULL)
+    if (m_device != nullptr && m_handle == nullptr)
     {
         int r = -1;
         int configuration = PEPERONI_CONF_TXRX;
@@ -237,7 +237,7 @@ bool PeperoniDevice::open(quint32 line, OperatingMode mode)
         if (r < 0)
         {
             qWarning() << "Unable to open PeperoniDevice with idProduct:" << m_descriptor->idProduct;
-            m_handle = NULL;
+            m_handle = nullptr;
             return false;
         }
 
@@ -265,7 +265,7 @@ bool PeperoniDevice::open(quint32 line, OperatingMode mode)
                             PEPERONI_TX_STARTCODE,   // Set DMX startcode
                             0,                       // Standard startcode is 0
                             0,                       // No index
-                            NULL,                    // No data
+                            nullptr,                    // No data
                             0,                       // Zero data length
                             50);                     // Timeout (ms)
         if (r < 0)
@@ -279,7 +279,7 @@ bool PeperoniDevice::open(quint32 line, OperatingMode mode)
                             PEPERONI_RX_STARTCODE,   // Set DMX startcode
                             0,                       // Standard startcode is 0
                             0,                       // No index
-                            NULL,                    // No data
+                            nullptr,                    // No data
                             0,                       // Zero data length
                             50);                     // Timeout (ms)
         if (r < 0)
@@ -323,7 +323,7 @@ void PeperoniDevice::close(quint32 line, OperatingMode mode)
 
     QMutexLocker lock(&m_ioMutex);
 
-    if (m_device != NULL && m_handle != NULL)
+    if (m_device != nullptr && m_handle != nullptr)
     {
         /* Release the interface in case we claimed it */
         int r = libusb_release_interface(m_handle, PEPERONI_IFACE_EP0);
@@ -336,7 +336,7 @@ void PeperoniDevice::close(quint32 line, OperatingMode mode)
         libusb_close(m_handle);
     }
 
-    m_handle = NULL;
+    m_handle = nullptr;
 }
 
 void PeperoniDevice::closeAll()
@@ -359,7 +359,7 @@ const struct libusb_device* PeperoniDevice::device() const
 
 void PeperoniDevice::run()
 {
-    if (m_device == NULL)
+    if (m_device == nullptr)
         return;
 
     qDebug() << "[Peperoni] input thread started correctly";
@@ -488,7 +488,7 @@ void PeperoniDevice::outputDMX(quint32 line, const QByteArray& universe)
     Q_UNUSED(line)
     int r = -1;
 
-    if (m_handle == NULL)
+    if (m_handle == nullptr)
         return;
 
     {

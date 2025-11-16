@@ -51,7 +51,7 @@ void ArtNetPlugin::init()
                 ArtNetIO tmpIO;
                 tmpIO.iface = iface;
                 tmpIO.address = entry;
-                tmpIO.controller = NULL;
+                tmpIO.controller = nullptr;
 
                 bool alreadyInList = false;
                 for (int j = 0; j < m_IOmapping.count(); j++)
@@ -144,7 +144,7 @@ QString ArtNetPlugin::outputInfo(quint32 output)
     str += QString("<H3>%1 %2</H3>").arg(tr("Output")).arg(outputs()[output]);
     str += QString("<P>");
     ArtNetController *ctrl = m_IOmapping.at(output).controller;
-    if (ctrl == NULL || ctrl->type() == ArtNetController::Input)
+    if (ctrl == nullptr || ctrl->type() == ArtNetController::Input)
         str += tr("Status: Not open");
     else
     {
@@ -180,7 +180,7 @@ bool ArtNetPlugin::openOutput(quint32 output, quint32 universe)
     qDebug() << "[ArtNet] Open output on address :" << m_IOmapping.at(output).address.ip().toString();
 
     // if the controller doesn't exist, create it
-    if (m_IOmapping[output].controller == NULL)
+    if (m_IOmapping[output].controller == nullptr)
     {
         ArtNetController *controller = new ArtNetController(m_IOmapping.at(output).iface,
                                                             m_IOmapping.at(output).address,
@@ -206,13 +206,13 @@ void ArtNetPlugin::closeOutput(quint32 output, quint32 universe)
 
     removeFromMap(output, universe, Output);
     ArtNetController *controller = m_IOmapping.at(output).controller;
-    if (controller != NULL)
+    if (controller != nullptr)
     {
         controller->removeUniverse(universe, ArtNetController::Output);
         if (controller->universesList().count() == 0)
         {
             delete m_IOmapping[output].controller;
-            m_IOmapping[output].controller = NULL;
+            m_IOmapping[output].controller = nullptr;
         }
     }
 }
@@ -223,7 +223,7 @@ void ArtNetPlugin::writeUniverse(quint32 universe, quint32 output, const QByteAr
         return;
 
     ArtNetController *controller = m_IOmapping.at(output).controller;
-    if (controller != NULL)
+    if (controller != nullptr)
         controller->sendDmx(universe, data, dataChanged);
 }
 
@@ -249,7 +249,7 @@ bool ArtNetPlugin::openInput(quint32 input, quint32 universe)
 
     // if the controller doesn't exist, create it.
     // We need to have only one input controller.
-    if (m_IOmapping[input].controller == NULL)
+    if (m_IOmapping[input].controller == nullptr)
     {
         ArtNetController *controller = new ArtNetController(m_IOmapping.at(input).iface,
                                                             m_IOmapping.at(input).address,
@@ -273,13 +273,13 @@ void ArtNetPlugin::closeInput(quint32 input, quint32 universe)
 
     removeFromMap(input, universe, Input);
     ArtNetController *controller = m_IOmapping.at(input).controller;
-    if (controller != NULL)
+    if (controller != nullptr)
     {
         controller->removeUniverse(universe, ArtNetController::Input);
         if (controller->universesList().count() == 0)
         {
             delete m_IOmapping[input].controller;
-            m_IOmapping[input].controller = NULL;
+            m_IOmapping[input].controller = nullptr;
         }
     }
 }
@@ -294,7 +294,7 @@ QString ArtNetPlugin::inputInfo(quint32 input)
     str += QString("<H3>%1 %2</H3>").arg(tr("Input")).arg(inputs()[input]);
     str += QString("<P>");
     ArtNetController *ctrl = m_IOmapping.at(input).controller;
-    if (ctrl == NULL || ctrl->type() == ArtNetController::Output)
+    if (ctrl == nullptr || ctrl->type() == ArtNetController::Output)
         str += tr("Status: Not open");
     else
     {
@@ -337,7 +337,7 @@ void ArtNetPlugin::setParameter(quint32 universe, quint32 line, Capability type,
         return;
 
     ArtNetController *controller = m_IOmapping.at(line).controller;
-    if (controller == NULL)
+    if (controller == nullptr)
         return;
 
     // If the Controller parameter is restored to its default value,
@@ -391,7 +391,7 @@ bool ArtNetPlugin::sendRDMCommand(quint32 universe, quint32 line, uchar command,
         return false;
 
     ArtNetController *controller = m_IOmapping.at(line).controller;
-    if (controller != NULL)
+    if (controller != nullptr)
         return controller->sendRDMCommand(universe, command, params);
 
     return false;
@@ -427,7 +427,7 @@ QSharedPointer<QUdpSocket> ArtNetPlugin::getUdpSocket()
 void ArtNetPlugin::slotReadyRead()
 {
     QUdpSocket* udpSocket = qobject_cast<QUdpSocket*>(sender());
-    Q_ASSERT(udpSocket != NULL);
+    Q_ASSERT(udpSocket != nullptr);
 
     QByteArray datagram;
     QHostAddress senderAddress;
@@ -447,7 +447,7 @@ void ArtNetPlugin::handlePacket(QByteArray const& datagram, QHostAddress const& 
     {
         if (senderAddress.isInSubnet(io.address.ip(), io.address.prefixLength()))
         {
-            if (io.controller != NULL)
+            if (io.controller != nullptr)
                 io.controller->handlePacket(datagram, senderAddress);
             return;
         }
@@ -456,7 +456,7 @@ void ArtNetPlugin::handlePacket(QByteArray const& datagram, QHostAddress const& 
     // We stop at the first controller that handles this packet.
     foreach (ArtNetIO io, m_IOmapping)
     {
-        if (io.controller != NULL)
+        if (io.controller != nullptr)
         {
             if (io.controller->handlePacket(datagram, senderAddress))
                 break;

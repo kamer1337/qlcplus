@@ -36,10 +36,10 @@ ShowItem::ShowItem(ShowFunction *function, QObject *)
     , m_timeScale(3)
     , m_trackIdx(-1)
     , m_function(function)
-    , m_alignToCursor(NULL)
-    , m_lockAction(NULL)
+    , m_alignToCursor(nullptr)
+    , m_lockAction(nullptr)
 {
-    Q_ASSERT(function != NULL);
+    Q_ASSERT(function != nullptr);
 
     setCursor(Qt::OpenHandCursor);
     setFlag(QGraphicsItem::ItemIsSelectable, true);
@@ -60,7 +60,7 @@ ShowItem::ShowItem(ShowFunction *function, QObject *)
 
 void ShowItem::updateTooltip()
 {
-    if (m_function == NULL)
+    if (m_function == nullptr)
         return;
 
     setToolTip(QString(tr("Name: %1\nStart time: %2\nDuration: %3\n%4"))
@@ -103,7 +103,7 @@ int ShowItem::getTimeScale()
 
 void ShowItem::setStartTime(quint32 time)
 {
-    if (m_function == NULL)
+    if (m_function == nullptr)
         return;
 
     m_function->setStartTime(time);
@@ -121,7 +121,7 @@ void ShowItem::setDuration(quint32 msec, bool stretch)
 {
     Q_UNUSED(stretch)
 
-    if (m_function == NULL)
+    if (m_function == nullptr)
         return;
 
     m_function->setDuration(msec);
@@ -190,13 +190,13 @@ bool ShowItem::isLocked()
 
 void ShowItem::setFunctionID(quint32 id)
 {
-    if (m_function != NULL)
+    if (m_function != nullptr)
         m_function->setFunctionID(id);
 }
 
 quint32 ShowItem::functionID()
 {
-    if (m_function != NULL)
+    if (m_function != nullptr)
         return m_function->functionID();
 
     return Function::invalidId();

@@ -140,7 +140,7 @@ bool AvolitesD4Parser::loadXML(const QString& path, QLCFixtureDef *fixtureDef)
     }
 
     QXmlStreamReader *doc = QLCFile::getXMLReader(path);
-    if (doc == NULL || doc->device() == NULL || doc->hasError())
+    if (doc == nullptr || doc->device() == nullptr || doc->hasError())
     {
         m_lastError = QString("Unable to read from %1").arg(path);
         return false;
@@ -363,7 +363,7 @@ bool AvolitesD4Parser::is16Bit(QString dmx) const
 QLCCapability *AvolitesD4Parser::getCapability(QString dmx, QString name, bool isFine)
 {
     if (dmx.isEmpty())
-        return NULL;
+        return nullptr;
 
     QStringList dmxValues = dmx.split(KD4TagFunctionDmxValueSeparator);
 
@@ -446,7 +446,7 @@ bool AvolitesD4Parser::parseFunction(QXmlStreamReader *doc, QLCFixtureDef *fixtu
     QString dmx = attrs.value(KD4TagFunctionDmx).toString();
     QLCCapability *cap = getCapability(dmx, name);
 
-    if (cap != NULL)
+    if (cap != nullptr)
     {
         // We just ignore capability adding errors, because avolites often repeats attributes due to conditionals
         // so we just add the first one we get, the repeating ones are ignored naturally and
@@ -462,7 +462,7 @@ bool AvolitesD4Parser::parseFunction(QXmlStreamReader *doc, QLCFixtureDef *fixtu
         fineChan->setColour(getColour(ID, name, group));
         fineChan->setControlByte(QLCChannel::LSB);
         QLCCapability *fineCap = getCapability(dmx, name, true);
-        if (fineCap != NULL)
+        if (fineCap != nullptr)
             fineChan->addCapability(fineCap);
         fixtureDef->addChannel(fineChan);
         m_channels.insert(ID + " Fine", fineChan);
@@ -698,7 +698,7 @@ void AvolitesD4Parser::parseInclude(QXmlStreamReader *doc, QLCFixtureMode *mode)
                     {
                         it.next();
                         QLCChannel *ch(it.value());
-                        Q_ASSERT(ch != NULL);
+                        Q_ASSERT(ch != nullptr);
 
                         if (ch->name() == QString(name + " Fine"))
                             channelList.insert(offsetValues.value(1).toInt(), ch);
@@ -721,7 +721,7 @@ void AvolitesD4Parser::parseInclude(QXmlStreamReader *doc, QLCFixtureMode *mode)
     while (it.hasNext() == true)
     {
         it.next();
-        Q_ASSERT(mode != NULL);
+        Q_ASSERT(mode != nullptr);
         mode->insertChannel(it.value(), it.key());
     }
 }
@@ -740,7 +740,7 @@ AvolitesD4Parser::Attributes AvolitesD4Parser::stringToAttributeEnum(const QStri
 
 QLCFixtureDef::FixtureType AvolitesD4Parser::guessType(QLCFixtureDef *def) const
 {
-    Q_ASSERT(def != NULL);
+    Q_ASSERT(def != nullptr);
 
     int pan = 0, tilt = 0;
     int r = 0, g = 0, b = 0, c = 0, m = 0, y = 0, nocol = 0;
@@ -779,7 +779,7 @@ QLCFixtureDef::FixtureType AvolitesD4Parser::guessType(QLCFixtureDef *def) const
         }
         else if (ch->group() == QLCChannel::Shutter)
         {
-            if (ch->searchCapability(/*S/s*/"trobe", false) != NULL)
+            if (ch->searchCapability(/*S/s*/"trobe", false) != nullptr)
                 strobe++;
         }
         else if (ch->group() == QLCChannel::Gobo)

@@ -239,7 +239,7 @@ public:
     /** Get the running step number. */
     int runningStepsNumber() const;
 
-    /** Get the first step of the running list. If none is running this returns NULL */
+    /** Get the first step of the running list. If none is running this returns nullptr */
     ChaserRunnerStep currentRunningStep() const;
 
 private:
@@ -262,7 +262,7 @@ private:
      *
      * @param self The parent Chaser function to create a runner for
      * @param doc The engine object
-     * @return NULL if unsuccessful, otherwise a new ChaserRunner*
+     * @return nullptr if unsuccessful, otherwise a new ChaserRunner*
      */
     void createRunner(quint32 startTime = 0);
 

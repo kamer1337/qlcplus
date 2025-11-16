@@ -33,7 +33,7 @@
 CapabilityWizard::CapabilityWizard(QWidget* parent, const QLCChannel* channel)
     : QDialog(parent)
 {
-    Q_ASSERT(channel != NULL);
+    Q_ASSERT(channel != nullptr);
     m_channel = channel;
 
     setupUi(this);
@@ -109,8 +109,8 @@ void CapabilityWizard::slotCreateCapabilities()
         item->setText(QString("[%1 - %2] %3").arg(cap->min())
                       .arg(cap->max()).arg(cap->name()));
 
-        if (m_channel->searchCapability(cap->min()) != NULL ||
-                m_channel->searchCapability(cap->max()) != NULL)
+        if (m_channel->searchCapability(cap->min()) != nullptr ||
+                m_channel->searchCapability(cap->max()) != nullptr)
         {
             /* Disable the item to indicate overlapping */
             item->setFlags(Qt::NoItemFlags);

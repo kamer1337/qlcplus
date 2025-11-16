@@ -73,8 +73,8 @@ bool ChaserStep::operator==(const ChaserStep& cs) const
 
 Function* ChaserStep::resolveFunction(const Doc* doc) const
 {
-    if (doc == NULL)
-        return NULL;
+    if (doc == nullptr)
+        return nullptr;
     else
         return doc->function(fid);
 }
@@ -88,7 +88,7 @@ int ChaserStep::setValue(SceneValue value, int index, bool *created)
         {
             values.append(value);
             std::sort(values.begin(), values.end());
-            if (created != NULL)
+            if (created != nullptr)
                 *created = true;
             return values.indexOf(value);
         }
@@ -97,7 +97,7 @@ int ChaserStep::setValue(SceneValue value, int index, bool *created)
     /* do not allow creation past the values begin/end */
     if (index < 0 || index > values.count())
     {
-        if (created != NULL)
+        if (created != nullptr)
             *created = false;
         qWarning() << "[ChaserStep] index not allowed:" << index;
         return -1;
@@ -107,19 +107,19 @@ int ChaserStep::setValue(SceneValue value, int index, bool *created)
     if (index == values.count())
     {
         values.append(value);
-        if (created != NULL)
+        if (created != nullptr)
             *created = true;
     }
     else if (values.at(index) == value)
     {
         values.replace(index, value);
-        if (created != NULL)
+        if (created != nullptr)
             *created = false;
     }
     else
     {
         values.insert(index, value);
-        if (created != NULL)
+        if (created != nullptr)
             *created = true;
     }
 
@@ -212,7 +212,7 @@ bool ChaserStep::loadXML(QXmlStreamReader &root, int& stepNumber, Doc *doc)
                     break;
 
                 quint32 fxID = QString(fxArray.at(f)).toUInt();
-                if (doc != NULL && doc->fixture(fxID) == NULL)
+                if (doc != nullptr && doc->fixture(fxID) == nullptr)
                     continue;
 
                 // now split the chunk into channel/values

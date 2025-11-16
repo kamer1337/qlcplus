@@ -33,22 +33,22 @@ void AboutBox_Test::initial()
     AboutBox ab(&w);
     QCOMPARE(ab.parentWidget(), &w);
 
-    QVERIFY(ab.m_titleLabel != NULL);
+    QVERIFY(ab.m_titleLabel != nullptr);
     QCOMPARE(ab.m_titleLabel->text(), QString(APPNAME));
 
-    QVERIFY(ab.m_versionLabel != NULL);
+    QVERIFY(ab.m_versionLabel != nullptr);
     QCOMPARE(ab.m_versionLabel->text(), QString(APPVERSION));
 
-    QVERIFY(ab.m_copyrightLabel != NULL);
+    QVERIFY(ab.m_copyrightLabel != nullptr);
     QVERIFY(ab.m_copyrightLabel->text().contains("Copyright &copy; <B>Heikki Junnila, Massimo Callegari</B>"));
 
-    QVERIFY(ab.m_websiteLabel != NULL);
+    QVERIFY(ab.m_websiteLabel != nullptr);
     QVERIFY(ab.m_websiteLabel->text().contains("<A HREF=\"http://www.qlcplus.org/\">http://www.qlcplus.org/</A>"));
 
-    QVERIFY(ab.m_contributors != NULL);
+    QVERIFY(ab.m_contributors != nullptr);
     QCOMPARE(ab.m_contributors->count(), CONTRIBCOUNT);
 
-    QVERIFY(ab.m_timer != NULL);
+    QVERIFY(ab.m_timer != nullptr);
     QCOMPARE(ab.m_row, -1);
     QCOMPARE(ab.m_increment, 1);
     QCOMPARE(ab.m_timer->interval(), 500);
@@ -57,7 +57,7 @@ void AboutBox_Test::initial()
 
 void AboutBox_Test::slotTimeout()
 {
-    AboutBox ab(NULL);
+    AboutBox ab(nullptr);
     ab.m_timer->stop();
 
     QCOMPARE(ab.m_row, -1);
@@ -80,12 +80,12 @@ void AboutBox_Test::slotTimeout()
 
 void AboutBox_Test::itemClick()
 {
-    AboutBox ab(NULL);
-    QVERIFY(ab.m_timer != NULL);
+    AboutBox ab(nullptr);
+    QVERIFY(ab.m_timer != nullptr);
     ab.slotItemClicked();
-    QVERIFY(ab.m_timer == NULL);
+    QVERIFY(ab.m_timer == nullptr);
     ab.slotItemClicked();
-    QVERIFY(ab.m_timer == NULL);
+    QVERIFY(ab.m_timer == nullptr);
 }
 
 QTEST_MAIN(AboutBox_Test)

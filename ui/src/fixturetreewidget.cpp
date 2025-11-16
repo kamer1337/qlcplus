@@ -149,7 +149,7 @@ QTreeWidgetItem *FixtureTreeWidget::fixtureItem(quint32 id) const
         }
     }
 
-    return NULL;
+    return nullptr;
 }
 
 QTreeWidgetItem *FixtureTreeWidget::groupItem(quint32 id) const
@@ -162,13 +162,13 @@ QTreeWidgetItem *FixtureTreeWidget::groupItem(quint32 id) const
             return item;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 void FixtureTreeWidget::updateFixtureItem(QTreeWidgetItem* item, Fixture* fixture)
 {
-    Q_ASSERT(item != NULL);
-    if (fixture == NULL)
+    Q_ASSERT(item != nullptr);
+    if (fixture == nullptr)
         return;
 
     item->setText(KColumnName, fixture->name());
@@ -210,7 +210,7 @@ void FixtureTreeWidget::updateFixtureItem(QTreeWidgetItem* item, Fixture* fixtur
 
     if (m_manufColumn > 0)
     {
-        if (fixture->fixtureDef() == NULL)
+        if (fixture->fixtureDef() == nullptr)
             item->setText(m_manufColumn, tr("Generic"));
         else
             item->setText(m_manufColumn, fixture->fixtureDef()->manufacturer());
@@ -218,7 +218,7 @@ void FixtureTreeWidget::updateFixtureItem(QTreeWidgetItem* item, Fixture* fixtur
 
     if (m_modelColumn > 0)
     {
-        if (fixture->fixtureDef() == NULL)
+        if (fixture->fixtureDef() == nullptr)
             item->setText(m_modelColumn, tr("Generic"));
         else
             item->setText(m_modelColumn, fixture->fixtureDef()->model());
@@ -277,8 +277,8 @@ void FixtureTreeWidget::updateFixtureItem(QTreeWidgetItem* item, Fixture* fixtur
 
 void FixtureTreeWidget::updateGroupItem(QTreeWidgetItem* item, const FixtureGroup* grp)
 {
-    Q_ASSERT(item != NULL);
-    Q_ASSERT(grp != NULL);
+    Q_ASSERT(item != nullptr);
+    Q_ASSERT(grp != nullptr);
 
     item->setText(KColumnName, grp->name());
     item->setIcon(KColumnName, QIcon(":/group.png"));
@@ -391,7 +391,7 @@ void FixtureTreeWidget::updateSelections()
         // Case 3: is there a valid head index ?
         else if (headVar.isValid())
         {
-            Q_ASSERT(item->parent() != NULL);
+            Q_ASSERT(item->parent() != nullptr);
             quint32 fxi = item->parent()->data(KColumnName, PROP_ID).toUInt();
             GroupHead gh(fxi, headVar.toInt());
             if (m_selectedHeads.contains(gh) == false)
@@ -437,9 +437,9 @@ void FixtureTreeWidget::updateTree()
 
     foreach (Fixture* fixture, m_doc->fixtures())
     {
-        Q_ASSERT(fixture != NULL);
+        Q_ASSERT(fixture != nullptr);
 
-        QTreeWidgetItem *topItem = NULL;
+        QTreeWidgetItem *topItem = nullptr;
         quint32 uni = fixture->universe();
         for (int i = 0; i < topLevelItemCount(); i++)
         {
@@ -456,7 +456,7 @@ void FixtureTreeWidget::updateTree()
             }
         }
         // Haven't found this universe node ? Create it.
-        if (topItem == NULL)
+        if (topItem == nullptr)
         {
             topItem = new QTreeWidgetItem(this);
             topItem->setText(KColumnName, m_doc->inputOutputMap()->getUniverseNameByID(uni));

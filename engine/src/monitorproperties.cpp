@@ -718,7 +718,7 @@ bool MonitorProperties::loadXML(QXmlStreamReader &root, const Doc *mainDocument)
 
 bool MonitorProperties::saveXML(QXmlStreamWriter *doc, const Doc *mainDocument) const
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* Create the master Monitor node */
     doc->writeStartElement(KXMLQLCMonitorProperties);

@@ -167,7 +167,7 @@ public:
      * Get a channel object by a channel number.
      *
      * @param channel The number of the channel to get.
-     * @return A QLCInputChannel* or NULL if not found.
+     * @return A QLCInputChannel* or nullptr if not found.
      */
     QLCInputChannel *channel(quint32 channel) const;
 

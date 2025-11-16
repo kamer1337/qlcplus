@@ -29,11 +29,11 @@ Win32PeperoniDevice::Win32PeperoniDevice(const QVariant& uid, const QString& nam
     : OutputDevice(uid, name, parent)
     , m_usbdmx(usbdmx)
     , m_id(id)
-    , m_handle(NULL)
+    , m_handle(nullptr)
 {
     qDebug() << Q_FUNC_INFO;
 
-    Q_ASSERT(usbdmx != NULL);
+    Q_ASSERT(usbdmx != nullptr);
 }
 
 Win32PeperoniDevice::~Win32PeperoniDevice()
@@ -59,7 +59,7 @@ void Win32PeperoniDevice::open()
     else
     {
         qWarning() << "Unable to open device with UID:" << uid();
-        m_handle = NULL;
+        m_handle = nullptr;
     }
 }
 
@@ -71,12 +71,12 @@ void Win32PeperoniDevice::close()
         return;
 
     m_usbdmx->close(m_handle);
-    m_handle = NULL;
+    m_handle = nullptr;
 }
 
 bool Win32PeperoniDevice::isOpen() const
 {
-    if (m_handle != NULL)
+    if (m_handle != nullptr)
         return true;
     else
         return false;

@@ -35,12 +35,12 @@
 FunctionLiveEditDialog::FunctionLiveEditDialog(Doc *doc, quint32 fid, QWidget *parent)
   : QDialog(parent)
   , m_doc(doc)
-  , m_editor(NULL)
+  , m_editor(nullptr)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     Function *func = m_doc->function(fid);
-    Q_ASSERT(func != NULL);
+    Q_ASSERT(func != nullptr);
 
     setWindowTitle(tr("Function Live Edit"));
     setWindowIcon(QIcon(":/liveedit.png"));
@@ -86,7 +86,7 @@ FunctionLiveEditDialog::FunctionLiveEditDialog(Doc *doc, quint32 fid, QWidget *p
         break;
     }
 
-    if (m_editor != NULL)
+    if (m_editor != nullptr)
     {
         m_scrollArea->setWidget(m_editor);
         m_editor->show();

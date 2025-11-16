@@ -78,18 +78,18 @@ QIcon EFX::getIcon() const
 
 Function* EFX::createCopy(Doc* doc, bool addToDoc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     Function* copy = new EFX(doc);
     if (copy->copyFrom(this) == false)
     {
         delete copy;
-        copy = NULL;
+        copy = nullptr;
     }
     if (addToDoc == true && doc->addFunction(copy) == false)
     {
         delete copy;
-        copy = NULL;
+        copy = nullptr;
     }
 
     return copy;
@@ -98,7 +98,7 @@ Function* EFX::createCopy(Doc* doc, bool addToDoc)
 bool EFX::copyFrom(const Function* function)
 {
     const EFX* efx = qobject_cast<const EFX*> (function);
-    if (efx == NULL)
+    if (efx == nullptr)
         return false;
 
     while (m_fixtures.isEmpty() == false)
@@ -645,7 +645,7 @@ bool EFX::isPhaseEnabled() const
 
 bool EFX::addFixture(EFXFixture* ef)
 {
-    Q_ASSERT(ef != NULL);
+    Q_ASSERT(ef != nullptr);
 
     /* Search for an existing fixture with the same ID and append at last but do
      * not prevent multiple entries because a fixture can have multiple efx. */
@@ -680,7 +680,7 @@ bool EFX::addFixture(quint32 fxi, int head)
 
 bool EFX::removeFixture(EFXFixture* ef)
 {
-    Q_ASSERT(ef != NULL);
+    Q_ASSERT(ef != nullptr);
 
     if (m_fixtures.removeAll(ef) > 0)
     {
@@ -716,7 +716,7 @@ void EFX::removeAllFixtures()
 
 bool EFX::raiseFixture(EFXFixture* ef)
 {
-    Q_ASSERT(ef != NULL);
+    Q_ASSERT(ef != nullptr);
 
     int index = m_fixtures.indexOf(ef);
     if (index > 0)
@@ -759,7 +759,7 @@ EFXFixture *EFX::fixture(quint32 id, int headIndex)
             return ef;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 QList<quint32> EFX::components()
@@ -833,7 +833,7 @@ EFX::PropagationMode EFX::stringToPropagationMode(QString str)
 
 bool EFX::saveXML(QXmlStreamWriter *doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* Function tag */
     doc->writeStartElement(KXMLQLCFunction);
@@ -1110,7 +1110,7 @@ void EFX::preRun(MasterTimer* timer)
     while (it.hasNext() == true)
     {
         EFXFixture *ef = it.next();
-        Q_ASSERT(ef != NULL);
+        Q_ASSERT(ef != nullptr);
         ef->setSerialNumber(serialNumber++);
     }
 

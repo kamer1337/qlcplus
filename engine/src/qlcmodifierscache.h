@@ -52,7 +52,7 @@ public:
     /**
      * Get a modifier instance by name
      * @param name The modifier name
-     * @return a pointer to the requested modifier or NULL if not found
+     * @return a pointer to the requested modifier or nullptr if not found
      */
     ChannelModifier* modifier(QString name);
 

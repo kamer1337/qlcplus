@@ -38,7 +38,7 @@
 
 SPIPlugin::~SPIPlugin()
 {
-    if (m_outThread != NULL)
+    if (m_outThread != nullptr)
         m_outThread->stopThread();
 
     if (m_spifd != -1)
@@ -49,7 +49,7 @@ void SPIPlugin::init()
 {
     m_spifd = -1;
     m_referenceCount = 0;
-    m_outThread = NULL;
+    m_outThread = nullptr;
 }
 
 QString SPIPlugin::name()
@@ -150,7 +150,7 @@ void SPIPlugin::setAbsoluteAddress(quint32 uniID, SPIUniverse *uni)
     while (it.hasNext() == true)
     {
         it.next();
-        if (it.value() == NULL)
+        if (it.value() == nullptr)
             continue;
         quint32 mapUniID = it.key();
         if (mapUniID < uniID)
@@ -191,7 +191,7 @@ void SPIPlugin::writeUniverse(quint32 universe, quint32 output, const QByteArray
     qDebug() << "[SPI] write" << universe << "size" << data.size();
 
     SPIUniverse *uniInfo = m_uniChannelsMap[universe];
-    if (uniInfo != NULL)
+    if (uniInfo != nullptr)
     {
         if (uniInfo->m_autoDetection == true)
         {
@@ -226,7 +226,7 @@ void SPIPlugin::configure()
     {
         QSettings settings;
         settings.setValue(SETTINGS_OUTPUT_FREQUENCY, QVariant(conf.frequency()));
-        if (m_outThread != NULL)
+        if (m_outThread != nullptr)
             m_outThread->setSpeed(conf.frequency());
     }
 }

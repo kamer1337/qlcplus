@@ -34,7 +34,7 @@
 void QLCFixtureMode_Test::initTestCase()
 {
     m_fixtureDef = new QLCFixtureDef();
-    QVERIFY(m_fixtureDef != NULL);
+    QVERIFY(m_fixtureDef != nullptr);
 
     m_ch1 = new QLCChannel();
     m_ch1->setName("Channel 1");
@@ -90,7 +90,7 @@ void QLCFixtureMode_Test::insertChannel()
     QLCFixtureMode* mode = new QLCFixtureMode(m_fixtureDef);
     mode->setName("Test");
 
-    QVERIFY(mode->insertChannel(NULL, 0) == false);
+    QVERIFY(mode->insertChannel(nullptr, 0) == false);
     QVERIFY(mode->channels().size() == 0);
 
     /* Channel that doesn't belong to mode->fixtureDef() */
@@ -141,7 +141,7 @@ void QLCFixtureMode_Test::removeChannel()
     QVERIFY(mode->channel(0) == m_ch1);
     QVERIFY(mode->channel(1) == m_ch3);
     QVERIFY(mode->channel(2) == m_ch4);
-    QVERIFY(mode->channel(3) == NULL);
+    QVERIFY(mode->channel(3) == nullptr);
 
     /* Remove the same channel again. Shouldn't change anything. */
     mode->removeChannel(m_ch2);
@@ -149,31 +149,31 @@ void QLCFixtureMode_Test::removeChannel()
     QVERIFY(mode->channel(0) == m_ch1);
     QVERIFY(mode->channel(1) == m_ch3);
     QVERIFY(mode->channel(2) == m_ch4);
-    QVERIFY(mode->channel(3) == NULL);
+    QVERIFY(mode->channel(3) == nullptr);
 
     /* Remove last channel. */
     mode->removeChannel(m_ch4);
     QVERIFY(mode->channels().size() == 2);
     QVERIFY(mode->channel(0) == m_ch1);
     QVERIFY(mode->channel(1) == m_ch3);
-    QVERIFY(mode->channel(2) == NULL);
-    QVERIFY(mode->channel(3) == NULL);
+    QVERIFY(mode->channel(2) == nullptr);
+    QVERIFY(mode->channel(3) == nullptr);
 
     /* Remove first channel. */
     mode->removeChannel(m_ch1);
     QVERIFY(mode->channels().size() == 1);
     QVERIFY(mode->channel(0) == m_ch3);
-    QVERIFY(mode->channel(1) == NULL);
-    QVERIFY(mode->channel(2) == NULL);
-    QVERIFY(mode->channel(3) == NULL);
+    QVERIFY(mode->channel(1) == nullptr);
+    QVERIFY(mode->channel(2) == nullptr);
+    QVERIFY(mode->channel(3) == nullptr);
 
     /* Remove last channel. */
     mode->removeChannel(m_ch3);
     QVERIFY(mode->channels().size() == 0);
-    QVERIFY(mode->channel(0) == NULL);
-    QVERIFY(mode->channel(1) == NULL);
-    QVERIFY(mode->channel(2) == NULL);
-    QVERIFY(mode->channel(3) == NULL);
+    QVERIFY(mode->channel(0) == nullptr);
+    QVERIFY(mode->channel(1) == nullptr);
+    QVERIFY(mode->channel(2) == nullptr);
+    QVERIFY(mode->channel(3) == nullptr);
 
     delete mode;
 }
@@ -191,8 +191,8 @@ void QLCFixtureMode_Test::channelByName()
     QVERIFY(mode->channel("Channel 2") == m_ch2);
     QVERIFY(mode->channel("Channel 3") == m_ch3);
     QVERIFY(mode->channel("Channel 4") == m_ch4);
-    QVERIFY(mode->channel("Foobar") == NULL);
-    QVERIFY(mode->channel("") == NULL);
+    QVERIFY(mode->channel("Foobar") == nullptr);
+    QVERIFY(mode->channel("") == nullptr);
 
     delete mode;
 }
@@ -210,7 +210,7 @@ void QLCFixtureMode_Test::channelByIndex()
     QVERIFY(mode->channel(1) == m_ch2);
     QVERIFY(mode->channel(2) == m_ch3);
     QVERIFY(mode->channel(3) == m_ch4);
-    QVERIFY(mode->channel(12) == NULL);
+    QVERIFY(mode->channel(12) == nullptr);
 
     delete mode;
 }
@@ -248,7 +248,7 @@ void QLCFixtureMode_Test::channelNumber()
 
     QLCChannel* ch = new QLCChannel();
     QVERIFY(mode->channelNumber(ch) == QLCChannel::invalid());
-    QVERIFY(mode->channelNumber(NULL) == QLCChannel::invalid());
+    QVERIFY(mode->channelNumber(nullptr) == QLCChannel::invalid());
     delete ch;
 
     delete mode;
@@ -356,7 +356,7 @@ void QLCFixtureMode_Test::copy()
 
     /* Create a copy of the mode to the same fixtureDef as the original */
     QLCFixtureMode* copy = new QLCFixtureMode(m_fixtureDef, mode);
-    QVERIFY(copy != NULL);
+    QVERIFY(copy != nullptr);
 
     QVERIFY(copy->name() == "Test Mode");
     QVERIFY(copy->channels().size() == 4);
@@ -369,7 +369,7 @@ void QLCFixtureMode_Test::copy()
     QVERIFY(copy->heads().at(0).channels().contains(quint32(1)) == true);
     QVERIFY(copy->heads().at(0).channels().contains(quint32(2)) == true);
     delete copy;
-    copy = NULL;
+    copy = nullptr;
 
     /* Create another fixture def with some channels matching, some not */
     QLCFixtureDef* anotherDef = new QLCFixtureDef();
@@ -498,7 +498,7 @@ void QLCFixtureMode_Test::load()
     xmlWriter.writeEmptyElement("Foo");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     QLCFixtureMode mode(m_fixtureDef);
@@ -548,7 +548,7 @@ void QLCFixtureMode_Test::loadWrongRoot()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -585,7 +585,7 @@ void QLCFixtureMode_Test::loadNoName()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -599,7 +599,7 @@ void QLCFixtureMode_Test::loadNoName()
 
 void QLCFixtureMode_Test::save()
 {
-    QVERIFY(m_fixtureDef != NULL);
+    QVERIFY(m_fixtureDef != nullptr);
     QCOMPARE(m_fixtureDef->channels().size(), 4);
 
     QString name("Foobar");
@@ -625,7 +625,7 @@ void QLCFixtureMode_Test::save()
 
     QVERIFY(mode.saveXML(&xmlWriter) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -661,7 +661,7 @@ void QLCFixtureMode_Test::save()
 
 void QLCFixtureMode_Test::savePhysicalOverride()
 {
-    QVERIFY(m_fixtureDef != NULL);
+    QVERIFY(m_fixtureDef != nullptr);
     QCOMPARE(m_fixtureDef->channels().size(), 4);
 
     QString name("Foobar");
@@ -686,7 +686,7 @@ void QLCFixtureMode_Test::savePhysicalOverride()
 
     QVERIFY(mode.saveXML(&xmlWriter) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -714,7 +714,7 @@ void QLCFixtureMode_Test::savePhysicalOverride()
 
 void QLCFixtureMode_Test::cleanupTestCase()
 {
-    QVERIFY(m_fixtureDef != NULL);
+    QVERIFY(m_fixtureDef != nullptr);
     delete m_fixtureDef;
 }
 

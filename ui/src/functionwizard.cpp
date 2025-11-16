@@ -63,7 +63,7 @@ FunctionWizard::FunctionWizard(QWidget* parent, Doc* doc)
     : QDialog(parent)
     , m_doc(doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
     setupUi(this);
 
     QString trbgSS = "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));";
@@ -201,7 +201,7 @@ QTreeWidgetItem *FunctionWizard::getFixtureGroupItem(QString manufacturer, QStri
 void FunctionWizard::addFixture(quint32 fxi_id)
 {
     Fixture* fxi = m_doc->fixture(fxi_id);
-    Q_ASSERT(fxi != NULL);
+    Q_ASSERT(fxi != nullptr);
 
     QStringList caps = PaletteGenerator::getCapabilities(fxi);
 
@@ -213,7 +213,7 @@ void FunctionWizard::addFixture(quint32 fxi_id)
     else
     {
         QTreeWidgetItem *groupItem = getFixtureGroupItem(fxi->fixtureDef()->manufacturer(), fxi->fixtureDef()->model());
-        Q_ASSERT(groupItem != NULL);
+        Q_ASSERT(groupItem != nullptr);
 
         QTreeWidgetItem* item = new QTreeWidgetItem(groupItem);
         item->setText(KFixtureColumnName, fxi->name());
@@ -265,12 +265,12 @@ QList <quint32> FunctionWizard::fixtureIds() const
     for (int i = 0; i < m_fixtureTree->topLevelItemCount(); i++)
     {
         QTreeWidgetItem* item(m_fixtureTree->topLevelItem(i));
-        Q_ASSERT(item != NULL);
+        Q_ASSERT(item != nullptr);
 
         for (int j = 0; j < item->childCount(); j++)
         {
             QTreeWidgetItem *child = item->child(j);
-            Q_ASSERT(child != NULL);
+            Q_ASSERT(child != nullptr);
 
             list << child->data(KFixtureColumnName, Qt::UserRole).toInt();
         }
@@ -286,7 +286,7 @@ QList <quint32> FunctionWizard::fixtureIds() const
 void FunctionWizard::addFunctionsGroup(QTreeWidgetItem *fxGrpItem, QTreeWidgetItem *grpItem,
                                        QString name, PaletteGenerator::PaletteType type)
 {
-    if (grpItem == NULL)
+    if (grpItem == nullptr)
         return;
 
     QTreeWidgetItem *item = new QTreeWidgetItem(grpItem);
@@ -294,7 +294,7 @@ void FunctionWizard::addFunctionsGroup(QTreeWidgetItem *fxGrpItem, QTreeWidgetIt
     item->setCheckState(KFunctionName, Qt::Unchecked);
     item->setData(KFunctionName, Qt::UserRole, type);
 
-    if (fxGrpItem != NULL && fxGrpItem->childCount() > 1)
+    if (fxGrpItem != nullptr && fxGrpItem->childCount() > 1)
     {
         item->setCheckState(KFunctionOddEven, Qt::Unchecked);
     }
@@ -311,7 +311,7 @@ void FunctionWizard::updateAvailableFunctionsTree()
     for (int i = 0; i < m_fixtureTree->topLevelItemCount(); i++)
     {
         QTreeWidgetItem *fxGrpItem = m_fixtureTree->topLevelItem(i);
-        Q_ASSERT(fxGrpItem != NULL);
+        Q_ASSERT(fxGrpItem != nullptr);
 
         if (fxGrpItem->childCount() == 0)
             continue;
@@ -326,7 +326,7 @@ void FunctionWizard::updateAvailableFunctionsTree()
         QTreeWidgetItem *fxItem = fxGrpItem->child(0);
         quint32 fxID = fxItem->data(KFixtureColumnName, Qt::UserRole).toUInt();
         Fixture* fxi = m_doc->fixture(fxID);
-        Q_ASSERT(fxi != NULL);
+        Q_ASSERT(fxi != nullptr);
 
         QStringList caps = PaletteGenerator::getCapabilities(fxi);
 
@@ -391,7 +391,7 @@ void FunctionWizard::updateResultFunctionsTree()
     for (int i = 0; i < m_allFuncsTree->topLevelItemCount(); i++)
     {
         QTreeWidgetItem *funcGrpItem = m_allFuncsTree->topLevelItem(i);
-        Q_ASSERT(funcGrpItem != NULL);
+        Q_ASSERT(funcGrpItem != nullptr);
 
         if (funcGrpItem->childCount() == 0)
             continue;
@@ -405,7 +405,7 @@ void FunctionWizard::updateResultFunctionsTree()
             QTreeWidgetItem *fItem = fxiGrpItem->child(f);
             quint32 fxID = fItem->data(KFixtureColumnName, Qt::UserRole).toUInt();
             Fixture *fixture = m_doc->fixture(fxID);
-            if (fixture != NULL)
+            if (fixture != nullptr)
                 fxList.append(fixture);
         }
 
@@ -465,7 +465,7 @@ void FunctionWizard::slotFunctionItemChanged(QTreeWidgetItem *item, int col)
 void FunctionWizard::addWidgetItem(QTreeWidgetItem *grpItem, QString name, int type,
                              QTreeWidgetItem *fxGrpItem, quint32 *channels)
 {
-    if (grpItem == NULL)
+    if (grpItem == nullptr)
         return;
 
     QTreeWidgetItem *item = new QTreeWidgetItem(grpItem);
@@ -521,7 +521,7 @@ void FunctionWizard::addChannelsToTree(QTreeWidgetItem *frame, QTreeWidgetItem *
     QTreeWidgetItem *fxItem = fxGrpItem->child(0);
     quint32 fxID = fxItem->data(KFixtureColumnName, Qt::UserRole).toUInt();
     Fixture *fxi = m_doc->fixture(fxID);
-    Q_ASSERT(fxi != NULL);
+    Q_ASSERT(fxi != nullptr);
 
     qint32 lastPanTilt[] = {-1, -1, -1, -1};
     qint32 lastRGB[] = {-1, -1, -1};
@@ -531,7 +531,7 @@ void FunctionWizard::addChannelsToTree(QTreeWidgetItem *frame, QTreeWidgetItem *
     //for (quint32 ch = 0; ch < fxi->channels(); ch++)
     {
         const QLCChannel *channel(fxi->channel(ch));
-        Q_ASSERT(channel != NULL);
+        Q_ASSERT(channel != nullptr);
 
         switch (channel->group())
         {
@@ -631,7 +631,7 @@ void FunctionWizard::updateWidgetsTree()
         frame->setFlags(frame->flags() | Qt::ItemIsUserCheckable | Qt::ItemIsAutoTristate);
         frame->setCheckState(KWidgetName, Qt::Unchecked);
 
-        QTreeWidgetItem *soloFrameItem = NULL;
+        QTreeWidgetItem *soloFrameItem = nullptr;
         if (palette->scenes().count() > 0)
         {
             soloFrameItem = new QTreeWidgetItem(frame);
@@ -643,8 +643,8 @@ void FunctionWizard::updateWidgetsTree()
         }
         foreach (Scene *scene, palette->scenes())
         {
-            QTreeWidgetItem *item = NULL;
-            if (soloFrameItem != NULL)
+            QTreeWidgetItem *item = nullptr;
+            if (soloFrameItem != nullptr)
                 item = new QTreeWidgetItem(soloFrameItem);
             else
                 item = new QTreeWidgetItem(frame);
@@ -669,8 +669,8 @@ void FunctionWizard::updateWidgetsTree()
 
         foreach (RGBMatrix *matrix, palette->matrices())
         {
-            QTreeWidgetItem *item = NULL;
-            if (soloFrameItem != NULL)
+            QTreeWidgetItem *item = nullptr;
+            if (soloFrameItem != nullptr)
                 item = new QTreeWidgetItem(soloFrameItem);
             else
                 item = new QTreeWidgetItem(frame);
@@ -710,7 +710,7 @@ void FunctionWizard::updateWidgetsTree()
     for (int i = 0; i < m_fixtureTree->topLevelItemCount(); i++)
     {
         QTreeWidgetItem *fxGrpItem = m_fixtureTree->topLevelItem(i);
-        Q_ASSERT(fxGrpItem != NULL);
+        Q_ASSERT(fxGrpItem != nullptr);
 
         if (fxGrpItem->childCount() == 0)
             continue;
@@ -719,7 +719,7 @@ void FunctionWizard::updateWidgetsTree()
         frame->setText(KWidgetName, "Channels - " + fxGrpItem->text(KFixtureColumnName));
         frame->setIcon(KWidgetName, VCWidget::typeToIcon(VCWidget::FrameWidget));
         frame->setData(KWidgetName, Qt::UserRole, VCWidget::FrameWidget);
-        frame->setData(KWidgetName, Qt::UserRole + 1, QVariant::fromValue((void *)NULL));
+        frame->setData(KWidgetName, Qt::UserRole + 1, QVariant::fromValue((void *)nullptr));
         frame->setFlags(frame->flags() | Qt::ItemIsUserCheckable | Qt::ItemIsAutoTristate);
         frame->setCheckState(KWidgetName, Qt::Unchecked);
         frame->setExpanded(true);
@@ -729,7 +729,7 @@ void FunctionWizard::updateWidgetsTree()
         QTreeWidgetItem *fxItem = fxGrpItem->child(0);
         quint32 fxID = fxItem->data(KFixtureColumnName, Qt::UserRole).toUInt();
         Fixture* fxi = m_doc->fixture(fxID);
-        Q_ASSERT(fxi != NULL);
+        Q_ASSERT(fxi != nullptr);
 
         frame->setData(KWidgetName, Qt::UserRole + 1, QVariant::fromValue((void *)fxi));
 
@@ -818,10 +818,10 @@ VCWidget *FunctionWizard::createWidget(int type, VCWidget *parent, int xpos, int
                                        quint32 chan, qint32 fixtureNr, qint32 headId)
 {
     VirtualConsole *vc = VirtualConsole::instance();
-    VCWidget *widget = NULL;
+    VCWidget *widget = nullptr;
 
-    if (parent == NULL)
-        return NULL;
+    if (parent == nullptr)
+        return nullptr;
 
     switch(type)
     {
@@ -846,7 +846,7 @@ VCWidget *FunctionWizard::createWidget(int type, VCWidget *parent, int xpos, int
             VCButton* button = new VCButton(parent, m_doc);
             vc->setupWidget(button, parent);
             button->move(QPoint(xpos, ypos));
-            if (func != NULL)
+            if (func != nullptr)
                 button->setFunction(func->id());
 
             widget = button;
@@ -857,7 +857,7 @@ VCWidget *FunctionWizard::createWidget(int type, VCWidget *parent, int xpos, int
             VCCueList* cuelist = new VCCueList(parent, m_doc);
             vc->setupWidget(cuelist, parent);
             cuelist->move(QPoint(xpos, ypos));
-            if (func != NULL)
+            if (func != nullptr)
                 cuelist->setChaser(func->id());
             cuelist->resize(QSize(300, m_sliderHeightSpin->value()));
 
@@ -870,7 +870,7 @@ VCWidget *FunctionWizard::createWidget(int type, VCWidget *parent, int xpos, int
             vc->setupWidget(slider, parent);
             slider->move(QPoint(xpos, ypos));
             // Click & Go Slider in Pallette Frames
-            if (func != NULL)
+            if (func != nullptr)
             {
                 Scene *scene = qobject_cast<Scene*> (func);
                 foreach (SceneValue scv, scene->values())
@@ -980,7 +980,7 @@ VCWidget *FunctionWizard::createWidget(int type, VCWidget *parent, int xpos, int
     }
 
     // Set Function
-    if (widget != NULL && func != NULL)
+    if (widget != nullptr && func != nullptr)
     {
         if (func->type() == Function::SceneType && type == VCWidget::ButtonWidget)
         {
@@ -999,7 +999,7 @@ VCWidget *FunctionWizard::createWidget(int type, VCWidget *parent, int xpos, int
                 foreach (SceneValue scv, scene->values())
                 {
                     Fixture *fixture = m_doc->fixture(scv.fxi);
-                    if (fixture == NULL)
+                    if (fixture == nullptr)
                         continue;
 
                     const QLCChannel* channel(fixture->channel(scv.channel));
@@ -1033,8 +1033,8 @@ QSize FunctionWizard::recursiveCreateWidget(QTreeWidgetItem *item, VCWidget *par
             childItem->checkState(KWidgetName) == Qt::PartiallyChecked)
         {
             int cType = childItem->data(KWidgetName, Qt::UserRole).toInt();
-            Function *func = NULL;
-            QTreeWidgetItem *fxGrpItem  = NULL;
+            Function *func = nullptr;
+            QTreeWidgetItem *fxGrpItem  = nullptr;
             quint32 channel = 0;
 
             if (type)
@@ -1123,7 +1123,7 @@ QSize FunctionWizard::recursiveCreateWidget(QTreeWidgetItem *item, VCWidget *par
 
             VCWidget *childWidget = createWidget(cType, parent, subX, subY, func, type, fxGrpItem,
                                                  channel, fxNr, headId);
-            if (childWidget != NULL)
+            if (childWidget != nullptr)
             {
                 if (childWidget->type() == VCWidget::SliderWidget)
                     childWidget->setCaption(childItem->text(KWidgetName).split(" - ")[0]);
@@ -1167,7 +1167,7 @@ void FunctionWizard::addWidgetsToVirtualConsole()
 
     VirtualConsole *vc = VirtualConsole::instance();
     VCFrame *mainFrame = vc->contents();
-    Q_ASSERT(mainFrame != NULL);
+    Q_ASSERT(mainFrame != nullptr);
 
     for (int i = 0; i < m_widgetsTree->topLevelItemCount(); i++)
     {
@@ -1178,7 +1178,7 @@ void FunctionWizard::addWidgetsToVirtualConsole()
         {
             int wType = wItem->data(KWidgetName, Qt::UserRole).toInt();
             VCWidget *widget = createWidget(wType, mainFrame, xPos, yPos);
-            if (widget == NULL)
+            if (widget == nullptr)
                 continue;
 
             widget->resize(QSize(2000, 1000));

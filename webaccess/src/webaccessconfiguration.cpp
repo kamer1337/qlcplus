@@ -78,13 +78,13 @@ QString WebAccessConfiguration::getIOConfigHTML(Doc *doc)
         QString uniName = ioMap->getUniverseNameByIndex(i);
         bool uniPass = ioMap->getUniversePassthrough(i);
 
-        QString currentInputPluginName = (ip == NULL)?KInputNone:ip->pluginName();
-        quint32 currentInput = (ip == NULL)?QLCChannel::invalid():ip->input();
-        QString currentOutputPluginName = (op == NULL)?KOutputNone:op->pluginName();
-        quint32 currentOutput = (op == NULL)?QLCChannel::invalid():op->output();
-        QString currentFeedbackPluginName = (fp == NULL)?KOutputNone:fp->pluginName();
-        quint32 currentFeedback = (fp == NULL)?QLCChannel::invalid():fp->output();
-        QString currentProfileName = (ip == NULL)?KInputNone:ip->profileName();
+        QString currentInputPluginName = (ip == nullptr)?KInputNone:ip->pluginName();
+        quint32 currentInput = (ip == nullptr)?QLCChannel::invalid():ip->input();
+        QString currentOutputPluginName = (op == nullptr)?KOutputNone:op->pluginName();
+        quint32 currentOutput = (op == nullptr)?QLCChannel::invalid():op->output();
+        QString currentFeedbackPluginName = (fp == nullptr)?KOutputNone:fp->pluginName();
+        quint32 currentFeedback = (fp == nullptr)?QLCChannel::invalid():fp->output();
+        QString currentProfileName = (ip == nullptr)?KInputNone:ip->profileName();
 
         html += "<tr align=center><td>" + uniName + "</td>\n";
         html += "<td><select onchange=\"ioChanged('INPUT', " + QString::number(i) + ", this.value);\">\n";

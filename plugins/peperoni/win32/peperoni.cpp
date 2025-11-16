@@ -44,7 +44,7 @@ void Peperoni::init()
 {
     /* Load usbdmx.dll */
     m_usbdmx = usbdmx_init();
-    if (m_usbdmx == NULL)
+    if (m_usbdmx == nullptr)
     {
         qWarning() << "Loading USBDMX.DLL failed.";
     }
@@ -79,7 +79,7 @@ int Peperoni::capabilities() const
 bool Peperoni::openOutput(quint32 output, quint32 universe)
 {
     Q_UNUSED(universe)
-    if (m_usbdmx == NULL)
+    if (m_usbdmx == nullptr)
         return false;
 
     if (output < quint32(m_devices.size()))
@@ -91,7 +91,7 @@ bool Peperoni::openOutput(quint32 output, quint32 universe)
 void Peperoni::closeOutput(quint32 output, quint32 universe)
 {
     Q_UNUSED(universe)
-    if (m_usbdmx == NULL)
+    if (m_usbdmx == nullptr)
         return;
 
     if (output < quint32(m_devices.size()))
@@ -131,7 +131,7 @@ QString Peperoni::outputInfo(quint32 output)
 {
     QString str;
 
-    if (m_usbdmx == NULL)
+    if (m_usbdmx == nullptr)
     {
         str += QString("<H3>%1</H3>").arg(name());
         str += QString("<P>");
@@ -162,12 +162,12 @@ void Peperoni::rescanDevices()
 {
     USHORT id = 0;
 
-    if (m_usbdmx == NULL)
+    if (m_usbdmx == nullptr)
         return;
 
     for (id = 0; id < 32; id++)
     {
-        HANDLE handle = NULL;
+        HANDLE handle = nullptr;
         if (m_usbdmx->open(id, &handle) == TRUE)
         {
             /* We don't need the handle now. */
@@ -217,7 +217,7 @@ void Peperoni::rescanDevices()
 
 void Peperoni::configure()
 {
-    int r = QMessageBox::question(NULL, name(),
+    int r = QMessageBox::question(nullptr, name(),
                                   tr("Do you wish to re-scan your hardware?"),
                                   QMessageBox::Yes, QMessageBox::No);
     if (r == QMessageBox::Yes)

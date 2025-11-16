@@ -50,7 +50,7 @@ public:
      * given in $fixtureDef.
      *
      * @param path The file path to load from
-     * @param fixtureDef The fixture definition object to fill, must not be NULL.
+     * @param fixtureDef The fixture definition object to fill, must not be nullptr.
      *
      * @return true if successful, otherwise false (see lastError() for a possible cause)
      */

@@ -36,9 +36,9 @@ AudioDecoderSndFile::~AudioDecoderSndFile()
     m_totalTime = 0;
     m_bitrate = 0;
     m_freq = 0;
-    if (m_path.isEmpty() == false && m_sndfile != NULL)
+    if (m_path.isEmpty() == false && m_sndfile != nullptr)
         sf_close(m_sndfile);
-    m_sndfile = NULL;
+    m_sndfile = nullptr;
 }
 
 AudioDecoder *AudioDecoderSndFile::createCopy()
@@ -57,7 +57,7 @@ bool AudioDecoderSndFile::initialize(const QString &path)
     m_path = path;
     m_bitrate = 0;
     m_totalTime = 0;
-    m_sndfile = NULL;
+    m_sndfile = nullptr;
     m_freq = 0;
     SF_INFO snd_info;
 
@@ -81,12 +81,12 @@ bool AudioDecoderSndFile::initialize(const QString &path)
     if ((snd_info.format & SF_FORMAT_SUBMASK) == SF_FORMAT_FLOAT)
     {
         qDebug() << "DecoderSndFile: Float audio format";
-        sf_command (m_sndfile, SFC_SET_SCALE_FLOAT_INT_READ, NULL, SF_TRUE);
+        sf_command (m_sndfile, SFC_SET_SCALE_FLOAT_INT_READ, nullptr, SF_TRUE);
     }
 
     /* Enable libsndfile clipping correction for MP3 decoding to avoid
        16-bit PCM wrapping artifacts on sample overflow */
-    sf_command(m_sndfile, SFC_SET_CLIPPING, NULL, SF_TRUE);
+    sf_command(m_sndfile, SFC_SET_CLIPPING, nullptr, SF_TRUE);
 
     AudioFormat pcmFormat = PCM_S16LE;
     switch(snd_info.format & SF_FORMAT_SUBMASK)

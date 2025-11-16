@@ -42,7 +42,7 @@ Show::Show(Doc* doc) : Function(doc, Function::ShowType)
     , m_timeDivisionBPM(120)
     , m_latestTrackId(0)
     , m_latestShowFunctionID(0)
-    , m_runner(NULL)
+    , m_runner(nullptr)
 {
     setName(tr("New Show"));
 
@@ -83,18 +83,18 @@ quint32 Show::totalDuration()
 
 Function* Show::createCopy(Doc* doc, bool addToDoc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     Function* copy = new Show(doc);
     if (copy->copyFrom(this) == false)
     {
         delete copy;
-        copy = NULL;
+        copy = nullptr;
     }
     if (addToDoc == true && doc->addFunction(copy) == false)
     {
         delete copy;
-        copy = NULL;
+        copy = nullptr;
     }
 
     return copy;
@@ -103,7 +103,7 @@ Function* Show::createCopy(Doc* doc, bool addToDoc)
 bool Show::copyFrom(const Function* function)
 {
     const Show* show = qobject_cast<const Show*> (function);
-    if (show == NULL)
+    if (show == nullptr)
         return false;
 
     m_timeDivisionType = show->m_timeDivisionType;
@@ -122,12 +122,12 @@ bool Show::copyFrom(const Function* function)
         foreach (ShowFunction *sfunc, track->showFunctions())
         {
             Function* function = doc()->function(sfunc->functionID());
-            if (function == NULL)
+            if (function == nullptr)
                 continue;
 
             /* Attempt to create a copy of the function to Doc */
             Function* copy = function->createCopy(doc());
-            if (copy != NULL)
+            if (copy != nullptr)
             {
                 copy->setName(tr("Copy of %1").arg(function->name()));
                 ShowFunction *showFunc = newTrack->createShowFunction(copy->id());
@@ -219,7 +219,7 @@ Show::TimeDivision Show::stringToTempo(QString tempo)
 
 bool Show::addTrack(Track *track, quint32 id)
 {
-    Q_ASSERT(track != NULL);
+    Q_ASSERT(track != nullptr);
 
     // No ID given, this method can assign one
     if (id == Track::invalidId())
@@ -239,7 +239,7 @@ bool Show::removeTrack(quint32 id)
     if (m_tracks.contains(id) == true)
     {
         Track* track = m_tracks.take(id);
-        Q_ASSERT(track != NULL);
+        Q_ASSERT(track != nullptr);
 
         unregisterAttribute(QString("%1-%2").arg(track->name()).arg(track->id()));
 
@@ -257,7 +257,7 @@ bool Show::removeTrack(quint32 id)
 
 Track* Show::track(quint32 id) const
 {
-    return m_tracks.value(id, NULL);
+    return m_tracks.value(id, nullptr);
 }
 
 Track* Show::getTrackFromSceneID(quint32 id)
@@ -267,16 +267,16 @@ Track* Show::getTrackFromSceneID(quint32 id)
         if (track->getSceneID() == id)
             return track;
     }
-    return NULL;
+    return nullptr;
 }
 
 Track *Show::getTrackFromShowFunctionID(quint32 id)
 {
     foreach (Track *track, m_tracks)
-        if (track->showFunction(id) != NULL)
+        if (track->showFunction(id) != nullptr)
             return track;
 
-    return NULL;
+    return nullptr;
 }
 
 int Show::getTracksCount()
@@ -286,14 +286,14 @@ int Show::getTracksCount()
 
 void Show::moveTrack(Track *track, int direction)
 {
-    if (track == NULL)
+    if (track == nullptr)
         return;
 
     qint32 trkID = track->id();
     if (trkID == 0 && direction == -1)
         return;
     qint32 maxID = -1;
-    Track *swapTrack = NULL;
+    Track *swapTrack = nullptr;
     qint32 swapID = -1;
     if (direction > 0) swapID = INT_MAX;
 
@@ -348,11 +348,11 @@ ShowFunction *Show::showFunction(quint32 id)
     foreach (Track *track, m_tracks)
     {
         ShowFunction *sf = track->showFunction(id);
-        if (sf != NULL)
+        if (sf != nullptr)
             return sf;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 /*****************************************************************************
@@ -361,7 +361,7 @@ ShowFunction *Show::showFunction(quint32 id)
 
 bool Show::saveXML(QXmlStreamWriter *doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* Function tag */
     doc->writeStartElement(KXMLQLCFunction);
@@ -435,7 +435,7 @@ void Show::postLoad()
 bool Show::contains(quint32 functionId)
 {
     Doc *doc = this->doc();
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     if (functionId == id())
         return true;
@@ -467,7 +467,7 @@ void Show::preRun(MasterTimer* timer)
 {
     Function::preRun(timer);
     m_runningChildren.clear();
-    if (m_runner != NULL)
+    if (m_runner != nullptr)
     {
         m_runner->stop();
         delete m_runner;
@@ -485,7 +485,7 @@ void Show::preRun(MasterTimer* timer)
 
 void Show::setPause(bool enable)
 {
-    if (m_runner != NULL)
+    if (m_runner != nullptr)
         m_runner->setPause(enable);
     Function::setPause(enable);
 }
@@ -502,11 +502,11 @@ void Show::write(MasterTimer* timer, QList<Universe *> universes)
 
 void Show::postRun(MasterTimer* timer, QList<Universe *> universes)
 {
-    if (m_runner != NULL)
+    if (m_runner != nullptr)
     {
         m_runner->stop();
         delete m_runner;
-        m_runner = NULL;
+        m_runner = nullptr;
     }
     Function::postRun(timer, universes);
 }
@@ -524,14 +524,14 @@ int Show::adjustAttribute(qreal fraction, int attributeId)
 {
     int attrIndex = Function::adjustAttribute(fraction, attributeId);
 
-    if (m_runner != NULL)
+    if (m_runner != nullptr)
     {
         QList<Track*> trkList = m_tracks.values();
         if (trkList.isEmpty() == false &&
             attrIndex >= 0 && attrIndex < trkList.count())
         {
             Track *track = trkList.at(attrIndex);
-            if (track != NULL)
+            if (track != nullptr)
                 m_runner->adjustIntensity(getAttributeValue(attrIndex), track);
         }
     }

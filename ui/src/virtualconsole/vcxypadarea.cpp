@@ -47,7 +47,7 @@ VCXYPadArea::VCXYPadArea(QWidget* parent)
     , m_rangeDmxRect()
     , m_rangeWindowRect()
     , m_degreesRange()
-    , m_previewArea(NULL)
+    , m_previewArea(nullptr)
 {
     setFrameStyle(KVCFrameStyleSunken);
     setWindowTitle("XY Pad");
@@ -236,7 +236,7 @@ void VCXYPadArea::enableEFXPreview(bool enable)
 {
     if (enable)
     {
-        if (m_previewArea == NULL)
+        if (m_previewArea == nullptr)
         {
             m_previewArea = new EFXPreviewArea(this);
             m_previewArea->setBackgroundAlpha(0);
@@ -249,14 +249,14 @@ void VCXYPadArea::enableEFXPreview(bool enable)
         if (m_previewArea)
         {
             m_previewArea->deleteLater();
-            m_previewArea = NULL;
+            m_previewArea = nullptr;
         }
     }
 }
 
 void VCXYPadArea::setEFXPolygons(const QPolygonF &pattern, const QVector<QPolygonF> fixtures)
 {
-    if (m_previewArea == NULL)
+    if (m_previewArea == nullptr)
         enableEFXPreview(true);
 
     m_previewArea->setPolygon(pattern);
@@ -265,7 +265,7 @@ void VCXYPadArea::setEFXPolygons(const QPolygonF &pattern, const QVector<QPolygo
 
 void VCXYPadArea::setEFXInterval(uint duration)
 {
-    if (m_previewArea != NULL)
+    if (m_previewArea != nullptr)
         m_previewArea->draw(duration / m_previewArea->polygonsCount());
 }
 
@@ -284,7 +284,7 @@ void VCXYPadArea::paintEvent(QPaintEvent* e)
     QPainter p(this);
     QPen pen;
 
-    if (m_previewArea == NULL)
+    if (m_previewArea == nullptr)
     {
         QString title = QString("%1%2%3\n%4\n")
             .arg(windowTitle())
@@ -322,7 +322,7 @@ void VCXYPadArea::paintEvent(QPaintEvent* e)
 
     updateWindowPos();
 
-    if (m_previewArea == NULL)
+    if (m_previewArea == nullptr)
     {
         foreach (QVariant pos, m_fixturePositions)
         {

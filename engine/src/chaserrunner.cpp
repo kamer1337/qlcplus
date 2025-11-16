@@ -34,7 +34,7 @@
 #include "doc.h"
 
 ChaserRunner::ChaserRunner(const Doc *doc, const Chaser *chaser, quint32 startTime)
-    : QObject(NULL)
+    : QObject(nullptr)
     , m_doc(doc)
     , m_chaser(chaser)
     , m_updateOverrideSpeeds(false)
@@ -44,7 +44,7 @@ ChaserRunner::ChaserRunner(const Doc *doc, const Chaser *chaser, quint32 startTi
     , m_roundTime(new QElapsedTimer())
     , m_order()
 {
-    Q_ASSERT(chaser != NULL);
+    Q_ASSERT(chaser != nullptr);
 
     m_pendingAction.m_action = ChaserNoAction;
     m_pendingAction.m_masterIntensity = 1.0;
@@ -295,7 +295,7 @@ ChaserRunnerStep *ChaserRunner::currentRunningStep() const
 {
     if (m_runnerSteps.count() > 0)
         return m_runnerSteps.at(0);
-    return NULL;
+    return nullptr;
 }
 
 int ChaserRunner::computeNextStep(int currentStep) const
@@ -430,7 +430,7 @@ void ChaserRunner::adjustStepIntensity(qreal fraction, int requestedStepIndex, i
 
     foreach (ChaserRunnerStep *step, m_runnerSteps)
     {
-        if (stepIndex == step->m_index && step->m_function != NULL)
+        if (stepIndex == step->m_index && step->m_function != nullptr)
         {
             if (requestedStepIndex == -1 && step->m_function->type() == Function::SceneType)
             {
@@ -481,7 +481,7 @@ void ChaserRunner::clearRunningList()
 void ChaserRunner::startNewStep(int index, MasterTimer *timer, qreal mIntensity, qreal sIntensity,
                                 int fadeControl, quint32 elapsed)
 {
-    if (m_chaser == NULL || m_chaser->stepsCount() == 0)
+    if (m_chaser == nullptr || m_chaser->stepsCount() == 0)
         return;
 
     if (index < 0 || index >= m_chaser->stepsCount())
@@ -489,7 +489,7 @@ void ChaserRunner::startNewStep(int index, MasterTimer *timer, qreal mIntensity,
 
     ChaserStep step(m_chaser->steps().at(index));
     Function *func = m_doc->function(step.fid);
-    if (func == NULL)
+    if (func == nullptr)
         return;
 
     ChaserRunnerStep *newStep = new ChaserRunnerStep();
@@ -718,7 +718,7 @@ void ChaserRunner::setPause(bool enable, QList<Universe *> universes)
     // there might be a Scene fading out, so request pause
     // to faders bound to the Scene ID running on universes
     Function *f = m_doc->function(m_lastFunctionID);
-    if (f != NULL && f->type() == Function::SceneType)
+    if (f != nullptr && f->type() == Function::SceneType)
     {
         foreach (Universe *universe, universes)
             universe->setFaderPause(m_lastFunctionID, enable);
@@ -798,7 +798,7 @@ bool ChaserRunner::write(MasterTimer *timer, QList<Universe *> universes)
             if (m_updateOverrideSpeeds == true)
             {
                 m_updateOverrideSpeeds = false;
-                if (step->m_function != NULL)
+                if (step->m_function != nullptr)
                 {
                     step->m_function->setOverrideFadeInSpeed(step->m_fadeIn);
                     step->m_function->setOverrideFadeOutSpeed(step->m_fadeOut);

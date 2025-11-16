@@ -54,7 +54,7 @@ public:
     QStringList getSupportedFormats();
 
     /** Get an audio decoder instance suitable for the given $filename.
-     *  If $filename can't be decoded, this method returns NULL */
+     *  If $filename can't be decoded, this method returns nullptr */
     AudioDecoder *getDecoderForFile(const QString& filename);
 
     /** Get the list of cached audio devices detected on creation */

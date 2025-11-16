@@ -59,12 +59,12 @@ void ChaserRunner_Test::cleanupTestCase()
 void ChaserRunner_Test::init()
 {
     QLCFixtureDef* def = m_doc->fixtureDefCache()->fixtureDef("Futurelight", "DJScan250");
-    QVERIFY(def != NULL);
+    QVERIFY(def != nullptr);
     QLCFixtureMode* mode = def->mode("Mode 1");
-    QVERIFY(mode != NULL);
+    QVERIFY(mode != nullptr);
 
     Fixture* fxi = new Fixture(m_doc);
-    QVERIFY(fxi != NULL);
+    QVERIFY(fxi != nullptr);
     fxi->setFixtureDefinition(def, mode);
     fxi->setName("Test Fixture");
     fxi->setAddress(0);
@@ -73,21 +73,21 @@ void ChaserRunner_Test::init()
 
     m_scene1 = new Scene(m_doc);
     m_scene1->setName("S1");
-    QVERIFY(m_scene1 != NULL);
+    QVERIFY(m_scene1 != nullptr);
     for (quint32 i = 0; i < fxi->channels(); i++)
         m_scene1->setValue(fxi->id(), i, 255 - i);
     m_doc->addFunction(m_scene1);
 
     m_scene2 = new Scene(m_doc);
     m_scene2->setName("S2");
-    QVERIFY(m_scene2 != NULL);
+    QVERIFY(m_scene2 != nullptr);
     for (quint32 i = 0; i < fxi->channels(); i++)
         m_scene2->setValue(fxi->id(), i, 127 - i);
     m_doc->addFunction(m_scene2);
 
     m_scene3 = new Scene(m_doc);
     m_scene3->setName("S3");
-    QVERIFY(m_scene3 != NULL);
+    QVERIFY(m_scene3 != nullptr);
     for (quint32 i = 0; i < fxi->channels(); i++)
         m_scene3->setValue(fxi->id(), i, 0 + i);
     m_doc->addFunction(m_scene3);

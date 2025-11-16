@@ -85,7 +85,7 @@ public:
      * Get the bus singleton object. If Bus::init() has not been called,
      * the debug version asserts.
      *
-     * @return The bus singleton or NULL
+     * @return The bus singleton or nullptr
      */
     static Bus* instance();
 

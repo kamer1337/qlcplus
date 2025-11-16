@@ -40,7 +40,7 @@ void FixtureSelection_Test::cleanup()
 
 void FixtureSelection_Test::execDialog()
 {
-    FixtureSelection dlg(NULL, m_doc);
+    FixtureSelection dlg(nullptr, m_doc);
     QTimer::singleShot(100, &dlg, SLOT(reject()));
     QCOMPARE(dlg.exec(), int(QDialog::Rejected));
 }

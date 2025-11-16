@@ -63,7 +63,7 @@ PositionTool::~PositionTool()
 
 QPointF PositionTool::position() const
 {
-    if (m_area == NULL)
+    if (m_area == nullptr)
         return QPointF(127, 127);
 
     return m_area->position();

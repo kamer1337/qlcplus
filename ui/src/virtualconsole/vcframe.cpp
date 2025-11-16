@@ -63,19 +63,19 @@ const quint8 VCFrame::shortcutsBaseInputSourceId = 20;
 
 VCFrame::VCFrame(QWidget* parent, Doc* doc, bool canCollapse)
     : VCWidget(parent, doc)
-    , m_hbox(NULL)
-    , m_collapseButton(NULL)
-    , m_enableButton(NULL)
-    , m_label(NULL)
+    , m_hbox(nullptr)
+    , m_collapseButton(nullptr)
+    , m_enableButton(nullptr)
+    , m_label(nullptr)
     , m_collapsed(false)
     , m_showHeader(true)
     , m_showEnableButton(true)
     , m_multiPageMode(false)
     , m_currentPage(0)
     , m_totalPagesNumber(1)
-    , m_nextPageBtn(NULL)
-    , m_prevPageBtn(NULL)
-    , m_pageCombo(NULL)
+    , m_nextPageBtn(nullptr)
+    , m_prevPageBtn(nullptr)
+    , m_pageCombo(nullptr)
     , m_pagesLoop(false)
 {
     /* Set the class name "VCFrame" as the object name as well */
@@ -103,7 +103,7 @@ VCFrame::~VCFrame()
 
 bool VCFrame::isBottomFrame()
 {
-    return (parentWidget() != NULL && qobject_cast<VCFrame*>(parentWidget()) == NULL);
+    return (parentWidget() != nullptr && qobject_cast<VCFrame*>(parentWidget()) == nullptr);
 }
 
 void VCFrame::setDisableState(bool disable)
@@ -146,7 +146,7 @@ void VCFrame::setLiveEdit(bool liveEdit)
 
 void VCFrame::setCaption(const QString& text)
 {
-    if (m_label != NULL)
+    if (m_label != nullptr)
     {
         if (!shortcuts().isEmpty() && m_currentPage < shortcuts().length())
         {
@@ -171,7 +171,7 @@ void VCFrame::setCaption(const QString& text)
 
 void VCFrame::setFont(const QFont &font)
 {
-    if (m_label != NULL)
+    if (m_label != nullptr)
     {
         m_label->setFont(font);
         m_hasCustomFont = true;
@@ -181,7 +181,7 @@ void VCFrame::setFont(const QFont &font)
 
 QFont VCFrame::font() const
 {
-    if (m_label != NULL)
+    if (m_label != nullptr)
         return m_label->font();
     else
         return VCWidget::font();
@@ -189,7 +189,7 @@ QFont VCFrame::font() const
 
 void VCFrame::setForegroundColor(const QColor &color)
 {
-    if (m_label != NULL)
+    if (m_label != nullptr)
     {
         m_label->setStyleSheet("QLabel { background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #666666, stop: 1 #000000); "
                                "color: " + color.name() + "; border-radius: 3px; padding: 3px; margin-left: 2px; }");
@@ -200,7 +200,7 @@ void VCFrame::setForegroundColor(const QColor &color)
 
 QColor VCFrame::foregroundColor() const
 {
-    if (m_label != NULL)
+    if (m_label != nullptr)
         return m_label->palette().color(m_label->foregroundRole());
     else
         return VCWidget::foregroundColor();
@@ -210,7 +210,7 @@ void VCFrame::setHeaderVisible(bool enable)
 {
     m_showHeader = enable;
 
-    if (m_hbox == NULL)
+    if (m_hbox == nullptr)
         createHeader();
 
     if (enable == false)
@@ -290,7 +290,7 @@ void VCFrame::slotEnableButtonClicked(bool checked)
 
 void VCFrame::createHeader()
 {
-    if (m_hbox != NULL)
+    if (m_hbox != nullptr)
         return;
 
     QVBoxLayout *vbox = new QVBoxLayout(this);
@@ -366,7 +366,7 @@ void VCFrame::setMultipageMode(bool enable)
 
     if (enable == true)
     {
-        if (m_prevPageBtn != NULL && m_nextPageBtn != NULL && m_pageCombo != NULL)
+        if (m_prevPageBtn != nullptr && m_nextPageBtn != nullptr && m_pageCombo != nullptr)
             return;
 
         QString btnSS = "QToolButton { background-color: #E0DFDF; border: 1px solid gray; border-radius: 3px; padding: 3px; margin-left: 2px; }";
@@ -440,7 +440,7 @@ void VCFrame::setMultipageMode(bool enable)
     }
     else
     {
-        if (m_prevPageBtn == NULL && m_nextPageBtn == NULL && m_pageCombo == NULL)
+        if (m_prevPageBtn == nullptr && m_nextPageBtn == nullptr && m_pageCombo == nullptr)
             return;
 
         resetShortcuts();
@@ -450,9 +450,9 @@ void VCFrame::setMultipageMode(bool enable)
         delete m_prevPageBtn;
         delete m_pageCombo;
         delete m_nextPageBtn;
-        m_prevPageBtn = NULL;
-        m_pageCombo = NULL;
-        m_nextPageBtn = NULL;
+        m_prevPageBtn = nullptr;
+        m_pageCombo = nullptr;
+        m_nextPageBtn = nullptr;
         setCaption(caption());
     }
 
@@ -500,7 +500,7 @@ int VCFrame::currentPage()
 
 void VCFrame::updatePageCombo()
 {
-    if (m_pageCombo == NULL || shortcuts().isEmpty())
+    if (m_pageCombo == nullptr || shortcuts().isEmpty())
         return;
 
     // Save current page to restore it afterwards
@@ -530,7 +530,7 @@ void VCFrame::setShortcuts(QList<VCFramePageShortcut *> shortcuts)
     foreach (VCFramePageShortcut const* shortcut, shortcuts)
     {
         m_pageShortcuts.append(new VCFramePageShortcut(*shortcut));
-        if (shortcut->m_inputSource != NULL)
+        if (shortcut->m_inputSource != nullptr)
             setInputSource(shortcut->m_inputSource, shortcut->m_id);
     }
     updatePageCombo();
@@ -812,7 +812,7 @@ void VCFrame::slotInputValueChanged(quint32 universe, quint32 channel, uchar val
     {
         foreach (VCFramePageShortcut* shortcut, m_pageShortcuts)
         {
-            if (shortcut->m_inputSource != NULL &&
+            if (shortcut->m_inputSource != nullptr &&
                     shortcut->m_inputSource->universe() == universe &&
                     shortcut->m_inputSource->channel() == pagedCh)
             {
@@ -828,13 +828,13 @@ void VCFrame::slotInputValueChanged(quint32 universe, quint32 channel, uchar val
 
 VCWidget* VCFrame::createCopy(VCWidget* parent)
 {
-    Q_ASSERT(parent != NULL);
+    Q_ASSERT(parent != nullptr);
 
     VCFrame* frame = new VCFrame(parent, m_doc, true);
     if (frame->copyFrom(this) == false)
     {
         delete frame;
-        frame = NULL;
+        frame = nullptr;
     }
 
     return frame;
@@ -843,7 +843,7 @@ VCWidget* VCFrame::createCopy(VCWidget* parent)
 bool VCFrame::copyFrom(const VCWidget* widget)
 {
     const VCFrame* frame = qobject_cast<const VCFrame*> (widget);
-    if (frame == NULL)
+    if (frame == nullptr)
         return false;
 
     setHeaderVisible(frame->m_showHeader);
@@ -863,7 +863,7 @@ bool VCFrame::copyFrom(const VCWidget* widget)
     while (it.hasNext() == true)
     {
         VCWidget* child = it.next();
-        VCWidget* childCopy = NULL;
+        VCWidget* childCopy = nullptr;
 
         /* findChildren() is recursive, so the list contains all
            possible child widgets below this frame. Each frame must
@@ -878,7 +878,7 @@ bool VCFrame::copyFrom(const VCWidget* widget)
             qDebug() << "Child copy in parent:" << childCopy->caption() << ", page:" << childCopy->page();
         }
 
-        if (childCopy != NULL)
+        if (childCopy != nullptr)
         {
             addWidgetToPageMap(childCopy);
 
@@ -979,7 +979,7 @@ void VCFrame::applyProperties(VCFrameProperties const& prop)
         }
     }
     VirtualConsole* vc = VirtualConsole::instance();
-    if (vc != NULL)
+    if (vc != nullptr)
         vc->reselectWidgets();
 }
 
@@ -988,7 +988,7 @@ void VCFrame::editProperties()
     if (isBottomFrame() == true)
         return;
 
-    VCFrameProperties prop(NULL, this, m_doc);
+    VCFrameProperties prop(nullptr, this, m_doc);
     if (prop.exec() == QDialog::Accepted)
     {
         applyProperties(prop);
@@ -1058,7 +1058,7 @@ bool VCFrame::loadXML(QXmlStreamReader &root)
         else if (root.name() == KXMLQLCVCFrameIsCollapsed)
         {
             /* Collapsed */
-            if (root.readElementText() == KXMLQLCTrue && m_collapseButton != NULL)
+            if (root.readElementText() == KXMLQLCTrue && m_collapseButton != nullptr)
                 m_collapseButton->toggle();
         }
         else if (root.name() == KXMLQLCVCFrameIsDisabled)
@@ -1299,7 +1299,7 @@ bool VCFrame::loadXML(QXmlStreamReader &root)
 
 bool VCFrame::saveXML(QXmlStreamWriter *doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* VC Frame entry */
     doc->writeStartElement(xmlTagName());
@@ -1453,10 +1453,10 @@ QString VCFrame::xmlTagName() const
 
 QMenu* VCFrame::customMenu(QMenu* parentMenu)
 {
-    QMenu* menu = NULL;
+    QMenu* menu = nullptr;
     VirtualConsole* vc = VirtualConsole::instance();
 
-    if (allowChildren() == true && vc != NULL)
+    if (allowChildren() == true && vc != nullptr)
     {
         /* Basically, just returning VC::addMenu() would suffice here, but
            since the returned menu will be deleted when the current widget
@@ -1479,7 +1479,7 @@ void VCFrame::handleWidgetSelection(QMouseEvent* e)
 {
     /* No point coming here if there is no VC */
     VirtualConsole* vc = VirtualConsole::instance();
-    if (vc == NULL)
+    if (vc == nullptr)
         return;
 
     /* Don't allow selection of the bottom frame. Selecting it will always

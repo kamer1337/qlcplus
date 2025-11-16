@@ -1174,7 +1174,7 @@ void VirtualConsole::slotInputValueChanged(quint32 universe, quint32 channel, uc
     }
     else
     {
-        /** The widget reference must be not NULL, otherwise
+        /** The widget reference must be not nullptr, otherwise
          *  it means something went nuts */
         Q_ASSERT(m_autoDetectionWidget != nullptr);
 

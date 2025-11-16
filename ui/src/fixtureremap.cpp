@@ -63,7 +63,7 @@ FixtureRemap::FixtureRemap(Doc *doc, QWidget *parent)
     : QDialog(parent)
     , m_doc(doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     setupUi(this);
 
@@ -158,7 +158,7 @@ FixtureRemap::~FixtureRemap()
 
 QTreeWidgetItem *FixtureRemap::getUniverseItem(Doc *doc, quint32 universe, QTreeWidget *tree)
 {
-    QTreeWidgetItem *topItem = NULL;
+    QTreeWidgetItem *topItem = nullptr;
 
     for (int i = 0; i < tree->topLevelItemCount(); i++)
     {
@@ -172,7 +172,7 @@ QTreeWidgetItem *FixtureRemap::getUniverseItem(Doc *doc, quint32 universe, QTree
     }
 
     // Haven't found this universe node ? Create it.
-    if (topItem == NULL)
+    if (topItem == nullptr)
     {
         topItem = new QTreeWidgetItem(tree);
         topItem->setText(KColumnName, doc->inputOutputMap()->universes().at(universe)->name());
@@ -262,7 +262,7 @@ void FixtureRemap::slotImportFixtures()
     bool autoConnect = msgBox.exec() == QMessageBox::Yes ? true : false;
 
     QXmlStreamReader *doc = QLCFile::getXMLReader(fileName);
-    if (doc == NULL || doc->device() == NULL || doc->hasError())
+    if (doc == nullptr || doc->device() == nullptr || doc->hasError())
     {
         qWarning() << Q_FUNC_INFO << "Unable to read from" << fileName;
         return;
@@ -294,7 +294,7 @@ void FixtureRemap::slotImportFixtures()
             if (doc->name() == KXMLFixture)
             {
                 Fixture* fxi = new Fixture(m_targetDoc);
-                Q_ASSERT(fxi != NULL);
+                Q_ASSERT(fxi != nullptr);
 
                 if (fxi->loadXML(*doc, m_targetDoc, m_doc->fixtureDefCache()) == true)
                 {
@@ -313,7 +313,7 @@ void FixtureRemap::slotImportFixtures()
             else if (doc->name() == KXMLQLCFixtureGroup)
             {
                 FixtureGroup* grp = new FixtureGroup(m_targetDoc);
-                Q_ASSERT(grp != NULL);
+                Q_ASSERT(grp != nullptr);
 
                 if (grp->loadXML(*doc) == true)
                 {
@@ -387,7 +387,7 @@ void FixtureRemap::slotAddTargetFixture()
         /* If an empty name was given use the model instead */
         if (name.simplified().isEmpty())
         {
-            if (fixtureDef != NULL)
+            if (fixtureDef != nullptr)
                 name = fixtureDef->model();
             else
                 name = tr("Generic Dimmer");
@@ -410,7 +410,7 @@ void FixtureRemap::slotAddTargetFixture()
 
         /* Set a fixture definition & mode if they were selected.
            Otherwise assign channels to a generic dimmer. */
-        if (fixtureDef != NULL && mode != NULL)
+        if (fixtureDef != nullptr && mode != nullptr)
             fxi->setFixtureDefinition(fixtureDef, mode);
         else
         {
@@ -500,7 +500,7 @@ void FixtureRemap::slotCloneSourceFixture()
     QTreeWidgetItem *sItem = m_sourceTree->selectedItems().first();
     quint32 fxID = sItem->text(KColumnID).toUInt();
     Fixture *srcFix = m_doc->fixture(fxID);
-    if (srcFix == NULL)
+    if (srcFix == nullptr)
         return; // popup here ?
 
     quint32 srcAddr = srcFix->universeAddress();
@@ -586,7 +586,7 @@ void FixtureRemap::slotAddRemap()
 
 void FixtureRemap::connectFixtures(QTreeWidgetItem *sourceItem, QTreeWidgetItem *targetItem)
 {
-    if (sourceItem == NULL || targetItem == NULL)
+    if (sourceItem == nullptr || targetItem == nullptr)
         return;
 
     RemapInfo newRemap;
@@ -597,7 +597,7 @@ void FixtureRemap::connectFixtures(QTreeWidgetItem *sourceItem, QTreeWidgetItem 
     Fixture *srcFxi = m_doc->fixture(srcFxiID);
     quint32 tgtFxiID = newRemap.target->text(KColumnID).toUInt();
     Fixture *tgtFxi = m_targetDoc->fixture(tgtFxiID);
-    if (srcFxi == NULL || tgtFxi == NULL)
+    if (srcFxi == nullptr || tgtFxi == nullptr)
     {
         QMessageBox::warning(this,
                 tr("Invalid selection"),
@@ -644,8 +644,8 @@ void FixtureRemap::connectFixtures(QTreeWidgetItem *sourceItem, QTreeWidgetItem 
 
         // 1-to-1 channel remapping is required for fixtures with
         // the same definition and mode
-        if (srcFxiDef != NULL && tgtFxiDef != NULL &&
-            srcFxiMode != NULL && tgtFxiMode != NULL)
+        if (srcFxiDef != nullptr && tgtFxiDef != nullptr &&
+            srcFxiMode != nullptr && tgtFxiMode != nullptr)
         {
             if (srcFxiDef->name() == tgtFxiDef->name() &&
                 srcFxiMode->name() == tgtFxiMode->name())
@@ -653,8 +653,8 @@ void FixtureRemap::connectFixtures(QTreeWidgetItem *sourceItem, QTreeWidgetItem 
         }
         // 1-to-1 channel remapping is required for
         // generic dimmer packs
-        else if (srcFxiDef == NULL && tgtFxiDef == NULL &&
-                 srcFxiMode == NULL && tgtFxiMode == NULL)
+        else if (srcFxiDef == nullptr && tgtFxiDef == nullptr &&
+                 srcFxiMode == nullptr && tgtFxiMode == nullptr)
                     oneToOneRemap = true;
 
         if (oneToOneRemap == true)
@@ -680,7 +680,7 @@ void FixtureRemap::connectFixtures(QTreeWidgetItem *sourceItem, QTreeWidgetItem 
 
                     // copy channel modifiers
                     ChannelModifier *chMod = srcFxi->channelModifier(s);
-                    if (chMod != NULL)
+                    if (chMod != nullptr)
                         tgtFxi->setChannelModifier(s, chMod);
                 }
             }
@@ -1076,7 +1076,7 @@ void FixtureRemap::accept()
      * 7 - remap 2D monitor properties, if defined
      * ********************************************************************** */
     MonitorProperties *props = m_doc->monitorProperties();
-    if (props != NULL)
+    if (props != nullptr)
     {
         QMap <quint32, FixturePreviewItem> remappedFixtureItems;
 

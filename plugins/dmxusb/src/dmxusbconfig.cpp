@@ -47,7 +47,7 @@ DMXUSBConfig::DMXUSBConfig(DMXUSB* plugin, QWidget* parent)
     , m_refreshButton(new QPushButton(tr("Refresh"), this))
     , m_closeButton(new QPushButton(tr("Close"), this))
 {
-    Q_ASSERT(plugin != NULL);
+    Q_ASSERT(plugin != nullptr);
 
     setWindowTitle(plugin->name());
 
@@ -87,7 +87,7 @@ DMXUSBConfig::~DMXUSBConfig()
 void DMXUSBConfig::slotTypeComboActivated(int index)
 {
     QComboBox *combo = qobject_cast<QComboBox*> (QObject::sender());
-    Q_ASSERT(combo != NULL);
+    Q_ASSERT(combo != nullptr);
 
     QVariant var = combo->property(PROP_SERIAL);
     if (var.isValid() == true)
@@ -104,7 +104,7 @@ void DMXUSBConfig::slotTypeComboActivated(int index)
 void DMXUSBConfig::slotFrequencyValueChanged(int value)
 {
     QSpinBox *spin = qobject_cast<QSpinBox*> (QObject::sender());
-    Q_ASSERT(spin != NULL);
+    Q_ASSERT(spin != nullptr);
 
     QVariant var = spin->property(PROP_SERIAL);
     if (var.isValid() == true)
@@ -140,7 +140,7 @@ void DMXUSBConfig::slotRefresh()
 
 QComboBox *DMXUSBConfig::createTypeCombo(DMXUSBWidget *widget)
 {
-    Q_ASSERT(widget != NULL);
+    Q_ASSERT(widget != nullptr);
     QComboBox* combo = new QComboBox;
     combo->setProperty(PROP_SERIAL, widget->serial());
     combo->addItem(QString("Pro RX/TX"), DMXUSBWidget::ProRXTX);
@@ -161,7 +161,7 @@ QComboBox *DMXUSBConfig::createTypeCombo(DMXUSBWidget *widget)
 
 QSpinBox *DMXUSBConfig::createFrequencySpin(DMXUSBWidget *widget)
 {
-    Q_ASSERT(widget != NULL);
+    Q_ASSERT(widget != nullptr);
     QSpinBox *spin = new QSpinBox;
     spin->setProperty(PROP_SERIAL, widget->serial());
     spin->setProperty(PROP_WIDGET, QVariant::fromValue((void *)widget));

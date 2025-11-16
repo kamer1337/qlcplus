@@ -67,8 +67,8 @@ MasterTimer::MasterTimer(Doc* doc)
     , m_beatRequested(false)
     , m_lastBeatOffset(0)
 {
-    Q_ASSERT(doc != NULL);
-    Q_ASSERT(d_ptr != NULL);
+    Q_ASSERT(doc != nullptr);
+    Q_ASSERT(d_ptr != nullptr);
 
     QSettings settings;
     QVariant var = settings.value(MASTERTIMER_FREQUENCY);
@@ -84,18 +84,18 @@ MasterTimer::~MasterTimer()
         stop();
 
     delete d_ptr;
-    d_ptr = NULL;
+    d_ptr = nullptr;
 }
 
 void MasterTimer::start()
 {
-    Q_ASSERT(d_ptr != NULL);
+    Q_ASSERT(d_ptr != nullptr);
     d_ptr->start();
 }
 
 void MasterTimer::stop()
 {
-    Q_ASSERT(d_ptr != NULL);
+    Q_ASSERT(d_ptr != nullptr);
     stopAllFunctions();
     d_ptr->stop();
 }
@@ -103,7 +103,7 @@ void MasterTimer::stop()
 void MasterTimer::timerTick()
 {
     Doc *doc = qobject_cast<Doc*> (parent());
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
 #ifdef DEBUG_MASTERTIMER
     qDebug() << "[MasterTimer] *********** tick:" << ticksCount++ << "**********";
@@ -169,7 +169,7 @@ uint MasterTimer::tick()
 
 void MasterTimer::startFunction(Function* function)
 {
-    if (function == NULL)
+    if (function == nullptr)
         return;
 
     QMutexLocker locker(&m_functionListMutex);
@@ -199,7 +199,7 @@ void MasterTimer::fadeAndStopAll(int timeout)
     if (timeout)
     {
         Doc *doc = qobject_cast<Doc*> (parent());
-        Q_ASSERT(doc != NULL);
+        Q_ASSERT(doc != nullptr);
 
         QList<Universe *> universes = doc->inputOutputMap()->claimUniverses();
         foreach (Universe *universe, universes)
@@ -236,7 +236,7 @@ void MasterTimer::timerTickFunctions(QList<Universe *> universes)
         {
             Function* function = m_functionList.at(i);
 
-            if (function != NULL)
+            if (function != nullptr)
             {
                 /* Run the function unless it's supposed to be stopped */
                 if (function->stopped() == false && m_stopAllFunctions == false)
@@ -314,7 +314,7 @@ void MasterTimer::timerTickFunctions(QList<Universe *> universes)
 
 void MasterTimer::registerDMXSource(DMXSource *source)
 {
-    Q_ASSERT(source != NULL);
+    Q_ASSERT(source != nullptr);
 
     QMutexLocker lock(&m_dmxSourceListMutex);
     if (m_dmxSourceList.contains(source) == false)
@@ -323,7 +323,7 @@ void MasterTimer::registerDMXSource(DMXSource *source)
 
 void MasterTimer::unregisterDMXSource(DMXSource *source)
 {
-    Q_ASSERT(source != NULL);
+    Q_ASSERT(source != nullptr);
 
     QMutexLocker lock(&m_dmxSourceListMutex);
     m_dmxSourceList.removeAll(source);
@@ -336,7 +336,7 @@ void MasterTimer::timerTickDMXSources(QList<Universe *> universes)
 
     foreach (DMXSource *source, m_dmxSourceList)
     {
-        Q_ASSERT(source != NULL);
+        Q_ASSERT(source != nullptr);
 
 #ifdef DEBUG_MASTERTIMER
         qDebug() << "[MasterTimer] ticking DMX source" << i;

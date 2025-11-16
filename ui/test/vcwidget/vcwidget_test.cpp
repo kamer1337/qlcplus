@@ -39,13 +39,13 @@
 
 void VCWidget_Test::initTestCase()
 {
-    m_doc = NULL;
+    m_doc = nullptr;
 }
 
 void VCWidget_Test::init()
 {
     m_doc = new Doc(this);
-    new VirtualConsole(NULL, m_doc);
+    new VirtualConsole(nullptr, m_doc);
 }
 
 void VCWidget_Test::cleanup()
@@ -69,7 +69,7 @@ void VCWidget_Test::initial()
     QCOMPARE(stub.lastClickPoint(), QPoint(0, 0));
 
     for (quint8 i = 0; i < 255; i++)
-        QVERIFY(stub.inputSource(i) == NULL);
+        QVERIFY(stub.inputSource(i) == nullptr);
 }
 
 void VCWidget_Test::bgImage()
@@ -313,11 +313,11 @@ void VCWidget_Test::inputSource()
     QCOMPARE(src->channel(), quint32(2));
 
     src = stub.inputSource(1);
-    QVERIFY(src == NULL);
+    QVERIFY(src == nullptr);
     src = stub.inputSource(2);
-    QVERIFY(src == NULL);
+    QVERIFY(src == nullptr);
     src = stub.inputSource(42);
-    QVERIFY(src == NULL);
+    QVERIFY(src == nullptr);
 
     stub.setInputSource(QSharedPointer<QLCInputSource>(new QLCInputSource(3, 4)), 0);
     src = stub.inputSource();
@@ -327,7 +327,7 @@ void VCWidget_Test::inputSource()
 
     stub.setInputSource(QSharedPointer<QLCInputSource>(new QLCInputSource()));
     src = stub.inputSource();
-    QVERIFY(src == NULL);
+    QVERIFY(src == nullptr);
 
     // Just for coverage - the implementation does nothing
     stub.slotInputValueChanged(0, 1, 2);
@@ -375,7 +375,7 @@ void VCWidget_Test::copy()
     QCOMPARE(copy.inputSource(1)->universe(), src3->universe());
     QCOMPARE(copy.inputSource(1)->channel(), src3->channel());
 
-    QVERIFY(copy.inputSource(2) == NULL);
+    QVERIFY(copy.inputSource(2) == nullptr);
 }
 
 void VCWidget_Test::stripKeySequence()
@@ -420,7 +420,7 @@ void VCWidget_Test::loadInput()
     xmlWriter.writeAttribute("Channel", "34");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
 
     buffer.seek(0);
     QXmlStreamReader xmlReader(&buffer);
@@ -470,7 +470,7 @@ void VCWidget_Test::loadAppearance()
     xmlWriter.writeTextElement("Font", font.toString());
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
 
     buffer.seek(0);
     QXmlStreamReader xmlReader(&buffer);
@@ -536,7 +536,7 @@ void VCWidget_Test::saveInput()
     stub.setInputSource(QSharedPointer<QLCInputSource>(new QLCInputSource(34, 56)));
     QVERIFY(stub.saveXMLInput(&xmlWriter) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -547,7 +547,7 @@ void VCWidget_Test::saveInput()
     QCOMPARE(xmlReader.attributes().value("Universe").toString(), QString("34"));
     QCOMPARE(xmlReader.attributes().value("Channel").toString(), QString("56"));
 
-    xmlReader.setDevice(NULL);
+    xmlReader.setDevice(nullptr);
     buffer.close();
     buffer.setData(QByteArray());
     buffer.open(QIODevice::WriteOnly | QIODevice::Text);
@@ -578,7 +578,7 @@ void VCWidget_Test::saveAppearance()
 
     QCOMPARE(stub.saveXMLAppearance(&xmlWriter), true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -642,7 +642,7 @@ void VCWidget_Test::saveAppearanceDefaultsImage()
 
     QCOMPARE(stub.saveXMLAppearance(&xmlWriter), true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -708,7 +708,7 @@ void VCWidget_Test::saveWindowState()
 
     QCOMPARE(stub.saveXMLWindowState(&xmlWriter), true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -722,7 +722,7 @@ void VCWidget_Test::saveWindowState()
     QCOMPARE(xmlReader.attributes().value("Height").toString(), QString("40"));
     QCOMPARE(xmlReader.attributes().value("Visible").toString(), QString("True"));
 
-    xmlReader.setDevice(NULL);
+    xmlReader.setDevice(nullptr);
     buffer.close();
     buffer.setData(QByteArray());
     buffer.open(QIODevice::WriteOnly | QIODevice::Text);
@@ -731,7 +731,7 @@ void VCWidget_Test::saveWindowState()
     w.hide();
     QCOMPARE(stub.saveXMLWindowState(&xmlWriter), true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -764,7 +764,7 @@ void VCWidget_Test::loadWindowState()
     xmlWriter.writeAttribute("Visible", "True");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
 
     buffer.seek(0);
     QXmlStreamReader xmlReader(&buffer);
@@ -772,11 +772,11 @@ void VCWidget_Test::loadWindowState()
 
     int x = 0, y = 0, w = 0, h = 0;
     bool v = false;
-    QCOMPARE(stub.loadXMLWindowState(xmlReader, &x, &y, &w, &h, NULL), false);
-    QCOMPARE(stub.loadXMLWindowState(xmlReader, &x, &y, &w, NULL, &v), false);
-    QCOMPARE(stub.loadXMLWindowState(xmlReader, &x, &y, NULL, &h, &v), false);
-    QCOMPARE(stub.loadXMLWindowState(xmlReader, &x, NULL, &w, &h, &v), false);
-    QCOMPARE(stub.loadXMLWindowState(xmlReader, NULL, &y, &w, &h, &v), false);
+    QCOMPARE(stub.loadXMLWindowState(xmlReader, &x, &y, &w, &h, nullptr), false);
+    QCOMPARE(stub.loadXMLWindowState(xmlReader, &x, &y, &w, nullptr, &v), false);
+    QCOMPARE(stub.loadXMLWindowState(xmlReader, &x, &y, nullptr, &h, &v), false);
+    QCOMPARE(stub.loadXMLWindowState(xmlReader, &x, nullptr, &w, &h, &v), false);
+    QCOMPARE(stub.loadXMLWindowState(xmlReader, nullptr, &y, &w, &h, &v), false);
 
     QCOMPARE(stub.loadXMLWindowState(xmlReader, &x, &y, &w, &h, &v), true);
     QCOMPARE(x, 20);
@@ -894,7 +894,7 @@ void VCWidget_Test::move()
 void VCWidget_Test::paint()
 {
     VirtualConsole* vc = VirtualConsole::instance();
-    QVERIFY(vc != NULL);
+    QVERIFY(vc != nullptr);
 
     // Just try to cover all local branches with this test
     StubWidget* stub = new StubWidget(vc->contents(), m_doc);
@@ -928,7 +928,7 @@ void VCWidget_Test::mousePress()
     QCOMPARE(m_doc->mode(), Doc::Design);
 
     VirtualConsole* vc = VirtualConsole::instance();
-    QVERIFY(vc != NULL);
+    QVERIFY(vc != nullptr);
 
     vc->show();
 

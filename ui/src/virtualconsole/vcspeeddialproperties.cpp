@@ -41,10 +41,10 @@ VCSpeedDialProperties::VCSpeedDialProperties(VCSpeedDial* dial, Doc* doc)
     : QDialog(dial)
     , m_dial(dial)
     , m_doc(doc)
-    , m_copyItem(NULL)
+    , m_copyItem(nullptr)
 {
-    Q_ASSERT(dial != NULL);
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(dial != nullptr);
+    Q_ASSERT(doc != nullptr);
 
     setupUi(this);
 
@@ -290,7 +290,7 @@ void VCSpeedDialProperties::slotCopyFactorsClicked()
 
 void VCSpeedDialProperties::slotPasteFactorsClicked()
 {
-    if (m_copyItem == NULL)
+    if (m_copyItem == nullptr)
         return;
 
     // is only called after the paste button has been enabled and copiedFactorValues is filled with data
@@ -302,7 +302,7 @@ void VCSpeedDialProperties::slotPasteFactorsClicked()
 
     foreach (QTreeWidgetItem* item, m_tree->selectedItems())
     {
-        Q_ASSERT(item != NULL);
+        Q_ASSERT(item != nullptr);
 
         QVariant id = item->data(COL_NAME, PROP_ID);
         if (id.isValid() == true)
@@ -323,7 +323,7 @@ QList <VCSpeedDialFunction> VCSpeedDialProperties::functions() const
     for (int i = 0; i < m_tree->topLevelItemCount(); i++)
     {
         QTreeWidgetItem* item = m_tree->topLevelItem(i);
-        Q_ASSERT(item != NULL);
+        Q_ASSERT(item != nullptr);
 
         QVariant id = item->data(COL_NAME, PROP_ID);
         if (id.isValid() == true)
@@ -342,7 +342,7 @@ QList <VCSpeedDialFunction> VCSpeedDialProperties::functions() const
 void VCSpeedDialProperties::createFunctionItem(const VCSpeedDialFunction &speeddialfunction)
 {
     Function* function = m_doc->function(speeddialfunction.functionId);
-    if (function != NULL)
+    if (function != nullptr)
     {
         QTreeWidgetItem* item = new QTreeWidgetItem(m_tree);
         item->setText(COL_NAME, function->name());
@@ -426,10 +426,10 @@ void VCSpeedDialProperties::updateTreeItem(VCSpeedDialPreset const& preset)
 VCSpeedDialPreset* VCSpeedDialProperties::getSelectedPreset()
 {
     if (m_presetsTree->selectedItems().isEmpty())
-        return NULL;
+        return nullptr;
 
     QTreeWidgetItem* item = m_presetsTree->selectedItems().first();
-    if (item != NULL)
+    if (item != nullptr)
     {
         quint8 presetID = item->data(0, Qt::UserRole).toUInt();
         foreach (VCSpeedDialPreset* preset, m_presets)
@@ -440,7 +440,7 @@ VCSpeedDialPreset* VCSpeedDialProperties::getSelectedPreset()
     }
 
     Q_ASSERT(false);
-    return NULL;
+    return nullptr;
 }
 
 void VCSpeedDialProperties::addPreset(VCSpeedDialPreset *preset)
@@ -483,7 +483,7 @@ void VCSpeedDialProperties::slotTreeSelectionChanged()
 {
     VCSpeedDialPreset* preset = getSelectedPreset();
 
-    if (preset != NULL)
+    if (preset != nullptr)
     {
         m_presetInputWidget->setInputSource(preset->m_inputSource);
         m_presetInputWidget->setKeySequence(preset->m_keySequence.toString(QKeySequence::NativeText));
@@ -496,7 +496,7 @@ void VCSpeedDialProperties::slotPresetNameEdited(QString const& newName)
 {
     VCSpeedDialPreset* preset = getSelectedPreset();
 
-    if (preset != NULL)
+    if (preset != nullptr)
     {
         preset->m_name = newName;
 
@@ -508,7 +508,7 @@ void VCSpeedDialProperties::slotSpeedDialWidgetValueChanged(int ms)
 {
     VCSpeedDialPreset* preset = getSelectedPreset();
 
-    if (preset != NULL)
+    if (preset != nullptr)
     {
         if (Function::stringToSpeed(preset->m_name) == uint(preset->m_value))
         {
@@ -530,7 +530,7 @@ void VCSpeedDialProperties::slotInputValueChanged(quint32 universe, quint32 chan
 
     VCSpeedDialPreset *preset = getSelectedPreset();
 
-    if (preset != NULL)
+    if (preset != nullptr)
         preset->m_inputSource = m_presetInputWidget->inputSource();
 }
 
@@ -538,7 +538,7 @@ void VCSpeedDialProperties::slotKeySequenceChanged(QKeySequence key)
 {
     VCSpeedDialPreset *preset = getSelectedPreset();
 
-    if (preset != NULL)
+    if (preset != nullptr)
         preset->m_keySequence = key;
 }
 

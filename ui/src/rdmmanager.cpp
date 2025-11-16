@@ -89,20 +89,20 @@ void RDMManager::slotRefresh()
 bool RDMManager::getPluginInfo(quint32 universe, quint32 line, quint32 &universeID, quint32 &outputLine)
 {
     Universe *uni = m_doc->inputOutputMap()->universe(universe);
-    if (uni == NULL)
+    if (uni == nullptr)
     {
         qDebug() << "ERROR. Universe not found!";
         return false;
     }
 
-    OutputPatch *op = NULL;
+    OutputPatch *op = nullptr;
     for (int i = 0; i < uni->outputPatchesCount(); i++)
     {
         op = uni->outputPatch(i);
         if (op->output() == line)
             break;
     }
-    if (op == NULL)
+    if (op == nullptr)
     {
         qDebug() << "ERROR. Output patch not found!";
         return false;
@@ -288,7 +288,7 @@ void RDMManager::slotTaskFinished()
 
 void RDMManager::updateRDMTreeItem(QString UID, UIDInfo info)
 {
-    QTreeWidgetItem *item = NULL;
+    QTreeWidgetItem *item = nullptr;
 
     qDebug() << "Got info for UID" << UID;
 
@@ -305,7 +305,7 @@ void RDMManager::updateRDMTreeItem(QString UID, UIDInfo info)
         }
     }
 
-    if (item == NULL)
+    if (item == nullptr)
     {
         item = new QTreeWidgetItem(m_rdmTree);
         item->setText(KColumnRDMUID, UID);
@@ -459,20 +459,20 @@ void RDMWorker::run()
     int waitCount = 0;
 
     Universe *uni = m_doc->inputOutputMap()->universe(m_universe);
-    if (uni == NULL)
+    if (uni == nullptr)
     {
         qDebug() << "ERROR. Universe not found!";
         return;
     }
 
-    OutputPatch *op = NULL;
+    OutputPatch *op = nullptr;
     for (int i = 0; i < uni->outputPatchesCount(); i++)
     {
         op = uni->outputPatch(i);
         if (op->output() == m_line)
             break;
     }
-    if (op == NULL)
+    if (op == nullptr)
     {
         qDebug() << "ERROR. Output patch not found!";
         return;

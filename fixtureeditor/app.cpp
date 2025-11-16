@@ -58,11 +58,11 @@ App::App(QWidget *parent) : QMainWindow(parent)
 {
     _app = this;
 
-    m_fileMenu = NULL;
-    m_helpMenu = NULL;
-    m_toolBar = NULL;
+    m_fileMenu = nullptr;
+    m_helpMenu = nullptr;
+    m_toolBar = nullptr;
 
-    m_copyChannel = NULL;
+    m_copyChannel = nullptr;
 
     setWindowTitle(App::longName());
     setWindowIcon(QIcon(":/qlcplus-fixtureeditor.png"));
@@ -98,10 +98,10 @@ App::~App()
     QSettings settings;
     settings.setValue(SETTINGS_GEOMETRY, saveGeometry());
 
-    setCopyChannel(NULL);
+    setCopyChannel(nullptr);
 
     // Remove the reference to the application
-    _app = NULL;
+    _app = nullptr;
 }
 
 QString App::longName()
@@ -116,7 +116,7 @@ QString App::version()
 
 void App::loadFixtureDefinition(const QString& path)
 {
-    QLCFixtureDef *fixtureDef = NULL;
+    QLCFixtureDef *fixtureDef = nullptr;
 
     /* Attempt to create a fixture definition from the selected file */
     QString error(tr("Unrecognized file extension: %1").arg(path));
@@ -125,9 +125,9 @@ void App::loadFixtureDefinition(const QString& path)
     else if (path.endsWith(KExtAvolitesFixture, Qt::CaseInsensitive) == true)
         fixtureDef = loadD4(path, error);
     else
-        fixtureDef = NULL;
+        fixtureDef = nullptr;
 
-    if (fixtureDef != NULL)
+    if (fixtureDef != nullptr)
     {
         /* Create a new sub window and put a fixture editor widget
            in that sub window with the newly-created fixture def */
@@ -155,13 +155,13 @@ void App::loadFixtureDefinition(const QString& path)
 QLCFixtureDef *App::loadQXF(const QString& path, QString& errorMsg) const
 {
     QLCFixtureDef *fixtureDef = new QLCFixtureDef;
-    Q_ASSERT(fixtureDef != NULL);
+    Q_ASSERT(fixtureDef != nullptr);
 
     QFile::FileError error = fixtureDef->loadXML(path);
     if (error != QFile::NoError)
     {
         delete fixtureDef;
-        fixtureDef = NULL;
+        fixtureDef = nullptr;
         errorMsg = QLCFile::errorString(error);
     }
 
@@ -177,7 +177,7 @@ QLCFixtureDef *App::loadD4(const QString& path, QString& errorMsg) const
     {
         errorMsg = parser.lastError();
         delete fixtureDef;
-        fixtureDef = NULL;
+        fixtureDef = nullptr;
     }
 
     return fixtureDef;
@@ -196,10 +196,10 @@ void App::closeEvent(QCloseEvent *e)
         QMdiSubWindow *sub;
 
         sub = it.next();
-        Q_ASSERT(sub != NULL);
+        Q_ASSERT(sub != nullptr);
 
         editor = static_cast<QLCFixtureEditor*> (sub->widget());
-        Q_ASSERT(editor != NULL);
+        Q_ASSERT(editor != nullptr);
 
         editor->show();
         editor->setFocus();
@@ -219,11 +219,11 @@ void App::closeEvent(QCloseEvent *e)
 
 void App::setCopyChannel(QLCChannel *ch)
 {
-    if (m_copyChannel != NULL)
+    if (m_copyChannel != nullptr)
         delete m_copyChannel;
-    m_copyChannel = NULL;
+    m_copyChannel = nullptr;
 
-    if (ch != NULL)
+    if (ch != nullptr)
         m_copyChannel = ch->createCopy();
 
     emit clipboardChanged();
@@ -395,11 +395,11 @@ void App::slotFileSave()
     QMdiSubWindow *sub;
 
     sub = (qobject_cast<QMdiArea*> (centralWidget()))->activeSubWindow();
-    if (sub == NULL)
+    if (sub == nullptr)
         return;
 
     editor = static_cast<QLCFixtureEditor*> (sub->widget());
-    if (editor == NULL)
+    if (editor == nullptr)
         return;
 
     editor->save();
@@ -411,11 +411,11 @@ void App::slotFileSaveAs()
     QMdiSubWindow *sub;
 
     sub = (qobject_cast<QMdiArea*> (centralWidget()))->activeSubWindow();
-    if (sub == NULL)
+    if (sub == nullptr)
         return;
 
     editor = static_cast<QLCFixtureEditor*> (sub->widget());
-    if (editor == NULL)
+    if (editor == nullptr)
         return;
 
     editor->saveAs();

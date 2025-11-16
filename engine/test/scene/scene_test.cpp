@@ -169,10 +169,10 @@ void Scene_Test::colorValue()
     ua.append(new Universe(0, new GrandMaster()));
 
     QLCFixtureDef* def = m_doc->fixtureDefCache()->fixtureDef("Generic", "Generic RGB");
-    QVERIFY(def != NULL);
+    QVERIFY(def != nullptr);
 
     QLCFixtureMode* mode = def->mode("Dimmer RGB");
-    QVERIFY(mode != NULL);
+    QVERIFY(mode != nullptr);
 
     Fixture* fxi1 = new Fixture(doc);
     fxi1->setFixtureDefinition(def, mode);
@@ -182,10 +182,10 @@ void Scene_Test::colorValue()
     doc->addFixture(fxi1);
 
     QLCFixtureDef *def2 = m_doc->fixtureDefCache()->fixtureDef("Futurelight", "PCC-250CMY");
-    QVERIFY(def2 != NULL);
+    QVERIFY(def2 != nullptr);
 
     QLCFixtureMode *mode2 = def2->mode("Mode 1");
-    QVERIFY(mode2 != NULL);
+    QVERIFY(mode2 != nullptr);
 
     Fixture *fxi2 = new Fixture(doc);
     fxi2->setFixtureDefinition(def2, mode2);
@@ -195,10 +195,10 @@ void Scene_Test::colorValue()
     doc->addFixture(fxi2);
 
     QLCFixtureDef *def3 = m_doc->fixtureDefCache()->fixtureDef("Showtec", "Phantom 95 LED Spot");
-    QVERIFY(def3 != NULL);
+    QVERIFY(def3 != nullptr);
 
     QLCFixtureMode *mode3 = def3->mode("15 Channels");
-    QVERIFY(mode3 != NULL);
+    QVERIFY(mode3 != nullptr);
 
     Fixture *fxi3 = new Fixture(doc);
     fxi3->setFixtureDefinition(def3, mode3);
@@ -342,7 +342,7 @@ void Scene_Test::loadSuccess()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -386,7 +386,7 @@ void Scene_Test::loadWrongType()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -424,7 +424,7 @@ void Scene_Test::loadWrongRoot()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -456,7 +456,7 @@ void Scene_Test::save()
 
     QVERIFY(s.saveXML(&xmlWriter) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -553,12 +553,12 @@ void Scene_Test::createCopy()
     QVERIFY(s1->id() != Function::invalidId());
 
     Function* f = s1->createCopy(&doc);
-    QVERIFY(f != NULL);
+    QVERIFY(f != nullptr);
     QVERIFY(f != s1);
     QVERIFY(f->id() != s1->id());
 
     Scene* copy = qobject_cast<Scene*> (f);
-    QVERIFY(copy != NULL);
+    QVERIFY(copy != nullptr);
     QVERIFY(copy->fadeInSpeed() == 200);
     QVERIFY(copy->fadeOutSpeed() == 2000);
     QVERIFY(copy->duration() == 20000);
@@ -716,10 +716,10 @@ void Scene_Test::writeHTPTwoTicks()
     QList<Universe*> ua;
 
     QLCFixtureDef* def = m_doc->fixtureDefCache()->fixtureDef("Futurelight", "DJScan250");
-    QVERIFY(def != NULL);
+    QVERIFY(def != nullptr);
 
     QLCFixtureMode* mode = def->mode("Mode 1");
-    QVERIFY(mode != NULL);
+    QVERIFY(mode != nullptr);
 
     Fixture* fxi = new Fixture(doc);
     fxi->setFixtureDefinition(def, mode);
@@ -830,10 +830,10 @@ void Scene_Test::writeHTPTwoTicksIntensity()
     QList<Universe*> ua;
 
     QLCFixtureDef* def = m_doc->fixtureDefCache()->fixtureDef("Futurelight", "DJScan250");
-    QVERIFY(def != NULL);
+    QVERIFY(def != nullptr);
 
     QLCFixtureMode* mode = def->mode("Mode 1");
-    QVERIFY(mode != NULL);
+    QVERIFY(mode != nullptr);
 
     Fixture* fxi = new Fixture(doc);
     fxi->setFixtureDefinition(def, mode);
@@ -932,10 +932,10 @@ void Scene_Test::writeLTPReady()
     QList<Universe*> ua;
 
     QLCFixtureDef* def = m_doc->fixtureDefCache()->fixtureDef("Futurelight", "DJScan250");
-    QVERIFY(def != NULL);
+    QVERIFY(def != nullptr);
 
     QLCFixtureMode* mode = def->mode("Mode 1");
-    QVERIFY(mode != NULL);
+    QVERIFY(mode != nullptr);
 
     Fixture* fxi = new Fixture(doc);
     fxi->setFixtureDefinition(def, mode);

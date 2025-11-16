@@ -37,7 +37,7 @@ ScriptRunner::ScriptRunner(Doc *doc, QString &content, QObject *parent)
     , m_doc(doc)
     , m_content(content)
     , m_running(false)
-    , m_engine(NULL)
+    , m_engine(nullptr)
     , m_stopOnExit(true)
     , m_waitCount(0)
     , m_waitFunctionId(Function::invalidId())
@@ -68,14 +68,14 @@ void ScriptRunner::stop()
     {
         m_engine->setInterrupted(true);
         m_engine->deleteLater();
-        m_engine = NULL;
+        m_engine = nullptr;
     }
 
     // Stop all functions started by this script
     foreach (quint32 fID, m_startedFunctions)
     {
         Function *function = m_doc->function(fID);
-        if (function == NULL)
+        if (function == nullptr)
             continue;
 
         function->stop(FunctionParent::master());
@@ -182,7 +182,7 @@ bool ScriptRunner::write(MasterTimer *timer, QList<Universe *> universes)
             FunctionOperation operation = pair.second;
 
             Function *function = m_doc->function(fID);
-            if (function == NULL)
+            if (function == nullptr)
             {
                 qWarning() << QString("No such function (ID %1)").arg(fID);
                 continue;
@@ -315,7 +315,7 @@ bool ScriptRunner::setFixture(quint32 fxID, quint32 channel, uchar value, uint t
     qDebug() << Q_FUNC_INFO;
 
     Fixture *fxi = m_doc->fixture(fxID);
-    if (fxi == NULL)
+    if (fxi == nullptr)
     {
         qWarning() << QString("No such fixture (ID: %1)").arg(fxID);
         return false;
@@ -356,13 +356,13 @@ bool ScriptRunner::stopOnExit(bool value)
 Function* ScriptRunner::getFunctionIfRunning(quint32 fID)
 {
     if (m_running == false)
-        return NULL;
+        return nullptr;
 
     Function *function = m_doc->function(fID);
-    if (function == NULL)
+    if (function == nullptr)
     {
         qWarning() << QString("No such function (ID %1)").arg(fID);
-        return NULL;
+        return nullptr;
     }
 
     return function;
@@ -371,7 +371,7 @@ Function* ScriptRunner::getFunctionIfRunning(quint32 fID)
 bool ScriptRunner::enqueueFunction(quint32 fID, FunctionOperation operation)
 {
     Function *function = getFunctionIfRunning(fID);
-    if (function == NULL)
+    if (function == nullptr)
         return false;
 
     QPair<quint32, FunctionOperation> pair;
@@ -396,19 +396,19 @@ bool ScriptRunner::stopFunction(quint32 fID)
 bool ScriptRunner::isFunctionRunning(quint32 fID)
 {
     Function *function = getFunctionIfRunning(fID);
-    return function == NULL ? false : function->isRunning();
+    return function == nullptr ? false : function->isRunning();
 }
 
 float ScriptRunner::getFunctionAttribute(quint32 fID, int attributeIndex)
 {
     Function *function = getFunctionIfRunning(fID);
-    return function == NULL ? 0 : function->getAttributeValue(attributeIndex);
+    return function == nullptr ? 0 : function->getAttributeValue(attributeIndex);
 }
 
 bool ScriptRunner::setFunctionAttribute(quint32 fID, int attributeIndex, float value)
 {
     Function *function = getFunctionIfRunning(fID);
-    if (function == NULL)
+    if (function == nullptr)
         return false;
 
     function->adjustAttribute(value, attributeIndex);
@@ -419,7 +419,7 @@ bool ScriptRunner::setFunctionAttribute(quint32 fID, int attributeIndex, float v
 bool ScriptRunner::setFunctionAttribute(quint32 fID, QString attributeName, float value)
 {
     Function *function = getFunctionIfRunning(fID);
-    if (function == NULL)
+    if (function == nullptr)
         return false;
 
     int attrIndex = function->getAttributeIndex(attributeName);

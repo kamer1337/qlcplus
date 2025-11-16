@@ -33,13 +33,13 @@
 
 void VCFrameProperties_Test::initTestCase()
 {
-    m_doc = NULL;
+    m_doc = nullptr;
 }
 
 void VCFrameProperties_Test::init()
 {
     m_doc = new Doc(this);
-    new VirtualConsole(NULL, m_doc);
+    new VirtualConsole(nullptr, m_doc);
 }
 
 void VCFrameProperties_Test::cleanup()

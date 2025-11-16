@@ -27,7 +27,7 @@
 
 AudioRendererPortAudio::AudioRendererPortAudio(QString device, QObject * parent)
     : AudioRenderer(parent)
-    , m_paStream(NULL)
+    , m_paStream(nullptr)
     , m_device(device)
     , m_channels(0)
     , m_frameSize(0)
@@ -106,7 +106,7 @@ bool AudioRendererPortAudio::initialize(quint32 freq, int chan, AudioFormat form
 
     outputParameters.channelCount = chan;       /* stereo output */
     outputParameters.suggestedLatency = Pa_GetDeviceInfo(outputParameters.device)->defaultLowOutputLatency;
-    outputParameters.hostApiSpecificStreamInfo = NULL;
+    outputParameters.hostApiSpecificStreamInfo = nullptr;
 
     switch (format)
     {
@@ -131,7 +131,7 @@ bool AudioRendererPortAudio::initialize(quint32 freq, int chan, AudioFormat form
         return false;
     }
 
-    err = Pa_OpenStream(&m_paStream, NULL, &outputParameters,
+    err = Pa_OpenStream(&m_paStream, nullptr, &outputParameters,
               freq, paFramesPerBufferUnspecified, flags, dataCallback, this);
 
     if (err != paNoError)
@@ -170,7 +170,7 @@ QList<AudioDeviceInfo> AudioRendererPortAudio::getDevicesInfo()
     for (i = 0; i < numDevices; i++)
     {
         const PaDeviceInfo *deviceInfo = Pa_GetDeviceInfo(i);
-        if (deviceInfo != NULL)
+        if (deviceInfo != nullptr)
         {
             AudioDeviceInfo info;
             info.deviceName = QString(deviceInfo->name);
@@ -211,7 +211,7 @@ void AudioRendererPortAudio::drain()
 void AudioRendererPortAudio::reset()
 {
     QMutexLocker locker(&m_paMutex);
-    if (m_paStream == NULL)
+    if (m_paStream == nullptr)
         return;
 
     PaError err;
@@ -223,7 +223,7 @@ void AudioRendererPortAudio::reset()
     if (err != paNoError)
         qDebug() << "PortAudio Error: Close stream failed!";
     m_buffer.clear();
-    m_paStream = NULL;
+    m_paStream = nullptr;
 }
 
 void AudioRendererPortAudio::suspend()

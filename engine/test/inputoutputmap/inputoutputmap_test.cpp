@@ -55,7 +55,7 @@ void InputOutputMap_Test::initTestCase()
 void InputOutputMap_Test::cleanupTestCase()
 {
     delete m_doc;
-    m_doc = NULL;
+    m_doc = nullptr;
 }
 
 void InputOutputMap_Test::initial()
@@ -83,7 +83,7 @@ void InputOutputMap_Test::pluginInputs()
 
     IOPluginStub* stub = static_cast<IOPluginStub*>
                                 (m_doc->ioPluginCache()->plugins().at(0));
-    QVERIFY(stub != NULL);
+    QVERIFY(stub != nullptr);
 
     QVERIFY(im.pluginInputs(stub->name()).size() == 4);
     QVERIFY(im.pluginInputs(stub->name()) == stub->inputs());
@@ -98,7 +98,7 @@ void InputOutputMap_Test::pluginOutputs()
 
     IOPluginStub* stub = static_cast<IOPluginStub*>
                                 (m_doc->ioPluginCache()->plugins().at(0));
-    QVERIFY(stub != NULL);
+    QVERIFY(stub != nullptr);
 
     QStringList ls(om.pluginOutputs(stub->name()));
     QVERIFY(ls == stub->outputs());
@@ -114,7 +114,7 @@ void InputOutputMap_Test::configurePlugin()
 
     IOPluginStub* stub = static_cast<IOPluginStub*>
                                 (m_doc->ioPluginCache()->plugins().at(0));
-    QVERIFY(stub != NULL);
+    QVERIFY(stub != nullptr);
 
     QCOMPARE(im.canConfigurePlugin("Foo"), false);
     QCOMPARE(im.canConfigurePlugin(stub->name()), false);
@@ -142,7 +142,7 @@ void InputOutputMap_Test::inputPluginStatus()
 
     IOPluginStub* stub = static_cast<IOPluginStub*>
                                 (m_doc->ioPluginCache()->plugins().at(0));
-    QVERIFY(stub != NULL);
+    QVERIFY(stub != nullptr);
 
     QVERIFY(im.inputPluginStatus(stub->name(), QLCIOPlugin::invalidLine()) == stub->inputInfo(QLCIOPlugin::invalidLine()));
     QVERIFY(im.inputPluginStatus(stub->name(), 0) == stub->inputInfo(0));
@@ -165,7 +165,7 @@ void InputOutputMap_Test::outputPluginStatus()
 
     IOPluginStub* stub = static_cast<IOPluginStub*>
                                 (m_doc->ioPluginCache()->plugins().at(0));
-    QVERIFY(stub != NULL);
+    QVERIFY(stub != nullptr);
 
     QVERIFY(om.outputPluginStatus(stub->name(), 4) == stub->outputInfo(QLCIOPlugin::invalidLine()));
     QVERIFY(om.outputPluginStatus(stub->name(), 0) == stub->outputInfo(0));
@@ -185,7 +185,7 @@ void InputOutputMap_Test::universeNames()
 
     IOPluginStub* stub = static_cast<IOPluginStub*>
                                 (m_doc->ioPluginCache()->plugins().at(0));
-    QVERIFY(stub != NULL);
+    QVERIFY(stub != nullptr);
 
     iom.setOutputPatch(0, stub->name(), "", 3);
     QCOMPARE(quint32(iom.universeNames().size()), iom.universesCount());
@@ -280,7 +280,7 @@ void InputOutputMap_Test::profiles()
     QVERIFY(im.profileNames().size() == 1);
     QVERIFY(im.profileNames().at(0) == prof->name());
     QVERIFY(im.profile(prof->name()) == prof);
-    QVERIFY(im.profile("Foobar") == NULL);
+    QVERIFY(im.profile("Foobar") == nullptr);
 
     QVERIFY(im.removeProfile("Foobar") == false);
     QVERIFY(im.m_profiles.size() == 1);
@@ -294,17 +294,17 @@ void InputOutputMap_Test::setInputPatch()
 
     IOPluginStub* stub = static_cast<IOPluginStub*>
                                 (m_doc->ioPluginCache()->plugins().at(0));
-    QVERIFY(stub != NULL);
+    QVERIFY(stub != nullptr);
 
     QLCInputProfile* prof = new QLCInputProfile();
     prof->setManufacturer("Foo");
     prof->setModel("Bar");
     im.addProfile(prof);
 
-    QVERIFY(im.inputPatch(0) == NULL);
-    QVERIFY(im.inputPatch(1) == NULL);
-    QVERIFY(im.inputPatch(2) == NULL);
-    QVERIFY(im.inputPatch(3) == NULL);
+    QVERIFY(im.inputPatch(0) == nullptr);
+    QVERIFY(im.inputPatch(1) == nullptr);
+    QVERIFY(im.inputPatch(2) == nullptr);
+    QVERIFY(im.inputPatch(3) == nullptr);
     QVERIFY(im.inputMapping(stub->name(), 0) == InputOutputMap::invalidUniverse());
     QVERIFY(im.inputMapping(stub->name(), 1) == InputOutputMap::invalidUniverse());
     QVERIFY(im.inputMapping(stub->name(), 2) == InputOutputMap::invalidUniverse());
@@ -313,41 +313,41 @@ void InputOutputMap_Test::setInputPatch()
     QVERIFY(im.isUniversePatched(42) == false);
 
     QVERIFY(im.setInputPatch(0, "Foobar", "", 0, prof->name()) == true);
-    QVERIFY(im.inputPatch(0) == NULL);
+    QVERIFY(im.inputPatch(0) == nullptr);
     QVERIFY(im.inputMapping(stub->name(), 0) == InputOutputMap::invalidUniverse());
 
-    QVERIFY(im.inputPatch(1) == NULL);
+    QVERIFY(im.inputPatch(1) == nullptr);
     QVERIFY(im.inputMapping(stub->name(), 1) == InputOutputMap::invalidUniverse());
 
-    QVERIFY(im.inputPatch(2) == NULL);
+    QVERIFY(im.inputPatch(2) == nullptr);
     QVERIFY(im.inputMapping(stub->name(), 2) == InputOutputMap::invalidUniverse());
 
-    QVERIFY(im.inputPatch(3) == NULL);
+    QVERIFY(im.inputPatch(3) == nullptr);
     QVERIFY(im.inputMapping(stub->name(), 3) == InputOutputMap::invalidUniverse());
 
     QVERIFY(im.setInputPatch(0, stub->name(), stub->inputs().at(0), 0) == true);
     QVERIFY(im.inputPatch(0)->plugin() == stub);
     QVERIFY(im.inputPatch(0)->input() == 0);
-    QVERIFY(im.inputPatch(0)->profile() == NULL);
+    QVERIFY(im.inputPatch(0)->profile() == nullptr);
     QVERIFY(im.inputMapping(stub->name(), 0) == 0);
     QVERIFY(im.isUniversePatched(0) == true);
 
-    QVERIFY(im.inputPatch(1) == NULL);
+    QVERIFY(im.inputPatch(1) == nullptr);
     QVERIFY(im.inputMapping(stub->name(), 1) == InputOutputMap::invalidUniverse());
 
-    QVERIFY(im.inputPatch(2) == NULL);
+    QVERIFY(im.inputPatch(2) == nullptr);
     QVERIFY(im.inputMapping(stub->name(), 2) == InputOutputMap::invalidUniverse());
 
-    QVERIFY(im.inputPatch(3) == NULL);
+    QVERIFY(im.inputPatch(3) == nullptr);
     QVERIFY(im.inputMapping(stub->name(), 3) == InputOutputMap::invalidUniverse());
 
     QVERIFY(im.setInputPatch(2, stub->name(), stub->inputs().at(3), 3, prof->name()) == true);
     QVERIFY(im.inputPatch(0)->plugin() == stub);
     QVERIFY(im.inputPatch(0)->input() == 0);
-    QVERIFY(im.inputPatch(0)->profile() == NULL);
+    QVERIFY(im.inputPatch(0)->profile() == nullptr);
     QVERIFY(im.inputMapping(stub->name(), 0) == 0);
 
-    QVERIFY(im.inputPatch(1) == NULL);
+    QVERIFY(im.inputPatch(1) == nullptr);
     QVERIFY(im.inputMapping(stub->name(), 1) == InputOutputMap::invalidUniverse());
 
     QVERIFY(im.inputPatch(2)->plugin() == stub);
@@ -355,7 +355,7 @@ void InputOutputMap_Test::setInputPatch()
     QVERIFY(im.inputPatch(2)->profile() == prof);
     QVERIFY(im.inputMapping(stub->name(), 2) == InputOutputMap::invalidUniverse());
 
-    QVERIFY(im.inputPatch(3) == NULL);
+    QVERIFY(im.inputPatch(3) == nullptr);
     QVERIFY(im.inputMapping(stub->name(), 3) == 2);
 
     // Universe out of bounds
@@ -369,25 +369,25 @@ void InputOutputMap_Test::setOutputPatch()
 
     IOPluginStub* stub = static_cast<IOPluginStub*>
                                 (m_doc->ioPluginCache()->plugins().at(0));
-    QVERIFY(stub != NULL);
+    QVERIFY(stub != nullptr);
 
     QVERIFY(iom.setOutputPatch(0, "Foobar", "", 0) == false);
-    QVERIFY(iom.outputPatch(0) == NULL);
-    QVERIFY(iom.outputPatch(1) == NULL);
-    QVERIFY(iom.outputPatch(2) == NULL);
-    QVERIFY(iom.outputPatch(3) == NULL);
+    QVERIFY(iom.outputPatch(0) == nullptr);
+    QVERIFY(iom.outputPatch(1) == nullptr);
+    QVERIFY(iom.outputPatch(2) == nullptr);
+    QVERIFY(iom.outputPatch(3) == nullptr);
 
     QVERIFY(iom.setOutputPatch(4, stub->name(), "", 0) == false);
-    QVERIFY(iom.outputPatch(0) == NULL);
-    QVERIFY(iom.outputPatch(1) == NULL);
-    QVERIFY(iom.outputPatch(2) == NULL);
-    QVERIFY(iom.outputPatch(3) == NULL);
+    QVERIFY(iom.outputPatch(0) == nullptr);
+    QVERIFY(iom.outputPatch(1) == nullptr);
+    QVERIFY(iom.outputPatch(2) == nullptr);
+    QVERIFY(iom.outputPatch(3) == nullptr);
 
     QVERIFY(iom.setOutputPatch(4, stub->name(), "", 4) == false);
-    QVERIFY(iom.outputPatch(0) == NULL);
-    QVERIFY(iom.outputPatch(1) == NULL);
-    QVERIFY(iom.outputPatch(2) == NULL);
-    QVERIFY(iom.outputPatch(3) == NULL);
+    QVERIFY(iom.outputPatch(0) == nullptr);
+    QVERIFY(iom.outputPatch(1) == nullptr);
+    QVERIFY(iom.outputPatch(2) == nullptr);
+    QVERIFY(iom.outputPatch(3) == nullptr);
 
     QVERIFY(iom.setOutputPatch(3, stub->name(), stub->outputs().at(0), 0) == true);
     QVERIFY(iom.outputPatch(3)->plugin() == stub);
@@ -408,8 +408,8 @@ void InputOutputMap_Test::setOutputPatch()
     QVERIFY(iom.outputMapping("Foo", 42) == QLCIOPlugin::invalidLine());
     QVERIFY(iom.outputMapping(stub->name(), 0) == 3);
 
-    QVERIFY(iom.feedbackPatch(42) == NULL);
-    QVERIFY(iom.feedbackPatch(0) == NULL);
+    QVERIFY(iom.feedbackPatch(42) == nullptr);
+    QVERIFY(iom.feedbackPatch(0) == nullptr);
 }
 
 void InputOutputMap_Test::setMultipleOutputPatches()
@@ -418,7 +418,7 @@ void InputOutputMap_Test::setMultipleOutputPatches()
 
     IOPluginStub* stub = static_cast<IOPluginStub*>
                                 (m_doc->ioPluginCache()->plugins().at(0));
-    QVERIFY(stub != NULL);
+    QVERIFY(stub != nullptr);
 
     // add an output patch
     QVERIFY(iom.setOutputPatch(1, stub->name(), "", 0, false, 0) == true);
@@ -437,7 +437,7 @@ void InputOutputMap_Test::setMultipleOutputPatches()
     QVERIFY(iom.outputPatchesCount(1) == 1);
     QVERIFY(iom.outputPatch(1, 0)->plugin() == stub);
     QVERIFY(iom.outputPatch(1, 0)->output() == 0);
-    QVERIFY(iom.outputPatch(1, 1) == NULL);
+    QVERIFY(iom.outputPatch(1, 1) == nullptr);
 
     // remove the first output patch again
     QVERIFY(iom.setOutputPatch(1, stub->name(), "", QLCIOPlugin::invalidLine(), false, 0) == true);
@@ -450,7 +450,7 @@ void InputOutputMap_Test::slotValueChanged()
 
     IOPluginStub* stub = static_cast<IOPluginStub*>
                                 (m_doc->ioPluginCache()->plugins().at(0));
-    QVERIFY(stub != NULL);
+    QVERIFY(stub != nullptr);
 
     QVERIFY(im.setInputPatch(0, stub->name(), stub->inputs().at(0), 0) == true);
     QVERIFY(im.inputPatch(0)->plugin() == stub);
@@ -529,7 +529,7 @@ void InputOutputMap_Test::slotConfigurationChanged()
 
     IOPluginStub* stub = static_cast<IOPluginStub*>
                                 (m_doc->ioPluginCache()->plugins().at(0));
-    QVERIFY(stub != NULL);
+    QVERIFY(stub != nullptr);
 
     QSignalSpy spy(&im, SIGNAL(pluginConfigurationChanged(QString, bool)));
     stub->configure();
@@ -572,7 +572,7 @@ void InputOutputMap_Test::inputSourceNames()
     InputOutputMap im(m_doc, 4);
 
     IOPluginStub* stub = static_cast<IOPluginStub*> (m_doc->ioPluginCache()->plugins().at(0));
-    QVERIFY(stub != NULL);
+    QVERIFY(stub != nullptr);
 
     QDir dir(INTERNAL_PROFILEDIR);
     dir.setFilter(QDir::Files);
@@ -636,7 +636,7 @@ void InputOutputMap_Test::claimReleaseDumpReset()
 
     IOPluginStub* stub = static_cast<IOPluginStub*>
                                 (m_doc->ioPluginCache()->plugins().at(0));
-    QVERIFY(stub != NULL);
+    QVERIFY(stub != nullptr);
 
     iom.setOutputPatch(0, stub->name(), stub->outputs().at(0), 0);
     iom.setOutputPatch(1, stub->name(), stub->outputs().at(1), 1);
@@ -686,7 +686,7 @@ void InputOutputMap_Test::blackout()
 
     IOPluginStub* stub = static_cast<IOPluginStub*>
                                 (m_doc->ioPluginCache()->plugins().at(0));
-    QVERIFY(stub != NULL);
+    QVERIFY(stub != nullptr);
 
     iom.setOutputPatch(0, stub->name(), stub->outputs().at(0), 0);
     iom.setOutputPatch(1, stub->name(), stub->outputs().at(1), 1);

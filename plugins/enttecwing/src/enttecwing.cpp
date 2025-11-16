@@ -158,7 +158,7 @@ QString EnttecWing::inputInfo(quint32 input)
         /* A specific input line selected. Display its information if
            available. */
         Wing* dev = device(input);
-        if (dev != NULL)
+        if (dev != nullptr)
             str += dev->infoText();
     }
 
@@ -174,7 +174,7 @@ void EnttecWing::sendFeedBack(quint32 universe, quint32 input,
     Q_UNUSED(universe)
 
     Wing* wing = device(input);
-    if (wing != NULL)
+    if (wing != nullptr)
         wing->feedBack(channel, value);
 }
 
@@ -200,11 +200,11 @@ bool EnttecWing::canConfigure()
 Wing* EnttecWing::createWing(QObject* parent, const QHostAddress& address,
                               const QByteArray& data)
 {
-    Wing* wing = NULL;
+    Wing* wing = nullptr;
 
     /* Check, that the message is from an ENTTEC Wing */
     if (Wing::isOutputData(data) == false)
-        return NULL;
+        return nullptr;
 
     switch (Wing::resolveType(data))
     {
@@ -218,7 +218,7 @@ Wing* EnttecWing::createWing(QObject* parent, const QHostAddress& address,
         wing = new ProgramWing(parent, address, data);
         break;
     default:
-        wing = NULL;
+        wing = nullptr;
         break;
     }
 
@@ -235,7 +235,7 @@ Wing* EnttecWing::device(const QHostAddress& address, Wing::Type type)
             return dev;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 Wing* EnttecWing::device(quint32 index)
@@ -243,7 +243,7 @@ Wing* EnttecWing::device(quint32 index)
     if (index < quint32(m_devices.count()))
         return m_devices.at(index);
     else
-        return NULL;
+        return nullptr;
 }
 
 static bool wing_device_sort(const Wing* d1, const Wing* d2)
@@ -254,7 +254,7 @@ static bool wing_device_sort(const Wing* d1, const Wing* d2)
 
 void EnttecWing::addDevice(Wing* device)
 {
-    Q_ASSERT(device != NULL);
+    Q_ASSERT(device != nullptr);
 
     connect(device, SIGNAL(valueChanged(quint32,uchar)),
             this, SLOT(slotValueChanged(quint32,uchar)));
@@ -272,7 +272,7 @@ void EnttecWing::addDevice(Wing* device)
 
 void EnttecWing::removeDevice(Wing* device)
 {
-    Q_ASSERT(device != NULL);
+    Q_ASSERT(device != nullptr);
     m_devices.removeAll(device);
     delete device;
 
@@ -293,11 +293,11 @@ void EnttecWing::slotReadSocket()
 
         /* Check, whether we already have a device from this address */
         wing = device(sender, Wing::resolveType(data));
-        if (wing == NULL)
+        if (wing == nullptr)
         {
             /* New address. Create a new device. */
             wing = createWing(this, sender, data);
-            if (wing != NULL)
+            if (wing != nullptr)
                 addDevice(wing);
         }
         else

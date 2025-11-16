@@ -50,7 +50,7 @@ QList<QString> QLCModifiersCache::templateNames()
 
 ChannelModifier *QLCModifiersCache::modifier(QString name)
 {
-    return m_modifiers.value(name, NULL);
+    return m_modifiers.value(name, nullptr);
 }
 
 QDir QLCModifiersCache::systemTemplateDirectory()
@@ -86,7 +86,7 @@ bool QLCModifiersCache::load(const QDir& dir, bool systemTemplates)
         if (path.toLower().endsWith(KExtModifierTemplate) == true)
         {
             ChannelModifier* chMod = new ChannelModifier();
-            Q_ASSERT(chMod != NULL);
+            Q_ASSERT(chMod != nullptr);
 
             QFile::FileError error = chMod->loadXML(path, type);
             if (error == QFile::NoError)
@@ -95,7 +95,7 @@ bool QLCModifiersCache::load(const QDir& dir, bool systemTemplates)
                 if (addModifier(chMod) == false)
                 {
                     delete chMod;
-                    chMod = NULL;
+                    chMod = nullptr;
                 }
             }
             else
@@ -103,7 +103,7 @@ bool QLCModifiersCache::load(const QDir& dir, bool systemTemplates)
                 qWarning() << Q_FUNC_INFO << "Channel modifier template loading from"
                            << path << "failed:" << QLCFile::errorString(error);
                 delete chMod;
-                chMod = NULL;
+                chMod = nullptr;
             }
         }
         else

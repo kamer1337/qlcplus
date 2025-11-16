@@ -35,7 +35,7 @@ static bool compareShowFunctions(const ShowFunction *sf1, const ShowFunction *sf
 }
 
 ShowRunner::ShowRunner(const Doc* doc, quint32 showID, quint32 startTime)
-    : QObject(NULL)
+    : QObject(nullptr)
     , m_doc(doc)
     , m_currentTimeFunctionIndex(0)
     , m_elapsedTime(startTime)
@@ -44,17 +44,17 @@ ShowRunner::ShowRunner(const Doc* doc, quint32 showID, quint32 startTime)
     , beatSynced(false)
     , m_totalRunTime(0)
 {
-    Q_ASSERT(m_doc != NULL);
+    Q_ASSERT(m_doc != nullptr);
     Q_ASSERT(showID != Show::invalidId());
 
     m_show = qobject_cast<Show*>(m_doc->function(showID));
-    if (m_show == NULL)
+    if (m_show == nullptr)
         return;
 
     foreach (Track *track, m_show->tracks())
     {
         // some sanity checks
-        if (track == NULL ||
+        if (track == nullptr ||
             track->id() == Track::invalidId())
                 continue;
 
@@ -68,7 +68,7 @@ ShowRunner::ShowRunner(const Doc* doc, quint32 showID, quint32 startTime)
                 continue;
 
             Function *f = m_doc->function(sfunc->functionID());
-            if (f == NULL)
+            if (f == nullptr)
                 continue;
 
             if (f->tempoType() == Function::Time)
@@ -271,7 +271,7 @@ void ShowRunner::write(MasterTimer *timer)
     // Phase 3. Check if this is the end of the Show
     if (m_elapsedTime >= m_totalRunTime)
     {
-        if (m_show != NULL)
+        if (m_show != nullptr)
             m_show->stop(functionParent());
         emit showFinished();
         return;
@@ -287,7 +287,7 @@ void ShowRunner::write(MasterTimer *timer)
 
 void ShowRunner::adjustIntensity(qreal fraction, Track *track)
 {
-    if (track == NULL)
+    if (track == nullptr)
         return;
 
     qDebug() << Q_FUNC_INFO << "Track ID: " << track->id() << ", val:" << fraction;
@@ -296,7 +296,7 @@ void ShowRunner::adjustIntensity(qreal fraction, Track *track)
     foreach (ShowFunction *sf, track->showFunctions())
     {
         Function *f = m_doc->function(sf->functionID());
-        if (f == NULL)
+        if (f == nullptr)
             continue;
 
         for (int i = 0; i < m_runningQueue.count(); i++)

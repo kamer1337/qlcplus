@@ -97,7 +97,7 @@ bool VCFramePageShortcut::loadXML(QXmlStreamReader &root)
 
 bool VCFramePageShortcut::saveXML(QXmlStreamWriter *doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     doc->writeStartElement(KXMLQLCVCFramePageShortcut);
     doc->writeAttribute(KXMLQLCVCFramePageShortcutPage, QString::number(m_page));

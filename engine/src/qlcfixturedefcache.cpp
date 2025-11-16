@@ -61,7 +61,7 @@ QLCFixtureDef* QLCFixtureDefCache::fixtureDef(
         }
     }
 
-    return NULL;
+    return nullptr;
 }
 
 QStringList QLCFixtureDefCache::manufacturers() const
@@ -116,7 +116,7 @@ QMap<QString, QMap<QString, bool> > QLCFixtureDefCache::fixtureCache() const
 
 bool QLCFixtureDefCache::addFixtureDef(QLCFixtureDef* fixtureDef)
 {
-    if (fixtureDef == NULL)
+    if (fixtureDef == nullptr)
         return false;
 
     if (models(fixtureDef->manufacturer()).contains(fixtureDef->model()) == false)
@@ -222,7 +222,7 @@ int QLCFixtureDefCache::loadMapManufacturer(QXmlStreamReader *doc, QString manuf
                 model.isEmpty() == false)
             {
                 QLCFixtureDef *fxi = new QLCFixtureDef();
-                Q_ASSERT(fxi != NULL);
+                Q_ASSERT(fxi != nullptr);
 
                 fxi->setDefinitionSourceFile(defFile);
                 fxi->setManufacturer(spacedManufacturer);
@@ -231,7 +231,7 @@ int QLCFixtureDefCache::loadMapManufacturer(QXmlStreamReader *doc, QString manuf
                 /* Delete the def if it's a duplicate. */
                 if (addFixtureDef(fxi) == false)
                     delete fxi;
-                fxi = NULL;
+                fxi = nullptr;
                 count++;
             }
         }
@@ -262,7 +262,7 @@ bool QLCFixtureDefCache::loadMap(const QDir &dir)
     m_mapAbsolutePath = dir.absolutePath();
 
     QXmlStreamReader *doc = QLCFile::getXMLReader(mapPath);
-    if (doc == NULL || doc->device() == NULL || doc->hasError())
+    if (doc == nullptr || doc->device() == nullptr || doc->hasError())
     {
         qWarning() << Q_FUNC_INFO << "Unable to read from" << mapPath;
         return false;
@@ -375,7 +375,7 @@ QDir QLCFixtureDefCache::userDefinitionDirectory()
 bool QLCFixtureDefCache::loadQXF(const QString& path, bool isUser)
 {
     QLCFixtureDef *fxi = new QLCFixtureDef();
-    Q_ASSERT(fxi != NULL);
+    Q_ASSERT(fxi != nullptr);
 
     QFile::FileError error = fxi->loadXML(path);
     if (error == QFile::NoError)
@@ -387,14 +387,14 @@ bool QLCFixtureDefCache::loadQXF(const QString& path, bool isUser)
         /* Delete the def if it's a duplicate. */
         if (addFixtureDef(fxi) == false)
             delete fxi;
-        fxi = NULL;
+        fxi = nullptr;
     }
     else
     {
         qWarning() << Q_FUNC_INFO << "Fixture definition loading from"
                    << path << "failed:" << QLCFile::errorString(error);
         delete fxi;
-        fxi = NULL;
+        fxi = nullptr;
         return false;
     }
     return true;
@@ -423,7 +423,7 @@ bool QLCFixtureDefCache::loadD4(const QString& path)
         qDebug() << Q_FUNC_INFO << "Deleting duplicate" << path;
         delete fxi;
     }
-    fxi = NULL;
+    fxi = nullptr;
 
     return true;
 }

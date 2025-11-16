@@ -30,7 +30,7 @@ RGBMatrixItem::RGBMatrixItem(RGBMatrix *rgbm, ShowFunction *func)
     : ShowItem(func)
     , m_matrix(rgbm)
 {
-    Q_ASSERT(rgbm != NULL);
+    Q_ASSERT(rgbm != nullptr);
 
     if (func->color().isValid())
         setColor(func->color());

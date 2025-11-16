@@ -69,7 +69,7 @@ int HIDPlugin::capabilities() const
 bool HIDPlugin::openInput(quint32 input, quint32 universe)
 {
     HIDDevice* dev = device(input);
-    if (dev != NULL)
+    if (dev != nullptr)
     {
         connect(dev, SIGNAL(valueChanged(quint32,quint32,quint32,uchar)),
                 this, SIGNAL(valueChanged(quint32,quint32,quint32,uchar)));
@@ -84,7 +84,7 @@ bool HIDPlugin::openInput(quint32 input, quint32 universe)
 void HIDPlugin::closeInput(quint32 input, quint32 universe)
 {
     HIDDevice* dev = device(input);
-    if (dev != NULL)
+    if (dev != nullptr)
     {
         removeFromMap(input, universe, Input);
         dev->closeInput();
@@ -137,7 +137,7 @@ QString HIDPlugin::inputInfo(quint32 input)
         /* A specific input line selected. Display its information if
            available. */
         HIDDevice* dev = device(input);
-        if (dev != NULL)
+        if (dev != nullptr)
             str += dev->infoText();
     }
 
@@ -153,7 +153,7 @@ QString HIDPlugin::inputInfo(quint32 input)
 bool HIDPlugin::openOutput(quint32 output, quint32 universe)
 {
     HIDDevice* dev = deviceOutput(output);
-    if (dev != NULL)
+    if (dev != nullptr)
     {
         addToMap(universe, output, Output);
         return dev->openOutput();
@@ -166,7 +166,7 @@ bool HIDPlugin::openOutput(quint32 output, quint32 universe)
 void HIDPlugin::closeOutput(quint32 output, quint32 universe)
 {
     HIDDevice* dev = deviceOutput(output);
-    if (dev != NULL)
+    if (dev != nullptr)
     {
         removeFromMap(output, universe, Output);
         dev->closeOutput();
@@ -199,7 +199,7 @@ QString HIDPlugin::outputInfo(quint32 output)
         /* A specific output line selected. Display its information if
            available. */
         HIDDevice* dev = deviceOutput(output);
-        if (dev != NULL)
+        if (dev != nullptr)
             str += dev->infoText();
     }
 
@@ -217,7 +217,7 @@ void HIDPlugin::writeUniverse(quint32 universe, quint32 output, const QByteArray
     if (output != QLCIOPlugin::invalidLine())
     {
         HIDDevice *dev = deviceOutput(output);
-        if (dev != NULL)
+        if (dev != nullptr)
             dev->outputDMX(data);
     }
 }
@@ -228,7 +228,7 @@ void HIDPlugin::writeUniverse(quint32 universe, quint32 output, const QByteArray
 
 void HIDPlugin::configure()
 {
-    ConfigureHID conf(NULL, this);
+    ConfigureHID conf(nullptr, this);
     conf.exec();
 }
 
@@ -260,7 +260,7 @@ void HIDPlugin::rescanDevices()
         //qDebug() << "[HID Device found] path:" << QString(cur_dev->path) << ", name:" << QString::fromWCharArray(cur_dev->product_string);
 
         HIDDevice* dev = device(QString(cur_dev->path));
-        if (dev != NULL)
+        if (dev != nullptr)
         {
             /** Device already exists, delete from remove list */
             destroyList.removeAll(dev);
@@ -326,7 +326,7 @@ HIDDevice* HIDPlugin::device(const QString& path)
             return dev;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 HIDDevice* HIDPlugin::device(quint32 index)
@@ -334,7 +334,7 @@ HIDDevice* HIDPlugin::device(quint32 index)
     if (index < quint32(m_devices.count()))
         return m_devices.at(index);
     else
-        return NULL;
+        return nullptr;
 }
 
 HIDDevice* HIDPlugin::deviceOutput(quint32 index)
@@ -352,12 +352,12 @@ HIDDevice* HIDPlugin::deviceOutput(quint32 index)
                 pos++;
         }
     }
-    return NULL;
+    return nullptr;
 }
 
 void HIDPlugin::addDevice(HIDDevice* device)
 {
-    Q_ASSERT(device != NULL);
+    Q_ASSERT(device != nullptr);
 
     m_devices.append(device);
     emit deviceAdded(device);
@@ -367,7 +367,7 @@ void HIDPlugin::addDevice(HIDDevice* device)
 
 void HIDPlugin::removeDevice(HIDDevice* device)
 {
-    Q_ASSERT(device != NULL);
+    Q_ASSERT(device != nullptr);
 
     m_devices.removeAll(device);
 

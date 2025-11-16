@@ -89,7 +89,7 @@ public:
     QByteArray read(int size);
 
     /** @reimpl */
-    uchar readByte(bool* ok = NULL);
+    uchar readByte(bool* ok = nullptr);
 
 private:
     FT_HANDLE m_handle;

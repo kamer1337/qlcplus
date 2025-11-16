@@ -88,7 +88,7 @@ VCCueList::VCCueList(QWidget *parent, Doc *doc) : VCWidget(parent, doc)
     , m_chaserID(Function::invalidId())
     , m_nextPrevBehavior(DefaultRunFirst)
     , m_playbackLayout(PlayPauseStop)
-    , m_timer(NULL)
+    , m_timer(nullptr)
     , m_primaryIndex(0)
     , m_secondaryIndex(0)
     , m_primaryTop(true)
@@ -295,13 +295,13 @@ void VCCueList::enableWidgetUI(bool enable)
 
 VCWidget *VCCueList::createCopy(VCWidget *parent)
 {
-    Q_ASSERT(parent != NULL);
+    Q_ASSERT(parent != nullptr);
 
     VCCueList *cuelist = new VCCueList(parent, m_doc);
     if (cuelist->copyFrom(this) == false)
     {
         delete cuelist;
-        cuelist = NULL;
+        cuelist = nullptr;
     }
 
     return cuelist;
@@ -310,7 +310,7 @@ VCWidget *VCCueList::createCopy(VCWidget *parent)
 bool VCCueList::copyFrom(const VCWidget *widget)
 {
     const VCCueList *cuelist = qobject_cast<const VCCueList*> (widget);
-    if (cuelist == NULL)
+    if (cuelist == nullptr)
         return false;
 
     /* Function list contents */
@@ -336,7 +336,7 @@ bool VCCueList::copyFrom(const VCWidget *widget)
 void VCCueList::setChaser(quint32 id)
 {
     Function *old = m_doc->function(m_chaserID);
-    if (old != NULL)
+    if (old != nullptr)
     {
         /* Get rid of old function connections */
         disconnect(old, SIGNAL(running(quint32)),
@@ -348,7 +348,7 @@ void VCCueList::setChaser(quint32 id)
     }
 
     Chaser *chaser = qobject_cast<Chaser*> (m_doc->function(id));
-    if (chaser != NULL)
+    if (chaser != nullptr)
     {
         /* Connect to the new function */
         connect(chaser, SIGNAL(running(quint32)),
@@ -368,7 +368,7 @@ void VCCueList::setChaser(quint32 id)
     updateStepList();
 
     /* Current status */
-    if (chaser != NULL && chaser->isRunning())
+    if (chaser != nullptr && chaser->isRunning())
     {
         slotFunctionRunning(m_chaserID);
         slotCurrentStepChanged(chaser->currentStepIndex());
@@ -385,7 +385,7 @@ quint32 VCCueList::chaserID() const
 Chaser *VCCueList::chaser()
 {
     if (m_chaserID == Function::invalidId())
-        return NULL;
+        return nullptr;
     Chaser *chaser = qobject_cast<Chaser*>(m_doc->function(m_chaserID));
     return chaser;
 }
@@ -397,7 +397,7 @@ void VCCueList::updateStepList()
     m_tree->clear();
 
     Chaser *ch = chaser();
-    if (ch == NULL)
+    if (ch == nullptr)
         return;
 
     QListIterator <ChaserStep> it(ch->steps());
@@ -406,7 +406,7 @@ void VCCueList::updateStepList()
         ChaserStep step(it.next());
 
         Function *function = m_doc->function(step.fid);
-        Q_ASSERT(function != NULL);
+        Q_ASSERT(function != nullptr);
 
         QTreeWidgetItem *item = new QTreeWidgetItem(m_tree);
         item->setFlags(item->flags() | Qt::ItemIsEditable);
@@ -458,7 +458,7 @@ void VCCueList::updateStepList()
     }
 
     QTreeWidgetItem *item = m_tree->topLevelItem(0);
-    if (item != NULL)
+    if (item != nullptr)
         m_defCol = item->background(COL_NUM);
 
     m_tree->header()->resizeSections(QHeaderView::ResizeToContents);
@@ -477,7 +477,7 @@ int VCCueList::getCurrentIndex()
 int VCCueList::getNextIndex()
 {
     Chaser *ch = chaser();
-    if (ch == NULL)
+    if (ch == nullptr)
         return -1;
 
     if (ch->direction() == Function::Forward)
@@ -489,7 +489,7 @@ int VCCueList::getNextIndex()
 int VCCueList::getPrevIndex()
 {
     Chaser *ch = chaser();
-    if (ch == NULL)
+    if (ch == nullptr)
         return -1;
 
     if (ch->direction() == Function::Forward)
@@ -501,7 +501,7 @@ int VCCueList::getPrevIndex()
 int VCCueList::getFirstIndex()
 {
     Chaser *ch = chaser();
-    if (ch == NULL)
+    if (ch == nullptr)
         return -1;
 
     if (ch->direction() == Function::Forward)
@@ -513,7 +513,7 @@ int VCCueList::getFirstIndex()
 int VCCueList::getLastIndex()
 {
     Chaser *ch = chaser();
-    if (ch == NULL)
+    if (ch == nullptr)
         return -1;
 
     if (ch->direction() == Function::Forward)
@@ -592,7 +592,7 @@ void VCCueList::slotFunctionNameChanged(quint32 fid)
     {
         // fid might be an ID of a ChaserStep of m_chaser
         Chaser *ch = chaser();
-        if (ch == NULL)
+        if (ch == nullptr)
             return;
         foreach (ChaserStep step, ch->steps())
         {
@@ -616,7 +616,7 @@ void VCCueList::slotPlayback()
         return;
 
     Chaser *ch = chaser();
-    if (ch == NULL)
+    if (ch == nullptr)
         return;
 
     if (ch->isRunning())
@@ -651,7 +651,7 @@ void VCCueList::slotPlayback()
     }
     else
     {
-        if (m_tree->currentItem() != NULL)
+        if (m_tree->currentItem() != nullptr)
             startChaser(getCurrentIndex());
         else
             startChaser();
@@ -666,7 +666,7 @@ void VCCueList::slotStop()
         return;
 
     Chaser *ch = chaser();
-    if (ch == NULL)
+    if (ch == nullptr)
         return;
 
     if (ch->isRunning())
@@ -711,7 +711,7 @@ void VCCueList::slotNextCue()
         return;
 
     Chaser *ch = chaser();
-    if (ch == NULL)
+    if (ch == nullptr)
         return;
 
     if (ch->isRunning())
@@ -757,7 +757,7 @@ void VCCueList::slotPreviousCue()
         return;
 
     Chaser *ch = chaser();
-    if (ch == NULL)
+    if (ch == nullptr)
         return;
 
     if (ch->isRunning())
@@ -806,7 +806,7 @@ void VCCueList::slotCurrentStepChanged(int stepNumber)
 
     Q_ASSERT(stepNumber < m_tree->topLevelItemCount() && stepNumber >= 0);
     QTreeWidgetItem *item = m_tree->topLevelItem(stepNumber);
-    Q_ASSERT(item != NULL);
+    Q_ASSERT(item != nullptr);
     m_tree->scrollToItem(item, QAbstractItemView::PositionAtCenter);
     m_tree->setCurrentItem(item);
     m_primaryIndex = stepNumber;
@@ -871,7 +871,7 @@ void VCCueList::slotItemChanged(QTreeWidgetItem *item, int column)
         return;
 
     Chaser *ch = chaser();
-    if (ch == NULL)
+    if (ch == nullptr)
         return;
 
     QString itemText = item->text(column);
@@ -887,7 +887,7 @@ void VCCueList::slotItemChanged(QTreeWidgetItem *item, int column)
 void VCCueList::slotStepNoteChanged(int idx, QString note)
 {
     Chaser *ch = chaser();
-    if (ch == NULL)
+    if (ch == nullptr)
         return;
     ChaserStep step = ch->steps().at(idx);
     step.note = note;
@@ -920,7 +920,7 @@ void VCCueList::slotFunctionStopped(quint32 fid)
     m_bottomStepLabel->setStyleSheet(cfLabelNoStyle);
     // reset any previously set background
     QTreeWidgetItem *item = m_tree->topLevelItem(m_secondaryIndex);
-    if (item != NULL)
+    if (item != nullptr)
         item->setBackground(COL_NUM, m_defCol);
 
     emit stepChanged(-1);
@@ -939,11 +939,11 @@ void VCCueList::slotFunctionStopped(quint32 fid)
 void VCCueList::slotProgressTimeout()
 {
     Chaser *ch = chaser();
-    if (ch == NULL || !ch->isRunning())
+    if (ch == nullptr || !ch->isRunning())
         return;
 
     ChaserRunnerStep step(ch->currentRunningStep());
-    if (step.m_function != NULL)
+    if (step.m_function != nullptr)
     {
         int status = m_progress->property("status").toInt();
         int newstatus;
@@ -1009,7 +1009,7 @@ double VCCueList::progressPercent()
 void VCCueList::startChaser(int startIndex)
 {
     Chaser *ch = chaser();
-    if (ch == NULL)
+    if (ch == nullptr)
         return;
 
     adjustFunctionIntensity(ch, intensity());
@@ -1029,7 +1029,7 @@ void VCCueList::startChaser(int startIndex)
 void VCCueList::stopChaser()
 {
     Chaser *ch = chaser();
-    if (ch == NULL)
+    if (ch == nullptr)
         return;
 
     ch->stop(functionParent());
@@ -1138,7 +1138,7 @@ QString VCCueList::faderModeToString(VCCueList::FaderMode mode)
 void VCCueList::setFaderInfo(int index)
 {
     Chaser *ch = chaser();
-    if (ch == NULL || !ch->isRunning())
+    if (ch == nullptr || !ch->isRunning())
         return;
 
     int tmpIndex = ch->computeNextStep(index);
@@ -1151,11 +1151,11 @@ void VCCueList::setFaderInfo(int index)
 
     // reset any previously set background
     QTreeWidgetItem *item = m_tree->topLevelItem(m_secondaryIndex);
-    if (item != NULL)
+    if (item != nullptr)
         item->setBackground(COL_NUM, m_defCol);
 
     item = m_tree->topLevelItem(tmpIndex);
-    if (item != NULL)
+    if (item != nullptr)
         item->setBackground(COL_NUM, QColor("#FF8000"));
     m_secondaryIndex = tmpIndex;
 
@@ -1234,7 +1234,7 @@ void VCCueList::slotSideFaderValueChanged(int value)
         emit sideFaderValueChanged();
 
         Chaser *ch = chaser();
-        if (ch == NULL || ch->stopped())
+        if (ch == nullptr || ch->stopped())
             return;
 
         int newStep = value; // by default we assume the Chaser has more than 256 steps
@@ -1268,7 +1268,7 @@ void VCCueList::slotSideFaderValueChanged(int value)
         emit sideFaderValueChanged();
 
         Chaser *ch = chaser();
-        if (!(ch == NULL || ch->stopped()))
+        if (!(ch == nullptr || ch->stopped()))
         {
             ch->adjustStepIntensity(qreal(value) / 100.0, m_primaryTop ? m_primaryIndex : m_secondaryIndex,
                                     Chaser::FadeControlMode(getFadeMode()));
@@ -1373,7 +1373,7 @@ void VCCueList::updateFeedback()
     sendFeedback(fbv, sideFaderInputSourceId);
 
     Chaser *ch = chaser();
-    if (ch == NULL)
+    if (ch == nullptr)
         return;
 
     sendFeedback(ch->isRunning() ? UCHAR_MAX : 0, playbackInputSourceId);
@@ -1486,7 +1486,7 @@ void VCCueList::slotInputValueChanged(quint32 universe, quint32 channel, uchar v
 void VCCueList::adjustIntensity(qreal val)
 {
     Chaser *ch = chaser();
-    if (ch != NULL)
+    if (ch != nullptr)
     {
         adjustFunctionIntensity(ch, val);
 /*
@@ -1545,14 +1545,14 @@ void VCCueList::slotModeChanged(Doc::Mode mode)
         m_progress->setStyleSheet(progressDisabledStyle);
         // reset any previously set background
         QTreeWidgetItem *item = m_tree->topLevelItem(m_secondaryIndex);
-        if (item != NULL)
+        if (item != nullptr)
             item->setBackground(COL_NUM, m_defCol);
     }
 
     enableWidgetUI(enable);
 
     /* Always start from the beginning */
-    m_tree->setCurrentItem(NULL);
+    m_tree->setCurrentItem(nullptr);
 
     VCWidget::slotModeChanged(mode);
 
@@ -1574,7 +1574,7 @@ void VCCueList::playCueAtIndex(int idx)
     m_primaryIndex = idx;
 
     Chaser *ch = chaser();
-    if (ch == NULL)
+    if (ch == nullptr)
         return;
 
     if (ch->isRunning())
@@ -1730,7 +1730,7 @@ bool VCCueList::loadXML(QXmlStreamReader &root)
         foreach (quint32 id, legacyStepList)
         {
             Function *function = m_doc->function(id);
-            if (function == NULL)
+            if (function == nullptr)
                 continue;
 
             // Legacy cuelists relied on individual functions' fadein/out speed and
@@ -1749,7 +1749,7 @@ bool VCCueList::loadXML(QXmlStreamReader &root)
 
 bool VCCueList::saveXML(QXmlStreamWriter *doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* VC CueList entry */
     doc->writeStartElement(KXMLQLCVCCueList);

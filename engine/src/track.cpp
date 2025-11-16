@@ -130,7 +130,7 @@ bool Track::isMute()
 ShowFunction *Track::createShowFunction(quint32 functionID)
 {
     Show *show = qobject_cast<Show *>(parent());
-    quint32 uId = show == NULL ? 0 : show->getLatestShowFunctionId();
+    quint32 uId = show == nullptr ? 0 : show->getLatestShowFunctionId();
     ShowFunction *func = new ShowFunction(uId);
     func->setFunctionID(functionID);
     m_functions.append(func);
@@ -140,7 +140,7 @@ ShowFunction *Track::createShowFunction(quint32 functionID)
 
 bool Track::addShowFunction(ShowFunction *func)
 {
-    if (func == NULL || func->functionID() == Function::invalidId())
+    if (func == nullptr || func->functionID() == Function::invalidId())
         return false;
 
     m_functions.append(func);
@@ -154,7 +154,7 @@ ShowFunction *Track::showFunction(quint32 id)
         if (sf->id() == id)
             return sf;
 
-    return NULL;
+    return nullptr;
 }
 
 bool Track::removeShowFunction(ShowFunction *function, bool performDelete)
@@ -179,7 +179,7 @@ QList <ShowFunction *> Track::showFunctions() const
  *****************************************************************************/
 bool Track::saveXML(QXmlStreamWriter *doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* Track entry */
     doc->writeStartElement(KXMLQLCTrack);
@@ -250,7 +250,7 @@ bool Track::loadXML(QXmlStreamReader &root)
         if (root.name() == KXMLShowFunction)
         {
             Show *show = qobject_cast<Show *>(parent());
-            quint32 uId = show == NULL ? 0 : show->getLatestShowFunctionId();
+            quint32 uId = show == nullptr ? 0 : show->getLatestShowFunctionId();
             ShowFunction *newFunc = new ShowFunction(uId);
             newFunc->loadXML(root);
             if (addShowFunction(newFunc) == false)
@@ -286,7 +286,7 @@ bool Track::postLoad(Doc* doc)
         ShowFunction* showFunction = it.next();
 
         Function* function = doc->function(showFunction->functionID());
-        if (function == NULL
+        if (function == nullptr
                 || (m_showId != Function::invalidId()
                     && function->contains(m_showId)))
         {
@@ -304,7 +304,7 @@ bool Track::postLoad(Doc* doc)
         if (function->type() == Function::SequenceType)
         {
             Sequence* sequence = qobject_cast<Sequence*>(function);
-            if (sequence == NULL || getSceneID() == sequence->boundSceneID())
+            if (sequence == nullptr || getSceneID() == sequence->boundSceneID())
                 continue;
 #ifndef QMLUI
             if (getSceneID() == Function::invalidId())
@@ -336,8 +336,8 @@ bool Track::contains(Doc* doc, quint32 functionId)
         ShowFunction* showFunction = it.next();
 
         Function* function = doc->function(showFunction->functionID());
-        // contains() can be called during init, function may be NULL
-        if (function == NULL)
+        // contains() can be called during init, function may be nullptr
+        if (function == nullptr)
             continue;
 
         if (function->id() == functionId)

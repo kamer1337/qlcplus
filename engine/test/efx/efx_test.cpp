@@ -485,7 +485,7 @@ void EFX_Test::fixtures()
     QCOMPARE(e->fixture(34, 0), ef2);
     QCOMPARE(e->fixture(56, 0), ef3);
     /* Test a non existent fixture */
-    QVERIFY(e->fixture(11, 22) == NULL);
+    QVERIFY(e->fixture(11, 22) == nullptr);
 
     /* Add fourth fixture */
     EFXFixture* ef4 = new EFXFixture(e);
@@ -2610,12 +2610,12 @@ void EFX_Test::createCopy()
     QVERIFY(e1->id() != Function::invalidId());
 
     Function* f = e1->createCopy(&doc);
-    QVERIFY(f != NULL);
+    QVERIFY(f != nullptr);
     QVERIFY(f != e1);
     QVERIFY(f->id() != e1->id());
 
     EFX* copy = qobject_cast<EFX*> (f);
-    QVERIFY(copy != NULL);
+    QVERIFY(copy != nullptr);
     QVERIFY(copy->name() == e1->name());
     QVERIFY(copy->direction() == EFX::Forward);
     QVERIFY(copy->runOrder() == EFX::PingPong);
@@ -2658,7 +2658,7 @@ void EFX_Test::loadXAxis()
     xmlWriter.writeTextElement("Foo", "Bar");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -2683,7 +2683,7 @@ void EFX_Test::loadYAxis()
     xmlWriter.writeTextElement("Phase", "3");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -2708,7 +2708,7 @@ void EFX_Test::loadYAxisWrongRoot()
     xmlWriter.writeTextElement("Phase", "3");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -2733,7 +2733,7 @@ void EFX_Test::loadAxisNoXY()
     xmlWriter.writeTextElement("Phase", "333");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -2811,7 +2811,7 @@ void EFX_Test::loadSuccessLegacy()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -2916,7 +2916,7 @@ void EFX_Test::loadSuccess()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -2964,7 +2964,7 @@ void EFX_Test::loadWrongType()
     xmlWriter.writeAttribute("Type", "Chaser");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -2985,7 +2985,7 @@ void EFX_Test::loadWrongRoot()
     xmlWriter.writeAttribute("Type", "EFX");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -3021,7 +3021,7 @@ void EFX_Test::loadDuplicateFixture()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -3077,7 +3077,7 @@ void EFX_Test::save()
 
     QVERIFY(e1.saveXML(&xmlWriter) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -3337,10 +3337,10 @@ void EFX_Test::adjustIntensity()
        then the exact channel numbers and mode name has to be changed
        below. */
     QLCFixtureDef* def = m_doc->fixtureDefCache()->fixtureDef("Martin", "MAC250+");
-    QVERIFY(def != NULL);
+    QVERIFY(def != nullptr);
 
     QLCFixtureMode* mode = def->mode("Mode 4");
-    QVERIFY(mode != NULL);
+    QVERIFY(mode != nullptr);
 
     Fixture* fxi1 = new Fixture(m_doc);
     fxi1->setFixtureDefinition(def, mode);

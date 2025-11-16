@@ -52,7 +52,7 @@
 #define SETTINGS_GEOMETRY "monitor/geometry"
 #define SETTINGS_VSPLITTER "monitor/vsplitter"
 
-Monitor* Monitor::s_instance = NULL;
+Monitor* Monitor::s_instance = nullptr;
 
 /*****************************************************************************
  * Initialization
@@ -61,22 +61,22 @@ Monitor* Monitor::s_instance = NULL;
 Monitor::Monitor(QWidget* parent, Doc* doc, Qt::WindowFlags f)
     : QWidget(parent, f)
     , m_doc(doc)
-    , m_props(NULL)
-    , m_DMXToolBar(NULL)
-    , m_scrollArea(NULL)
-    , m_monitorWidget(NULL)
-    , m_monitorLayout(NULL)
+    , m_props(nullptr)
+    , m_DMXToolBar(nullptr)
+    , m_scrollArea(nullptr)
+    , m_monitorWidget(nullptr)
+    , m_monitorLayout(nullptr)
     , m_currentUniverse(Universe::invalid())
-    , m_graphicsToolBar(NULL)
-    , m_splitter(NULL)
-    , m_graphicsView(NULL)
-    , m_fixtureItemEditor(NULL)
-    , m_gridWSpin(NULL)
-    , m_gridHSpin(NULL)
-    , m_unitsCombo(NULL)
-    , m_labelsAction(NULL)
+    , m_graphicsToolBar(nullptr)
+    , m_splitter(nullptr)
+    , m_graphicsView(nullptr)
+    , m_fixtureItemEditor(nullptr)
+    , m_gridWSpin(nullptr)
+    , m_gridHSpin(nullptr)
+    , m_unitsCombo(nullptr)
+    , m_labelsAction(nullptr)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     m_props = m_doc->monitorProperties();
 
@@ -101,7 +101,7 @@ void Monitor::slotFunctionStarted(quint32 id)
     if (m_props->displayMode() == MonitorProperties::Graphics)
     {
         QString bgImage = m_props->customBackground(id);
-        if (m_graphicsView != NULL && bgImage.isEmpty() == false)
+        if (m_graphicsView != nullptr && bgImage.isEmpty() == false)
             m_graphicsView->setBackgroundImage(bgImage);
     }
 }
@@ -114,7 +114,7 @@ Monitor::~Monitor()
     saveSettings();
 
     /* Reset the singleton instance */
-    Monitor::s_instance = NULL;
+    Monitor::s_instance = nullptr;
 }
 
 void Monitor::initView()
@@ -158,7 +158,7 @@ void Monitor::fillDMXView()
     /* Create a bunch of MonitorFixtures for each fixture */
     foreach (Fixture* fxi, m_doc->fixtures())
     {
-        Q_ASSERT(fxi != NULL);
+        Q_ASSERT(fxi != nullptr);
         if (m_currentUniverse == Universe::invalid() ||
             m_currentUniverse == fxi->universe())
                 createMonitorFixture(fxi);
@@ -254,7 +254,7 @@ void Monitor::fillGraphicsView()
 
     foreach (quint32 fid, m_props->fixtureItemsID())
     {
-        if (m_doc->fixture(fid) != NULL)
+        if (m_doc->fixture(fid) != nullptr)
         {
             PreviewItem item = m_props->fixtureItem(fid, 0, 0);
             m_graphicsView->addFixture(fid, QPointF(item.m_position.x(), item.m_position.y()));
@@ -310,22 +310,22 @@ void Monitor::saveSettings()
     QSettings settings;
     settings.setValue(SETTINGS_GEOMETRY, saveGeometry());
 
-    if (m_splitter != NULL)
+    if (m_splitter != nullptr)
     {
         QSettings settings;
         settings.setValue(SETTINGS_VSPLITTER, m_splitter->saveState());
     }
 
-    if (m_monitorWidget != NULL)
+    if (m_monitorWidget != nullptr)
         m_props->setFont(m_monitorWidget->font());
 }
 
 void Monitor::createAndShow(QWidget* parent, Doc* doc)
 {
-    QWidget* window = NULL;
+    QWidget* window = nullptr;
 
     /* Must not create more than one instance */
-    if (s_instance == NULL)
+    if (s_instance == nullptr)
     {
         /* Create a separate window for OSX */
         s_instance = new Monitor(parent, doc, Qt::Window);
@@ -372,7 +372,7 @@ void Monitor::initDMXToolbar()
     m_DMXToolBar = new QToolBar(this);
 
     /* Menu bar */
-    Q_ASSERT(layout() != NULL);
+    Q_ASSERT(layout() != nullptr);
     layout()->setMenuBar(m_DMXToolBar);
 
     action = m_DMXToolBar->addAction(tr("2D View"));
@@ -483,7 +483,7 @@ void Monitor::initGraphicsToolbar()
     m_graphicsToolBar = new QToolBar(this);
 
     /* Menu bar */
-    Q_ASSERT(layout() != NULL);
+    Q_ASSERT(layout() != nullptr);
     layout()->setMenuBar(m_graphicsToolBar);
 
     action = m_graphicsToolBar->addAction(tr("DMX View"));
@@ -570,7 +570,7 @@ void Monitor::slotChooseFont()
 void Monitor::slotChannelStyleTriggered()
 {
     QAction* action = qobject_cast<QAction*> (QObject::sender());
-    Q_ASSERT(action != NULL);
+    Q_ASSERT(action != nullptr);
 
     action->setChecked(true);
     m_props->setChannelStyle(MonitorProperties::ChannelStyle(action->data().toInt()));
@@ -580,7 +580,7 @@ void Monitor::slotChannelStyleTriggered()
 void Monitor::slotValueStyleTriggered()
 {
     QAction* action = qobject_cast<QAction*> (QObject::sender());
-    Q_ASSERT(action != NULL);
+    Q_ASSERT(action != nullptr);
 
     action->setChecked(true);
     m_props->setValueStyle(MonitorProperties::ValueStyle(action->data().toInt()));
@@ -590,7 +590,7 @@ void Monitor::slotValueStyleTriggered()
 void Monitor::slotSwitchMode()
 {
     QAction* action = qobject_cast<QAction*> (QObject::sender());
-    Q_ASSERT(action != NULL);
+    Q_ASSERT(action != nullptr);
 
     m_props->setDisplayMode(MonitorProperties::DisplayMode(action->data().toInt()));
     showCurrentView();
@@ -628,7 +628,7 @@ void Monitor::createMonitorFixture(Fixture* fxi)
 void Monitor::slotFixtureAdded(quint32 fxi_id)
 {
     Fixture* fxi = m_doc->fixture(fxi_id);
-    if (fxi != NULL)
+    if (fxi != nullptr)
         createMonitorFixture(fxi);
 }
 
@@ -687,7 +687,7 @@ void Monitor::slotUniverseSelected(int index)
 
 void Monitor::slotGridWidthChanged(int value)
 {
-    Q_ASSERT(m_graphicsView != NULL);
+    Q_ASSERT(m_graphicsView != nullptr);
 
     m_graphicsView->setGridSize(QSize(value, m_gridHSpin->value()));
     m_props->setGridSize(QVector3D(value, m_props->gridSize().y(), m_gridHSpin->value()));
@@ -695,7 +695,7 @@ void Monitor::slotGridWidthChanged(int value)
 
 void Monitor::slotGridHeightChanged(int value)
 {
-    Q_ASSERT(m_graphicsView != NULL);
+    Q_ASSERT(m_graphicsView != nullptr);
 
     m_graphicsView->setGridSize(QSize(m_gridWSpin->value(), value));
     m_props->setGridSize(QVector3D(m_gridWSpin->value(), m_props->gridSize().y(), value));
@@ -703,7 +703,7 @@ void Monitor::slotGridHeightChanged(int value)
 
 void Monitor::slotGridUnitsChanged(int index)
 {
-    Q_ASSERT(m_graphicsView != NULL);
+    Q_ASSERT(m_graphicsView != nullptr);
 
     MonitorProperties::GridUnits units = MonitorProperties::Meters;
 
@@ -721,7 +721,7 @@ void Monitor::slotGridUnitsChanged(int index)
 
 void Monitor::slotAddFixture()
 {
-    Q_ASSERT(m_graphicsView != NULL);
+    Q_ASSERT(m_graphicsView != nullptr);
 
     QList <quint32> disabled = m_graphicsView->fixturesID();
     /* Get a list of new fixtures to add to the scene */
@@ -747,7 +747,7 @@ void Monitor::slotAddFixture()
 
 void Monitor::slotRemoveFixture()
 {
-    Q_ASSERT(m_graphicsView != NULL);
+    Q_ASSERT(m_graphicsView != nullptr);
 
     hideFixtureItemEditor();
     if (m_graphicsView->removeFixture() == true)
@@ -756,7 +756,7 @@ void Monitor::slotRemoveFixture()
 
 void Monitor::slotSetBackground()
 {
-    Q_ASSERT(m_graphicsView != NULL);
+    Q_ASSERT(m_graphicsView != nullptr);
 
     MonitorBackgroundSelection mbgs(this, m_doc);
 
@@ -773,7 +773,7 @@ void Monitor::slotSetBackground()
 
 void Monitor::slotShowLabels(bool visible)
 {
-    Q_ASSERT(m_graphicsView != NULL);
+    Q_ASSERT(m_graphicsView != nullptr);
 
     m_props->setLabelsVisible(visible);
     m_graphicsView->showFixturesLabels(visible);
@@ -781,7 +781,7 @@ void Monitor::slotShowLabels(bool visible)
 
 void Monitor::slotFixtureMoved(quint32 fid, QPointF pos)
 {
-    Q_ASSERT(m_graphicsView != NULL);
+    Q_ASSERT(m_graphicsView != nullptr);
 
     showFixtureItemEditor();
     m_props->setFixturePosition(fid, 0, 0, QVector3D(pos.x(), pos.y(), 0));
@@ -790,19 +790,19 @@ void Monitor::slotFixtureMoved(quint32 fid, QPointF pos)
 
 void Monitor::slotViewClicked()
 {
-    Q_ASSERT(m_graphicsView != NULL);
+    Q_ASSERT(m_graphicsView != nullptr);
 
     hideFixtureItemEditor();
 }
 
 void Monitor::hideFixtureItemEditor()
 {
-    if (m_fixtureItemEditor != NULL)
+    if (m_fixtureItemEditor != nullptr)
     {
         m_splitter->widget(1)->layout()->removeWidget(m_fixtureItemEditor);
         m_splitter->widget(1)->hide();
         m_fixtureItemEditor->deleteLater();
-        m_fixtureItemEditor = NULL;
+        m_fixtureItemEditor = nullptr;
     }
 }
 
@@ -811,7 +811,7 @@ void Monitor::showFixtureItemEditor()
     MonitorFixtureItem *item = m_graphicsView->getSelectedItem();
     hideFixtureItemEditor();
 
-    if (item != NULL)
+    if (item != nullptr)
     {
         m_fixtureItemEditor = new MonitorFixturePropertiesEditor(
                     item, m_graphicsView,

@@ -57,7 +57,7 @@ void SimpleDeskEngine_Test::cueStack()
 {
     SimpleDeskEngine eng(m_doc);
     CueStack* stack = eng.cueStack(0);
-    QVERIFY(stack != NULL);
+    QVERIFY(stack != nullptr);
     QCOMPARE(eng.cueStack(0), stack);
 }
 

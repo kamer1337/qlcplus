@@ -59,9 +59,9 @@ InputProfileEditor::InputProfileEditor(QWidget* parent, QLCInputProfile* profile
     : QDialog(parent)
     , m_ioMap(ioMap)
     , m_wizardActive(false)
-    , m_latestItem(NULL)
+    , m_latestItem(nullptr)
 {
-    Q_ASSERT(ioMap != NULL);
+    Q_ASSERT(ioMap != nullptr);
 
     setupUi(this);
 
@@ -110,7 +110,7 @@ InputProfileEditor::InputProfileEditor(QWidget* parent, QLCInputProfile* profile
     connect(m_ioMap, SIGNAL(inputValueChanged(quint32, quint32, uchar, const QString&)),
             this, SLOT(slotInputValueChanged(quint32, quint32, uchar, const QString&)));
 
-    if (profile == NULL)
+    if (profile == nullptr)
     {
         m_profile = new QLCInputProfile();
     }
@@ -248,8 +248,8 @@ void InputProfileEditor::updateChannelItem(QTreeWidgetItem *item,
 {
     quint32 num;
 
-    Q_ASSERT(item != NULL);
-    Q_ASSERT(ch != NULL);
+    Q_ASSERT(item != nullptr);
+    Q_ASSERT(ch != nullptr);
 
     num = m_profile->channelNumber(ch);
     item->setText(KColumnNumber, QString("%1").arg(num + 1, 4, 10, QChar('0')));
@@ -356,11 +356,11 @@ QList<QLCInputChannel *> InputProfileEditor::selectedChannels()
     while (it.hasNext() == true)
     {
         QTreeWidgetItem *item = it.next();
-        Q_ASSERT(item != NULL);
+        Q_ASSERT(item != nullptr);
 
         quint32 chnum = item->text(KColumnNumber).toUInt() - 1;
         QLCInputChannel *channel = m_profile->channel(chnum);
-        Q_ASSERT(channel != NULL);
+        Q_ASSERT(channel != nullptr);
 
         channels.append(channel);
     }
@@ -377,7 +377,7 @@ add:
         channel->setType(ice.type());
         channel->setName(ice.name());
 
-        if (m_profile->channel(ice.channel()) == NULL)
+        if (m_profile->channel(ice.channel()) == nullptr)
         {
             m_profile->insertChannel(ice.channel(), channel);
             updateChannelItem(new QTreeWidgetItem(m_tree), channel);
@@ -400,7 +400,7 @@ add:
 void InputProfileEditor::slotRemoveClicked()
 {
     QList <QTreeWidgetItem*> selected;
-    QTreeWidgetItem* next = NULL;
+    QTreeWidgetItem* next = nullptr;
 
     /* Ask for confirmation if we're deleting more than one channel */
     selected = m_tree->selectedItems();
@@ -420,7 +420,7 @@ void InputProfileEditor::slotRemoveClicked()
     while (it.hasNext() == true)
     {
         QTreeWidgetItem *item = it.next();
-        Q_ASSERT(item != NULL);
+        Q_ASSERT(item != nullptr);
 
         /* Remove & Delete the channel object */
         quint32 chnum = item->text(KColumnNumber).toUInt() - 1;
@@ -429,7 +429,7 @@ void InputProfileEditor::slotRemoveClicked()
         /* Choose the closest item below or above the removed items
            as the one that is selected after the removal */
         next = m_tree->itemBelow(item);
-        if (next == NULL)
+        if (next == nullptr)
             next = m_tree->itemAbove(item);
 
         delete item;
@@ -448,13 +448,13 @@ void InputProfileEditor::slotEditClicked()
     {
         /* Just one item selected. Edit that. */
         item = m_tree->currentItem();
-        if (item == NULL)
+        if (item == nullptr)
             return;
 
         /* Find the channel object associated to the selected item */
         chnum = item->text(KColumnNumber).toUInt() - 1;
         channel = m_profile->channel(chnum);
-        Q_ASSERT(channel != NULL);
+        Q_ASSERT(channel != nullptr);
 
         /* Edit the channel and update its item if necessary */
         InputChannelEditor ice(this, m_profile, channel, currentProfileType());
@@ -464,7 +464,7 @@ edit:
             QLCInputChannel* another;
             another = m_profile->channel(ice.channel());
 
-            if (another == NULL || another == channel)
+            if (another == nullptr || another == channel)
             {
                 if (ice.channel() != QLCChannel::invalid())
                     m_profile->remapChannel(channel, ice.channel());
@@ -494,7 +494,7 @@ edit:
     else if (m_tree->selectedItems().count() > 1)
     {
         /* Multiple channels selected. Apply changes to all of them */
-        InputChannelEditor ice(this, NULL, NULL, QLCInputProfile::DMX);
+        InputChannelEditor ice(this, nullptr, nullptr, QLCInputProfile::DMX);
         if (ice.exec() == QDialog::Accepted)
         {
             QListIterator <QTreeWidgetItem*>
@@ -502,11 +502,11 @@ edit:
             while (it.hasNext() == true)
             {
                 item = it.next();
-                Q_ASSERT(item != NULL);
+                Q_ASSERT(item != nullptr);
 
                 chnum = item->text(KColumnNumber).toUInt() - 1;
                 channel = m_profile->channel(chnum);
-                Q_ASSERT(channel != NULL);
+                Q_ASSERT(channel != nullptr);
 
                 /* Set only name and type and only if they
                    have been modified. */
@@ -550,7 +550,7 @@ void InputProfileEditor::slotItemClicked(QTreeWidgetItem *item, int col)
 
     quint32 chNum = item->text(KColumnNumber).toUInt() - 1;
     QLCInputChannel *ich = m_profile->channel(chNum);
-    if (ich != NULL)
+    if (ich != nullptr)
     {
         setOptionsVisibility(ich->type());
 
@@ -714,7 +714,7 @@ void InputProfileEditor::slotInputValueChanged(quint32 universe,
                                                uchar value,
                                                const QString& key)
 {
-    QTreeWidgetItem* latestItem = NULL;
+    QTreeWidgetItem* latestItem = nullptr;
 
     Q_UNUSED(universe);
 
@@ -769,7 +769,7 @@ void InputProfileEditor::slotInputValueChanged(quint32 universe,
         if (values.size() == 3)
         {
             QLCInputChannel* ch = m_profile->channel(channel);
-            Q_ASSERT(ch != NULL);
+            Q_ASSERT(ch != nullptr);
 
             if (ch->type() == QLCInputChannel::Button)
             {
@@ -783,9 +783,9 @@ void InputProfileEditor::slotInputValueChanged(quint32 universe,
         }
     }
 
-    if (latestItem != NULL)
+    if (latestItem != nullptr)
     {
-        if (m_latestItem != NULL)
+        if (m_latestItem != nullptr)
             m_latestItem->setIcon(KColumnNumber, QIcon());
         m_latestItem = latestItem;
         m_latestItem->setIcon(KColumnNumber, QIcon(":/input.png"));
@@ -796,9 +796,9 @@ void InputProfileEditor::slotInputValueChanged(quint32 universe,
 
 void InputProfileEditor::slotTimerTimeout()
 {
-    if (m_latestItem != NULL)
+    if (m_latestItem != nullptr)
         m_latestItem->setIcon(KColumnNumber, QIcon());
-    m_latestItem = NULL;
+    m_latestItem = nullptr;
 }
 
 /****************************************************************************

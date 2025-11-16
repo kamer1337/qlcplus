@@ -65,12 +65,12 @@ QLCFixtureHead EditHead::head() const
 
 void EditHead::fillChannelTree(const QLCFixtureMode* mode)
 {
-    Q_ASSERT(mode != NULL);
+    Q_ASSERT(mode != nullptr);
 
     for (quint32 i = 0; i < quint32(mode->channels().size()); i++)
     {
         const QLCChannel* ch = mode->channels().at(i);
-        Q_ASSERT(ch != NULL);
+        Q_ASSERT(ch != nullptr);
 
         QTreeWidgetItem* item = new QTreeWidgetItem(m_tree);
         item->setText(0, QString::number(i + 1));

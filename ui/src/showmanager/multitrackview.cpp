@@ -76,7 +76,7 @@ MultiTrackView::MultiTrackView(QWidget *parent) :
     m_scene->addItem(m_cursor);
     connect(horizontalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(slotViewScrolled(int)));
 
-    m_vdivider = NULL;
+    m_vdivider = nullptr;
     // draw horizontal and vertical lines for tracks
     updateTracksDividers();
 }
@@ -90,7 +90,7 @@ void MultiTrackView::updateTracksDividers()
             m_scene->removeItem(m_hdividers.takeLast());
         m_hdividers.clear();
     }
-    if (m_vdivider != NULL)
+    if (m_vdivider != nullptr)
         m_scene->removeItem(m_vdivider);
 
     int ypos = 35 + TRACK_HEIGHT;
@@ -226,11 +226,11 @@ void MultiTrackView::addSequence(Chaser *chaser, Track *track, ShowFunction *sf)
 
     int trackNum = getTrackIndex(track);
 
-    if (track == NULL)
+    if (track == nullptr)
         track = m_tracks.at(trackNum)->getTrack();
 
     ShowFunction *func = sf;
-    if (func == NULL)
+    if (func == nullptr)
         func = track->createShowFunction(chaser->id());
 
     SequenceItem *item = new SequenceItem(chaser, func);
@@ -244,11 +244,11 @@ void MultiTrackView::addAudio(Audio *audio, Track *track, ShowFunction *sf)
 
     int trackNum = getTrackIndex(track);
 
-    if (track == NULL)
+    if (track == nullptr)
         track = m_tracks.at(trackNum)->getTrack();
 
     ShowFunction *func = sf;
-    if (func == NULL)
+    if (func == nullptr)
         func = track->createShowFunction(audio->id());
 
     AudioItem *item = new AudioItem(audio, func);
@@ -262,11 +262,11 @@ void MultiTrackView::addRGBMatrix(RGBMatrix *rgbm, Track *track, ShowFunction *s
 
     int trackNum = getTrackIndex(track);
 
-    if (track == NULL)
+    if (track == nullptr)
         track = m_tracks.at(trackNum)->getTrack();
 
     ShowFunction *func = sf;
-    if (func == NULL)
+    if (func == nullptr)
         func = track->createShowFunction(rgbm->id());
 
     RGBMatrixItem *item = new RGBMatrixItem(rgbm, func);
@@ -280,11 +280,11 @@ void MultiTrackView::addEFX(EFX *efx, Track *track, ShowFunction *sf)
 
     int trackNum = getTrackIndex(track);
 
-    if (track == NULL)
+    if (track == nullptr)
         track = m_tracks.at(trackNum)->getTrack();
 
     ShowFunction *func = sf;
-    if (func == NULL)
+    if (func == nullptr)
         func = track->createShowFunction(efx->id());
 
     EFXItem *item = new EFXItem(efx, func);
@@ -298,11 +298,11 @@ void MultiTrackView::addVideo(Video *video, Track *track, ShowFunction *sf)
 
     int trackNum = getTrackIndex(track);
 
-    if (track == NULL)
+    if (track == nullptr)
         track = m_tracks.at(trackNum)->getTrack();
 
     ShowFunction *func = sf;
-    if (func == NULL)
+    if (func == nullptr)
         func = track->createShowFunction(video->id());
 
     VideoItem *item = new VideoItem(video, func);
@@ -312,7 +312,7 @@ void MultiTrackView::addVideo(Video *video, Track *track, ShowFunction *sf)
 quint32 MultiTrackView::deleteSelectedItem()
 {
     ShowItem *selectedItem = getSelectedItem();
-    if (selectedItem != NULL)
+    if (selectedItem != nullptr)
     {
         QString msg = tr("Do you want to DELETE item:") + QString("\n\n") + selectedItem->functionName();
 
@@ -409,7 +409,7 @@ ShowItem *MultiTrackView::getSelectedItem()
         if (item->isSelected())
             return item;
 
-    return NULL;
+    return nullptr;
 }
 
 quint32 MultiTrackView::getTimeFromCursor()
@@ -441,8 +441,8 @@ int MultiTrackView::getTrackIndex(Track *trk)
 {
     for (int idx = 0; idx < m_tracks.count(); idx++)
     {
-        if ((trk == NULL && m_tracks.at(idx)->isActive()) ||
-            (trk != NULL && trk == m_tracks.at(idx)->getTrack()))
+        if ((trk == nullptr && m_tracks.at(idx)->isActive()) ||
+            (trk != nullptr && trk == m_tracks.at(idx)->getTrack()))
                 return idx;
     }
 
@@ -475,7 +475,7 @@ void MultiTrackView::setSnapToGrid(bool enable)
 
 void MultiTrackView::mouseReleaseEvent(QMouseEvent * e)
 {
-    if (getSelectedItem() == NULL)
+    if (getSelectedItem() == nullptr)
     {
         // Don't handle positions at the left of QLC+ window
         if (mapToScene(e->pos()).x() < 0)
@@ -560,7 +560,7 @@ void MultiTrackView::slotTrackSoloFlagChanged(TrackItem* track, bool solo)
         if (item != track)
             item->setFlags(false, solo);
         Track *trk = item->getTrack();
-        if (trk != NULL)
+        if (trk != nullptr)
             trk->setMute(item->isMute());
     }
 }
@@ -568,7 +568,7 @@ void MultiTrackView::slotTrackSoloFlagChanged(TrackItem* track, bool solo)
 void MultiTrackView::slotTrackMuteFlagChanged(TrackItem* item, bool mute)
 {
     Track *trk = item->getTrack();
-    if (trk != NULL)
+    if (trk != nullptr)
         trk->setMute(mute);
 }
 

@@ -40,7 +40,7 @@ VCMatrixPresetSelection::VCMatrixPresetSelection(Doc *doc, QWidget *parent)
     : QDialog(parent)
     , m_doc(doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     setupUi(this);
 
@@ -76,7 +76,7 @@ void VCMatrixPresetSelection::resetProperties(QLayoutItem *item)
 
 void VCMatrixPresetSelection::displayProperties(RGBScript *script)
 {
-    if (script == NULL)
+    if (script == nullptr)
         return;
 
     int gridRowIdx = 0;

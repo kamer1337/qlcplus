@@ -56,7 +56,7 @@ void AudioBar_Test::copy()
     AudioBar bar(1, 42, 100);
     bar.setName("foo");
     AudioBar* cp = bar.createCopy();
-    QVERIFY(cp != NULL);
+    QVERIFY(cp != nullptr);
     QCOMPARE(cp->m_type, bar.m_type);
     QCOMPARE(cp->m_value, bar.m_value);
     QCOMPARE(cp->m_parentId, bar.m_parentId);

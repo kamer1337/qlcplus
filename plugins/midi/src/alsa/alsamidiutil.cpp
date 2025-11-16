@@ -24,7 +24,7 @@
 
 QVariant AlsaMidiUtil::addressToVariant(const snd_seq_addr_t* addr)
 {
-    Q_ASSERT(addr != NULL);
+    Q_ASSERT(addr != nullptr);
     uint value = addr->client << 8;
     value = value | addr->port;
     return QVariant(value);
@@ -32,7 +32,7 @@ QVariant AlsaMidiUtil::addressToVariant(const snd_seq_addr_t* addr)
 
 bool AlsaMidiUtil::variantToAddress(const QVariant& var, snd_seq_addr_t* addr)
 {
-    Q_ASSERT(addr != NULL);
+    Q_ASSERT(addr != nullptr);
 
     if (var.isValid() == false)
         return false;
@@ -46,10 +46,10 @@ bool AlsaMidiUtil::variantToAddress(const QVariant& var, snd_seq_addr_t* addr)
 QString AlsaMidiUtil::extractName(snd_seq_t* alsa, const snd_seq_addr_t* address)
 {
     //qDebug() << Q_FUNC_INFO;
-    Q_ASSERT(alsa != NULL);
-    Q_ASSERT(address != NULL);
+    Q_ASSERT(alsa != nullptr);
+    Q_ASSERT(address != nullptr);
 
-    snd_seq_port_info_t* portInfo = NULL;
+    snd_seq_port_info_t* portInfo = nullptr;
     snd_seq_port_info_alloca(&portInfo);
     int r = snd_seq_get_any_port_info(alsa, address->client, address->port, portInfo);
     if (r == 0)

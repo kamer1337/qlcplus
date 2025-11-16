@@ -42,7 +42,7 @@ VCPropertiesEditor::VCPropertiesEditor(QWidget* parent, const VCProperties& prop
     : QDialog(parent)
     , m_ioMap(ioMap)
 {
-    Q_ASSERT(ioMap != NULL);
+    Q_ASSERT(ioMap != nullptr);
 
     setupUi(this);
 

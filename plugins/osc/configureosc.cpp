@@ -49,7 +49,7 @@
 ConfigureOSC::ConfigureOSC(OSCPlugin* plugin, QWidget* parent)
         : QDialog(parent)
 {
-    Q_ASSERT(plugin != NULL);
+    Q_ASSERT(plugin != nullptr);
     m_plugin = plugin;
 
     /* Setup UI controls */
@@ -77,27 +77,27 @@ ConfigureOSC::~ConfigureOSC()
 
 void ConfigureOSC::fillMappingTree()
 {
-    QTreeWidgetItem* inputItem = NULL;
-    QTreeWidgetItem* outputItem = NULL;
+    QTreeWidgetItem* inputItem = nullptr;
+    QTreeWidgetItem* outputItem = nullptr;
 
     QList<OSCIO> IOmap = m_plugin->getIOMapping();
     foreach (OSCIO io, IOmap)
     {
-        if (io.controller == NULL)
+        if (io.controller == nullptr)
             continue;
 
         OSCController *controller = io.controller;
-        if (controller == NULL)
+        if (controller == nullptr)
             continue;
 
         qDebug() << "[OSC] controller IP" << controller->getNetworkIP().toString() << "type:" << controller->type();
-        if ((controller->type() & OSCController::Input) && inputItem == NULL)
+        if ((controller->type() & OSCController::Input) && inputItem == nullptr)
         {
             inputItem = new QTreeWidgetItem(m_uniMapTree);
             inputItem->setText(KMapColumnInterface, tr("Inputs"));
             inputItem->setExpanded(true);
         }
-        if ((controller->type() & OSCController::Output) && outputItem == NULL)
+        if ((controller->type() & OSCController::Output) && outputItem == nullptr)
         {
             outputItem = new QTreeWidgetItem(m_uniMapTree);
             outputItem->setText(KMapColumnInterface, tr("Outputs"));
@@ -208,11 +208,11 @@ void ConfigureOSC::accept()
                 cap = QLCIOPlugin::Output;
 
             QSpinBox *inSpin = qobject_cast<QSpinBox*>(m_uniMapTree->itemWidget(item, KMapColumnInputPort));
-            if (inSpin != NULL)
+            if (inSpin != nullptr)
                 m_plugin->setParameter(universe, line, cap, OSC_INPUTPORT, inSpin->value());
 
             QLineEdit *ipEdit = qobject_cast<QLineEdit*>(m_uniMapTree->itemWidget(item, KMapColumnOutputAddress));
-            if (ipEdit != NULL)
+            if (ipEdit != nullptr)
             {
                 QHostAddress newHostAddress(ipEdit->text());
                 if (newHostAddress.isNull() && ipEdit->text().size() > 0)
@@ -228,7 +228,7 @@ void ConfigureOSC::accept()
             }
 
             QSpinBox *outSpin = qobject_cast<QSpinBox*>(m_uniMapTree->itemWidget(item, KMapColumnOutputPort));
-            if (outSpin != NULL)
+            if (outSpin != nullptr)
             {
                 if (type == OSCController::Input)
                     m_plugin->setParameter(universe, line, QLCIOPlugin::Output, OSC_FEEDBACKPORT, outSpin->value());

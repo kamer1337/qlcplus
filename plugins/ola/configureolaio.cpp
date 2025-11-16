@@ -42,7 +42,7 @@ ConfigureOlaIO::ConfigureOlaIO(OlaIO* plugin, QWidget* parent)
     : QDialog(parent)
     , m_plugin(plugin)
 {
-    Q_ASSERT(plugin != NULL);
+    Q_ASSERT(plugin != nullptr);
 
     setupUi(this);
     populateOutputList();

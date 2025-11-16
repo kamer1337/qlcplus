@@ -99,7 +99,7 @@ VCXYPadPreset &VCXYPadPreset::operator=(const VCXYPadPreset &vcpp)
         m_fxGroup = vcpp.m_fxGroup;
         m_keySequence = vcpp.m_keySequence;
 
-        if (vcpp.m_inputSource != NULL)
+        if (vcpp.m_inputSource != nullptr)
         {
             m_inputSource = QSharedPointer<QLCInputSource>(new QLCInputSource(vcpp.m_inputSource->universe(),
                                                    vcpp.m_inputSource->channel()));
@@ -232,7 +232,7 @@ bool VCXYPadPreset::loadXML(QXmlStreamReader &root)
 
 bool VCXYPadPreset::saveXML(QXmlStreamWriter *doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     doc->writeStartElement(KXMLQLCVCXYPadPreset);
     doc->writeAttribute(KXMLQLCVCXYPadPresetID, QString::number(m_id));

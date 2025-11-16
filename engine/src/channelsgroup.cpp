@@ -171,11 +171,11 @@ QString ChannelsGroup::status(Doc *doc) const
     foreach (SceneValue value, m_channels)
     {
         Fixture *fixture = doc->fixture(value.fxi);
-        if (fixture == NULL)
+        if (fixture == nullptr)
             return QString();
         const QLCFixtureMode *mode = fixture->fixtureMode();
         QString chInfo("<TR><TD>%1</TD><TD>%2</TD><TD>%3</TD></TR>");
-        if (mode != NULL)
+        if (mode != nullptr)
         {
             info += chInfo.arg(fixture->name()).arg(value.channel + 1)
                 .arg(mode->channels().at(value.channel)->name());
@@ -225,7 +225,7 @@ void ChannelsGroup::slotInputValueChanged(quint32 universe, quint32 channel, uch
 
     //qDebug() << Q_FUNC_INFO << "universe: " << universe << ", channel: " << channel << ", value: " << value;
 
-    if (inputSource() != NULL &&
+    if (inputSource() != nullptr &&
         inputSource()->universe() == universe &&
         inputSource()->channel() == channel)
     {
@@ -241,7 +241,7 @@ bool ChannelsGroup::loader(QXmlStreamReader &xmlDoc, Doc* doc)
     bool result = false;
 
     ChannelsGroup* grp = new ChannelsGroup(doc);
-    Q_ASSERT(grp != NULL);
+    Q_ASSERT(grp != nullptr);
 
     if (grp->loadXML(xmlDoc) == true)
     {
@@ -260,7 +260,7 @@ bool ChannelsGroup::loader(QXmlStreamReader &xmlDoc, Doc* doc)
 
 bool ChannelsGroup::saveXML(QXmlStreamWriter *doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     QString str;
     foreach (SceneValue value, this->getChannels())
@@ -324,13 +324,13 @@ bool ChannelsGroup::loadXML(QXmlStreamReader &xmlDoc)
             SceneValue scv(QString(varray.at(i)).toUInt(),
                            QString(varray.at(i + 1)).toUInt(), 0);
             Fixture* fxi = m_doc->fixture(scv.fxi);
-            if (fxi == NULL)
+            if (fxi == nullptr)
             {
                 qWarning() << Q_FUNC_INFO << "Fixture not present:" << scv.fxi;
                 continue;
             }
             const QLCChannel* ch = fxi->channel(scv.channel);
-            if (ch == NULL)
+            if (ch == nullptr)
             {
                 qWarning() << Q_FUNC_INFO << "Fixture" << scv.fxi << "does not have channel" << scv.channel;
                 continue;

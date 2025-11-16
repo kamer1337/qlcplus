@@ -37,11 +37,11 @@
 #include "rgbscript.h"
 #include "rgbscriptscache.h"
 
-QScriptEngine* RGBScript::s_engine = NULL;
+QScriptEngine* RGBScript::s_engine = nullptr;
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-  QMutex* RGBScript::s_engineMutex = NULL;
+  QMutex* RGBScript::s_engineMutex = nullptr;
 #else
-  QRecursiveMutex* RGBScript::s_engineMutex = NULL;
+  QRecursiveMutex* RGBScript::s_engineMutex = nullptr;
 #endif
 
 /****************************************************************************
@@ -215,7 +215,7 @@ bool RGBScript::evaluate()
 
 void RGBScript::initEngine()
 {
-    if (s_engineMutex == NULL)
+    if (s_engineMutex == nullptr)
     {
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
         s_engineMutex = new QMutex(QMutex::Recursive);
@@ -224,8 +224,8 @@ void RGBScript::initEngine()
 #endif
         s_engine = new QScriptEngine(QCoreApplication::instance());
     }
-    Q_ASSERT(s_engineMutex != NULL);
-    Q_ASSERT(s_engine != NULL);
+    Q_ASSERT(s_engineMutex != nullptr);
+    Q_ASSERT(s_engine != nullptr);
 }
 
 void RGBScript::displayError(QScriptValue e, const QString& fileName)
@@ -397,7 +397,7 @@ bool RGBScript::loadXML(QXmlStreamReader &root)
 
 bool RGBScript::saveXML(QXmlStreamWriter *doc) const
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     if (apiVersion() > 0 && name().isEmpty() == false)
     {

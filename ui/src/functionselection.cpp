@@ -43,9 +43,9 @@ FunctionSelection::FunctionSelection(QWidget* parent, Doc* doc)
     , m_doc(doc)
     , m_isInitializing(true)
     , m_none(false)
-    , m_noneItem(NULL)
+    , m_noneItem(nullptr)
     , m_newTrack(false)
-    , m_newTrackItem(NULL)
+    , m_newTrackItem(nullptr)
     , m_multiSelection(true)
     , m_runningOnlyFlag(false)
     , m_filter(Function::SceneType | Function::ChaserType | Function::SequenceType | Function::CollectionType |
@@ -54,7 +54,7 @@ FunctionSelection::FunctionSelection(QWidget* parent, Doc* doc)
     , m_disableFilters(0)
     , m_constFilter(false)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     setupUi(this);
 
@@ -355,7 +355,7 @@ void FunctionSelection::slotItemSelectionChanged()
 
 void FunctionSelection::slotItemDoubleClicked(QTreeWidgetItem* item)
 {
-    if (item == NULL)
+    if (item == nullptr)
         return;
 
     if (m_buttonBox->button(QDialogButtonBox::Ok)->isEnabled() == false)

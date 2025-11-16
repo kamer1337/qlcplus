@@ -30,7 +30,7 @@ static void CALLBACK MidiInProc(HMIDIIN hMidiIn, UINT wMsg,
     Q_UNUSED(hMidiIn)
     Q_UNUSED(dwParam2)
     Win32MidiInputDevice* self = (Win32MidiInputDevice*) dwInstance;
-    Q_ASSERT(self != NULL);
+    Q_ASSERT(self != nullptr);
 
     if (wMsg == MIM_DATA)
     {
@@ -66,7 +66,7 @@ Win32MidiInputDevice::Win32MidiInputDevice(const QVariant& uid, const QString& n
                                            QObject* parent)
     : MidiInputDevice(uid, name, parent)
     , m_id(id)
-    , m_handle(NULL)
+    , m_handle(nullptr)
     , m_universe(MAX_MIDI_DMX_CHANNELS, char(0))
     , m_mbc_counter(UINT_MAX)
 {
@@ -82,7 +82,7 @@ bool Win32MidiInputDevice::open()
 {
     qDebug() << Q_FUNC_INFO;
 
-    if (m_handle != NULL)
+    if (m_handle != nullptr)
         return false;
 
     MMRESULT result = midiInOpen(&m_handle, m_id, (DWORD_PTR) MidiInProc, (DWORD_PTR) this, CALLBACK_FUNCTION);
@@ -90,7 +90,7 @@ bool Win32MidiInputDevice::open()
     {
         qWarning() << Q_FUNC_INFO << "Unable to open MIDI input device with id:" << m_id
                    << "name:" << name() << ":" << result;
-        m_handle = NULL;
+        m_handle = nullptr;
         return false;
     }
     else
@@ -104,7 +104,7 @@ void Win32MidiInputDevice::close()
 {
     qDebug() << Q_FUNC_INFO;
 
-    if (m_handle == NULL)
+    if (m_handle == nullptr)
         return;
 
     MMRESULT result = midiInStop(m_handle);
@@ -116,12 +116,12 @@ void Win32MidiInputDevice::close()
     if (result != MMSYSERR_NOERROR)
         qWarning() << Q_FUNC_INFO << "Unable to close MIDI input with id:" << m_id
                    << "name:" << name() << ":" << result;
-    m_handle = NULL;
+    m_handle = nullptr;
 }
 
 bool Win32MidiInputDevice::isOpen() const
 {
-    if (m_handle != NULL)
+    if (m_handle != nullptr)
         return true;
     else
         return false;

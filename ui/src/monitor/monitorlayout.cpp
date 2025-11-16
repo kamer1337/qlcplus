@@ -44,10 +44,10 @@ bool MonitorLayoutItem::operator<(const MonitorLayoutItem& item)
     MonitorFixture* mof;
 
     mof = qobject_cast<MonitorFixture*> (widget());
-    Q_ASSERT(mof != NULL);
+    Q_ASSERT(mof != nullptr);
 
     item_mof = qobject_cast<MonitorFixture*> (ncitem.widget());
-    Q_ASSERT(item_mof != NULL);
+    Q_ASSERT(item_mof != nullptr);
 
     if ((*mof) < (*item_mof))
         return true;
@@ -95,7 +95,7 @@ MonitorLayoutItem* MonitorLayout::takeAt(int index)
     if (index >= 0 && index < m_items.size())
         return m_items.takeAt(index);
     else
-        return NULL;
+        return nullptr;
 }
 
 static bool MonitorLayoutLessThan(MonitorLayoutItem* i1, MonitorLayoutItem* i2)

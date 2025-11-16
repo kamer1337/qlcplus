@@ -47,8 +47,8 @@ AudioRendererAlsa::AudioRendererAlsa(QString device, QObject * parent)
     m_inited = false;
     m_use_mmap = false;
     pcm_name = strdup(dev_name.toLatin1().data());
-    pcm_handle = NULL;
-    m_prebuf = NULL;
+    pcm_handle = nullptr;
+    m_prebuf = nullptr;
     m_prebuf_size = 0;
     m_prebuf_fill = 0;
     m_can_pause = false;
@@ -294,7 +294,7 @@ QList<AudioDeviceInfo> AudioRendererAlsa::getDevicesInfo()
 
 qint64 AudioRendererAlsa::writeAudio(unsigned char *data, qint64 maxSize)
 {
-    if (pcm_handle == NULL || m_prebuf == NULL)
+    if (pcm_handle == nullptr || m_prebuf == nullptr)
         return 0;
 
     if ((maxSize = qMin(maxSize, m_prebuf_size - m_prebuf_fill)) > 0)

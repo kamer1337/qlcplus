@@ -360,7 +360,7 @@ public:
      * @param name The name to search for
      * @param exactMatch if true, only exact matches are returned,
      *                   otherwise a "contains" comparison is made.
-     * @return QLCCapability or NULL
+     * @return QLCCapability or nullptr
      */
     QLCCapability* searchCapability(const QString& name,
                                     bool exactMatch = true) const;

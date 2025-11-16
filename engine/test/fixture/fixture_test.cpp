@@ -163,11 +163,11 @@ void Fixture_Test::type()
 
     QLCFixtureDef* fixtureDef;
     fixtureDef = m_doc->fixtureDefCache()->fixtureDef("Martin", "MAC250+");
-    QVERIFY(fixtureDef != NULL);
+    QVERIFY(fixtureDef != nullptr);
 
     QLCFixtureMode* fixtureMode;
     fixtureMode = fixtureDef->modes().at(0);
-    QVERIFY(fixtureMode != NULL);
+    QVERIFY(fixtureMode != nullptr);
 
     fxi.setFixtureDefinition(fixtureDef, fixtureMode);
     QCOMPARE(fxi.typeString(), fixtureDef->typeToString(fixtureDef->type()));
@@ -175,9 +175,9 @@ void Fixture_Test::type()
     QCOMPARE(fxi.iconResource(), QString(":/movinghead.png"));
 
     fixtureDef = m_doc->fixtureDefCache()->fixtureDef("SGM", "Colorlab 250");
-    QVERIFY(fixtureDef != NULL);
+    QVERIFY(fixtureDef != nullptr);
     fixtureMode = fixtureDef->modes().at(0);
-    QVERIFY(fixtureMode != NULL);
+    QVERIFY(fixtureMode != nullptr);
 
     fxi.setFixtureDefinition(fixtureDef, fixtureMode);
     QCOMPARE(fxi.typeString(), fixtureDef->typeToString(fixtureDef->type()));
@@ -185,9 +185,9 @@ void Fixture_Test::type()
     QCOMPARE(fxi.iconResource(), QString(":/fixture.png"));
 
     fixtureDef = m_doc->fixtureDefCache()->fixtureDef("Chauvet", "Vue 3.1");
-    QVERIFY(fixtureDef != NULL);
+    QVERIFY(fixtureDef != nullptr);
     fixtureMode = fixtureDef->modes().at(0);
-    QVERIFY(fixtureMode != NULL);
+    QVERIFY(fixtureMode != nullptr);
 
     fxi.setFixtureDefinition(fixtureDef, fixtureMode);
     QCOMPARE(fxi.typeString(), fixtureDef->typeToString(fixtureDef->type()));
@@ -195,9 +195,9 @@ void Fixture_Test::type()
     QCOMPARE(fxi.iconResource(), QString(":/effect.png"));
 
     fixtureDef = m_doc->fixtureDefCache()->fixtureDef("Cameo", "Storm");
-    QVERIFY(fixtureDef != NULL);
+    QVERIFY(fixtureDef != nullptr);
     fixtureMode = fixtureDef->modes().at(0);
-    QVERIFY(fixtureMode != NULL);
+    QVERIFY(fixtureMode != nullptr);
 
     fxi.setFixtureDefinition(fixtureDef, fixtureMode);
     QCOMPARE(fxi.typeString(), fixtureDef->typeToString(fixtureDef->type()));
@@ -205,9 +205,9 @@ void Fixture_Test::type()
     QCOMPARE(fxi.iconResource(), QString(":/flower.png"));
 
     fixtureDef = m_doc->fixtureDefCache()->fixtureDef("Showtec", "Dragon F-350");
-    QVERIFY(fixtureDef != NULL);
+    QVERIFY(fixtureDef != nullptr);
     fixtureMode = fixtureDef->modes().at(0);
-    QVERIFY(fixtureMode != NULL);
+    QVERIFY(fixtureMode != nullptr);
 
     fxi.setFixtureDefinition(fixtureDef, fixtureMode);
     QCOMPARE(fxi.typeString(), fixtureDef->typeToString(fixtureDef->type()));
@@ -215,9 +215,9 @@ void Fixture_Test::type()
     QCOMPARE(fxi.iconResource(true), QString("qrc:/hazer.svg"));
 
     fixtureDef = m_doc->fixtureDefCache()->fixtureDef("beamZ", "LS-3DRG");
-    QVERIFY(fixtureDef != NULL);
+    QVERIFY(fixtureDef != nullptr);
     fixtureMode = fixtureDef->modes().at(0);
-    QVERIFY(fixtureMode != NULL);
+    QVERIFY(fixtureMode != nullptr);
 
     fxi.setFixtureDefinition(fixtureDef, fixtureMode);
     QCOMPARE(fxi.typeString(), fixtureDef->typeToString(fixtureDef->type()));
@@ -225,9 +225,9 @@ void Fixture_Test::type()
     QCOMPARE(fxi.iconResource(), QString(":/laser.png"));
 
     fixtureDef = m_doc->fixtureDefCache()->fixtureDef("GLP", "PocketScan");
-    QVERIFY(fixtureDef != NULL);
+    QVERIFY(fixtureDef != nullptr);
     fixtureMode = fixtureDef->modes().at(0);
-    QVERIFY(fixtureMode != NULL);
+    QVERIFY(fixtureMode != nullptr);
 
     fxi.setFixtureDefinition(fixtureDef, fixtureMode);
     QCOMPARE(fxi.typeString(), fixtureDef->typeToString(fixtureDef->type()));
@@ -235,9 +235,9 @@ void Fixture_Test::type()
     QCOMPARE(fxi.iconResource(), QString(":/scanner.png"));
 
     fixtureDef = m_doc->fixtureDefCache()->fixtureDef("Robe", "Fog 1500 FT");
-    QVERIFY(fixtureDef != NULL);
+    QVERIFY(fixtureDef != nullptr);
     fixtureMode = fixtureDef->modes().at(0);
-    QVERIFY(fixtureMode != NULL);
+    QVERIFY(fixtureMode != nullptr);
 
     fxi.setFixtureDefinition(fixtureDef, fixtureMode);
     QCOMPARE(fxi.typeString(), fixtureDef->typeToString(fixtureDef->type()));
@@ -245,9 +245,9 @@ void Fixture_Test::type()
     QCOMPARE(fxi.iconResource(true), QString("qrc:/smoke.svg"));
 
     fixtureDef = m_doc->fixtureDefCache()->fixtureDef("Chauvet", "LED Shadow");
-    QVERIFY(fixtureDef != NULL);
+    QVERIFY(fixtureDef != nullptr);
     fixtureMode = fixtureDef->modes().at(0);
-    QVERIFY(fixtureMode != NULL);
+    QVERIFY(fixtureMode != nullptr);
 
     fxi.setFixtureDefinition(fixtureDef, fixtureMode);
     QCOMPARE(fxi.typeString(), fixtureDef->typeToString(fixtureDef->type()));
@@ -255,9 +255,9 @@ void Fixture_Test::type()
     QCOMPARE(fxi.iconResource(), QString(":/strobe.png"));
 
     fixtureDef = m_doc->fixtureDefCache()->fixtureDef("Varytec", "Gigabar II");
-    QVERIFY(fixtureDef != NULL);
+    QVERIFY(fixtureDef != nullptr);
     fixtureMode = fixtureDef->modes().at(0);
-    QVERIFY(fixtureMode != NULL);
+    QVERIFY(fixtureMode != nullptr);
 
     fxi.setFixtureDefinition(fixtureDef, fixtureMode);
     QCOMPARE(fxi.typeString(), fixtureDef->typeToString(fixtureDef->type()));
@@ -265,9 +265,9 @@ void Fixture_Test::type()
     QCOMPARE(fxi.iconResource(), QString(":/ledbar_pixels.png"));
 
     fixtureDef = m_doc->fixtureDefCache()->fixtureDef("Clay Paky", "Show Batten 100");
-    QVERIFY(fixtureDef != NULL);
+    QVERIFY(fixtureDef != nullptr);
     fixtureMode = fixtureDef->modes().at(0);
-    QVERIFY(fixtureMode != NULL);
+    QVERIFY(fixtureMode != nullptr);
 
     fxi.setFixtureDefinition(fixtureDef, fixtureMode);
     QCOMPARE(fxi.typeString(), fixtureDef->typeToString(fixtureDef->type()));
@@ -279,24 +279,24 @@ void Fixture_Test::dimmer()
 {
     Fixture fxi(this);
 
-    QVERIFY(fxi.fixtureDef() == NULL);
-    QVERIFY(fxi.fixtureMode() == NULL);
+    QVERIFY(fxi.fixtureDef() == nullptr);
+    QVERIFY(fxi.fixtureMode() == nullptr);
     QVERIFY(fxi.channels() == 0);
-    QVERIFY(fxi.channel(0) == NULL);
-    QVERIFY(fxi.channel(42) == NULL);
+    QVERIFY(fxi.channel(0) == nullptr);
+    QVERIFY(fxi.channel(42) == nullptr);
 
     /* All channels point to the same generic channel instance */
     fxi.setChannels(5);
     QVERIFY(fxi.channels() == 5);
-    QVERIFY(fxi.channel(0) != NULL);
+    QVERIFY(fxi.channel(0) != nullptr);
     const QLCChannel* ch = fxi.channel(0);
     QVERIFY(fxi.channel(1) != fxi.channel(0));
     QVERIFY(fxi.channel(2) != fxi.channel(1));
     QVERIFY(fxi.channel(3) != fxi.channel(2));
     QVERIFY(fxi.channel(4) != fxi.channel(3));
-    QVERIFY(fxi.channel(5) == NULL);
-    QVERIFY(fxi.channel(42) == NULL);
-    QVERIFY(fxi.channel(QLCChannel::invalid()) == NULL);
+    QVERIFY(fxi.channel(5) == nullptr);
+    QVERIFY(fxi.channel(42) == nullptr);
+    QVERIFY(fxi.channel(QLCChannel::invalid()) == nullptr);
 
     QVERIFY(ch->capabilities().count() == 1);
     QVERIFY(ch->capabilities().at(0)->min() == 0);
@@ -474,10 +474,10 @@ void Fixture_Test::fixtureDef()
 {
     Fixture fxi(this);
 
-    QVERIFY(fxi.fixtureDef() == NULL);
-    QVERIFY(fxi.fixtureMode() == NULL);
+    QVERIFY(fxi.fixtureDef() == nullptr);
+    QVERIFY(fxi.fixtureMode() == nullptr);
     QVERIFY(fxi.channels() == 0);
-    QVERIFY(fxi.channel(0) == NULL);
+    QVERIFY(fxi.channel(0) == nullptr);
     QCOMPARE(fxi.channelNumber(QLCChannel::Pan, QLCChannel::MSB), QLCChannel::invalid());
     QCOMPARE(fxi.channelNumber(QLCChannel::Tilt, QLCChannel::MSB), QLCChannel::invalid());
     QCOMPARE(fxi.channelNumber(QLCChannel::Pan, QLCChannel::LSB), QLCChannel::invalid());
@@ -486,33 +486,33 @@ void Fixture_Test::fixtureDef()
 
     QLCFixtureDef* fixtureDef;
     fixtureDef = m_doc->fixtureDefCache()->fixtureDef("Martin", "MAC300");
-    Q_ASSERT(fixtureDef != NULL);
+    Q_ASSERT(fixtureDef != nullptr);
 
-    fxi.setFixtureDefinition(fixtureDef, NULL);
-    QVERIFY(fxi.fixtureDef() == NULL);
-    QVERIFY(fxi.fixtureMode() == NULL);
+    fxi.setFixtureDefinition(fixtureDef, nullptr);
+    QVERIFY(fxi.fixtureDef() == nullptr);
+    QVERIFY(fxi.fixtureMode() == nullptr);
 
     QLCFixtureMode* fixtureMode;
     fixtureMode = fixtureDef->modes().last();
-    Q_ASSERT(fixtureMode != NULL);
+    Q_ASSERT(fixtureMode != nullptr);
 
-    fxi.setFixtureDefinition(NULL, fixtureMode);
-    QVERIFY(fxi.fixtureDef() == NULL);
-    QVERIFY(fxi.fixtureMode() == NULL);
+    fxi.setFixtureDefinition(nullptr, fixtureMode);
+    QVERIFY(fxi.fixtureDef() == nullptr);
+    QVERIFY(fxi.fixtureMode() == nullptr);
 
     fxi.setFixtureDefinition(fixtureDef, fixtureMode);
-    QVERIFY(fxi.fixtureDef() != NULL);
-    QVERIFY(fxi.fixtureMode() != NULL);
+    QVERIFY(fxi.fixtureDef() != nullptr);
+    QVERIFY(fxi.fixtureMode() != nullptr);
     QVERIFY(fxi.fixtureDef() == fixtureDef);
     QVERIFY(fxi.fixtureMode() == fixtureMode);
 
     QVERIFY(fxi.channels() == quint32(fixtureMode->channels().count()));
-    QVERIFY(fxi.channel(fxi.channels() - 1) != NULL);
-    QVERIFY(fxi.channel(fxi.channels()) == NULL);
+    QVERIFY(fxi.channel(fxi.channels() - 1) != nullptr);
+    QVERIFY(fxi.channel(fxi.channels()) == nullptr);
 
     QVERIFY(fxi.channel(QLCChannel::Pan) != QLCChannel::invalid());
     const QLCChannel* ch = fxi.channel(fxi.channel(QLCChannel::Pan));
-    QVERIFY(ch != NULL);
+    QVERIFY(ch != nullptr);
 
     QCOMPARE(fxi.channelNumber(QLCChannel::Pan, QLCChannel::MSB), quint32(7));
     QCOMPARE(fxi.channelNumber(QLCChannel::Tilt, QLCChannel::MSB), quint32(9));
@@ -527,9 +527,9 @@ void Fixture_Test::channels()
 {
     Fixture fxi(this);
     QLCFixtureDef* fixtureDef = m_doc->fixtureDefCache()->fixtureDef("i-Pix", "BB4");
-    QVERIFY(fixtureDef != NULL);
+    QVERIFY(fixtureDef != nullptr);
     QLCFixtureMode* fixtureMode = fixtureDef->modes().last();
-    QVERIFY(fixtureMode != NULL);
+    QVERIFY(fixtureMode != nullptr);
     fxi.setFixtureDefinition(fixtureDef, fixtureMode);
 
     QCOMPARE(fxi.channel(QLCChannel::Intensity, QLCChannel::Red), quint32(3));
@@ -553,11 +553,11 @@ void Fixture_Test::degrees()
 
     QLCFixtureDef* fixtureDef;
     fixtureDef = m_doc->fixtureDefCache()->fixtureDef("Martin", "MAC250+");
-    QVERIFY(fixtureDef != NULL);
+    QVERIFY(fixtureDef != nullptr);
 
     QLCFixtureMode* fixtureMode;
     fixtureMode = fixtureDef->modes().at(1);
-    QVERIFY(fixtureMode != NULL);
+    QVERIFY(fixtureMode != nullptr);
 
     fxi.setFixtureDefinition(fixtureDef, fixtureMode);
 
@@ -596,11 +596,11 @@ void Fixture_Test::heads()
 
     QLCFixtureDef* fixtureDef;
     fixtureDef = m_doc->fixtureDefCache()->fixtureDef("Equinox", "Photon");
-    QVERIFY(fixtureDef != NULL);
+    QVERIFY(fixtureDef != nullptr);
 
     QLCFixtureMode* fixtureMode;
     fixtureMode = fixtureDef->modes().last();
-    QVERIFY(fixtureMode != NULL);
+    QVERIFY(fixtureMode != nullptr);
 
     fxi.setFixtureDefinition(fixtureDef, fixtureMode);
 
@@ -628,7 +628,7 @@ void Fixture_Test::loadWrongRoot()
 
     xmlWriter.writeStartElement("Function");
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -657,7 +657,7 @@ void Fixture_Test::loadFixtureDef()
     xmlWriter.writeTextElement("Address", "21");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -670,8 +670,8 @@ void Fixture_Test::loadFixtureDef()
     QVERIFY(fxi.channels() == 9);
     QVERIFY(fxi.address() == 21);
     QVERIFY(fxi.universe() == 0);
-    QVERIFY(fxi.fixtureDef() != NULL);
-    QVERIFY(fxi.fixtureMode() != NULL);
+    QVERIFY(fxi.fixtureDef() != nullptr);
+    QVERIFY(fxi.fixtureMode() != nullptr);
 }
 
 void Fixture_Test::loadFixtureDefWrongChannels()
@@ -692,7 +692,7 @@ void Fixture_Test::loadFixtureDefWrongChannels()
     xmlWriter.writeTextElement("Address", "21");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -705,8 +705,8 @@ void Fixture_Test::loadFixtureDefWrongChannels()
     QVERIFY(fxi.channels() == 9);
     QVERIFY(fxi.address() == 21);
     QVERIFY(fxi.universe() == 0);
-    QVERIFY(fxi.fixtureDef() != NULL);
-    QVERIFY(fxi.fixtureMode() != NULL);
+    QVERIFY(fxi.fixtureDef() != nullptr);
+    QVERIFY(fxi.fixtureMode() != nullptr);
 }
 
 void Fixture_Test::loadDimmer()
@@ -727,7 +727,7 @@ void Fixture_Test::loadDimmer()
     xmlWriter.writeTextElement("Address", "21");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -740,8 +740,8 @@ void Fixture_Test::loadDimmer()
     QVERIFY(fxi.channels() == 18);
     QVERIFY(fxi.address() == 21);
     QVERIFY(fxi.universe() == 3);
-    QVERIFY(fxi.fixtureDef() != NULL);
-    QVERIFY(fxi.fixtureMode() != NULL);
+    QVERIFY(fxi.fixtureDef() != nullptr);
+    QVERIFY(fxi.fixtureMode() != nullptr);
 }
 
 void Fixture_Test::loadWrongAddress()
@@ -762,7 +762,7 @@ void Fixture_Test::loadWrongAddress()
     xmlWriter.writeTextElement("Address", "512");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -795,7 +795,7 @@ void Fixture_Test::loadWrongUniverse()
     xmlWriter.writeTextElement("Address", "25");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -828,7 +828,7 @@ void Fixture_Test::loadWrongID()
     xmlWriter.writeTextElement("Address", "21");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -857,39 +857,39 @@ void Fixture_Test::loader()
     xmlWriter.writeTextElement("Address", "21");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
     QXmlStreamReader xmlReader(&buffer);
     xmlReader.readNextStartElement();
 
-    QVERIFY(m_doc != NULL);
+    QVERIFY(m_doc != nullptr);
     QVERIFY(m_doc->fixtures().size() == 0);
 
     QVERIFY(Fixture::loader(xmlReader, m_doc) == true);
     QVERIFY(m_doc->fixtures().size() == 1);
-    QVERIFY(m_doc->fixture(0) == NULL); // No ID auto-assignment
+    QVERIFY(m_doc->fixture(0) == nullptr); // No ID auto-assignment
 
     Fixture* fxi = m_doc->fixture(42);
-    QVERIFY(fxi != NULL);
+    QVERIFY(fxi != nullptr);
     QVERIFY(fxi->name() == "Foobar");
     QVERIFY(fxi->channels() == 18);
     QVERIFY(fxi->address() == 21);
     QVERIFY(fxi->universe() == 3);
-    QVERIFY(fxi->fixtureDef() != NULL);
-    QVERIFY(fxi->fixtureMode() != NULL);
+    QVERIFY(fxi->fixtureDef() != nullptr);
+    QVERIFY(fxi->fixtureMode() != nullptr);
 }
 
 void Fixture_Test::save()
 {
     QLCFixtureDef* fixtureDef;
     fixtureDef = m_doc->fixtureDefCache()->fixtureDef("Martin", "MAC250+");
-    Q_ASSERT(fixtureDef != NULL);
+    Q_ASSERT(fixtureDef != nullptr);
 
     QLCFixtureMode* fixtureMode;
     fixtureMode = fixtureDef->modes().at(0);
-    Q_ASSERT(fixtureMode != NULL);
+    Q_ASSERT(fixtureMode != nullptr);
 
     Fixture fxi(this);
     fxi.setID(1337);
@@ -906,7 +906,7 @@ void Fixture_Test::save()
 
     QVERIFY(fxi.saveXML(&xmlWriter) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -1006,11 +1006,11 @@ void Fixture_Test::status()
 
     QLCFixtureDef* fixtureDef;
     fixtureDef = m_doc->fixtureDefCache()->fixtureDef("Martin", "MAC250+");
-    Q_ASSERT(fixtureDef != NULL);
+    Q_ASSERT(fixtureDef != nullptr);
 
     QLCFixtureMode* fixtureMode;
     fixtureMode = fixtureDef->modes().at(0);
-    Q_ASSERT(fixtureMode != NULL);
+    Q_ASSERT(fixtureMode != nullptr);
 
     fxi.setFixtureDefinition(fixtureDef, fixtureMode);
     info = fxi.status();

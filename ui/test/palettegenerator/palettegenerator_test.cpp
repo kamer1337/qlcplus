@@ -67,10 +67,10 @@ void PaletteGenerator_Test::capabilities()
 
     QLCFixtureDef* fixtureDef;
     fixtureDef = m_fixtureDefCache.fixtureDef("Showtec", "MiniMax 250");
-    Q_ASSERT(fixtureDef != NULL);
+    Q_ASSERT(fixtureDef != nullptr);
     QLCFixtureMode* fixtureMode;
     fixtureMode = fixtureDef->modes().at(0);
-    Q_ASSERT(fixtureMode != NULL);
+    Q_ASSERT(fixtureMode != nullptr);
 
     Fixture* fxi = new Fixture(&doc);
     fxi->setFixtureDefinition(fixtureDef, fixtureMode);
@@ -82,9 +82,9 @@ void PaletteGenerator_Test::capabilities()
     QCOMPARE(caps.at(2), KQLCChannelMovement);
 
     fixtureDef = m_fixtureDefCache.fixtureDef("Martin", "MAC300");
-    Q_ASSERT(fixtureDef != NULL);
+    Q_ASSERT(fixtureDef != nullptr);
     fixtureMode = fixtureDef->modes().at(0);
-    Q_ASSERT(fixtureMode != NULL);
+    Q_ASSERT(fixtureMode != nullptr);
 
     fxi->setFixtureDefinition(fixtureDef, fixtureMode);
 
@@ -102,10 +102,10 @@ void PaletteGenerator_Test::createColours()
 
     QLCFixtureDef* fixtureDef;
     fixtureDef = m_fixtureDefCache.fixtureDef("Futurelight", "DJScan250");
-    Q_ASSERT(fixtureDef != NULL);
+    Q_ASSERT(fixtureDef != nullptr);
     QLCFixtureMode* fixtureMode;
     fixtureMode = fixtureDef->modes().at(0);
-    Q_ASSERT(fixtureMode != NULL);
+    Q_ASSERT(fixtureMode != nullptr);
 
     QList <Fixture*> list;
     Fixture* fxi1 = new Fixture(&doc);
@@ -124,7 +124,7 @@ void PaletteGenerator_Test::createColours()
     for (quint32 i = 0; i < 10; i++)
     {
         Scene* s = qobject_cast<Scene*> (doc.function(i));
-        QVERIFY(s != NULL);
+        QVERIFY(s != nullptr);
         QCOMPARE(s->values().size(), 2); // One colour for two fixtures
         QCOMPARE(s->values().at(0).fxi, fxi1->id());
         QCOMPARE(s->values().at(0).channel, quint32(2)); // DJScan colour channel
@@ -139,10 +139,10 @@ void PaletteGenerator_Test::createGobos()
 
     QLCFixtureDef* fixtureDef;
     fixtureDef = m_fixtureDefCache.fixtureDef("Futurelight", "DJScan250");
-    Q_ASSERT(fixtureDef != NULL);
+    Q_ASSERT(fixtureDef != nullptr);
     QLCFixtureMode* fixtureMode;
     fixtureMode = fixtureDef->modes().at(0);
-    Q_ASSERT(fixtureMode != NULL);
+    Q_ASSERT(fixtureMode != nullptr);
 
     QList <Fixture*> list;
     Fixture* fxi1 = new Fixture(&doc);
@@ -161,7 +161,7 @@ void PaletteGenerator_Test::createGobos()
     for (quint32 i = 0; i < 10; i++)
     {
         Scene* s = qobject_cast<Scene*> (doc.function(i));
-        QVERIFY(s != NULL);
+        QVERIFY(s != nullptr);
         QCOMPARE(s->values().size(), 2); // One gobo for two fixtures
         QCOMPARE(s->values().at(0).fxi, fxi1->id());
         QCOMPARE(s->values().at(0).channel, quint32(3)); // DJScan gobo channel
@@ -176,10 +176,10 @@ void PaletteGenerator_Test::createShutters()
 
     QLCFixtureDef* fixtureDef;
     fixtureDef = m_fixtureDefCache.fixtureDef("Martin", "MAC300");
-    Q_ASSERT(fixtureDef != NULL);
+    Q_ASSERT(fixtureDef != nullptr);
     QLCFixtureMode* fixtureMode;
     fixtureMode = fixtureDef->modes().at(0);
-    Q_ASSERT(fixtureMode != NULL);
+    Q_ASSERT(fixtureMode != nullptr);
 
     QList <Fixture*> list;
     Fixture* fxi1 = new Fixture(&doc);
@@ -199,7 +199,7 @@ void PaletteGenerator_Test::createShutters()
     for (quint32 i = 0; i < 13; i++)
     {
         Scene* s = qobject_cast<Scene*> (doc.function(i));
-        QVERIFY(s != NULL);
+        QVERIFY(s != nullptr);
         QCOMPARE(s->values().size(), 2); // One cap for two fixtures
         QCOMPARE(s->values().at(0).fxi, fxi1->id());
         QCOMPARE(s->values().at(0).channel, quint32(0)); // MAC300 shutter channel

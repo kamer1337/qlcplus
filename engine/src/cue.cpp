@@ -182,7 +182,7 @@ bool Cue::loadXML(QXmlStreamReader &root)
 bool Cue::saveXML(QXmlStreamWriter *doc) const
 {
     qDebug() << Q_FUNC_INFO;
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     doc->writeStartElement(KXMLQLCCue);
     doc->writeAttribute(KXMLQLCCueName, name());

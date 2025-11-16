@@ -55,7 +55,7 @@ void VCXYPad_Test::initTestCase()
 
 void VCXYPad_Test::init()
 {
-    new VirtualConsole(NULL, m_doc);
+    new VirtualConsole(nullptr, m_doc);
 }
 
 void VCXYPad_Test::cleanup()
@@ -73,12 +73,12 @@ void VCXYPad_Test::initial()
     QCOMPARE(pad.caption(), QString("XY Pad"));
     QCOMPARE(pad.frameStyle(), QFrame::Panel | QFrame::Sunken);
     QCOMPARE(pad.size(), QSize(230, 230));
-    QVERIFY(pad.m_area != NULL);
+    QVERIFY(pad.m_area != nullptr);
     QVERIFY(pad.m_area->m_activePixmap.isNull() == false);
     QCOMPARE(pad.m_area->position(), QPointF(0, 0));
     QCOMPARE(pad.m_fixtures.size(), 0);
-    QVERIFY(pad.m_vSlider != NULL);
-    QVERIFY(pad.m_hSlider != NULL);
+    QVERIFY(pad.m_vSlider != nullptr);
+    QVERIFY(pad.m_hSlider != nullptr);
 }
 
 void VCXYPad_Test::fixtures()
@@ -148,7 +148,7 @@ void VCXYPad_Test::copy()
     pad.appendFixture(xyf3);
 
     VCXYPad* copy = qobject_cast<VCXYPad*> (pad.createCopy(&parent));
-    QVERIFY(copy != NULL);
+    QVERIFY(copy != nullptr);
     QCOMPARE(copy->m_fixtures.size(), 3);
     QVERIFY(copy->m_fixtures[0] == xyf1);
     QVERIFY(copy->m_fixtures[1] == xyf2);
@@ -235,7 +235,7 @@ void VCXYPad_Test::loadXML()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
 
     buffer.seek(0);
     QXmlStreamReader xmlReader(&buffer);
@@ -323,7 +323,7 @@ void VCXYPad_Test::saveXML()
 
     QVERIFY(pad.saveXML(&xmlWriter) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -446,9 +446,9 @@ void VCXYPad_Test::modeChange()
 
     Fixture* fxi = new Fixture(m_doc);
     QLCFixtureDef* def = m_doc->fixtureDefCache()->fixtureDef("Futurelight", "DJScan250");
-    QVERIFY(def != NULL);
+    QVERIFY(def != nullptr);
     QLCFixtureMode* mode = def->modes().first();
-    QVERIFY(mode != NULL);
+    QVERIFY(mode != nullptr);
     fxi->setFixtureDefinition(def, mode);
     m_doc->addFixture(fxi);
 

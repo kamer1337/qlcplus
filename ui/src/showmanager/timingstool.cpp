@@ -33,11 +33,11 @@
 
 TimingsTool::TimingsTool(ShowItem *item, QWidget *parent)
     : QWidget(parent)
-    , m_startDial(NULL)
-    , m_durationDial(NULL)
+    , m_startDial(nullptr)
+    , m_durationDial(nullptr)
     , m_item(item)
 {
-    Q_ASSERT(item != NULL);
+    Q_ASSERT(item != nullptr);
 
     setWindowFlags(WINDOW_FLAGS);
     setAttribute(Qt::WA_DeleteOnClose);

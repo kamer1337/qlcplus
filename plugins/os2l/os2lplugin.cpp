@@ -39,7 +39,7 @@ void OS2LPlugin::init()
 {
     m_inputUniverse = UINT_MAX;
     m_hostPort = OS2L_DEFAULT_PORT;
-    m_tcpServer = NULL;
+    m_tcpServer = nullptr;
 }
 
 QString OS2LPlugin::name()
@@ -149,13 +149,13 @@ bool OS2LPlugin::enableTCPServer(bool enable)
     }
     else
     {
-        if (m_tcpServer == NULL)
+        if (m_tcpServer == nullptr)
             return true;
 
         disconnect(m_tcpServer, SIGNAL(newConnection()), this, SLOT(slotProcessNewTCPConnection()));
         m_tcpServer->close();
         delete m_tcpServer;
-        m_tcpServer = NULL;
+        m_tcpServer = nullptr;
         qDebug() << "[OS2L] stop listening on TCP";
     }
 
@@ -181,7 +181,7 @@ void OS2LPlugin::slotProcessNewTCPConnection()
 {
     qDebug() << Q_FUNC_INFO;
     QTcpSocket *clientConnection = m_tcpServer->nextPendingConnection();
-    if (clientConnection == NULL)
+    if (clientConnection == nullptr)
         return;
 
     QHostAddress senderAddress = clientConnection->peerAddress();
@@ -200,7 +200,7 @@ void OS2LPlugin::slotHostDisconnected()
 void OS2LPlugin::slotProcessTCPPackets()
 {
     QTcpSocket *socket = (QTcpSocket *)sender();
-    if (socket == NULL)
+    if (socket == nullptr)
         return;
 
     QHostAddress senderAddress = QHostAddress(socket->peerAddress().toIPv4Address());

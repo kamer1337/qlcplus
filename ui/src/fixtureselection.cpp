@@ -35,7 +35,7 @@ FixtureSelection::FixtureSelection(QWidget* parent, Doc* doc)
     , m_doc(doc)
     , m_selectionMode(Fixtures)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     setupUi(this);
 

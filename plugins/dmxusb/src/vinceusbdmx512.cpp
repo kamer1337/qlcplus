@@ -22,7 +22,7 @@
 #include "vinceusbdmx512.h"
 
 VinceUSBDMX512::VinceUSBDMX512(DMXInterface *iface, quint32 outputLine)
-    : QThread(NULL)
+    : QThread(nullptr)
     , DMXUSBWidget(iface, outputLine, DEFAULT_OUTPUT_FREQUENCY)
     , m_running(false)
 {

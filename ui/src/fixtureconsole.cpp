@@ -39,7 +39,7 @@ FixtureConsole::FixtureConsole(QWidget *parent, Doc *doc, GroupType type, bool s
     , m_showCheckBoxes(showCheck)
     , m_fixture(Fixture::invalidId())
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     m_layout = new QHBoxLayout(this);
     layout()->setSpacing(0);
@@ -98,7 +98,7 @@ void FixtureConsole::enableResetButton(bool enable)
     while (it.hasNext() == true)
     {
         ConsoleChannel* cc = it.next();
-        Q_ASSERT(cc != NULL);
+        Q_ASSERT(cc != nullptr);
         cc->showResetButton(enable);
         connect(cc, SIGNAL(resetRequest(quint32,quint32)),
                 this, SIGNAL(resetRequest(quint32,quint32)));
@@ -111,7 +111,7 @@ void FixtureConsole::showEvent(QShowEvent *)
     while (it.hasNext() == true)
     {
         ConsoleChannel* cc = it.next();
-        Q_ASSERT(cc != NULL);
+        Q_ASSERT(cc != nullptr);
         cc->setVisible(true);
     }
 }
@@ -128,7 +128,7 @@ void FixtureConsole::setFixture(quint32 id)
 
     /* Get the new fixture */
     Fixture *fxi = m_doc->fixture(id);
-    Q_ASSERT(fxi != NULL);
+    Q_ASSERT(fxi != nullptr);
     if (m_groupType != GroupNone)
         setTitle(fxi->name());
 
@@ -136,7 +136,7 @@ void FixtureConsole::setFixture(quint32 id)
     for (uint i = 0; i < fxi->channels(); i++)
     {
         const QLCChannel *ch = fxi->channel(i);
-        Q_ASSERT(ch != NULL);
+        Q_ASSERT(ch != nullptr);
         if (ch->group() == QLCChannel::NoGroup)
             continue;
 
@@ -213,7 +213,7 @@ void FixtureConsole::setChecked(bool state, quint32 channel)
     while (it.hasNext() == true)
     {
         ConsoleChannel* cc = it.next();
-        Q_ASSERT(cc != NULL);
+        Q_ASSERT(cc != nullptr);
         if (channel == UINT_MAX || channel == cc->channelIndex())
             cc->setChecked(state);
     }
@@ -227,7 +227,7 @@ void FixtureConsole::setSceneValue(const SceneValue& scv)
     while (it.hasNext() == true)
     {
         ConsoleChannel* cc = it.next();
-        Q_ASSERT(cc != NULL);
+        Q_ASSERT(cc != nullptr);
         if (cc->channelIndex() == scv.channel)
         {
             cc->setChecked(true);
@@ -244,7 +244,7 @@ QList <SceneValue> FixtureConsole::values() const
     while (it.hasNext() == true)
     {
         ConsoleChannel* cc = it.next();
-        Q_ASSERT(cc != NULL);
+        Q_ASSERT(cc != nullptr);
         if (cc->isChecked() == true)
         {
             list.append(SceneValue(m_fixture, cc->channelIndex(), cc->value()));
@@ -263,7 +263,7 @@ bool FixtureConsole::hasSelections()
 {
     foreach (ConsoleChannel *cc, m_channels)
     {
-        Q_ASSERT(cc != NULL);
+        Q_ASSERT(cc != nullptr);
         if (cc->isChecked() && cc->isSelected())
             return true;
     }
@@ -282,7 +282,7 @@ void FixtureConsole::setValues(const QList <SceneValue>& list, bool fromSelectio
         if (val.channel < quint32(children().size()))
         {
             ConsoleChannel* cc = channel(val.channel);
-            if (cc != NULL)
+            if (cc != nullptr)
             {
                 if (cc->isChecked() == false)
                     cc->setChecked(true);
@@ -302,14 +302,14 @@ void FixtureConsole::setValues(const QList <SceneValue>& list, bool fromSelectio
 void FixtureConsole::setValue(quint32 ch, uchar value, bool apply)
 {
     ConsoleChannel* cc = channel(ch);
-    if (cc != NULL)
+    if (cc != nullptr)
         cc->setValue(value, apply);
 }
 
 uchar FixtureConsole::value(quint32 ch) const
 {
     ConsoleChannel* cc = channel(ch);
-    if (cc != NULL)
+    if (cc != nullptr)
         return cc->value();
     else
         return 0;
@@ -318,7 +318,7 @@ uchar FixtureConsole::value(quint32 ch) const
 void FixtureConsole::setChannelStylesheet(quint32 ch, QString ss)
 {
     ConsoleChannel* cc = channel(ch);
-    if (cc != NULL)
+    if (cc != nullptr)
         cc->setChannelStyleSheet(ss);
 }
 
@@ -328,7 +328,7 @@ void FixtureConsole::resetChannelsStylesheet()
     while (it.hasNext() == true)
     {
         ConsoleChannel* cc = it.next();
-        Q_ASSERT(cc != NULL);
+        Q_ASSERT(cc != nullptr);
         cc->setChannelStyleSheet(m_styleSheet);
     }
 }
@@ -339,10 +339,10 @@ ConsoleChannel* FixtureConsole::channel(quint32 ch) const
     while (it.hasNext() == true)
     {
         ConsoleChannel* cc = it.next();
-        Q_ASSERT(cc != NULL);
+        Q_ASSERT(cc != nullptr);
         if (cc->channelIndex() == ch)
             return cc;
     }
 
-    return NULL;
+    return nullptr;
 }

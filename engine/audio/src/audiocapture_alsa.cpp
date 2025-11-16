@@ -24,19 +24,19 @@
 
 AudioCaptureAlsa::AudioCaptureAlsa(QObject * parent)
     : AudioCapture(parent)
-    , m_captureHandle(NULL)
+    , m_captureHandle(nullptr)
 {
 }
 
 AudioCaptureAlsa::~AudioCaptureAlsa()
 {
     stop();
-    Q_ASSERT(m_captureHandle == NULL);
+    Q_ASSERT(m_captureHandle == nullptr);
 }
 
 bool AudioCaptureAlsa::initialize()
 {
-    snd_pcm_hw_params_t *hw_params = NULL;
+    snd_pcm_hw_params_t *hw_params = nullptr;
     QString dev_name = "default";
     int err;
 
@@ -49,7 +49,7 @@ bool AudioCaptureAlsa::initialize()
 
     qDebug() << "AudioCaptureAlsa: initializing device " << pcm_name;
 
-    Q_ASSERT(m_captureHandle == NULL);
+    Q_ASSERT(m_captureHandle == nullptr);
 
     if ((err = snd_pcm_open (&m_captureHandle, pcm_name, SND_PCM_STREAM_CAPTURE, 0)) < 0)
         qWarning("cannot open audio device (%s)\n", snd_strerror (err));
@@ -75,10 +75,10 @@ bool AudioCaptureAlsa::initialize()
 
     if (err < 0)
     {
-        if (m_captureHandle != NULL)
+        if (m_captureHandle != nullptr)
         {
             snd_pcm_close(m_captureHandle);
-            m_captureHandle = NULL;
+            m_captureHandle = nullptr;
         }
         return false;
     }
@@ -88,9 +88,9 @@ bool AudioCaptureAlsa::initialize()
 
 void AudioCaptureAlsa::uninitialize()
 {
-    Q_ASSERT(m_captureHandle != NULL);
+    Q_ASSERT(m_captureHandle != nullptr);
     snd_pcm_close(m_captureHandle);
-    m_captureHandle = NULL;
+    m_captureHandle = nullptr;
 }
 
 qint64 AudioCaptureAlsa::latency()
@@ -108,7 +108,7 @@ void AudioCaptureAlsa::resume()
 
 bool AudioCaptureAlsa::readAudio(int maxSize)
 {
-    Q_ASSERT(m_captureHandle != NULL);
+    Q_ASSERT(m_captureHandle != nullptr);
 
     int read;
     if ((read = snd_pcm_readi (m_captureHandle, m_audioBuffer, maxSize)) != maxSize)

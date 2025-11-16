@@ -32,7 +32,7 @@
 SPIConfiguration::SPIConfiguration(SPIPlugin* plugin, QWidget* parent)
         : QDialog(parent)
 {
-    Q_ASSERT(plugin != NULL);
+    Q_ASSERT(plugin != nullptr);
     m_plugin = plugin;
 
     /* Setup UI controls */

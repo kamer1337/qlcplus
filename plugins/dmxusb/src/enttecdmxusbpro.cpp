@@ -64,11 +64,11 @@
  ****************************************************************************/
 
 EnttecDMXUSBPro::EnttecDMXUSBPro(DMXInterface *iface, quint32 outputLine, quint32 inputLine)
-    : QThread(NULL)
+    : QThread(nullptr)
     , DMXUSBWidget(iface, outputLine, DEFAULT_OUTPUT_FREQUENCY)
     , m_dmxKingMode(false)
     , m_isThreadRunning(false)
-    , m_rdm(NULL)
+    , m_rdm(nullptr)
     , m_universe(UINT_MAX)
 {
     m_inputBaseLine = inputLine;
@@ -111,7 +111,7 @@ bool EnttecDMXUSBPro::writeLabelRequest(DMXInterface *iface, int label)
 
 bool EnttecDMXUSBPro::readResponse(DMXInterface *iface, char label, QByteArray &payload)
 {
-    if (iface == NULL)
+    if (iface == nullptr)
         return false;
 
     int attemptCount = 0;
@@ -762,7 +762,7 @@ void EnttecDMXUSBPro::run()
                     uchar command = cmd.param2.toUInt();
                     quint32 portIndex = lineToPortIndex(line, DMXUSBWidget::Output);
 
-                    if (m_rdm == NULL)
+                    if (m_rdm == nullptr)
                         m_rdm = new RDMProtocol();
 
                     QByteArray ba;

@@ -43,7 +43,7 @@
 #include "doc.h"
 
 InputOutputMap::InputOutputMap(const Doc *doc, quint32 universes)
-    : QObject(NULL)
+    : QObject(nullptr)
     , m_doc(doc)
     , m_blackout(false)
     , m_universeChanged(false)
@@ -97,7 +97,7 @@ bool InputOutputMap::setBlackout(bool blackout)
         for (int i = 0; i < universe->outputPatchesCount(); i++)
         {
             OutputPatch *op = universe->outputPatch(i);
-            if (op != NULL)
+            if (op != nullptr)
                 op->setBlackout(blackout);
         }
 
@@ -134,7 +134,7 @@ bool InputOutputMap::addUniverse(quint32 id)
 {
     {
         QMutexLocker locker(&m_universeMutex);
-        Universe *uni = NULL;
+        Universe *uni = nullptr;
 
         if (id == InputOutputMap::invalidUniverse())
         {
@@ -287,7 +287,7 @@ Universe *InputOutputMap::universe(quint32 id)
         if (m_universeArray.at(i)->id() == id)
             return m_universeArray.at(i);
 
-    return NULL;
+    return nullptr;
 }
 
 QList<Universe*> InputOutputMap::claimUniverses()
@@ -324,7 +324,7 @@ void InputOutputMap::resetUniverses()
 
 void InputOutputMap::setGrandMasterChannelMode(GrandMaster::ChannelMode mode)
 {
-    Q_ASSERT(m_grandMaster != NULL);
+    Q_ASSERT(m_grandMaster != nullptr);
 
     if (m_grandMaster->channelMode() != mode)
     {
@@ -335,14 +335,14 @@ void InputOutputMap::setGrandMasterChannelMode(GrandMaster::ChannelMode mode)
 
 GrandMaster::ChannelMode InputOutputMap::grandMasterChannelMode()
 {
-    Q_ASSERT(m_grandMaster != NULL);
+    Q_ASSERT(m_grandMaster != nullptr);
 
     return m_grandMaster->channelMode();
 }
 
 void InputOutputMap::setGrandMasterValueMode(GrandMaster::ValueMode mode)
 {
-    Q_ASSERT(m_grandMaster != NULL);
+    Q_ASSERT(m_grandMaster != nullptr);
 
     if (m_grandMaster->valueMode() != mode)
     {
@@ -355,14 +355,14 @@ void InputOutputMap::setGrandMasterValueMode(GrandMaster::ValueMode mode)
 
 GrandMaster::ValueMode InputOutputMap::grandMasterValueMode()
 {
-    Q_ASSERT(m_grandMaster != NULL);
+    Q_ASSERT(m_grandMaster != nullptr);
 
     return m_grandMaster->valueMode();
 }
 
 void InputOutputMap::setGrandMasterValue(uchar value)
 {
-    Q_ASSERT(m_grandMaster != NULL);
+    Q_ASSERT(m_grandMaster != nullptr);
 
     if (m_grandMaster->value() != value)
     {
@@ -376,7 +376,7 @@ void InputOutputMap::setGrandMasterValue(uchar value)
 
 uchar InputOutputMap::grandMasterValue()
 {
-    Q_ASSERT(m_grandMaster != NULL);
+    Q_ASSERT(m_grandMaster != nullptr);
 
     return m_grandMaster->value();
 }
@@ -405,8 +405,8 @@ bool InputOutputMap::setInputPatch(quint32 universe, const QString &pluginName,
 
     QMutexLocker locker(&m_universeMutex);
     InputPatch *currInPatch = m_universeArray.at(universe)->inputPatch();
-    QLCInputProfile *currProfile = NULL;
-    if (currInPatch != NULL)
+    QLCInputProfile *currProfile = nullptr;
+    if (currInPatch != nullptr)
     {
         currProfile = currInPatch->profile();
         disconnect(currInPatch, SIGNAL(inputValueChanged(quint32,quint32,uchar,const QString&)),
@@ -417,10 +417,10 @@ bool InputOutputMap::setInputPatch(quint32 universe, const QString &pluginName,
                        this, SLOT(slotPluginBeat(quint32,quint32,uchar,const QString&)));
         }
     }
-    InputPatch *ip = NULL;
+    InputPatch *ip = nullptr;
     QLCIOPlugin *plugin = m_doc->ioPluginCache()->plugin(pluginName);
 
-    if (!inputUID.isEmpty() && plugin != NULL)
+    if (!inputUID.isEmpty() && plugin != nullptr)
     {
         QStringList inputs = plugin->inputs();
         int lIdx = inputs.indexOf(inputUID);
@@ -440,7 +440,7 @@ bool InputOutputMap::setInputPatch(quint32 universe, const QString &pluginName,
                 plugin, input, profile(profileName)) == true)
     {
         ip = m_universeArray.at(universe)->inputPatch();
-        if (ip != NULL)
+        if (ip != nullptr)
         {
             connect(ip, SIGNAL(inputValueChanged(quint32,quint32,uchar,const QString&)),
                     this, SIGNAL(inputValueChanged(quint32,quint32,uchar,const QString&)));
@@ -456,7 +456,7 @@ bool InputOutputMap::setInputPatch(quint32 universe, const QString &pluginName,
         return false;
     }
 
-    if (ip != NULL && currProfile != ip->profile())
+    if (ip != nullptr && currProfile != ip->profile())
         emit profileChanged(universe, ip->profileName());
 
     return true;
@@ -472,7 +472,7 @@ bool InputOutputMap::setInputProfile(quint32 universe, const QString &profileNam
     }
 
     InputPatch *currInPatch = m_universeArray.at(universe)->inputPatch();
-    if (currInPatch != NULL)
+    if (currInPatch != nullptr)
         currInPatch->set(profile(profileName));
 
     /* if no input patch is set, then setting a profile is useless,
@@ -494,7 +494,7 @@ bool InputOutputMap::setOutputPatch(quint32 universe, const QString &pluginName,
     QMutexLocker locker(&m_universeMutex);
     QLCIOPlugin *plugin = m_doc->ioPluginCache()->plugin(pluginName);
 
-    if (!outputUID.isEmpty() && plugin != NULL)
+    if (!outputUID.isEmpty() && plugin != nullptr)
     {
         QStringList inputs = plugin->outputs();
         int lIdx = inputs.indexOf(outputUID);
@@ -534,7 +534,7 @@ InputPatch *InputOutputMap::inputPatch(quint32 universe) const
     if (universe >= universesCount())
     {
         qWarning() << Q_FUNC_INFO << "Universe" << universe << "out of bounds.";
-        return NULL;
+        return nullptr;
     }
     return m_universeArray.at(universe)->inputPatch();
 }
@@ -544,7 +544,7 @@ OutputPatch *InputOutputMap::outputPatch(quint32 universe, int index) const
     if (universe >= universesCount())
     {
         qWarning() << Q_FUNC_INFO << "Universe" << universe << "out of bounds.";
-        return NULL;
+        return nullptr;
     }
     return m_universeArray.at(universe)->outputPatch(index);
 }
@@ -554,7 +554,7 @@ OutputPatch *InputOutputMap::feedbackPatch(quint32 universe) const
     if (universe >= universesCount())
     {
         qWarning() << Q_FUNC_INFO << "Universe" << universe << "out of bounds.";
-        return NULL;
+        return nullptr;
     }
     return m_universeArray.at(universe)->feedbackPatch();
 }
@@ -573,7 +573,7 @@ quint32 InputOutputMap::inputMapping(const QString &pluginName, quint32 input) c
     for (quint32 uni = 0; uni < universesCount(); uni++)
     {
         const InputPatch* p = m_universeArray.at(uni)->inputPatch();
-        if (p != NULL && p->pluginName() == pluginName && p->input() == input)
+        if (p != nullptr && p->pluginName() == pluginName && p->input() == input)
             return uni;
     }
 
@@ -588,7 +588,7 @@ quint32 InputOutputMap::outputMapping(const QString &pluginName, quint32 output)
         for (int i = 0; i < universe->outputPatchesCount(); i++)
         {
             const OutputPatch* p = universe->outputPatch(i);
-            if (p != NULL && p->pluginName() == pluginName && p->output() == output)
+            if (p != nullptr && p->pluginName() == pluginName && p->output() == output)
                 return uni;
         }
     }
@@ -602,12 +602,12 @@ quint32 InputOutputMap::outputMapping(const QString &pluginName, quint32 output)
 
 QString InputOutputMap::pluginDescription(const QString &pluginName)
 {
-    QLCIOPlugin* plugin = NULL;
+    QLCIOPlugin* plugin = nullptr;
 
     if (pluginName.isEmpty() == false)
         plugin = m_doc->ioPluginCache()->plugin(pluginName);
 
-    if (plugin != NULL)
+    if (plugin != nullptr)
     {
         return plugin->pluginInfo();
     }
@@ -664,7 +664,7 @@ QStringList InputOutputMap::outputPluginNames()
 QStringList InputOutputMap::pluginInputs(const QString& pluginName)
 {
     QLCIOPlugin* ip = m_doc->ioPluginCache()->plugin(pluginName);
-    if (ip == NULL)
+    if (ip == nullptr)
         return QStringList();
     else
     {
@@ -677,7 +677,7 @@ QStringList InputOutputMap::pluginInputs(const QString& pluginName)
 QStringList InputOutputMap::pluginOutputs(const QString& pluginName)
 {
     QLCIOPlugin* op = m_doc->ioPluginCache()->plugin(pluginName);
-    if (op == NULL)
+    if (op == nullptr)
         return QStringList();
     else
     {
@@ -690,7 +690,7 @@ QStringList InputOutputMap::pluginOutputs(const QString& pluginName)
 bool InputOutputMap::pluginSupportsFeedback(const QString& pluginName)
 {
     QLCIOPlugin* outputPlugin = m_doc->ioPluginCache()->plugin(pluginName);
-    if (outputPlugin != NULL)
+    if (outputPlugin != nullptr)
         return (outputPlugin->capabilities() & QLCIOPlugin::Feedback) > 0;
     else
         return false;
@@ -699,14 +699,14 @@ bool InputOutputMap::pluginSupportsFeedback(const QString& pluginName)
 void InputOutputMap::configurePlugin(const QString& pluginName)
 {
     QLCIOPlugin* outputPlugin = m_doc->ioPluginCache()->plugin(pluginName);
-    if (outputPlugin != NULL)
+    if (outputPlugin != nullptr)
         outputPlugin->configure();
 }
 
 bool InputOutputMap::canConfigurePlugin(const QString& pluginName)
 {
     QLCIOPlugin* outputPlugin = m_doc->ioPluginCache()->plugin(pluginName);
-    if (outputPlugin != NULL)
+    if (outputPlugin != nullptr)
         return outputPlugin->canConfigure();
     else
         return false;
@@ -714,13 +714,13 @@ bool InputOutputMap::canConfigurePlugin(const QString& pluginName)
 
 QString InputOutputMap::inputPluginStatus(const QString& pluginName, quint32 input)
 {
-    QLCIOPlugin* inputPlugin = NULL;
+    QLCIOPlugin* inputPlugin = nullptr;
     QString info;
 
     if (pluginName.isEmpty() == false)
         inputPlugin = m_doc->ioPluginCache()->plugin(pluginName);
 
-    if (inputPlugin != NULL)
+    if (inputPlugin != nullptr)
     {
         info = inputPlugin->inputInfo(input);
     }
@@ -738,7 +738,7 @@ QString InputOutputMap::inputPluginStatus(const QString& pluginName, quint32 inp
 QString InputOutputMap::outputPluginStatus(const QString& pluginName, quint32 output)
 {
     QLCIOPlugin* outputPlugin = m_doc->ioPluginCache()->plugin(pluginName);
-    if (outputPlugin != NULL)
+    if (outputPlugin != nullptr)
     {
         return outputPlugin->outputInfo(output);
     }
@@ -759,7 +759,7 @@ bool InputOutputMap::sendFeedBack(quint32 universe, quint32 channel, uchar value
 
     OutputPatch* patch = m_universeArray.at(universe)->feedbackPatch();
 
-    if (patch != NULL && patch->isPatched())
+    if (patch != nullptr && patch->isPatched())
     {
         patch->plugin()->sendFeedBack(universe, patch->output(), channel, value, params);
         return true;
@@ -781,7 +781,7 @@ void InputOutputMap::slotPluginConfigurationChanged(QLCIOPlugin* plugin)
         {
             OutputPatch* op = universe->outputPatch(oi);
 
-            if (op != NULL && op->plugin() == plugin)
+            if (op != nullptr && op->plugin() == plugin)
             {
                 /*success = */ op->reconnect();
             }
@@ -789,13 +789,13 @@ void InputOutputMap::slotPluginConfigurationChanged(QLCIOPlugin* plugin)
 
         InputPatch* ip = m_universeArray.at(i)->inputPatch();
 
-        if (ip != NULL && ip->plugin() == plugin)
+        if (ip != nullptr && ip->plugin() == plugin)
         {
             /*success = */ ip->reconnect();
         }
 
         OutputPatch* fp = m_universeArray.at(i)->feedbackPatch();
-        if (fp != NULL && fp->plugin() == plugin)
+        if (fp != nullptr && fp->plugin() == plugin)
         {
             /*success = */ fp->reconnect();
         }
@@ -824,10 +824,10 @@ void InputOutputMap::loadProfiles(const QDir& dir)
 
         path = dir.absoluteFilePath(it.next());
         prof = QLCInputProfile::loader(path);
-        if (prof != NULL)
+        if (prof != nullptr)
         {
             /* Check for duplicates */
-            if (profile(prof->name()) == NULL)
+            if (profile(prof->name()) == nullptr)
                 addProfile(prof);
             else
                 delete prof;
@@ -863,7 +863,7 @@ QLCInputProfile* InputOutputMap::profile(const QString& name)
     if (m_localProfilesLoaded == false)
     {
         if (m_doc->workspacePath().isEmpty())
-            return NULL;
+            return nullptr;
 
         m_localProfilesLoaded = true;
 
@@ -882,12 +882,12 @@ QLCInputProfile* InputOutputMap::profile(const QString& name)
         }
     }
 
-    return NULL;
+    return nullptr;
 }
 
 bool InputOutputMap::addProfile(QLCInputProfile* profile)
 {
-    Q_ASSERT(profile != NULL);
+    Q_ASSERT(profile != nullptr);
 
     /* Don't add the same profile twice */
     if (m_profiles.contains(profile) == false)
@@ -921,14 +921,14 @@ bool InputOutputMap::removeProfile(const QString& name)
 bool InputOutputMap::inputSourceNames(const QLCInputSource *src,
                                 QString& uniName, QString& chName) const
 {
-    if (src == NULL || src->isValid() == false)
+    if (src == nullptr || src->isValid() == false)
         return false;
 
     if (src->universe() >= universesCount())
         return false;
 
     InputPatch* pat = m_universeArray.at(src->universe())->inputPatch();
-    if (pat == NULL)
+    if (pat == nullptr)
     {
         /* There is no patch for the given universe */
         uniName = QString("%1 -UNPATCHED-").arg(src->universe() + 1);
@@ -944,10 +944,10 @@ bool InputOutputMap::inputSourceNames(const QLCInputSource *src,
     }
 
     QLCInputProfile* profile = pat->profile();
-    if (profile == NULL)
+    if (profile == nullptr)
     {
         /* There is no profile. Display plugin name and channel number. */
-        if (pat->plugin() != NULL)
+        if (pat->plugin() != nullptr)
             uniName = QString("%1: %2").arg(src->universe() + 1).arg(pat->plugin()->name());
         else
             uniName = QString("%1: ??").arg(src->universe() + 1);
@@ -974,7 +974,7 @@ bool InputOutputMap::inputSourceNames(const QLCInputSource *src,
         ushort channel = (src->channel() & 0x0000FFFF);
 
         ich = profile->channel(channel);
-        if (ich != NULL)
+        if (ich != nullptr)
             name = ich->name();
         else
             name = QString("?");
@@ -1235,21 +1235,21 @@ void InputOutputMap::saveDefaults()
 
         /* Plugin name */
         key = QString("/inputmap/universe%1/plugin/").arg(i);
-        if (inPatch != NULL)
+        if (inPatch != nullptr)
             settings.setValue(key, inPatch->pluginName());
         else
             settings.setValue(key, KInputNone);
 
         /* Plugin input */
         key = QString("/inputmap/universe%1/input/").arg(i);
-        if (inPatch != NULL)
+        if (inPatch != nullptr)
             settings.setValue(key, QString::number(inPatch->input()));
         else
             settings.setValue(key, KInputNone);
 
         /* Input profile */
         key = QString("/inputmap/universe%1/profile/").arg(i);
-        if (inPatch != NULL)
+        if (inPatch != nullptr)
             settings.setValue(key, inPatch->profileName());
         else
             settings.setValue(key, KInputNone);
@@ -1273,14 +1273,14 @@ void InputOutputMap::saveDefaults()
         key = QString("/outputmap/universe%1/plugin/").arg(i);
 
         /* Plugin name */
-        if (outPatch != NULL)
+        if (outPatch != nullptr)
             settings.setValue(key, outPatch->pluginName());
         else
             settings.setValue(key, KOutputNone);
 
         /* Plugin output */
         key = QString("/outputmap/universe%1/output/").arg(i);
-        if (outPatch != NULL)
+        if (outPatch != nullptr)
             settings.setValue(key, outPatch->output());
         else
             settings.setValue(key, KOutputNone);
@@ -1288,14 +1288,14 @@ void InputOutputMap::saveDefaults()
         key = QString("/outputmap/universe%1/feedbackplugin/").arg(i);
 
         /* Feedback plugin name */
-        if (fbPatch != NULL)
+        if (fbPatch != nullptr)
             settings.setValue(key, fbPatch->pluginName());
         else
             settings.setValue(key, KOutputNone);
 
         /* Feedback plugin output */
         key = QString("/outputmap/universe%1/feedback/").arg(i);
-        if (fbPatch != NULL)
+        if (fbPatch != nullptr)
             settings.setValue(key, QString::number(fbPatch->output()));
         else
             settings.setValue(key, KOutputNone);
@@ -1354,7 +1354,7 @@ bool InputOutputMap::loadXML(QXmlStreamReader &root)
 
 bool InputOutputMap::saveXML(QXmlStreamWriter *doc) const
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* IO Map Instance entry */
     doc->writeStartElement(KXMLIOMap);

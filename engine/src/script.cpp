@@ -69,7 +69,7 @@ const QStringList knownKeywords(QStringList() << "ch" << "val" << "arg");
 Script::Script(Doc* doc) : Function(doc, Function::ScriptType)
     , m_currentCommand(0)
     , m_waitCount(0)
-    , m_waitFunction(NULL)
+    , m_waitFunction(nullptr)
 {
     setName(tr("New Script"));
 }
@@ -107,18 +107,18 @@ quint32 Script::totalDuration()
 
 Function* Script::createCopy(Doc* doc, bool addToDoc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     Function* copy = new Script(doc);
     if (copy->copyFrom(this) == false)
     {
         delete copy;
-        copy = NULL;
+        copy = nullptr;
     }
     if (addToDoc == true && doc->addFunction(copy) == false)
     {
         delete copy;
-        copy = NULL;
+        copy = nullptr;
     }
 
     return copy;
@@ -127,7 +127,7 @@ Function* Script::createCopy(Doc* doc, bool addToDoc)
 bool Script::copyFrom(const Function* function)
 {
     const Script* script = qobject_cast<const Script*> (function);
-    if (script == NULL)
+    if (script == nullptr)
         return false;
 
     setData(script->data());
@@ -312,7 +312,7 @@ bool Script::loadXML(QXmlStreamReader &root)
 
 bool Script::saveXML(QXmlStreamWriter *doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* Function tag */
     doc->writeStartElement(KXMLQLCFunction);
@@ -349,7 +349,7 @@ void Script::preRun(MasterTimer *timer)
 {
     // Reset
     m_waitCount = 0;
-    m_waitFunction = NULL;
+    m_waitFunction = nullptr;
     m_currentCommand = 0;
     m_startedFunctions.clear();
     m_stopOnExit = true;
@@ -376,12 +376,12 @@ void Script::write(MasterTimer *timer, QList<Universe *> universes)
         }
 
         // In case a wait command is the last command, don't stop the script prematurely
-        if (m_currentCommand >= m_lines.size() && m_waitCount == 0 && m_waitFunction == NULL)
+        if (m_currentCommand >= m_lines.size() && m_waitCount == 0 && m_waitFunction == nullptr)
             stop(FunctionParent::master());
     }
 
     // Handle GenericFader tasks (setltp/sethtp/setfixture)
-    //if (m_fader != NULL)
+    //if (m_fader != nullptr)
     //    m_fader->write(universes);
 }
 
@@ -406,7 +406,7 @@ bool Script::waiting()
         m_waitCount--;
         return true;
     }
-    else if (m_waitFunction != NULL)
+    else if (m_waitFunction != nullptr)
     {
         // Still waiting for the function to start/stop.
         return true;
@@ -571,10 +571,10 @@ QString Script::handleStartFunction(const QList<QStringList>& tokens, MasterTime
         return QString("Invalid function ID: %1").arg(tokens[0][1]);
 
     Doc* doc = qobject_cast<Doc*> (parent());
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     Function* function = doc->function(id);
-    if (function != NULL)
+    if (function != nullptr)
     {
         function->start(timer, FunctionParent::master());
 
@@ -603,10 +603,10 @@ QString Script::handleStopFunction(const QList <QStringList>& tokens)
         return QString("Invalid function ID: %1").arg(tokens[0][1]);
 
     Doc *doc = qobject_cast<Doc*> (parent());
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     Function *function = doc->function(id);
-    if (function != NULL)
+    if (function != nullptr)
     {
         function->stop(FunctionParent::master());
 
@@ -642,7 +642,7 @@ QString Script::handleBlackout(const QList <QStringList>& tokens)
     }
 
     Doc* doc = qobject_cast<Doc*> (parent());
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     doc->inputOutputMap()->requestBlackout(request);
 
@@ -692,10 +692,10 @@ QString Script::handleWaitFunction(const QList<QStringList> &tokens, bool start)
         return QString("Invalid function ID: %1").arg(tokens[0][1]);
 
     Doc *doc = qobject_cast<Doc *>(parent());
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     Function *function = doc->function(id);
-    if (function == NULL)
+    if (function == nullptr)
     {
         return QString("No such function (ID %1)").arg(id);
     }
@@ -722,18 +722,18 @@ QString Script::handleWaitFunction(const QList<QStringList> &tokens, bool start)
 
 void Script::slotWaitFunctionStarted(quint32 fid)
 {
-    if (m_waitFunction != NULL && m_waitFunction->id() == fid) {
+    if (m_waitFunction != nullptr && m_waitFunction->id() == fid) {
         disconnect(m_waitFunction, SIGNAL(running(quint32)), this, SLOT(slotWaitFunctionStarted(quint32)));
-        m_waitFunction = NULL;
+        m_waitFunction = nullptr;
     }
 }
 
 void Script::slotWaitFunctionStopped(quint32 fid)
 {
-    if (m_waitFunction != NULL && m_waitFunction->id() == fid) {
+    if (m_waitFunction != nullptr && m_waitFunction->id() == fid) {
         disconnect(m_waitFunction, SIGNAL(stopped(quint32)), this, SLOT(slotWaitFunctionStopped(quint32)));
         m_startedFunctions.removeAll(m_waitFunction);
-        m_waitFunction = NULL;
+        m_waitFunction = nullptr;
     }
 }
 
@@ -776,10 +776,10 @@ QString Script::handleSetFixture(const QList<QStringList>& tokens, QList<Univers
     }
 
     Doc *doc = qobject_cast<Doc*> (parent());
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     Fixture *fxi = doc->fixture(id);
-    if (fxi != NULL)
+    if (fxi != nullptr)
     {
         if (ch < fxi->channels())
         {
@@ -890,7 +890,7 @@ QList <QStringList> Script::tokenizeLine(const QString& str, bool* ok)
     QString keyword;
     QString value;
 
-    if (ok != NULL)
+    if (ok != nullptr)
         *ok = true; // in case, this is set to false afterwards
 
     if (str.simplified().startsWith("//") == true || str.simplified().isEmpty() == true)
@@ -924,7 +924,7 @@ QList <QStringList> Script::tokenizeLine(const QString& str, bool* ok)
             if (right == -1)
             {
                 qDebug() << "Syntax error:" << line.mid(left);
-                if (ok != NULL)
+                if (ok != nullptr)
                     *ok = false;
                 break;
             }
@@ -951,7 +951,7 @@ QList <QStringList> Script::tokenizeLine(const QString& str, bool* ok)
                 else
                 {
                     qDebug() << "Syntax error:" << line.mid(quoteleft);
-                    if (ok != NULL)
+                    if (ok != nullptr)
                         *ok = false;
                     break;
                 }
@@ -967,7 +967,7 @@ QList <QStringList> Script::tokenizeLine(const QString& str, bool* ok)
                 if (right == -1)
                 {
                     qDebug() << "Syntax error:" << line.mid(left);
-                    if (ok != NULL)
+                    if (ok != nullptr)
                         *ok = false;
                     break;
                 }
@@ -982,7 +982,7 @@ QList <QStringList> Script::tokenizeLine(const QString& str, bool* ok)
             if (tokens.count() > 0 && knownKeywords.contains(keyword.trimmed()) == false)
             {
                 qDebug() << "Syntax error. Unknown keyword detected:" << keyword.trimmed();
-                if (ok != NULL)
+                if (ok != nullptr)
                     *ok = false;
                 break;
             }

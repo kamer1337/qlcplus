@@ -31,12 +31,12 @@
 AudioItem::AudioItem(Audio *aud, ShowFunction *func)
     : ShowItem(func)
     , m_audio(aud)
-    , m_previewLeftAction(NULL)
-    , m_previewRightAction(NULL)
-    , m_previewStereoAction(NULL)
-    , m_preview(NULL)
+    , m_previewLeftAction(nullptr)
+    , m_previewRightAction(nullptr)
+    , m_previewStereoAction(nullptr)
+    , m_preview(nullptr)
 {
-    Q_ASSERT(aud != NULL);
+    Q_ASSERT(aud != nullptr);
 
     if (func->color().isValid())
         setColor(func->color());
@@ -89,7 +89,7 @@ void AudioItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 
     ShowItem::paint(painter, option, widget);
 
-    if (m_preview != NULL)
+    if (m_preview != nullptr)
     {
         // show preview here
         painter->drawPixmap(0, 0, m_preview->scaled(m_width, TRACK_HEIGHT - 4));
@@ -182,7 +182,7 @@ void AudioItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *)
     menuFont.setPixelSize(14);
     menu.setFont(menuFont);
 
-    if (m_audio->getAudioDecoder() != NULL)
+    if (m_audio->getAudioDecoder() != nullptr)
     {
         AudioDecoder *ad = m_audio->getAudioDecoder();
         AudioParameters ap = ad->audioParameters();
@@ -236,7 +236,7 @@ void PreviewThread::run()
     bool left = m_item->m_previewLeftAction->isChecked() || m_item->m_previewStereoAction->isChecked();
     bool right = m_item->m_previewRightAction->isChecked() || m_item->m_previewStereoAction->isChecked();
 
-    if ((left || right) && m_item->m_audio->getAudioDecoder() != NULL)
+    if ((left || right) && m_item->m_audio->getAudioDecoder() != nullptr)
     {
         AudioDecoder *ad = m_item->m_audio->doc()->audioPluginCache()->getDecoderForFile(m_item->m_audio->getSourceFileName());
         AudioParameters ap = ad->audioParameters();
@@ -276,7 +276,7 @@ void PreviewThread::run()
                     ", onePixelReadLen:" << onePixelReadLen;
 
         delete m_item->m_preview;
-        m_item->m_preview = NULL;
+        m_item->m_preview = nullptr;
         m_item->update();
 
         while (dataRead)
@@ -394,7 +394,7 @@ void PreviewThread::run()
     else // no preview selected. Delete pixmap
     {
         delete m_item->m_preview;
-        m_item->m_preview = NULL;
+        m_item->m_preview = nullptr;
     }
 
     m_item->update();

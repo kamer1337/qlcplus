@@ -226,7 +226,7 @@ public:
 public:
     /**
      * Change the number of channels. Valid only for generic dimmers, whose
-     * $fixtureDef == NULL && $fixtureMode == NULL.
+     * $fixtureDef == nullptr && $fixtureMode == nullptr.
      *
      * @param channels The new number of channels
      */
@@ -324,7 +324,7 @@ public:
     void setChannelModifier(quint32 idx, ChannelModifier *mod);
 
     /** Get the ChannelModifier for the channel with the given $idx.
-     *  Returns NULL if no modifier has been assigned */
+     *  Returns nullptr if no modifier has been assigned */
     ChannelModifier *channelModifier(quint32 idx);
 
 protected:
@@ -423,12 +423,12 @@ public:
     int heads() const;
 
     /**
-     * Get the fixture head at the given index. If $index is invalid, returns NULL.
+     * Get the fixture head at the given index. If $index is invalid, returns nullptr.
      * Each fixture has at least one head. Dimmer fixtures have no heads since each
      * channel can be treated as a head.
      *
      * @param index The index of the head to return
-     * @return The head at the given index or NULL
+     * @return The head at the given index or nullptr
      */
     QLCFixtureHead head(int index) const;
 

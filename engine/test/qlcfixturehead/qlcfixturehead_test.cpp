@@ -32,7 +32,7 @@
 void QLCFixtureHead_Test::initTestCase()
 {
     m_fixtureDef = new QLCFixtureDef();
-    QVERIFY(m_fixtureDef != NULL);
+    QVERIFY(m_fixtureDef != nullptr);
 
     m_ch1 = new QLCChannel();
     m_ch1->setName("Channel 1");
@@ -64,7 +64,7 @@ void QLCFixtureHead_Test::load()
     xmlWriter.writeTextElement("Foo", "25");
     xmlWriter.writeTextElement("Channel", "42");
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -94,7 +94,7 @@ void QLCFixtureHead_Test::save()
 
     QVERIFY(head.saveXML(&xmlWriter));
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -347,7 +347,7 @@ void QLCFixtureHead_Test::cacheChannelsColor()
 
 void QLCFixtureHead_Test::cleanupTestCase()
 {
-    QVERIFY(m_fixtureDef != NULL);
+    QVERIFY(m_fixtureDef != nullptr);
     delete m_fixtureDef;
 }
 

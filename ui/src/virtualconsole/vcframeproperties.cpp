@@ -36,8 +36,8 @@ VCFrameProperties::VCFrameProperties(QWidget* parent, VCFrame* frame, Doc *doc)
     , m_frame(frame)
     , m_doc(doc)
 {
-    Q_ASSERT(frame != NULL);
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(frame != nullptr);
+    Q_ASSERT(doc != nullptr);
 
     setupUi(this);
 
@@ -193,7 +193,7 @@ void VCFrameProperties::slotMultipageChecked(bool enable)
 
 void VCFrameProperties::slotPageComboChanged(int index)
 {
-    if (index >= 0 && index < m_shortcuts.count() && m_shortcuts[index] != NULL)
+    if (index >= 0 && index < m_shortcuts.count() && m_shortcuts[index] != nullptr)
     {
         m_shortcutInputWidget->setInputSource(m_shortcuts[index]->m_inputSource);
         m_shortcutInputWidget->setKeySequence(m_shortcuts[index]->m_keySequence.toString(QKeySequence::NativeText));
@@ -236,7 +236,7 @@ void VCFrameProperties::slotInputValueChanged(quint32 universe, quint32 channel)
 
     VCFramePageShortcut *shortcut = m_shortcuts[m_pageCombo->currentIndex()];
 
-    if (shortcut != NULL)
+    if (shortcut != nullptr)
         shortcut->m_inputSource = m_shortcutInputWidget->inputSource();
 }
 
@@ -244,7 +244,7 @@ void VCFrameProperties::slotKeySequenceChanged(QKeySequence key)
 {
     VCFramePageShortcut *shortcut = m_shortcuts[m_pageCombo->currentIndex()];
 
-    if (shortcut != NULL)
+    if (shortcut != nullptr)
         shortcut->m_keySequence = key;
 }
 

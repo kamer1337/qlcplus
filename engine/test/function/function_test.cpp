@@ -56,7 +56,7 @@ void Function_Test::initial()
     QCOMPARE(stub->overrideFadeInSpeed(), Function::defaultSpeed());
     QCOMPARE(stub->overrideFadeOutSpeed(), Function::defaultSpeed());
     QCOMPARE(stub->overrideDuration(), Function::defaultSpeed());
-    QVERIFY(stub->saveXML(NULL) == false);
+    QVERIFY(stub->saveXML(nullptr) == false);
     QXmlStreamReader reader;
     QVERIFY(stub->loadXML(reader) == false);
 }
@@ -117,7 +117,7 @@ void Function_Test::copyFrom()
     Doc doc(this);
 
     Function_Stub* stub1 = new Function_Stub(&doc);
-    QVERIFY(stub1->copyFrom(NULL) == false);
+    QVERIFY(stub1->copyFrom(nullptr) == false);
     stub1->setName("Stub1");
     stub1->setRunOrder(Function::PingPong);
     stub1->setDirection(Function::Backward);
@@ -146,13 +146,13 @@ void Function_Test::flashUnflash()
     QSignalSpy spy(stub, SIGNAL(flashing(quint32,bool)));
 
     QVERIFY(stub->flashing() == false);
-    stub->flash(NULL, false, false);
+    stub->flash(nullptr, false, false);
     QCOMPARE(spy.size(), 1);
     QVERIFY(stub->flashing() == true);
-    stub->flash(NULL, false, false);
+    stub->flash(nullptr, false, false);
     QCOMPARE(spy.size(), 1);
     QVERIFY(stub->flashing() == true);
-    stub->unFlash(NULL);
+    stub->unFlash(nullptr);
     QCOMPARE(spy.size(), 2);
     QVERIFY(stub->flashing() == false);
 }
@@ -185,7 +185,7 @@ void Function_Test::preRunPostRun()
 
     Function_Stub* stub = new Function_Stub(&doc);
     QSignalSpy spyRunning(stub, SIGNAL(running(quint32)));
-    stub->preRun(NULL);
+    stub->preRun(nullptr);
     QVERIFY(stub->isRunning() == true);
     QCOMPARE(spyRunning.size(), 1);
     // @todo Check the contents of the signal in spyRunning
@@ -193,7 +193,7 @@ void Function_Test::preRunPostRun()
     stub->incrementElapsed();
 
     QSignalSpy spyStopped(stub, SIGNAL(stopped(quint32)));
-    stub->postRun(NULL, QList<Universe*>());
+    stub->postRun(nullptr, QList<Universe*>());
     QVERIFY(stub->stopped() == true);
     QVERIFY(stub->isRunning() == false);
     QCOMPARE(stub->elapsed(), quint32(0));
@@ -207,7 +207,7 @@ void Function_Test::stopAndWait()
     Doc doc(this);
 
     Function_Stub* stub = new Function_Stub(&doc);
-    stub->preRun(NULL);
+    stub->preRun(nullptr);
     stub->incrementElapsed();
 
     // @todo Make stopAndWait() return before the 2s watchdog timer
@@ -220,7 +220,7 @@ void Function_Test::stopAndWaitFail()
     Doc doc(this);
 
     Function_Stub* stub = new Function_Stub(&doc);
-    stub->preRun(NULL);
+    stub->preRun(nullptr);
     stub->incrementElapsed();
 
     QSignalSpy spyStopped(stub, SIGNAL(stopped(quint32)));
@@ -569,7 +569,7 @@ void Function_Test::loaderWrongRoot()
     xmlWriter.writeStartElement("Scene");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -592,7 +592,7 @@ void Function_Test::loaderWrongID()
     xmlWriter.writeAttribute("ID", QString("%1").arg(Function::invalidId()));
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -612,7 +612,7 @@ void Function_Test::loaderWrongID()
     xmlWriter.writeAttribute("ID", "-4");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -648,7 +648,7 @@ void Function_Test::loaderScene()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -659,7 +659,7 @@ void Function_Test::loaderScene()
        loading is tested in Scene_test. */
     QVERIFY(Function::loader(xmlReader, &d) == true);
     QVERIFY(d.functions().size() == 1);
-    QVERIFY(d.function(15) != NULL);
+    QVERIFY(d.function(15) != nullptr);
     QVERIFY(d.function(15)->type() == Function::SceneType);
     QVERIFY(d.function(15)->name() == QString("Lipton"));
 }
@@ -701,7 +701,7 @@ void Function_Test::loaderChaser()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -712,7 +712,7 @@ void Function_Test::loaderChaser()
        loading is tested in Chaser_test. */
     QVERIFY(Function::loader(xmlReader, &d) == true);
     QVERIFY(d.functions().size() == 1);
-    QVERIFY(d.function(1) != NULL);
+    QVERIFY(d.function(1) != nullptr);
     QVERIFY(d.function(1)->type() == Function::ChaserType);
     QVERIFY(d.function(1)->name() == QString("Malarkey"));
 }
@@ -733,7 +733,7 @@ void Function_Test::loaderCollection()
     xmlWriter.writeTextElement("Step", "87");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -744,7 +744,7 @@ void Function_Test::loaderCollection()
        loading is tested in Chaser_test. */
     QVERIFY(Function::loader(xmlReader, &d) == true);
     QVERIFY(d.functions().size() == 1);
-    QVERIFY(d.function(120) != NULL);
+    QVERIFY(d.function(120) != nullptr);
     QVERIFY(d.function(120)->type() == Function::CollectionType);
     QVERIFY(d.function(120)->name() == QString("Spiers"));
 }
@@ -823,7 +823,7 @@ void Function_Test::loaderEFX()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -834,7 +834,7 @@ void Function_Test::loaderEFX()
        loading is tested in Chaser_test. */
     QVERIFY(Function::loader(xmlReader, &d) == true);
     QVERIFY(d.functions().size() == 1);
-    QVERIFY(d.function(0) != NULL);
+    QVERIFY(d.function(0) != nullptr);
     QVERIFY(d.function(0)->type() == Function::EFXType);
     QVERIFY(d.function(0)->name() == QString("Guarnere"));
 }
@@ -853,7 +853,7 @@ void Function_Test::loaderUnknownType()
     xmlWriter.writeAttribute("Name", "Winters");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -864,7 +864,7 @@ void Function_Test::loaderUnknownType()
        loading is tested in Scene_test. */
     QVERIFY(Function::loader(xmlReader, &d) == false);
     QVERIFY(d.functions().size() == 0);
-    QVERIFY(d.function(15) == NULL);
+    QVERIFY(d.function(15) == nullptr);
 }
 
 void Function_Test::runOrderXML()
@@ -879,7 +879,7 @@ void Function_Test::runOrderXML()
 
     QVERIFY(stub.saveXMLRunOrder(&xmlWriter) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -904,7 +904,7 @@ void Function_Test::runOrderXML()
     stub.setRunOrder(Function::Loop);
     QVERIFY(stub.saveXMLRunOrder(&xmlWriter) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -931,7 +931,7 @@ void Function_Test::runOrderXML()
     stub.setRunOrder(Function::PingPong);
     QVERIFY(stub.saveXMLRunOrder(&xmlWriter) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -964,7 +964,7 @@ void Function_Test::directionXML()
 
     QVERIFY(stub.saveXMLDirection(&xmlWriter) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -988,7 +988,7 @@ void Function_Test::directionXML()
     stub.setDirection(Function::Forward);
     QVERIFY(stub.saveXMLDirection(&xmlWriter) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer2.close();
 
     buffer2.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -1022,7 +1022,7 @@ void Function_Test::speedXML()
 
     QVERIFY(stub.saveXMLSpeed(&xmlWriter) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);

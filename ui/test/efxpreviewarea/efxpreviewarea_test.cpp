@@ -28,7 +28,7 @@
 
 void EFXPreviewArea_Test::initial()
 {
-    EFXPreviewArea area(NULL);
+    EFXPreviewArea area(nullptr);
     QCOMPARE(area.m_iter, 0);
     QCOMPARE(area.m_timer.parent(), &area);
     QCOMPARE(area.m_timer.isActive(), false);
@@ -36,7 +36,7 @@ void EFXPreviewArea_Test::initial()
 
 void EFXPreviewArea_Test::setPoints()
 {
-    EFXPreviewArea area(NULL);
+    EFXPreviewArea area(nullptr);
     area.show();
 
     QPolygonF poly;
@@ -60,7 +60,7 @@ void EFXPreviewArea_Test::setPoints()
 
 void EFXPreviewArea_Test::draw()
 {
-    EFXPreviewArea area(NULL);
+    EFXPreviewArea area(nullptr);
     area.show();
 
     QPolygonF poly;

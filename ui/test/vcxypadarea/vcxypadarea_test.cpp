@@ -30,7 +30,7 @@
 
 void VCXYPadArea_Test::initial()
 {
-    VCXYPadArea area(NULL);
+    VCXYPadArea area(nullptr);
     QCOMPARE(area.m_mode, Doc::Design);
     QCOMPARE(area.m_changed, false);
     QVERIFY(area.m_activePixmap.isNull() == false);
@@ -41,7 +41,7 @@ void VCXYPadArea_Test::initial()
 
 void VCXYPadArea_Test::mode()
 {
-    VCXYPadArea area(NULL);
+    VCXYPadArea area(nullptr);
 
     area.setMode(Doc::Operate);
     QCOMPARE(area.isEnabled(), true);
@@ -62,7 +62,7 @@ void VCXYPadArea_Test::mode()
 
 void VCXYPadArea_Test::position()
 {
-    VCXYPadArea area(NULL);
+    VCXYPadArea area(nullptr);
     area.resize(QSize(100, 100));
 
     QCOMPARE(area.hasPositionChanged(), false);
@@ -92,7 +92,7 @@ void VCXYPadArea_Test::position()
 
 void VCXYPadArea_Test::paint()
 {
-    VCXYPadArea area(NULL);
+    VCXYPadArea area(nullptr);
     area.resize(100, 100);
     area.show();
     QTest::qWait(10);
@@ -103,7 +103,7 @@ void VCXYPadArea_Test::paint()
 
 void VCXYPadArea_Test::mouseEvents()
 {
-    VCXYPadArea area(NULL);
+    VCXYPadArea area(nullptr);
     area.resize(QSize(256, 256));
 
     QMouseEvent e(QEvent::MouseButtonPress, QPoint(20, 30), QPoint(0, 0), QPoint(0, 0),
