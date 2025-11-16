@@ -208,7 +208,7 @@ void QLCPhysical_Test::load()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -277,7 +277,7 @@ void QLCPhysical_Test::loadWrongRoot()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -298,7 +298,7 @@ void QLCPhysical_Test::save()
     QVERIFY(p.saveXML(&xmlWriter) == true);
 
     //qDebug() << buffer.buffer();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);

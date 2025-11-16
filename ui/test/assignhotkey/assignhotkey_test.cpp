@@ -30,7 +30,7 @@
 void AssignHotKey_Test::initial()
 {
     QKeySequence seq(Qt::Key_A | Qt::SHIFT);
-    AssignHotKey ahk(NULL, seq);
+    AssignHotKey ahk(nullptr, seq);
     QCOMPARE(ahk.keySequence(), seq);
     QCOMPARE(ahk.m_previewEdit->text(), seq.toString(QKeySequence::NativeText));
     QCOMPARE(ahk.m_previewEdit->isReadOnly(), true);
@@ -38,7 +38,7 @@ void AssignHotKey_Test::initial()
 
 void AssignHotKey_Test::keyPressEventAuto()
 {
-    AssignHotKey ahk(NULL);
+    AssignHotKey ahk(nullptr);
     bool autoclose = ahk.m_autoCloseCheckBox->isChecked();
 
     // Autoclose on
@@ -55,7 +55,7 @@ void AssignHotKey_Test::keyPressEventAuto()
 
 void AssignHotKey_Test::keyPressEventNoAuto()
 {
-    AssignHotKey ahk(NULL);
+    AssignHotKey ahk(nullptr);
     bool autoclose = ahk.m_autoCloseCheckBox->isChecked();
 
     // Autoclose off
@@ -72,7 +72,7 @@ void AssignHotKey_Test::keyPressEventNoAuto()
 
 void AssignHotKey_Test::keyPressEventOnlyModifiers()
 {
-    AssignHotKey ahk(NULL);
+    AssignHotKey ahk(nullptr);
     bool autoclose = ahk.m_autoCloseCheckBox->isChecked();
 
     ahk.m_autoCloseCheckBox->setChecked(false);

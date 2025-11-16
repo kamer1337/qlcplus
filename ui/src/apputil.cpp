@@ -45,7 +45,7 @@
 
 void AppUtil::ensureWidgetIsVisible(QWidget *widget)
 {
-    if (widget == NULL)
+    if (widget == nullptr)
         return;
 
     QWidget *parent = widget->parentWidget();
@@ -54,7 +54,7 @@ void AppUtil::ensureWidgetIsVisible(QWidget *widget)
         // The widget is a top-level window (a dialog, for instance)
         // @todo Use the screen where the main application currently is?
         QScreen *screen = QGuiApplication::screens().first();
-        if (screen != NULL)
+        if (screen != nullptr)
         {
             // Move the widget to the center of the default screen
             const QRect screenRect(screen->availableGeometry());
@@ -71,7 +71,7 @@ void AppUtil::ensureWidgetIsVisible(QWidget *widget)
             widget->move(0, 0);
         }
     }
-    else if (parent != NULL)
+    else if (parent != nullptr)
     {
         // The widget's placement is bounded by a parent
         const QRect parentRect(parent->rect());
@@ -92,11 +92,11 @@ void AppUtil::ensureWidgetIsVisible(QWidget *widget)
 
 #define SETTINGS_SLIDERSTYLE "workspace/sliderstyle"
 
-static QStyle* s_saneStyle = NULL;
+static QStyle* s_saneStyle = nullptr;
 
 QStyle* AppUtil::saneStyle()
 {
-    if (s_saneStyle == NULL)
+    if (s_saneStyle == nullptr)
     {
         QSettings settings;
         QVariant var = settings.value(SETTINGS_SLIDERSTYLE, QString("Fusion"));

@@ -79,7 +79,7 @@ QByteArray ShortcutWing_Test::data()
 void ShortcutWing_Test::initTestCase()
 {
     m_wing = new ShortcutWing(this, QHostAddress::LocalHost, data());
-    QVERIFY(m_wing != NULL);
+    QVERIFY(m_wing != nullptr);
 }
 
 void ShortcutWing_Test::firmware()
@@ -410,5 +410,5 @@ void ShortcutWing_Test::buttons()
 void ShortcutWing_Test::cleanupTestCase()
 {
     delete m_wing;
-    m_wing = NULL;
+    m_wing = nullptr;
 }

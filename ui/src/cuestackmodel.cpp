@@ -37,7 +37,7 @@
 
 CueStackModel::CueStackModel(QObject* parent)
     : QAbstractItemModel(parent)
-    , m_cueStack(NULL)
+    , m_cueStack(nullptr)
 {
 }
 
@@ -49,7 +49,7 @@ void CueStackModel::setCueStack(CueStack* cs)
 {
     //qDebug() << Q_FUNC_INFO << "old:" << (void*)m_cueStack << "new:" << (void*) cs;
 
-    if (m_cueStack != NULL)
+    if (m_cueStack != nullptr)
     {
         // Don't attempt to remove anything if there's nothing to remove
         int last = m_cueStack->cues().size() - 1;
@@ -60,13 +60,13 @@ void CueStackModel::setCueStack(CueStack* cs)
         disconnect(m_cueStack, SIGNAL(removed(int)), this, SLOT(slotRemoved(int)));
         disconnect(m_cueStack, SIGNAL(changed(int)), this, SLOT(slotChanged(int)));
         disconnect(m_cueStack, SIGNAL(currentCueChanged(int)), this, SLOT(slotCurrentCueChanged(int)));
-        m_cueStack = NULL;
+        m_cueStack = nullptr;
 
         if (last >= 0)
             endRemoveRows();
     }
 
-    if (cs != NULL)
+    if (cs != nullptr)
     {
         // Don't attempt to insert anything if there's nothing to insert
         if (cs->cues().size() > 0)
@@ -92,21 +92,21 @@ CueStack* CueStackModel::cueStack() const
 
 void CueStackModel::slotAdded(int index)
 {
-    Q_ASSERT(m_cueStack != NULL);
+    Q_ASSERT(m_cueStack != nullptr);
     beginInsertRows(QModelIndex(), index, index);
     endInsertRows();
 }
 
 void CueStackModel::slotRemoved(int index)
 {
-    Q_ASSERT(m_cueStack != NULL);
+    Q_ASSERT(m_cueStack != nullptr);
     beginRemoveRows(QModelIndex(), index, index);
     endRemoveRows();
 }
 
 void CueStackModel::slotChanged(int index)
 {
-    Q_ASSERT(m_cueStack != NULL);
+    Q_ASSERT(m_cueStack != nullptr);
     emit dataChanged(createIndex(index, 0, quintptr(0)), createIndex(index, 1, quintptr(0)));
 }
 
@@ -149,7 +149,7 @@ QVariant CueStackModel::headerData(int section, Qt::Orientation orientation, int
 
 QModelIndex CueStackModel::index(int row, int column, const QModelIndex& parent) const
 {
-    if (m_cueStack == NULL || parent.isValid() == true) // No parents
+    if (m_cueStack == nullptr || parent.isValid() == true) // No parents
         return QModelIndex();
     else
         return createIndex(row, column, quintptr(0));
@@ -163,7 +163,7 @@ QModelIndex CueStackModel::parent(const QModelIndex& index) const
 
 int CueStackModel::rowCount(const QModelIndex& parent) const
 {
-    if (m_cueStack == NULL || parent.isValid() == true) // No parents
+    if (m_cueStack == nullptr || parent.isValid() == true) // No parents
         return 0;
     else
         return m_cueStack->cues().size();
@@ -171,7 +171,7 @@ int CueStackModel::rowCount(const QModelIndex& parent) const
 
 QVariant CueStackModel::data(const QModelIndex& index, int role) const
 {
-    if (m_cueStack == NULL)
+    if (m_cueStack == nullptr)
         return QVariant();
 
     QVariant var;
@@ -253,7 +253,7 @@ bool CueStackModel::dropMimeData(const QMimeData* data, Qt::DropAction action, i
     Q_UNUSED(row);
     Q_UNUSED(column);
 
-    if (m_cueStack == NULL || action != Qt::MoveAction)
+    if (m_cueStack == nullptr || action != Qt::MoveAction)
         return false;
 
     if (data->hasText() == true)
@@ -263,7 +263,7 @@ bool CueStackModel::dropMimeData(const QMimeData* data, Qt::DropAction action, i
         buffer.open(QIODevice::ReadOnly | QIODevice::Text);
         QXmlStreamReader doc(&buffer);
         doc.readNextStartElement();
-        if (doc.device() != NULL && doc.atEnd() == false && doc.hasError() == false)
+        if (doc.device() != nullptr && doc.atEnd() == false && doc.hasError() == false)
         {
             if (doc.name() != MIMEDATA_ROOT)
             {
@@ -302,8 +302,8 @@ QMimeData* CueStackModel::mimeData(const QModelIndexList& indexes) const
 {
     qDebug() << Q_FUNC_INFO << indexes;
 
-    if (m_cueStack == NULL || indexes.size() == 0)
-        return NULL;
+    if (m_cueStack == nullptr || indexes.size() == 0)
+        return nullptr;
 
     // MIME data is essentially a bunch of XML "Cue" entries (plus drag index)
     QBuffer buffer;
@@ -326,7 +326,7 @@ QMimeData* CueStackModel::mimeData(const QModelIndexList& indexes) const
 
     QMimeData* data = new QMimeData;
     doc.writeEndElement();
-    doc.setDevice(NULL);
+    doc.setDevice(nullptr);
     buffer.close();
 
     data->setText(QString(buffer.data()));
@@ -335,7 +335,7 @@ QMimeData* CueStackModel::mimeData(const QModelIndexList& indexes) const
 
 bool CueStackModel::removeRows(int row, int count, const QModelIndex& parent)
 {
-    if (m_cueStack == NULL || parent.isValid() == true)
+    if (m_cueStack == nullptr || parent.isValid() == true)
         return false;
 
     for (int i = 0; i < count; i++)

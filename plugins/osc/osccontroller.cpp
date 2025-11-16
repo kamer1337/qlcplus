@@ -194,7 +194,7 @@ UniverseInfo* OSCController::getUniverseInfo(quint32 universe)
     if (m_universeMap.contains(universe))
         return &m_universeMap[universe];
 
-    return NULL;
+    return nullptr;
 }
 
 OSCController::Type OSCController::type() const

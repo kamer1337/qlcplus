@@ -51,7 +51,7 @@ DmxDumpFactory::DmxDumpFactory(Doc *doc, DmxDumpFactoryProperties *props, QWidge
     , m_properties(props)
     , m_selectedSceneID(Function::invalidId())
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     setupUi(this);
 
@@ -138,7 +138,7 @@ void DmxDumpFactory::slotSelectSceneButtonClicked()
     {
         m_selectedSceneID = fs.selection().first();
         Scene *scene = qobject_cast<Scene*>(m_doc->function(m_selectedSceneID));
-        if (scene == NULL)
+        if (scene == nullptr)
             return;
 
         m_sceneName->setText(scene->name());
@@ -149,7 +149,7 @@ void DmxDumpFactory::slotSelectSceneButtonClicked()
         foreach (SceneValue scv, scene->values())
         {
             Fixture *fxi = m_doc->fixture(scv.fxi);
-            if (fxi == NULL)
+            if (fxi == nullptr)
                 continue;
             quint32 absAddress = fxi->universeAddress() + scv.channel;
             if (chMask.length() > (int)absAddress)
@@ -164,7 +164,7 @@ void DmxDumpFactory::slotSelectSceneButtonClicked()
 QList<VCWidget *> DmxDumpFactory::getChildren(VCWidget *obj, int type)
 {
     QList<VCWidget *> list;
-    if (obj == NULL)
+    if (obj == nullptr)
         return list;
     QListIterator <VCWidget*> it(obj->findChildren<VCWidget*>());
     while (it.hasNext() == true)
@@ -234,14 +234,14 @@ void DmxDumpFactory::accept()
 
     m_doc->inputOutputMap()->releaseUniverses(false);
 
-    Scene *newScene = NULL;
+    Scene *newScene = nullptr;
     if (m_selectedSceneID != Function::invalidId())
         newScene = qobject_cast<Scene*>(m_doc->function(m_selectedSceneID));
 
     for (int t = 0; t < m_fixturesTree->topLevelItemCount(); t++)
     {
         QTreeWidgetItem *uniItem = m_fixturesTree->topLevelItem(t);
-        if (newScene == NULL && (m_dumpAllRadio->isChecked() ||
+        if (newScene == nullptr && (m_dumpAllRadio->isChecked() ||
              uniItem->checkState(KColumnName) != Qt::Unchecked))
                 newScene = new Scene(m_doc);
         //int uni = uniItem->text(KColumnID).toInt();
@@ -250,7 +250,7 @@ void DmxDumpFactory::accept()
             QTreeWidgetItem *fixItem = uniItem->child(f);
             quint32 fxID = fixItem->data(KColumnName, PROP_ID).toUInt();
             Fixture *fxi = m_doc->fixture(fxID);
-            if (fxi != NULL)
+            if (fxi != nullptr)
             {
                 quint32 baseAddress = fxi->universeAddress();
                 for (int c = 0; c < fixItem->childCount(); c++)
@@ -291,12 +291,12 @@ void DmxDumpFactory::accept()
         }
     }
     /** If the Scene is valid, add it to QLC+ functions */
-    if (newScene != NULL)
+    if (newScene != nullptr)
     {
         bool addedToDoc = false;
 
         if (m_selectedSceneID != Function::invalidId() &&
-            m_doc->function(m_selectedSceneID) != NULL)
+            m_doc->function(m_selectedSceneID) != nullptr)
         {
             addedToDoc = true;
         }
@@ -318,7 +318,7 @@ void DmxDumpFactory::accept()
                     if (m_chaserRadio->isChecked())
                     {
                         Chaser *chaser = qobject_cast<Chaser*>(m_doc->function(targetID));
-                        if (chaser != NULL)
+                        if (chaser != nullptr)
                         {
                             ChaserStep chsStep(sceneID);
                             chaser->addStep(chsStep);
@@ -328,7 +328,7 @@ void DmxDumpFactory::accept()
                     else if (m_buttonRadio->isChecked())
                     {
                         VCButton *button = qobject_cast<VCButton*>(VirtualConsole::instance()->widget(targetID));
-                        if (button != NULL)
+                        if (button != nullptr)
                         {
                             button->setFunction(newScene->id());
                             button->setCaption(newScene->name());
@@ -337,7 +337,7 @@ void DmxDumpFactory::accept()
                     else if (m_sliderRadio->isChecked())
                     {
                         VCSlider *slider = qobject_cast<VCSlider*>(VirtualConsole::instance()->widget(targetID));
-                        if (slider != NULL)
+                        if (slider != nullptr)
                         {
                             slider->setPlaybackFunction(newScene->id());
                             slider->setCaption(newScene->name());

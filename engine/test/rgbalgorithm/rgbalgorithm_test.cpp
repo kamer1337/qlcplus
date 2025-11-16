@@ -66,29 +66,29 @@ void RGBAlgorithm_Test::algorithms()
 void RGBAlgorithm_Test::algorithm()
 {
     RGBAlgorithm* algo = RGBAlgorithm::algorithm(m_doc, "Foo");
-    QVERIFY(algo != NULL);
+    QVERIFY(algo != nullptr);
     QCOMPARE(algo->apiVersion(), 0); // Invalid
     delete algo;
 
     algo = RGBAlgorithm::algorithm(m_doc, QString());
-    QVERIFY(algo != NULL);
+    QVERIFY(algo != nullptr);
     QCOMPARE(algo->apiVersion(), 0); // Invalid
     delete algo;
 
     algo = RGBAlgorithm::algorithm(m_doc, "Text");
-    QVERIFY(algo != NULL);
+    QVERIFY(algo != nullptr);
     QCOMPARE(algo->type(), RGBAlgorithm::Text);
     QCOMPARE(algo->name(), QString("Text"));
     delete algo;
 
     algo = RGBAlgorithm::algorithm(m_doc, "Stripes");
-    QVERIFY(algo != NULL);
+    QVERIFY(algo != nullptr);
     QCOMPARE(algo->type(), RGBAlgorithm::Script);
     QCOMPARE(algo->name(), QString("Stripes"));
     delete algo;
 
     algo = RGBAlgorithm::algorithm(m_doc, "Balls");
-    QVERIFY(algo != NULL);
+    QVERIFY(algo != nullptr);
     QCOMPARE(algo->type(), RGBAlgorithm::Script);
     QCOMPARE(algo->name(), QString("Balls"));
     QCOMPARE(algo->apiVersion(), 3);
@@ -118,7 +118,7 @@ void RGBAlgorithm_Test::loader()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -126,7 +126,7 @@ void RGBAlgorithm_Test::loader()
     xmlReader.readNextStartElement();
 
     RGBAlgorithm* algo = RGBAlgorithm::loader(m_doc, xmlReader);
-    QVERIFY(algo != NULL);
+    QVERIFY(algo != nullptr);
     QCOMPARE(algo->type(), RGBAlgorithm::Script);
     QCOMPARE(algo->name(), QString("Stripes"));
     delete algo;
@@ -141,7 +141,7 @@ void RGBAlgorithm_Test::loader()
     xmlWriter.writeStartElement("Algorithm");
     xmlWriter.writeAttribute("Type", "Text");
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer2.close();
 
     buffer2.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -149,7 +149,7 @@ void RGBAlgorithm_Test::loader()
     xmlReader.readNextStartElement();
 
     algo = RGBAlgorithm::loader(m_doc, xmlReader);
-    QVERIFY(algo != NULL);
+    QVERIFY(algo != nullptr);
     QCOMPARE(algo->type(), RGBAlgorithm::Text);
     QCOMPARE(algo->name(), QString("Text"));
     delete algo;
@@ -163,7 +163,7 @@ void RGBAlgorithm_Test::loader()
 
     xmlWriter.writeStartElement("Type", "Foo");
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer3.close();
 
     buffer3.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -171,7 +171,7 @@ void RGBAlgorithm_Test::loader()
     xmlReader.readNextStartElement();
 
     algo = RGBAlgorithm::loader(m_doc, xmlReader);
-    QVERIFY(algo == NULL);
+    QVERIFY(algo == nullptr);
 
     buffer3.close();
 
@@ -183,7 +183,7 @@ void RGBAlgorithm_Test::loader()
     xmlWriter.writeStartElement("Foo");
     xmlWriter.writeAttribute("Type", "Text");
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer4.close();
 
     buffer4.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -191,7 +191,7 @@ void RGBAlgorithm_Test::loader()
     xmlReader.readNextStartElement();
 
     algo = RGBAlgorithm::loader(m_doc, xmlReader);
-    QVERIFY(algo == NULL);
+    QVERIFY(algo == nullptr);
 }
 
 QTEST_MAIN(RGBAlgorithm_Test)

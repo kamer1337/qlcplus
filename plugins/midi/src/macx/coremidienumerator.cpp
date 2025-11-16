@@ -65,7 +65,7 @@ MidiEnumeratorPrivate::~MidiEnumeratorPrivate()
 
 QString MidiEnumeratorPrivate::extractName(MIDIEndpointRef endpoint)
 {
-    CFStringRef str = NULL;
+    CFStringRef str = nullptr;
     QString name;
 
     /* Get the name property */
@@ -152,7 +152,7 @@ void MidiEnumeratorPrivate::rescan()
         qDebug() << Q_FUNC_INFO << "Found source device:" << name << "UID:" << QString::number(uid.toUInt(), 16);
 
         MidiInputDevice* dev = inputDevice(uid);
-        if (dev == NULL)
+        if (dev == nullptr)
         {
             CoreMidiInputDevice* dev = new CoreMidiInputDevice(uid, name, sourceDev, m_client, this);
             m_inputDevices << dev;
@@ -187,7 +187,7 @@ void MidiEnumeratorPrivate::rescan()
         qDebug() << Q_FUNC_INFO << "Found destination device:" << name << "UID:" << QString::number(uid.toUInt(), 16);
 
         MidiOutputDevice* dev = outputDevice(uid);
-        if (dev == NULL)
+        if (dev == nullptr)
         {
             CoreMidiOutputDevice* dev = new CoreMidiOutputDevice(uid, name, destDev, m_client, this);
             m_outputDevices << dev;
@@ -227,7 +227,7 @@ MidiOutputDevice* MidiEnumeratorPrivate::outputDevice(const QVariant& uid) const
             return dev;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 MidiInputDevice* MidiEnumeratorPrivate::inputDevice(const QVariant& uid) const
@@ -240,7 +240,7 @@ MidiInputDevice* MidiEnumeratorPrivate::inputDevice(const QVariant& uid) const
             return dev;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 QList <MidiOutputDevice*> MidiEnumeratorPrivate::outputDevices() const
@@ -269,7 +269,7 @@ MidiEnumerator::~MidiEnumerator()
 {
     qDebug() << Q_FUNC_INFO;
     delete d_ptr;
-    d_ptr = NULL;
+    d_ptr = nullptr;
 }
 
 void MidiEnumerator::rescan()

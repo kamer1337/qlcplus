@@ -34,7 +34,7 @@ ChannelModifierEditor::ChannelModifierEditor(Doc *doc, QString modifier, QWidget
     : QDialog(parent)
     , m_doc(doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     setupUi(this);
 
@@ -186,7 +186,7 @@ void ChannelModifierEditor::slotRemoveHandlerClicked()
 void ChannelModifierEditor::slotSaveClicked()
 {
     ChannelModifier *modifier = m_doc->modifiersCache()->modifier(m_templateNameEdit->text());
-    if (modifier != NULL && modifier->type() == ChannelModifier::SystemTemplate)
+    if (modifier != nullptr && modifier->type() == ChannelModifier::SystemTemplate)
     {
         // cannot overwrite a system template !
         QMessageBox::critical(this, tr("Error"),
@@ -206,7 +206,7 @@ void ChannelModifierEditor::slotSaveClicked()
     newModifier->setModifierMap(map);
     newModifier->saveXML(filename);
 
-    if (modifier == NULL)
+    if (modifier == nullptr)
     {
         QTreeWidgetItem *item = new QTreeWidgetItem(m_templatesTree);
         item->setText(0, m_templateNameEdit->text());
@@ -218,6 +218,6 @@ void ChannelModifierEditor::slotSaveClicked()
 
 void ChannelModifierEditor::slotUnsetClicked()
 {
-    m_currentTemplate = NULL;
+    m_currentTemplate = nullptr;
     QDialog::accept();
 }

@@ -40,8 +40,8 @@ FixtureGroupEditor::FixtureGroupEditor(FixtureGroup* grp, Doc* doc, QWidget* par
     , m_grp(grp)
     , m_doc(doc)
 {
-    Q_ASSERT(grp != NULL);
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(grp != nullptr);
+    Q_ASSERT(doc != nullptr);
 
     setupUi(this);
 
@@ -105,7 +105,7 @@ void FixtureGroupEditor::updateTable()
 
         GroupHead head(it.value());
         Fixture* fxi = m_doc->fixture(head.fxi);
-        if (fxi == NULL)
+        if (fxi == nullptr)
             continue;
 
         QIcon icon = fxi->getIconFromType();
@@ -185,7 +185,7 @@ void FixtureGroupEditor::slotUpClicked()
 void FixtureGroupEditor::slotRemoveFixtureClicked()
 {
     QTableWidgetItem* item = m_table->currentItem();
-    if (item == NULL)
+    if (item == nullptr)
         return;
 
     if (m_grp->resignHead(QLCPoint(m_column, m_row)) == true)
@@ -197,7 +197,7 @@ void FixtureGroupEditor::slotCellActivated(int row, int column)
     m_row = row;
     m_column = column;
 
-    if (m_table->currentItem() == NULL)
+    if (m_table->currentItem() == nullptr)
         m_removeButton->setEnabled(false);
     else
         m_removeButton->setEnabled(true);
@@ -244,7 +244,7 @@ void FixtureGroupEditor::slotResized()
         for (int x = 0; x < m_table->columnCount(); x++)
         {
             QTableWidgetItem* item = m_table->item(y, x);
-            if (item != NULL)
+            if (item != nullptr)
             {
                 QFont scaledFont = font;
 #if (QT_VERSION < QT_VERSION_CHECK(5, 11, 0))

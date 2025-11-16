@@ -76,7 +76,7 @@ QByteArray ProgramWing_Test::data()
 void ProgramWing_Test::initTestCase()
 {
     m_wing = new ProgramWing(this, QHostAddress::LocalHost, data());
-    QVERIFY(m_wing != NULL);
+    QVERIFY(m_wing != nullptr);
     QVERIFY(m_wing->type() == Wing::Program);
 }
 
@@ -519,5 +519,5 @@ void ProgramWing_Test::encoders()
 void ProgramWing_Test::cleanupTestCase()
 {
     delete m_wing;
-    m_wing = NULL;
+    m_wing = nullptr;
 }

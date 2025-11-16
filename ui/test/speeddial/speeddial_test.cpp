@@ -32,22 +32,22 @@ void SpeedDial_Test::initial()
     SpeedDial sd(&w);
     QCOMPARE(sd.parentWidget(), &w);
     QCOMPARE(sd.value(), 0);
-    QVERIFY(sd.m_timer != NULL);
-    QVERIFY(sd.m_dial != NULL);
-    QVERIFY(sd.m_plus != NULL);
-    QVERIFY(sd.m_minus != NULL);
-    QVERIFY(sd.m_tap != NULL);
-    QVERIFY(sd.m_hrs != NULL);
-    QVERIFY(sd.m_min != NULL);
-    QVERIFY(sd.m_sec != NULL);
-    QVERIFY(sd.m_ms != NULL);
-    QVERIFY(sd.m_infiniteCheck != NULL);
+    QVERIFY(sd.m_timer != nullptr);
+    QVERIFY(sd.m_dial != nullptr);
+    QVERIFY(sd.m_plus != nullptr);
+    QVERIFY(sd.m_minus != nullptr);
+    QVERIFY(sd.m_tap != nullptr);
+    QVERIFY(sd.m_hrs != nullptr);
+    QVERIFY(sd.m_min != nullptr);
+    QVERIFY(sd.m_sec != nullptr);
+    QVERIFY(sd.m_ms != nullptr);
+    QVERIFY(sd.m_infiniteCheck != nullptr);
     QCOMPARE(sd.m_visibilityMask, SpeedDial::defaultVisibilityMask());
 }
 
 void SpeedDial_Test::setValue()
 {
-    SpeedDial sd(NULL);
+    SpeedDial sd(nullptr);
     sd.setValue(5000);
     QCOMPARE(sd.value(), 5000);
     sd.toggleInfinite();

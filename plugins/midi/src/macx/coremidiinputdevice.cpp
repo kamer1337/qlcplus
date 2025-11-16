@@ -37,7 +37,7 @@ static void MidiInProc(const MIDIPacketList* pktList, void* readProcRefCon,
 
     // Go thru all packets in the midi packet list
     const MIDIPacket* packet = &pktList->packet[0];
-    for (quint32 p = 0; p < pktList->numPackets && packet != NULL; ++p)
+    for (quint32 p = 0; p < pktList->numPackets && packet != nullptr; ++p)
     {
         // Go thru all simultaneously-occurring messages in the packet
         for (quint32 i = 0; i < packet->length && i < 256; ++i)

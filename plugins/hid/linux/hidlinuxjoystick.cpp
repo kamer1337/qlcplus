@@ -148,7 +148,7 @@ bool HIDLinuxJoystick::readEvent()
 
 void HIDLinuxJoystick::run()
 {
-    struct pollfd* fds = NULL;
+    struct pollfd* fds = nullptr;
     fds = new struct pollfd[1];
     memset(fds, 0, 1);
 

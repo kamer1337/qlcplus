@@ -128,7 +128,7 @@ Function::Function(Doc* doc, Type t)
     , m_preserveAttributes(false)
     , m_blendMode(Universe::NormalBlend)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
     registerAttribute(tr("Intensity"), Multiply | Single);
 }
 
@@ -146,18 +146,18 @@ Doc* Function::doc() const
  *****************************************************************************/
 Function *Function::createCopy(Doc *doc, bool addToDoc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     Function* copy = new Function(doc, type());
     if (copy->copyFrom(this) == false)
     {
         delete copy;
-        copy = NULL;
+        copy = nullptr;
     }
     if (addToDoc == true && doc->addFunction(copy) == false)
     {
         delete copy;
-        copy = NULL;
+        copy = nullptr;
     }
 
     return copy;
@@ -165,7 +165,7 @@ Function *Function::createCopy(Doc *doc, bool addToDoc)
 
 bool Function::copyFrom(const Function* function)
 {
-    if (function == NULL)
+    if (function == nullptr)
         return false;
 
     m_name = function->name();
@@ -329,7 +329,7 @@ bool Function::isVisible() const
 
 bool Function::saveXMLCommon(QXmlStreamWriter *doc) const
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     doc->writeAttribute(KXMLQLCFunctionID, QString::number(id()));
     doc->writeAttribute(KXMLQLCFunctionType, Function::typeToString(type()));
@@ -393,7 +393,7 @@ Function::RunOrder Function::stringToRunOrder(const QString& str)
 
 bool Function::saveXMLRunOrder(QXmlStreamWriter *doc) const
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     doc->writeTextElement(KXMLQLCFunctionRunOrder, runOrderToString(runOrder()));
 
@@ -456,7 +456,7 @@ Function::Direction Function::stringToDirection(const QString& str)
 
 bool Function::saveXMLDirection(QXmlStreamWriter *doc) const
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     doc->writeTextElement(KXMLQLCFunctionDirection, directionToString(direction()));
 
@@ -591,7 +591,7 @@ void Function::slotBPMChanged(int bpmNumber)
 
 bool Function::saveXMLTempoType(QXmlStreamWriter *doc) const
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* Make this optional to keep projects lighter */
     if (tempoType() == Beats)
@@ -918,7 +918,7 @@ bool Function::loader(QXmlStreamReader &root, Doc* doc)
     }
 
     /* Create a new function according to the type */
-    Function* function = NULL;
+    Function* function = nullptr;
     if (type == Function::SceneType)
         function = new class Scene(doc);
     else if (type == Function::ChaserType)
@@ -1135,7 +1135,7 @@ void Function::start(MasterTimer* timer, FunctionParent source, quint32 startTim
 {
     qDebug() << "Function start(). Name:" << m_name << "ID: " << m_id << "source:" << source.type() << source.id() << ", startTime:" << startTime;
 
-    Q_ASSERT(timer != NULL);
+    Q_ASSERT(timer != nullptr);
 
     {
         QMutexLocker sourcesLocker(&m_sourcesMutex);

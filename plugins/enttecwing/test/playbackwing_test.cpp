@@ -80,7 +80,7 @@ QByteArray PlaybackWing_Test::data()
 void PlaybackWing_Test::initTestCase()
 {
     m_wing = new PlaybackWing(this, QHostAddress::LocalHost, data());
-    QVERIFY(m_wing != NULL);
+    QVERIFY(m_wing != nullptr);
 }
 
 void PlaybackWing_Test::firmware()
@@ -338,5 +338,5 @@ void PlaybackWing_Test::faders()
 void PlaybackWing_Test::cleanupTestCase()
 {
     delete m_wing;
-    m_wing = NULL;
+    m_wing = nullptr;
 }

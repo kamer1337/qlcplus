@@ -138,7 +138,7 @@ MidiOutputDevice* MidiEnumeratorPrivate::outputDevice(const QVariant& uid) const
             return dev;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 MidiInputDevice* MidiEnumeratorPrivate::inputDevice(const QVariant& uid) const
@@ -151,7 +151,7 @@ MidiInputDevice* MidiEnumeratorPrivate::inputDevice(const QVariant& uid) const
             return dev;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 QList <MidiOutputDevice*> MidiEnumeratorPrivate::outputDevices() const
@@ -180,7 +180,7 @@ MidiEnumerator::~MidiEnumerator()
 {
     qDebug() << Q_FUNC_INFO;
     delete d_ptr;
-    d_ptr = NULL;
+    d_ptr = nullptr;
 }
 
 void MidiEnumerator::rescan()

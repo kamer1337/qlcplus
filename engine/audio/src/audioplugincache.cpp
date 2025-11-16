@@ -86,7 +86,7 @@ void AudioPluginCache::load(const QDir &dir)
 
         QPluginLoader loader(path, this);
         AudioDecoder* ptr = qobject_cast<AudioDecoder*> (loader.instance());
-        if (ptr != NULL)
+        if (ptr != nullptr)
         {
             qDebug() << "Loaded audio decoder plugin from" << fileName;
             /* Just append the plugin path to be used at runtime
@@ -107,7 +107,7 @@ QStringList AudioPluginCache::getSupportedFormats()
     {
         QPluginLoader loader(path, this);
         AudioDecoder* ptr = qobject_cast<AudioDecoder*> (loader.instance());
-        if (ptr != NULL)
+        if (ptr != nullptr)
         {
             ptr->initialize("");
             caps << ptr->supportedFormats();
@@ -122,13 +122,13 @@ AudioDecoder *AudioPluginCache::getDecoderForFile(const QString &filename)
 {
     QFile fn(filename);
     if (fn.exists() == false)
-        return NULL;
+        return nullptr;
 
     foreach (QString path, m_pluginsMap)
     {
         QPluginLoader loader(path, this);
         AudioDecoder* ptr = qobject_cast<AudioDecoder*> (loader.instance());
-        if (ptr != NULL)
+        if (ptr != nullptr)
         {
             ptr->initialize("");
             AudioDecoder* copy = qobject_cast<AudioDecoder*> (ptr->createCopy());
@@ -142,7 +142,7 @@ AudioDecoder *AudioPluginCache::getDecoderForFile(const QString &filename)
         }
     }
 
-    return NULL;
+    return nullptr;
 }
 
 QList<AudioDeviceInfo> AudioPluginCache::audioDevicesList() const

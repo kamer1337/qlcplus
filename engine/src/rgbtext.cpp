@@ -378,7 +378,7 @@ bool RGBText::loadXML(QXmlStreamReader &root)
 
 bool RGBText::saveXML(QXmlStreamWriter *doc) const
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     doc->writeStartElement(KXMLQLCRGBAlgorithm);
     doc->writeAttribute(KXMLQLCRGBAlgorithmType, KXMLQLCRGBText);

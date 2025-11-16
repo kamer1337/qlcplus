@@ -78,7 +78,7 @@ class Universe: public QThread
 
 public:
     /** Construct a new Universe */
-    Universe(quint32 id = invalid(), GrandMaster *gm = NULL, QObject *parent = 0);
+    Universe(quint32 id = invalid(), GrandMaster *gm = nullptr, QObject *parent = 0);
 
     /** Destructor */
     virtual ~Universe();
@@ -200,7 +200,7 @@ public:
 
     /** Sets an input patch for this Universe, and connect to it to receive signals */
     bool setInputPatch(QLCIOPlugin *plugin, quint32 input,
-                       QLCInputProfile *profile = NULL);
+                       QLCInputProfile *profile = nullptr);
 
     /** Add/Remove/Replace an output patch on this Universe */
     bool setOutputPatch(QLCIOPlugin *plugin, quint32 output, int index = 0);
@@ -213,13 +213,13 @@ public:
 
     /**
      * Get the reference to the input plugin associated to this universe.
-     * If not present NULL is returned.
+     * If not present nullptr is returned.
      */
     InputPatch *inputPatch() const;
 
     /**
      * Get the reference to the output plugin associated to this universe.
-     * If not present NULL is returned.
+     * If not present nullptr is returned.
      */
     Q_INVOKABLE OutputPatch *outputPatch(int index) const;
 
@@ -228,7 +228,7 @@ public:
 
     /**
      * Get the reference to the feedback plugin associated to this universe.
-     * If not present NULL is returned.
+     * If not present nullptr is returned.
      */
     OutputPatch *feedbackPatch() const;
 
@@ -304,18 +304,18 @@ public:
     void setChannelDefaultValue(ushort channel, uchar value);
 
     /** Assign a Channel Modifier to the given channel index
-      * $modifier can be NULL if the channel has no modifier */
+      * $modifier can be nullptr if the channel has no modifier */
     void setChannelModifier(ushort channel, ChannelModifier *modifier);
 
     /** Return the Channel Modifier assigned to the given channel
-      * or NULL if none or not valid */
+      * or nullptr if none or not valid */
     ChannelModifier *channelModifier(ushort channel);
 
 protected:
     /** An array of each channel's capabilities. This helps to optimize HTP/LTP/Relative checks */
     QScopedPointer<QByteArray> m_channelsMask;
 
-    /** Vector of pointer to ChannelModifier classes. If not NULL, they will modify
+    /** Vector of pointer to ChannelModifier classes. If not nullptr, they will modify
      *  a DMX value right before HTP/LTP check and before being assigned to preGM */
     QVector<ChannelModifier*> m_modifiers;
 

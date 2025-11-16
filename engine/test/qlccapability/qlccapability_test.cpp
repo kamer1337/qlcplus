@@ -203,7 +203,7 @@ void QLCCapability_Test::load()
     xmlWriter.writeAttribute("Max", "19");
     xmlWriter.writeCharacters("Test1");
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -228,7 +228,7 @@ void QLCCapability_Test::loadWrongRoot()
     xmlWriter.writeAttribute("Max", "19");
     xmlWriter.writeCharacters("Test1");
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -252,7 +252,7 @@ void QLCCapability_Test::loadNoMin()
     xmlWriter.writeAttribute("Max", "19");
     xmlWriter.writeCharacters("Test1");
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -276,7 +276,7 @@ void QLCCapability_Test::loadNoMax()
     xmlWriter.writeAttribute("Min", "13");
     xmlWriter.writeCharacters("Test1");
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -301,7 +301,7 @@ void QLCCapability_Test::loadMinGreaterThanMax()
     xmlWriter.writeAttribute("Max", "19");
     xmlWriter.writeCharacters("Test1");
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -328,7 +328,7 @@ void QLCCapability_Test::save()
 
     QVERIFY(cap.saveXML(&xmlWriter) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -358,7 +358,7 @@ void QLCCapability_Test::savePreset()
 
     QVERIFY(cap.saveXML(&xmlWriter) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);

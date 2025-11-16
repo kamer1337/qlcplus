@@ -28,9 +28,9 @@
 VideoItem::VideoItem(Video *vid, ShowFunction *func)
     : ShowItem(func)
     , m_video(vid)
-    , m_fullscreenAction(NULL)
+    , m_fullscreenAction(nullptr)
 {
-    Q_ASSERT(vid != NULL);
+    Q_ASSERT(vid != nullptr);
 
     if (func->color().isValid())
         setColor(func->color());

@@ -31,24 +31,24 @@
 
 void QLCFile_Test::XMLReader()
 {
-    QVERIFY(QLCFile::getXMLReader("") == NULL);
+    QVERIFY(QLCFile::getXMLReader("") == nullptr);
 
     QXmlStreamReader *reader = QLCFile::getXMLReader("readonly.xml.in");
 
-    QVERIFY(reader != NULL);
-    QVERIFY(reader->device() != NULL);
+    QVERIFY(reader != nullptr);
+    QVERIFY(reader->device() != nullptr);
     QVERIFY(reader->device()->isOpen() == true);
 
     /* check releasing an invalid reader does nothing */
-    QLCFile::releaseXMLReader(NULL);
+    QLCFile::releaseXMLReader(nullptr);
 
     /* release the real reader */
     QLCFile::releaseXMLReader(reader);
-    reader = NULL;
+    reader = nullptr;
 
     /* check a file that cannot be created */
     reader = QLCFile::getXMLReader("foo.xml");
-    QVERIFY(reader == NULL);
+    QVERIFY(reader == nullptr);
 }
 
 void QLCFile_Test::getXMLHeader()
@@ -65,7 +65,7 @@ void QLCFile_Test::getXMLHeader()
     QLCFile::writeXMLHeader(&doc, "DocumentTag", "TestUnit");
     doc.writeEndDocument();
 
-    doc.setDevice(NULL);
+    doc.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);

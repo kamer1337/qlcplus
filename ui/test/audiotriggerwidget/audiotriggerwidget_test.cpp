@@ -15,7 +15,7 @@ void AudioTriggerWidget_Test::basics()
     w.setMaxFrequency(1000);
     QCOMPARE(w.m_barsNumber, 2);
     QCOMPARE(w.m_maxFrequency, 1000);
-    QVERIFY(w.m_spectrumBands != NULL);
+    QVERIFY(w.m_spectrumBands != nullptr);
 }
 
 void AudioTriggerWidget_Test::display()

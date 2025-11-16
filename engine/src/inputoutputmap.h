@@ -239,7 +239,7 @@ public:
 
     /**
      * Get a reference to a Universe from the given Universe ID
-     * Return NULL if no Universe is found
+     * Return nullptr if no Universe is found
      */
     Universe *universe(quint32 id);
 

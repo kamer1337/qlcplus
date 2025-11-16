@@ -115,12 +115,12 @@ void Sequence_Test::createCopy()
     QVERIFY(seq->id() != Function::invalidId());
 
     Function* f = seq->createCopy(&doc);
-    QVERIFY(f != NULL);
+    QVERIFY(f != nullptr);
     QVERIFY(f != seq);
     QVERIFY(f->id() != seq->id());
 
     Sequence* copy = qobject_cast<Sequence*> (f);
-    QVERIFY(copy != NULL);
+    QVERIFY(copy != nullptr);
     QVERIFY(copy->fadeInSpeed() == 42);
     QVERIFY(copy->fadeOutSpeed() == 69);
     QVERIFY(copy->duration() == 1337);
@@ -144,7 +144,7 @@ void Sequence_Test::loadWrongRoot()
     xmlWriter.writeAttribute("Type", "Sequence");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -165,7 +165,7 @@ void Sequence_Test::loadWrongType()
     xmlWriter.writeAttribute("Type", "Wrong");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -231,7 +231,7 @@ void Sequence_Test::loadWithScene()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     Fixture* fxi1 = new Fixture(m_doc);
@@ -403,7 +403,7 @@ void Sequence_Test::loadWithoutScene()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -558,7 +558,7 @@ void Sequence_Test::save()
 
     QVERIFY(seq->saveXML(&xmlWriter) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);

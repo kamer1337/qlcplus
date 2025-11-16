@@ -96,7 +96,7 @@ class OlaStandaloneClient : public OlaOutThread
 public:
     OlaStandaloneClient():
             OlaOutThread(),
-            m_tcp_socket(NULL) {}
+            m_tcp_socket(nullptr) {}
 
 private:
     bool init();
@@ -113,8 +113,8 @@ class OlaEmbeddedServer : public OlaOutThread
 public:
     OlaEmbeddedServer():
             OlaOutThread(),
-            m_daemon(NULL),
-            m_pipe_socket(NULL) {}
+            m_daemon(nullptr),
+            m_pipe_socket(nullptr) {}
 
 private:
     bool init();

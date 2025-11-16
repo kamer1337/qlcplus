@@ -69,10 +69,10 @@ void QLCInputProfile_Test::addChannel()
 
     ip.insertChannel(5, ich2);
     QVERIFY(ip.channel(0) == ich1);
-    QVERIFY(ip.channel(1) == NULL);
-    QVERIFY(ip.channel(2) == NULL);
-    QVERIFY(ip.channel(3) == NULL);
-    QVERIFY(ip.channel(4) == NULL);
+    QVERIFY(ip.channel(1) == nullptr);
+    QVERIFY(ip.channel(2) == nullptr);
+    QVERIFY(ip.channel(3) == nullptr);
+    QVERIFY(ip.channel(4) == nullptr);
     QVERIFY(ip.channel(5) == ich2);
 }
 
@@ -97,11 +97,11 @@ void QLCInputProfile_Test::removeChannel()
     QVERIFY(ip.channel(0) == ich1);
     QVERIFY(ip.channel(5) == ich2);
     QVERIFY(ip.removeChannel(0) == true);
-    QVERIFY(ip.channel(0) == NULL);
+    QVERIFY(ip.channel(0) == nullptr);
     QVERIFY(ip.channel(5) == ich2);
     QVERIFY(ip.removeChannel(5) == true);
-    QVERIFY(ip.channel(0) == NULL);
-    QVERIFY(ip.channel(5) == NULL);
+    QVERIFY(ip.channel(0) == nullptr);
+    QVERIFY(ip.channel(5) == nullptr);
 }
 
 void QLCInputProfile_Test::remapChannel()
@@ -119,14 +119,14 @@ void QLCInputProfile_Test::remapChannel()
     QVERIFY(ip.channel(5) == ich2);
 
     QVERIFY(ip.remapChannel(ich1, 9000) == true);
-    QVERIFY(ip.channel(0) == NULL);
+    QVERIFY(ip.channel(0) == nullptr);
     QVERIFY(ip.channel(5) == ich2);
     QVERIFY(ip.channel(9000) == ich1);
     QVERIFY(ip.channel(9000)->name() == "Foobar");
 
-    QVERIFY(ip.remapChannel(NULL, 9000) == false);
+    QVERIFY(ip.remapChannel(nullptr, 9000) == false);
     QVERIFY(ip.channels().size() == 2);
-    QVERIFY(ip.channel(0) == NULL);
+    QVERIFY(ip.channel(0) == nullptr);
     QVERIFY(ip.channel(5) == ich2);
     QVERIFY(ip.channel(9000) == ich1);
     QVERIFY(ip.channel(9000)->name() == "Foobar");
@@ -134,7 +134,7 @@ void QLCInputProfile_Test::remapChannel()
     QLCInputChannel* ich3 = new QLCInputChannel();
     QVERIFY(ip.remapChannel(ich3, 5) == false);
     QVERIFY(ip.channels().size() == 2);
-    QVERIFY(ip.channel(0) == NULL);
+    QVERIFY(ip.channel(0) == nullptr);
     QVERIFY(ip.channel(5) == ich2);
     QVERIFY(ip.channel(9000) == ich1);
     QVERIFY(ip.channel(9000)->name() == "Foobar");
@@ -153,10 +153,10 @@ void QLCInputProfile_Test::channel()
     ip.insertChannel(5, ich2);
 
     QVERIFY(ip.channel(0) == ich1);
-    QVERIFY(ip.channel(1) == NULL);
-    QVERIFY(ip.channel(2) == NULL);
-    QVERIFY(ip.channel(3) == NULL);
-    QVERIFY(ip.channel(4) == NULL);
+    QVERIFY(ip.channel(1) == nullptr);
+    QVERIFY(ip.channel(2) == nullptr);
+    QVERIFY(ip.channel(3) == nullptr);
+    QVERIFY(ip.channel(4) == nullptr);
     QVERIFY(ip.channel(5) == ich2);
 }
 
@@ -196,7 +196,7 @@ void QLCInputProfile_Test::channelNumber()
     QLCInputChannel* ich3 = new QLCInputChannel();
     ip.insertChannel(5, ich3);
 
-    QCOMPARE(ip.channelNumber(NULL), QLCChannel::invalid());
+    QCOMPARE(ip.channelNumber(nullptr), QLCChannel::invalid());
     QCOMPARE(ip.channelNumber(ich1), quint32(0));
     QCOMPARE(ip.channelNumber(ich2), quint32(6510));
     QCOMPARE(ip.channelNumber(ich3), quint32(5));
@@ -232,19 +232,19 @@ void QLCInputProfile_Test::copy()
 
     /* Verify that it's a deep copy */
     QVERIFY(copy->channel(0) != ich1);
-    QVERIFY(copy->channel(0) != NULL);
+    QVERIFY(copy->channel(0) != nullptr);
     QVERIFY(copy->channel(0)->name() == "Channel 1");
 
     QVERIFY(copy->channel(5) != ich2);
-    QVERIFY(copy->channel(5) != NULL);
+    QVERIFY(copy->channel(5) != nullptr);
     QVERIFY(copy->channel(5)->name() == "Channel 2");
 
     QVERIFY(copy->channel(2) != ich3);
-    QVERIFY(copy->channel(2) != NULL);
+    QVERIFY(copy->channel(2) != nullptr);
     QVERIFY(copy->channel(2)->name() == "Channel 3");
 
     QVERIFY(copy->channel(9000) != ich4);
-    QVERIFY(copy->channel(9000) != NULL);
+    QVERIFY(copy->channel(9000) != nullptr);
     QVERIFY(copy->channel(9000)->name() == "Channel 4");
 }
 
@@ -279,22 +279,22 @@ void QLCInputProfile_Test::assign()
     /* Test the assignment operator */
     ip2 = ip;
     QCOMPARE(ip2.channels().size(), 4);
-    QVERIFY(ip2.channel(0) != NULL);
+    QVERIFY(ip2.channel(0) != nullptr);
     QVERIFY(ip2.channel(0) != ich1);
     QVERIFY(ip2.channel(0) != ip.channel(0));
     QCOMPARE(ip2.channel(0)->name(), QString("Channel 1"));
 
-    QVERIFY(ip2.channel(5) != NULL);
+    QVERIFY(ip2.channel(5) != nullptr);
     QVERIFY(ip2.channel(5) != ich2);
     QVERIFY(ip2.channel(5) != ip.channel(5));
     QCOMPARE(ip2.channel(5)->name(), QString("Channel 2"));
 
-    QVERIFY(ip2.channel(2) != NULL);
+    QVERIFY(ip2.channel(2) != nullptr);
     QVERIFY(ip2.channel(2) != ich3);
     QVERIFY(ip2.channel(2) != ip.channel(2));
     QCOMPARE(ip2.channel(2)->name(), QString("Channel 3"));
 
-    QVERIFY(ip2.channel(9000) != NULL);
+    QVERIFY(ip2.channel(9000) != nullptr);
     QVERIFY(ip2.channel(9000) != ich4);
     QVERIFY(ip2.channel(9000) != ip.channel(9000));
     QCOMPARE(ip2.channel(9000)->name(), QString("Channel 4"));
@@ -316,7 +316,7 @@ void QLCInputProfile_Test::load()
     xmlWriter.writeTextElement("Name", "Foobar");
     xmlWriter.writeTextElement("Type", "Slider");
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -327,7 +327,7 @@ void QLCInputProfile_Test::load()
     QVERIFY(ip.manufacturer() == "Behringer");
     QVERIFY(ip.model() == "BCF2000");
     QVERIFY(ip.channels().size() == 1);
-    QVERIFY(ip.channel(492) != NULL);
+    QVERIFY(ip.channel(492) != nullptr);
     QVERIFY(ip.channel(492)->name() == "Foobar");
     QVERIFY(ip.channel(492)->type() == QLCInputChannel::Slider);
 }
@@ -350,14 +350,14 @@ void QLCInputProfile_Test::loadNoProfile()
 void QLCInputProfile_Test::loader()
 {
     QLCInputProfile* prof = QLCInputProfile::loader("foobar");
-    QVERIFY(prof == NULL);
+    QVERIFY(prof == nullptr);
 
     prof = QLCInputProfile::loader("broken.xml");
-    QVERIFY(prof == NULL);
+    QVERIFY(prof == nullptr);
 
     QString path(INTERNAL_PROFILEDIR "Generic-MIDI.qxi");
     prof = QLCInputProfile::loader(path);
-    QVERIFY(prof != NULL);
+    QVERIFY(prof != nullptr);
     QCOMPARE(prof->path(), path);
     QCOMPARE(prof->name(), QString("Generic MIDI"));
     QCOMPARE(prof->channels().size(), 256);
@@ -392,7 +392,7 @@ void QLCInputProfile_Test::save()
 #endif
 
     QLCInputProfile* prof = QLCInputProfile::loader(path);
-    QVERIFY(prof != NULL);
+    QVERIFY(prof != nullptr);
     QCOMPARE(prof->manufacturer(), ip.manufacturer());
     QCOMPARE(prof->model(), ip.model());
     QCOMPARE(prof->name(), ip.name());

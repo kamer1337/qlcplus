@@ -26,7 +26,7 @@
 
 AudioTriggerWidget::AudioTriggerWidget(QWidget *parent) :
     QWidget(parent)
-  , m_spectrumBands(NULL)
+  , m_spectrumBands(nullptr)
   , m_spectrumHeight(0)
   , m_volumeBarHeight(0)
   , m_barsNumber(0)

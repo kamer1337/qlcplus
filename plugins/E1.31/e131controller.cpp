@@ -309,7 +309,7 @@ UniverseInfo *E131Controller::getUniverseInfo(quint32 universe)
     if (m_universeMap.contains(universe))
         return &m_universeMap[universe];
 
-    return NULL;
+    return nullptr;
 }
 
 E131Controller::Type E131Controller::type()
@@ -391,7 +391,7 @@ void E131Controller::sendDmx(const quint32 universe, const QByteArray &data)
 void E131Controller::processPendingPackets()
 {
     QUdpSocket* socket = qobject_cast<QUdpSocket*>(sender());
-    Q_ASSERT(socket != NULL);
+    Q_ASSERT(socket != nullptr);
 
     while (socket->hasPendingDatagrams())
     {

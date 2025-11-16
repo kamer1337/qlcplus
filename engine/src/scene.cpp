@@ -70,18 +70,18 @@ quint32 Scene::totalDuration()
 
 Function* Scene::createCopy(Doc* doc, bool addToDoc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     Function* copy = new Scene(doc);
     if (copy->copyFrom(this) == false)
     {
         delete copy;
-        copy = NULL;
+        copy = nullptr;
     }
     if (addToDoc == true && doc->addFunction(copy) == false)
     {
         delete copy;
-        copy = NULL;
+        copy = nullptr;
     }
 
     return copy;
@@ -90,7 +90,7 @@ Function* Scene::createCopy(Doc* doc, bool addToDoc)
 bool Scene::copyFrom(const Function* function)
 {
     const Scene* scene = qobject_cast<const Scene*> (function);
-    if (scene == NULL)
+    if (scene == nullptr)
         return false;
 
     m_values.clear();
@@ -144,7 +144,7 @@ void Scene::setValue(const SceneValue& scv, bool blind, bool checkHTP)
         if (blind == false && m_fadersMap.isEmpty() == false)
         {
             Fixture *fixture = doc()->fixture(scv.fxi);
-            if (fixture != NULL)
+            if (fixture != nullptr)
             {
                 quint32 universe = fixture->universe();
 
@@ -234,11 +234,11 @@ QColor Scene::colorValue(quint32 fxi)
             continue;
 
         Fixture *fixture = doc()->fixture(scv.fxi);
-        if (fixture == NULL)
+        if (fixture == nullptr)
             continue;
 
         const QLCChannel* channel = fixture->channel(scv.channel);
-        if (channel == NULL)
+        if (channel == nullptr)
             continue;
 
         if (channel->group() == QLCChannel::Intensity)
@@ -423,7 +423,7 @@ QList<quint32> Scene::palettes() const
 
 bool Scene::saveXML(QXmlStreamWriter *doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* Function tag */
     doc->writeStartElement(KXMLQLCFunction);
@@ -638,7 +638,7 @@ void Scene::postLoad()
     {
         SceneValue value(it.next().key());
         Fixture* fxi = doc()->fixture(value.fxi);
-        if (fxi == NULL || fxi->channel(value.channel) == NULL)
+        if (fxi == nullptr || fxi->channel(value.channel) == nullptr)
             it.remove();
     }
 }
@@ -655,7 +655,7 @@ void Scene::flash(MasterTimer *timer, bool shouldOverride, bool forceLTP)
     m_flashOverrides = shouldOverride;
     m_flashForceLTP = forceLTP;
 
-    Q_ASSERT(timer != NULL);
+    Q_ASSERT(timer != nullptr);
     Function::flash(timer, shouldOverride, forceLTP);
     timer->registerDMXSource(this);
 }
@@ -665,13 +665,13 @@ void Scene::unFlash(MasterTimer *timer)
     if (flashing() == false)
         return;
 
-    Q_ASSERT(timer != NULL);
+    Q_ASSERT(timer != nullptr);
     Function::unFlash(timer);
 }
 
 void Scene::writeDMX(MasterTimer *timer, QList<Universe *> ua)
 {
-    Q_ASSERT(timer != NULL);
+    Q_ASSERT(timer != nullptr);
 
     if (flashing() == true)
     {
@@ -724,7 +724,7 @@ void Scene::processValue(MasterTimer *timer, QList<Universe*> ua, uint fadeIn, S
 {
     Fixture *fixture = doc()->fixture(scv.fxi);
 
-    if (fixture == NULL)
+    if (fixture == nullptr)
         return;
 
     int universeIndex = floor((fixture->universeAddress() + scv.channel) / 512);
@@ -755,7 +755,7 @@ void Scene::processValue(MasterTimer *timer, QList<Universe*> ua, uint fadeIn, S
     if (blendFunctionID() != Function::invalidId())
     {
         Scene *blendScene = qobject_cast<Scene *>(doc()->function(blendFunctionID()));
-        if (blendScene != NULL && blendScene->checkValue(scv))
+        if (blendScene != nullptr && blendScene->checkValue(scv))
         {
             fc->addFlag(FadeChannel::CrossFade);
             fc->setCurrent(blendScene->value(scv.fxi, scv.channel), chIndex);
@@ -840,7 +840,7 @@ void Scene::write(MasterTimer *timer, QList<Universe*> ua)
         foreach (quint32 paletteID, palettes())
         {
             QLCPalette *palette = doc()->palette(paletteID);
-            if (palette == NULL)
+            if (palette == nullptr)
                 continue;
 
             foreach (SceneValue scv, palette->valuesFromFixtureGroups(doc(), fixtureGroups()))

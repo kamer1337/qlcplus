@@ -91,7 +91,7 @@ public:
     QByteArray read(int size);
 
     /** @reimpl */
-    uchar readByte(bool* ok = NULL);
+    uchar readByte(bool* ok = nullptr);
 
 private:
     QSerialPort *m_handle;

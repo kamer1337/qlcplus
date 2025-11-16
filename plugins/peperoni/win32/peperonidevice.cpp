@@ -31,9 +31,9 @@ PeperoniDevice::PeperoniDevice(QObject* parent, struct usbdmx_functions* usbdmx,
                                int output)
     : QObject(parent)
 {
-    Q_ASSERT(usbdmx != NULL);
+    Q_ASSERT(usbdmx != nullptr);
 
-    m_handle = NULL;
+    m_handle = nullptr;
     m_output = output;
     m_usbdmx = usbdmx;
     m_deviceOK = false;
@@ -79,7 +79,7 @@ void PeperoniDevice::extractName()
 {
     bool needToClose = false;
 
-    if (m_handle == NULL)
+    if (m_handle == nullptr)
     {
         /* If the device was closed, we need to close it after name
            extraction. But if it was already open, we leave it that
@@ -88,7 +88,7 @@ void PeperoniDevice::extractName()
         open();
     }
 
-    if (m_handle == NULL)
+    if (m_handle == nullptr)
     {
         /* Opening the device failed */
         m_name = tr("Nothing");
@@ -124,7 +124,7 @@ void PeperoniDevice::extractName()
 
 bool PeperoniDevice::open()
 {
-    if (m_handle != NULL)
+    if (m_handle != nullptr)
         return false;
 
     /* Open the device */
@@ -150,16 +150,16 @@ bool PeperoniDevice::open()
 
 void PeperoniDevice::close()
 {
-    if (m_handle == NULL)
+    if (m_handle == nullptr)
         return;
 
     m_usbdmx->close(m_handle);
-    m_handle = NULL;
+    m_handle = nullptr;
 }
 
 void PeperoniDevice::rehash()
 {
-    if (m_handle != NULL)
+    if (m_handle != nullptr)
     {
         close();
         open();
@@ -174,7 +174,7 @@ void PeperoniDevice::rehash()
 
 void PeperoniDevice::outputDMX(const QByteArray& universe)
 {
-    if (m_handle != NULL)
+    if (m_handle != nullptr)
         m_usbdmx->tx_set(m_handle, (unsigned char*) universe.data(),
                          universe.size());
 }

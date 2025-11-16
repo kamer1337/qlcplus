@@ -42,12 +42,12 @@ PaletteGenerator::PaletteGenerator(Doc* doc, const QList <Fixture*>& fxList,
     , m_type(type)
     , m_subType(subType)
     , m_fixtures(fxList)
-    , m_fixtureGroup(NULL)
+    , m_fixtureGroup(nullptr)
 {
     if (m_fixtures.count() > 0)
     {
         m_name = typetoString(type);
-        if (m_fixtures.at(0)->fixtureDef() != NULL)
+        if (m_fixtures.at(0)->fixtureDef() != nullptr)
             m_model = m_fixtures.at(0)->fixtureDef()->model();
         if (type != Undefined)
             createFunctions(type, subType);
@@ -117,11 +117,11 @@ QStringList PaletteGenerator::getCapabilities(const Fixture *fixture)
     bool hasCyan = false, hasMagenta = false, hasYellow = false;
     bool hasWhite = false;
 
-    Q_ASSERT(fixture != NULL);
+    Q_ASSERT(fixture != nullptr);
     for (quint32 ch = 0; ch < fixture->channels(); ch++)
     {
         const QLCChannel* channel(fixture->channel(ch));
-        Q_ASSERT(channel != NULL);
+        Q_ASSERT(channel != nullptr);
 
         switch (channel->group())
         {
@@ -209,7 +209,7 @@ void PaletteGenerator::addToDoc()
         m_doc->addFunction(chaser);
     }
 
-    if (m_fixtureGroup != NULL)
+    if (m_fixtureGroup != nullptr)
         m_doc->addFixtureGroup(m_fixtureGroup);
 
     foreach (RGBMatrix *matrix, m_matrices)
@@ -225,8 +225,8 @@ void PaletteGenerator::createColorScene(QList<SceneValue> chMap, QString name, P
         return;
 
     Scene *scene = new Scene(m_doc);
-    Scene *evenScene = NULL;
-    Scene *oddScene = NULL;
+    Scene *evenScene = nullptr;
+    Scene *oddScene = nullptr;
     bool even = false;
 
     if (subType == OddEven)
@@ -296,8 +296,8 @@ void PaletteGenerator::createRGBCMYScene(QList<SceneValue> rcMap,
         }
 
         Scene *scene = new Scene(m_doc);
-        Scene *evenScene = NULL;
-        Scene *oddScene = NULL;
+        Scene *evenScene = nullptr;
+        Scene *oddScene = nullptr;
 
         if (subType == OddEven)
         {
@@ -376,7 +376,7 @@ void PaletteGenerator::createCapabilityScene(QHash<quint32, quint32> chMap,
         return;
 
     Fixture *fxi = m_fixtures.at(0);
-    Q_ASSERT(fxi != NULL);
+    Q_ASSERT(fxi != nullptr);
     QHashIterator <quint32, quint32> it(chMap);
 
     quint32 ch = it.next().value();
@@ -386,8 +386,8 @@ void PaletteGenerator::createCapabilityScene(QHash<quint32, quint32> chMap,
     for (int cIdx = 0; cIdx < channel->capabilities().count(); cIdx++)
     {
         Scene *scene = new Scene(m_doc);
-        Scene *evenScene = NULL;
-        Scene *oddScene = NULL;
+        Scene *evenScene = nullptr;
+        Scene *oddScene = nullptr;
         bool even = false;
         QLCCapability *cap = channel->capabilities().at(cIdx);
         uchar value = cap->middle();
@@ -496,13 +496,13 @@ void PaletteGenerator::createFunctions(PaletteGenerator::PaletteType type,
     for (int i = 0; i < m_fixtures.count(); i++)
     {
         Fixture *fixture = m_fixtures.at(i);
-        Q_ASSERT(fixture != NULL);
+        Q_ASSERT(fixture != nullptr);
         quint32 fxID = fixture->id();
 
         for (quint32 ch = 0; ch < fixture->channels(); ch++)
         {
             const QLCChannel* channel(fixture->channel(ch));
-            Q_ASSERT(channel != NULL);
+            Q_ASSERT(channel != nullptr);
 
             switch (channel->group())
             {

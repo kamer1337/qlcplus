@@ -22,7 +22,7 @@
 
 QLCClipboard::QLCClipboard(Doc *doc)
     : m_doc(doc)
-    , m_copyFunction(NULL)
+    , m_copyFunction(nullptr)
 {
 
 }
@@ -31,9 +31,9 @@ void QLCClipboard::resetContents()
 {
     m_copySteps.clear();
     m_copySceneValues.clear();
-    if (m_copyFunction != NULL && m_doc->function(m_copyFunction->id()) == NULL)
+    if (m_copyFunction != nullptr && m_doc->function(m_copyFunction->id()) == nullptr)
         delete m_copyFunction;
-    m_copyFunction = NULL;
+    m_copyFunction = nullptr;
 }
 
 void QLCClipboard::copyContent(quint32 sourceID, QList<ChaserStep> steps)
@@ -54,16 +54,16 @@ void QLCClipboard::copyContent(quint32 sourceID, Function *function)
 {
     Q_UNUSED(sourceID)
 
-    if (function == NULL)
+    if (function == nullptr)
         return;
 
-    if (m_copyFunction != NULL && m_doc->function(m_copyFunction->id()) == NULL)
+    if (m_copyFunction != nullptr && m_doc->function(m_copyFunction->id()) == nullptr)
         delete m_copyFunction;
-    m_copyFunction = NULL;
+    m_copyFunction = nullptr;
 
     /* Attempt to create a copy of the function to Doc */
     Function* copy = function->createCopy(m_doc, false);
-    if (copy != NULL)
+    if (copy != nullptr)
     {
         copy->setName(tr("Copy of %1").arg(function->name()));
         m_copyFunction = copy;
@@ -88,7 +88,7 @@ bool QLCClipboard::hasSceneValues()
 
 bool QLCClipboard::hasFunction()
 {
-    if (m_copyFunction != NULL)
+    if (m_copyFunction != nullptr)
         return true;
 
     return false;

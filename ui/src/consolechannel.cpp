@@ -46,17 +46,17 @@ ConsoleChannel::ConsoleChannel(QWidget* parent, Doc* doc, quint32 fixture, quint
     , m_fixture(fixture)
     , m_chIndex(channel)
     , m_group(Fixture::invalidId())
-    , m_presetButton(NULL)
-    , m_cngWidget(NULL)
-    , m_spin(NULL)
-    , m_slider(NULL)
-    , m_label(NULL)
-    , m_resetButton(NULL)
+    , m_presetButton(nullptr)
+    , m_cngWidget(nullptr)
+    , m_spin(nullptr)
+    , m_slider(nullptr)
+    , m_label(nullptr)
+    , m_resetButton(nullptr)
     , m_showResetButton(false)
-    , m_menu(NULL)
+    , m_menu(nullptr)
     , m_selected(false)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
     Q_ASSERT(channel != QLCChannel::invalid());
 
     if (isCheckable == true)
@@ -72,13 +72,13 @@ ConsoleChannel::~ConsoleChannel()
 void ConsoleChannel::init()
 {
     Fixture* fxi = m_doc->fixture(m_fixture);
-    //Q_ASSERT(fxi != NULL);
+    //Q_ASSERT(fxi != nullptr);
 
     new QVBoxLayout(this);
     layout()->setSpacing(0);
     layout()->setContentsMargins(0, 2, 0, 2);
 
-    if (fxi != NULL)
+    if (fxi != nullptr)
     {
         m_presetButton = new QToolButton(this);
         m_presetButton->setStyle(AppUtil::saneStyle());
@@ -90,7 +90,7 @@ void ConsoleChannel::init()
         m_presetButton->setFocusPolicy(Qt::NoFocus);
 
         /* Create a menu only if channel has sophisticated contents */
-        if (fxi->fixtureDef() != NULL && fxi->fixtureMode() != NULL)
+        if (fxi->fixtureDef() != nullptr && fxi->fixtureMode() != nullptr)
             initMenu();
         else
             m_presetButton->setStyleSheet("QToolButton { border-image: url(:/intensity.png) 0 0 0 0 stretch stretch; }");
@@ -161,14 +161,14 @@ void ConsoleChannel::init()
     m_label->setWordWrap(true);
 
     /* Set tooltip */
-    if (fxi == NULL)
+    if (fxi == nullptr)
     {
         setToolTip(tr("Intensity"));
     }
     else
     {
         const QLCChannel *ch = fxi->channel(m_chIndex);
-        Q_ASSERT(ch != NULL);
+        Q_ASSERT(ch != nullptr);
         setToolTip(QString("%1").arg(ch->name()));
         setValue(ch->defaultValue(), false);
         m_channel = ch;
@@ -302,7 +302,7 @@ void ConsoleChannel::showResetButton(bool show)
 {
     if (show == true)
     {
-        if (m_resetButton == NULL)
+        if (m_resetButton == nullptr)
         {
             m_resetButton = new QToolButton(this);
             m_resetButton->setStyle(AppUtil::saneStyle());
@@ -320,18 +320,18 @@ void ConsoleChannel::showResetButton(bool show)
     }
     else
     {
-        if (m_resetButton != NULL)
+        if (m_resetButton != nullptr)
         {
             layout()->removeWidget(m_resetButton);
             delete m_resetButton;
-            m_resetButton = NULL;
+            m_resetButton = nullptr;
         }
     }
 }
 
 bool ConsoleChannel::hasResetButton()
 {
-    return m_resetButton != NULL ? true : false;
+    return m_resetButton != nullptr ? true : false;
 }
 
 void ConsoleChannel::slotResetButtonClicked()
@@ -346,16 +346,16 @@ void ConsoleChannel::slotResetButtonClicked()
 void ConsoleChannel::initMenu()
 {
     Fixture* fxi = m_doc->fixture(fixture());
-    Q_ASSERT(fxi != NULL);
+    Q_ASSERT(fxi != nullptr);
 
     const QLCChannel* ch = fxi->channel(m_chIndex);
-    Q_ASSERT(ch != NULL);
+    Q_ASSERT(ch != nullptr);
 
     // Get rid of a possible previous menu
-    if (m_menu != NULL)
+    if (m_menu != nullptr)
     {
         delete m_menu;
-        m_menu = NULL;
+        m_menu = nullptr;
     }
 
     // Create a popup menu and set the channel name as its title
@@ -390,7 +390,7 @@ void ConsoleChannel::initMenu()
         break;
     }
 
-    if (m_cngWidget != NULL)
+    if (m_cngWidget != nullptr)
     {
         QWidgetAction* action = new QWidgetAction(this);
         action->setDefaultWidget(m_cngWidget);
@@ -639,7 +639,7 @@ void ConsoleChannel::contextMenuEvent(QContextMenuEvent* e)
     // Show the preset menu only of it has been created.
     // Generic dimmer fixtures don't have capabilities and so
     // they will not have these menus either.
-    if (m_menu != NULL)
+    if (m_menu != nullptr)
     {
         m_menu->exec(e->globalPos());
         e->accept();
@@ -648,7 +648,7 @@ void ConsoleChannel::contextMenuEvent(QContextMenuEvent* e)
 
 void ConsoleChannel::slotContextMenuTriggered(QAction* action)
 {
-    Q_ASSERT(action != NULL);
+    Q_ASSERT(action != nullptr);
 
     // The menuitem's data contains a valid DMX value
     setValue(action->data().toInt());

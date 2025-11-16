@@ -45,7 +45,7 @@
 ConfigureHID::ConfigureHID(QWidget* parent, HIDPlugin* plugin)
         : QDialog(parent)
 {
-    Q_ASSERT(plugin != NULL);
+    Q_ASSERT(plugin != nullptr);
     m_plugin = plugin;
 
     /* Setup UI controls */
@@ -80,7 +80,7 @@ ConfigureHID::~ConfigureHID()
 
 void ConfigureHID::slotRefreshClicked()
 {
-    Q_ASSERT(m_plugin != NULL);
+    Q_ASSERT(m_plugin != nullptr);
     m_plugin->rescanDevices();
     refreshList();
 }
@@ -97,7 +97,7 @@ void ConfigureHID::refreshList()
         QTreeWidgetItem* item;
 
         dev = m_plugin->device(i);
-        Q_ASSERT(dev != NULL);
+        Q_ASSERT(dev != nullptr);
 
         item = new QTreeWidgetItem(m_list);
         item->setText(KColumnNumber, s.setNum(i + 1));
@@ -121,12 +121,12 @@ void ConfigureHID::slotDeviceAdded(HIDDevice*)
 
 void ConfigureHID::slotDeviceRemoved(HIDDevice* device)
 {
-    Q_ASSERT(device != NULL);
+    Q_ASSERT(device != nullptr);
 
     for (int i = 0; i < m_list->topLevelItemCount(); i++)
     {
         QTreeWidgetItem* item = m_list->topLevelItem(i);
-        Q_ASSERT(item != NULL);
+        Q_ASSERT(item != nullptr);
         if (item->text(KColumnName) == device->name())
         {
             delete item;
@@ -152,13 +152,13 @@ QWidget* ConfigureHID::createMergerModeWidget(bool mergerModeEnabled)
 void ConfigureHID::slotMergerModeChanged(int state)
 {
     QCheckBox* checkbox = qobject_cast<QCheckBox*> (QObject::sender());
-    Q_ASSERT(checkbox != NULL);
+    Q_ASSERT(checkbox != nullptr);
 
     QVariant var = checkbox->property(PROP_DEV);
     Q_ASSERT(var.isValid() == true);
 
     HIDDevice* dev = (HIDDevice*) var.toULongLong();
-    Q_ASSERT(dev != NULL);
+    Q_ASSERT(dev != nullptr);
 
     bool mergerModeEnabled = (state == Qt::Checked);
     

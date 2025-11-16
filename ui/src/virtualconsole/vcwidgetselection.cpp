@@ -66,13 +66,13 @@ VCWidget *VCWidgetSelection::getSelectedWidget()
     int selIdx = m_tree->currentIndex().row();
     if (selIdx >= 0)
         return m_widgetsList.at(selIdx);
-    return NULL;
+    return nullptr;
 }
 
 QList<VCWidget *> VCWidgetSelection::getChildren(VCWidget *obj)
 {
     QList<VCWidget *> list;
-    if (obj == NULL)
+    if (obj == nullptr)
         return list;
     QListIterator <VCWidget*> it(obj->findChildren<VCWidget*>());
     while (it.hasNext() == true)
@@ -114,7 +114,7 @@ void VCWidgetSelection::slotItemSelectionChanged()
 
 void VCWidgetSelection::slotItemDoubleClicked(QTreeWidgetItem* item)
 {
-    if (item == NULL)
+    if (item == nullptr)
         return;
 
     accept();

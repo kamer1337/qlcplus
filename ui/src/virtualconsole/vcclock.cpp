@@ -204,7 +204,7 @@ void VCClock::slotUpdateTime()
                         VCClockSchedule sch = m_scheduleList.at(i);
                         quint32 fid = sch.function();
                         Function *func = m_doc->function(fid);
-                        if (func != NULL)
+                        if (func != nullptr)
                         {
                             func->start(m_doc->masterTimer(), functionParent());
                             qDebug() << "VC Clock starting function:" << func->name();
@@ -228,7 +228,7 @@ void VCClock::slotUpdateTime()
                     {
                         quint32 fid = sch.function();
                         Function *func = m_doc->function(fid);
-                        if (func != NULL)
+                        if (func != nullptr)
                         {
                             func->start(m_doc->masterTimer(), functionParent());
                             qDebug() << "VC Clock starting function:" << func->name();
@@ -379,13 +379,13 @@ void VCClock::slotInputValueChanged(quint32 universe, quint32 channel, uchar val
 
 VCWidget* VCClock::createCopy(VCWidget* parent)
 {
-    Q_ASSERT(parent != NULL);
+    Q_ASSERT(parent != nullptr);
 
     VCClock* clock = new VCClock(parent, m_doc);
     if (clock->copyFrom(this) == false)
     {
         delete clock;
-        clock = NULL;
+        clock = nullptr;
     }
 
     return clock;
@@ -394,7 +394,7 @@ VCWidget* VCClock::createCopy(VCWidget* parent)
 bool VCClock::copyFrom(const VCWidget* widget)
 {
     const VCClock* clock = qobject_cast<const VCClock*> (widget);
-    if (clock == NULL)
+    if (clock == nullptr)
         return false;
 
     // TODO: copy schedules
@@ -499,7 +499,7 @@ bool VCClock::loadXML(QXmlStreamReader &root)
 
 bool VCClock::saveXML(QXmlStreamWriter *doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* VC Clock entry */
     doc->writeStartElement(KXMLQLCVCClock);

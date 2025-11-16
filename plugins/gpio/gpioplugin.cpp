@@ -45,7 +45,7 @@ GPIOPlugin::~GPIOPlugin()
 
 void GPIOPlugin::init()
 {
-    m_readerThread = NULL;
+    m_readerThread = nullptr;
     m_inputUniverse = UINT_MAX;
     m_outputUniverse = UINT_MAX;
 
@@ -283,7 +283,7 @@ void GPIOPlugin::setLineDirection(int lineNumber, GPIOPlugin::LineDirection dire
 
     if (gpio->m_direction == InputDirection || direction == InputDirection)
     {
-        if (m_readerThread != NULL && m_readerThread->isRunning())
+        if (m_readerThread != nullptr && m_readerThread->isRunning())
             m_readerThread->pause(true);
     }
 
@@ -293,7 +293,7 @@ void GPIOPlugin::setLineDirection(int lineNumber, GPIOPlugin::LineDirection dire
 
         setLineStatus(lineNumber, false);
 
-        if (m_readerThread != NULL)
+        if (m_readerThread != nullptr)
             m_readerThread->pause(false);
 
         return;
@@ -303,7 +303,7 @@ void GPIOPlugin::setLineDirection(int lineNumber, GPIOPlugin::LineDirection dire
 
     m_gpioList[lineNumber]->m_direction = direction;
 
-    if (m_readerThread != NULL)
+    if (m_readerThread != nullptr)
     {
         m_readerThread->pause(false);
     }

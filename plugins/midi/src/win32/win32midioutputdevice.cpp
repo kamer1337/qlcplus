@@ -26,7 +26,7 @@ Win32MidiOutputDevice::Win32MidiOutputDevice(const QVariant& uid, const QString&
                                              QObject* parent)
     : MidiOutputDevice(uid, name, parent)
     , m_id(id)
-    , m_handle(NULL)
+    , m_handle(nullptr)
     , m_universe(MAX_MIDI_DMX_CHANNELS, char(0))
 {
     qDebug() << Q_FUNC_INFO;
@@ -41,7 +41,7 @@ bool Win32MidiOutputDevice::open()
 {
     qDebug() << Q_FUNC_INFO;
 
-    if (m_handle != NULL)
+    if (m_handle != nullptr)
         return false;
 
     MMRESULT result = midiOutOpen(&m_handle, m_id, 0, 0, 0);
@@ -49,7 +49,7 @@ bool Win32MidiOutputDevice::open()
     {
         qWarning() << Q_FUNC_INFO << "Unable to open MIDI output device with id:" << m_id
                    << "name:" << name() << ":" << result;
-        m_handle = NULL;
+        m_handle = nullptr;
         return false;
     }
     return true;
@@ -59,19 +59,19 @@ void Win32MidiOutputDevice::close()
 {
     qDebug() << Q_FUNC_INFO;
 
-    if (m_handle == NULL)
+    if (m_handle == nullptr)
         return;
 
     MMRESULT result = midiOutClose(m_handle);
     if (result != MMSYSERR_NOERROR)
         qWarning() << Q_FUNC_INFO << "Unable to close MIDI output with id:" << m_id
                    << "name:" << name() << ":" << result;
-    m_handle = NULL;
+    m_handle = nullptr;
 }
 
 bool Win32MidiOutputDevice::isOpen() const
 {
-    if (m_handle != NULL)
+    if (m_handle != nullptr)
         return true;
     else
         return false;

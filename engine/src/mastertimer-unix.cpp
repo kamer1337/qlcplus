@@ -39,7 +39,7 @@ MasterTimerPrivate::MasterTimerPrivate(MasterTimer* masterTimer)
     : QThread(masterTimer)
     , m_run(false)
 {
-    Q_ASSERT(masterTimer != NULL);
+    Q_ASSERT(masterTimer != nullptr);
 #if defined(Q_OS_MACOS) || defined(Q_OS_IOS)
     host_get_clock_service(mach_host_self(), SYSTEM_CLOCK, &cclock);
 #endif
@@ -87,7 +87,7 @@ void MasterTimerPrivate::run()
         return;
 
     MasterTimer* mt = qobject_cast <MasterTimer*> (parent());
-    Q_ASSERT(mt != NULL);
+    Q_ASSERT(mt != nullptr);
 
     /* How long to wait each loop, in nanoseconds */
     int nsTickTime = 1000000000L / mt->frequency();

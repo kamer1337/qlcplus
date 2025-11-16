@@ -30,7 +30,7 @@ QT_USE_NAMESPACE
 QtSerialInterface::QtSerialInterface(const QString& serial, const QString& name, const QString& vendor,
                                      quint16 VID, quint16 PID, quint32 id)
     : DMXInterface(serial, name, vendor, VID, PID , id)
-    , m_handle(NULL)
+    , m_handle(nullptr)
 {
 
 }
@@ -112,7 +112,7 @@ bool QtSerialInterface::open()
     qDebug() << Q_FUNC_INFO << "Open device ID: " << id() << "(" << m_info.description() << ")";
 
     m_handle = new QSerialPort(m_info);
-    if (m_handle == NULL)
+    if (m_handle == nullptr)
     {
         qWarning() << Q_FUNC_INFO << name() << "cannot create serial driver";
         return false;
@@ -123,7 +123,7 @@ bool QtSerialInterface::open()
         {
             qWarning() << Q_FUNC_INFO << name() << "cannot open serial driver";
             delete m_handle;
-            m_handle = NULL;
+            m_handle = nullptr;
             return false;
         }
 
@@ -151,7 +151,7 @@ bool QtSerialInterface::close()
     {
         m_handle->close();
         delete m_handle;
-        m_handle = NULL;
+        m_handle = nullptr;
     }
 
     return true;
@@ -159,7 +159,7 @@ bool QtSerialInterface::close()
 
 bool QtSerialInterface::isOpen() const
 {
-    return (m_handle != NULL) ? true : false;
+    return (m_handle != nullptr) ? true : false;
 }
 
 bool QtSerialInterface::reset()
@@ -181,7 +181,7 @@ bool QtSerialInterface::setLineProperties()
 {
     qDebug() << Q_FUNC_INFO;
 
-    if (m_handle == NULL)
+    if (m_handle == nullptr)
         return false;
 
     if (m_handle->setDataBits(QSerialPort::Data8) == false)
@@ -209,7 +209,7 @@ bool QtSerialInterface::setBaudRate()
 {
     qDebug() << Q_FUNC_INFO;
 
-    if (m_handle == NULL)
+    if (m_handle == nullptr)
         return false;
 
     if (m_handle->setBaudRate(250000) == false)
@@ -227,7 +227,7 @@ bool QtSerialInterface::setFlowControl()
 {
     qDebug() << Q_FUNC_INFO;
 
-    if (m_handle == NULL)
+    if (m_handle == nullptr)
         return false;
 
     if (m_handle->setFlowControl(QSerialPort::NoFlowControl) == false)
@@ -251,7 +251,7 @@ bool QtSerialInterface::clearRts()
 {
     qDebug() << Q_FUNC_INFO;
 
-    if (m_handle == NULL)
+    if (m_handle == nullptr)
         return false;
 
     if (m_handle->setRequestToSend(false) == false)
@@ -269,7 +269,7 @@ bool QtSerialInterface::purgeBuffers()
 {
     qDebug() << Q_FUNC_INFO;
 
-    if (m_handle == NULL)
+    if (m_handle == nullptr)
         return false;
 
     if (m_handle->clear() == false)
@@ -287,7 +287,7 @@ bool QtSerialInterface::purgeBuffers()
 
 bool QtSerialInterface::setBreak(bool on)
 {
-    if (m_handle == NULL)
+    if (m_handle == nullptr)
         return false;
 
     if (m_handle->setBreakEnabled(on) == false)
@@ -305,7 +305,7 @@ bool QtSerialInterface::write(const QByteArray& data)
 {
     //qDebug() << Q_FUNC_INFO;
 
-    if (m_handle == NULL)
+    if (m_handle == nullptr)
         return false;
 
     if (m_handle->write(data) == false)
@@ -324,7 +324,7 @@ QByteArray QtSerialInterface::read(int size)
 {
     //qDebug() << Q_FUNC_INFO;
 
-    if (m_handle == NULL)
+    if (m_handle == nullptr)
         return QByteArray();
 
     if (m_handle->waitForReadyRead(10) == true)
@@ -337,7 +337,7 @@ uchar QtSerialInterface::readByte(bool *ok)
 {
     if (ok) *ok = false;
 
-    if (m_handle == NULL)
+    if (m_handle == nullptr)
         return 0;
 
     //qDebug() << Q_FUNC_INFO;

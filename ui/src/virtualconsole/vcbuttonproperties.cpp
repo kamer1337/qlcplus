@@ -40,10 +40,10 @@ VCButtonProperties::VCButtonProperties(VCButton* button, Doc* doc)
     : QDialog(button)
     , m_button(button)
     , m_doc(doc)
-    , m_speedDials(NULL)
+    , m_speedDials(nullptr)
 {
-    Q_ASSERT(button != NULL);
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(button != nullptr);
+    Q_ASSERT(doc != nullptr);
 
     setupUi(this);
 
@@ -126,7 +126,7 @@ void VCButtonProperties::slotSetFunction(quint32 fid)
     m_function = fid;
     Function* func = m_doc->function(m_function);
 
-    if (func == NULL)
+    if (func == nullptr)
     {
         m_functionEdit->setText(tr("No function"));
     }
@@ -176,9 +176,9 @@ void VCButtonProperties::slotSpeedDialToggle(bool state)
     }
     else
     {
-        if (m_speedDials != NULL)
+        if (m_speedDials != nullptr)
             m_speedDials->deleteLater();
-        m_speedDials = NULL;
+        m_speedDials = nullptr;
     }
 }
 
@@ -207,7 +207,7 @@ void VCButtonProperties::slotFadeOutTextEdited()
 {
     m_fadeOutTime = Function::stringToSpeed(m_fadeOutEdit->text());
     m_fadeOutEdit->setText(Function::speedToString(m_fadeOutTime));
-    if (m_speedDials != NULL)
+    if (m_speedDials != nullptr)
         m_speedDials->setFadeOutSpeed(m_fadeOutTime);
 }
 

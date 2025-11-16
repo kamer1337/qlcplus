@@ -53,7 +53,7 @@ class Monitor : public QWidget
      * Initialization
      *********************************************************************/
 public:
-    /** Get the monitor singleton instance. Can be NULL. */
+    /** Get the monitor singleton instance. Can be nullptr. */
     static Monitor* instance();
 
     /** Create or show Monitor */

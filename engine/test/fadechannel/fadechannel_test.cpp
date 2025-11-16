@@ -108,10 +108,10 @@ void FadeChannel_Test::type()
     QVERIFY(doc.fixtureDefCache()->loadMap(dir) == true);
 
     QLCFixtureDef *def = doc.fixtureDefCache()->fixtureDef("Futurelight", "DJScan250");
-    QVERIFY(def != NULL);
+    QVERIFY(def != nullptr);
 
     QLCFixtureMode *mode = def->modes().first();
-    QVERIFY(mode != NULL);
+    QVERIFY(mode != nullptr);
 
     fxi = new Fixture(&doc);
     fxi->setAddress(0);

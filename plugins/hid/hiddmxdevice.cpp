@@ -59,7 +59,7 @@ void HIDDMXDevice::init()
 
     if (!m_handle)
     {
-        QMessageBox::warning(NULL, (tr("HID DMX Interface Error")),
+        QMessageBox::warning(nullptr, (tr("HID DMX Interface Error")),
             (tr("Unable to open %1. Make sure the udev rule is installed.").arg(name())),
              QMessageBox::Ok, QMessageBox::Ok);
         return;

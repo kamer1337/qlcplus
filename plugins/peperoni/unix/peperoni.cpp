@@ -35,7 +35,7 @@ Peperoni::~Peperoni()
 
 void Peperoni::init()
 {
-    m_ctx = NULL;
+    m_ctx = nullptr;
 
     if (libusb_init(&m_ctx) != 0)
         qWarning() << "Unable to initialize libusb context!";
@@ -63,7 +63,7 @@ bool Peperoni::openOutput(quint32 output, quint32 universe)
     if (m_devices.contains(output) == false)
         return false;
 
-    if (m_devices[output] != NULL)
+    if (m_devices[output] != nullptr)
         return m_devices[output]->open(output, PeperoniDevice::OutputMode);
     return false;
 }
@@ -71,7 +71,7 @@ bool Peperoni::openOutput(quint32 output, quint32 universe)
 void Peperoni::closeOutput(quint32 output, quint32 universe)
 {
     Q_UNUSED(universe)
-    if (m_devices.contains(output) && m_devices[output] != NULL)
+    if (m_devices.contains(output) && m_devices[output] != nullptr)
             m_devices[output]->close(output, PeperoniDevice::OutputMode);
 }
 
@@ -111,7 +111,7 @@ QString Peperoni::outputInfo(quint32 output)
     if (m_devices.contains(output) == false)
         return str;
 
-    if (m_devices[output] != NULL)
+    if (m_devices[output] != nullptr)
     {
         str += m_devices[output]->outputInfoText(output);
     }
@@ -132,7 +132,7 @@ void Peperoni::writeUniverse(quint32 universe, quint32 output, const QByteArray 
     if (m_devices.contains(output) == false)
         return;
 
-    if (m_devices[output] != NULL)
+    if (m_devices[output] != nullptr)
         m_devices[output]->outputDMX(output, data);
     else
         qDebug() << "Peperoni invalid output!" << output << m_devices.size();
@@ -148,7 +148,7 @@ bool Peperoni::openInput(quint32 input, quint32 universe)
     if (m_devices.contains(input) == false)
         return false;
 
-    if (m_devices[input] != NULL)
+    if (m_devices[input] != nullptr)
     {
         connect(m_devices[input], SIGNAL(valueChanged(quint32, quint32,quint32,uchar)),
                 this, SIGNAL(valueChanged(quint32, quint32,quint32,uchar)));
@@ -160,7 +160,7 @@ bool Peperoni::openInput(quint32 input, quint32 universe)
 void Peperoni::closeInput(quint32 input, quint32 universe)
 {
     Q_UNUSED(universe)
-    if (m_devices.contains(input) && m_devices[input] != NULL)
+    if (m_devices.contains(input) && m_devices[input] != nullptr)
     {
         m_devices[input]->close(input, PeperoniDevice::InputMode);
         disconnect(m_devices[input], SIGNAL(valueChanged(quint32,quint32,quint32,uchar)),
@@ -186,7 +186,7 @@ QString Peperoni::inputInfo(quint32 input)
     if (m_devices.contains(input) == false)
         return str;
 
-    if (m_devices[input] != NULL)
+    if (m_devices[input] != nullptr)
     {
         str += m_devices[input]->baseInfoText(input);
         str += m_devices[input]->inputInfoText(input);
@@ -206,7 +206,7 @@ QString Peperoni::inputInfo(quint32 input)
 
 void Peperoni::configure()
 {
-    int r = QMessageBox::question(NULL, name(),
+    int r = QMessageBox::question(nullptr, name(),
                                   tr("Do you wish to re-scan your hardware?"),
                                   QMessageBox::Yes, QMessageBox::No);
     if (r == QMessageBox::Yes)
@@ -230,12 +230,12 @@ void Peperoni::rescanDevices()
     quint32 line = 0;
     int devCount = m_devices.count();
 
-    libusb_device** devices = NULL;
+    libusb_device** devices = nullptr;
     ssize_t count = libusb_get_device_list(m_ctx, &devices);
     for (ssize_t i = 0; i < count; i++)
     {
         libusb_device* dev = devices[i];
-        Q_ASSERT(dev != NULL);
+        Q_ASSERT(dev != nullptr);
 
         libusb_device_descriptor desc;
         int r = libusb_get_device_descriptor(dev, &desc);

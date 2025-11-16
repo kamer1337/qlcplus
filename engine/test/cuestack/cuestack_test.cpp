@@ -419,7 +419,7 @@ void CueStack_Test::loadEmpty()
     xmlWriter.writeStartElement("CueStack");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -442,7 +442,7 @@ void CueStack_Test::loadID()
     xmlWriter.writeAttribute("ID", "15");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -488,7 +488,7 @@ void CueStack_Test::loadComplete()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -522,7 +522,7 @@ void CueStack_Test::save()
 
     QCOMPARE(cs.saveXML(&xmlWriter, 42), true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -682,10 +682,10 @@ void CueStack_Test::nextPrevious()
 void CueStack_Test::switchCue()
 {
     QLCFixtureDef* def = m_doc->fixtureDefCache()->fixtureDef("Futurelight", "DJScan250");
-    QVERIFY(def != NULL);
+    QVERIFY(def != nullptr);
 
     QLCFixtureMode* mode = def->modes().first();
-    QVERIFY(mode != NULL);
+    QVERIFY(mode != nullptr);
 
     Fixture* fxi = new Fixture(m_doc);
     fxi->setFixtureDefinition(def, mode);
@@ -847,10 +847,10 @@ void CueStack_Test::switchCue()
 void CueStack_Test::postRun()
 {
     QLCFixtureDef* def = m_doc->fixtureDefCache()->fixtureDef("Futurelight", "DJScan250");
-    QVERIFY(def != NULL);
+    QVERIFY(def != nullptr);
 
     QLCFixtureMode* mode = def->modes().first();
-    QVERIFY(mode != NULL);
+    QVERIFY(mode != nullptr);
 
     Fixture* fxi = new Fixture(m_doc);
     fxi->setFixtureDefinition(def, mode);

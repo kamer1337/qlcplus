@@ -207,7 +207,7 @@ void QLCChannel_Test::searchCapabilityByValue()
     QVERIFY(channel->searchCapability(18) == cap2);
     QVERIFY(channel->searchCapability(19) == cap2);
 
-    QVERIFY(channel->searchCapability(30) == NULL);
+    QVERIFY(channel->searchCapability(30) == nullptr);
 
     delete channel;
 }
@@ -229,7 +229,7 @@ void QLCChannel_Test::searchCapabilityByName()
     QVERIFY(channel->searchCapability("0-9") == cap1);
     QVERIFY(channel->searchCapability("10-19") == cap2);
     QVERIFY(channel->searchCapability("20-29") == cap3);
-    QVERIFY(channel->searchCapability("foo") == NULL);
+    QVERIFY(channel->searchCapability("foo") == nullptr);
 
     delete channel;
 }
@@ -254,31 +254,31 @@ void QLCChannel_Test::addCapability()
     QLCCapability* cap3 = new QLCCapability(5, 6, "5-6");
     QVERIFY(channel->addCapability(cap3) == false);
     delete cap3;
-    cap3 = NULL;
+    cap3 = nullptr;
 
     /* Partially overlapping from low-end with cap1 */
     QLCCapability* cap4 = new QLCCapability(19, 25, "19-25");
     QVERIFY(channel->addCapability(cap4) == false);
     delete cap4;
-    cap4 = NULL;
+    cap4 = nullptr;
 
     /* Partially overlapping from high end with cap1 */
     QLCCapability* cap5 = new QLCCapability(10, 15, "10-15");
     QVERIFY(channel->addCapability(cap5) == false);
     delete cap5;
-    cap5 = NULL;
+    cap5 = nullptr;
 
     /* Partially overlapping with two ranges at both ends (cap1 & cap2) */
     QLCCapability* cap6 = new QLCCapability(8, 16, "8-16");
     QVERIFY(channel->addCapability(cap6) == false);
     delete cap6;
-    cap6 = NULL;
+    cap6 = nullptr;
 
     /* Completely containing cap1 */
     QLCCapability* cap7 = new QLCCapability(14, 20, "14-20");
     QVERIFY(channel->addCapability(cap7) == false);
     delete cap7;
-    cap7 = NULL;
+    cap7 = nullptr;
 
     /* Non-overlapping, between cap1 & cap2*/
     QLCCapability* cap8 = new QLCCapability(10, 14, "10-14");
@@ -508,7 +508,7 @@ void QLCChannel_Test::load()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -561,7 +561,7 @@ void QLCChannel_Test::loadWrongRoot()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -602,7 +602,7 @@ void QLCChannel_Test::save()
 
     QVERIFY(channel->saveXML(&xmlWriter) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);

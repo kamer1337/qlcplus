@@ -65,14 +65,14 @@ void FunctionsTreeWidget::functionNameChanged(quint32 fid)
 {
     blockSignals(true);
     Function* function = m_doc->function(fid);
-    if (function == NULL)
+    if (function == nullptr)
     {
         blockSignals(false);
         return;
     }
 
     QTreeWidgetItem* item = functionItem(function);
-    if (item != NULL)
+    if (item != nullptr)
         updateFunctionItem(item, function);
 
     blockSignals(false);
@@ -81,18 +81,18 @@ void FunctionsTreeWidget::functionNameChanged(quint32 fid)
 QTreeWidgetItem *FunctionsTreeWidget::addFunction(quint32 fid)
 {
     Function* function = m_doc->function(fid);
-    if (function == NULL || function->isVisible() == false)
-        return NULL;
+    if (function == nullptr || function->isVisible() == false)
+        return nullptr;
 
     QTreeWidgetItem* item = functionItem(function);
-    if (item != NULL)
+    if (item != nullptr)
         return item;
 
     blockSignals(true);
     QTreeWidgetItem* parent = parentItem(function);
     item = new QTreeWidgetItem(parent);
     updateFunctionItem(item, function);
-    if (parent != NULL)
+    if (parent != nullptr)
         function->setPath(parent->text(COL_PATH));
     blockSignals(false);
     return item;
@@ -100,8 +100,8 @@ QTreeWidgetItem *FunctionsTreeWidget::addFunction(quint32 fid)
 
 void FunctionsTreeWidget::updateFunctionItem(QTreeWidgetItem* item, const Function* function)
 {
-    Q_ASSERT(item != NULL);
-    Q_ASSERT(function != NULL);
+    Q_ASSERT(item != nullptr);
+    Q_ASSERT(function != nullptr);
     item->setText(COL_NAME, function->name());
     item->setIcon(COL_NAME, function->getIcon());
     item->setData(COL_NAME, Qt::UserRole, function->id());
@@ -111,10 +111,10 @@ void FunctionsTreeWidget::updateFunctionItem(QTreeWidgetItem* item, const Functi
 
 QTreeWidgetItem* FunctionsTreeWidget::parentItem(const Function* function)
 {
-    Q_ASSERT(function != NULL);
+    Q_ASSERT(function != nullptr);
 
     if (function->isVisible() == false)
-        return NULL;
+        return nullptr;
 
     QString basePath = Function::typeToString(function->type());
     if (m_foldersMap.contains(QString(basePath + "/")) == false)
@@ -132,18 +132,18 @@ QTreeWidgetItem* FunctionsTreeWidget::parentItem(const Function* function)
 
     QTreeWidgetItem *pItem = folderItem(function->path());
 
-    if (pItem != NULL)
+    if (pItem != nullptr)
     {
         //qDebug() << "Found item for function:" << function->name() << ", path: " << function->path();
         return pItem;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 quint32 FunctionsTreeWidget::itemFunctionId(const QTreeWidgetItem* item) const
 {
-    if (item == NULL || item->parent() == NULL)
+    if (item == nullptr || item->parent() == nullptr)
         return Function::invalidId();
     else
     {
@@ -157,13 +157,13 @@ quint32 FunctionsTreeWidget::itemFunctionId(const QTreeWidgetItem* item) const
 
 QTreeWidgetItem* FunctionsTreeWidget::functionItem(const Function* function)
 {
-    Q_ASSERT(function != NULL);
+    Q_ASSERT(function != nullptr);
 
     if (function->isVisible() == false)
-        return NULL;
+        return nullptr;
 
     QTreeWidgetItem* parent = parentItem(function);
-    Q_ASSERT(parent != NULL);
+    Q_ASSERT(parent != nullptr);
 
     for (int i = 0; i < parent->childCount(); i++)
     {
@@ -172,7 +172,7 @@ QTreeWidgetItem* FunctionsTreeWidget::functionItem(const Function* function)
             return item;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 /*********************************************************************
@@ -227,7 +227,7 @@ void FunctionsTreeWidget::addFolder()
 
 void FunctionsTreeWidget::deleteFolder(QTreeWidgetItem *item)
 {
-    if (item == NULL)
+    if (item == nullptr)
         return;
 
     QList<QTreeWidgetItem*> childrenList;
@@ -269,11 +269,11 @@ QTreeWidgetItem *FunctionsTreeWidget::folderItem(QString name)
         return m_foldersMap[name];
 
     if (name.endsWith('/'))
-        return NULL;
+        return nullptr;
 
     qDebug() << "Folder" << name << "doesn't exist. Creating it...";
 
-    QTreeWidgetItem *parentNode = NULL;
+    QTreeWidgetItem *parentNode = nullptr;
     int type = Function::Undefined;
     QString fullPath;
     QStringList levelsList = name.split("/");
@@ -327,7 +327,7 @@ void FunctionsTreeWidget::slotItemChanged(QTreeWidgetItem *item)
     }
 
     QTreeWidgetItem *parent = item->parent();
-    if (parent != NULL)
+    if (parent != nullptr)
     {
         QString fullPath = parent->text(COL_PATH);
 
@@ -357,7 +357,7 @@ void FunctionsTreeWidget::slotUpdateChildrenPath(QTreeWidgetItem *root)
         {
             quint32 fid = child->data(COL_NAME, Qt::UserRole).toUInt();
             Function *func = m_doc->function(fid);
-            if (func != NULL)
+            if (func != nullptr)
                 func->setPath(root->text(COL_PATH));
         }
         else
@@ -382,7 +382,7 @@ void FunctionsTreeWidget::dropEvent(QDropEvent *event)
 #else
     QTreeWidgetItem *dropItem = itemAt(event->position().toPoint());
 #endif
-    if (m_draggedItems.count() == 0 || dropItem == NULL)
+    if (m_draggedItems.count() == 0 || dropItem == nullptr)
         return;
 
     QVariant var = dropItem->data(COL_NAME, Qt::UserRole + 1);
@@ -396,12 +396,12 @@ void FunctionsTreeWidget::dropEvent(QDropEvent *event)
     {
         quint32 dragFID = item->data(COL_NAME, Qt::UserRole).toUInt();
         Function *dragFunc = m_doc->function(dragFID);
-        if (dragFunc != NULL && dragFunc->type() == dropType)
+        if (dragFunc != nullptr && dragFunc->type() == dropType)
         {
             QTreeWidget::dropEvent(event);
             quint32 fid = item->data(COL_NAME, Qt::UserRole).toUInt();
             Function *func = m_doc->function(fid);
-            if (func != NULL)
+            if (func != nullptr)
                 func->setPath(dropItem->text(COL_PATH));
         }
         else

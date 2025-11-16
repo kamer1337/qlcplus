@@ -172,7 +172,7 @@ public:
      *
      * @param doc The QLC Doc object that owns all functions
      * @param addToDoc enable/disable addition of the function copy to Doc
-     * @return The newly-created function or NULL in case of an error
+     * @return The newly-created function or nullptr in case of an error
      */
     virtual Function* createCopy(Doc* doc, bool addToDoc = true);
 

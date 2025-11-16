@@ -52,23 +52,23 @@
 
 #define SETTINGS_SPLITTER "inputmanager/splitter"
 
-InputOutputManager* InputOutputManager::s_instance = NULL;
+InputOutputManager* InputOutputManager::s_instance = nullptr;
 
 InputOutputManager::InputOutputManager(QWidget* parent, Doc* doc)
     : QWidget(parent)
     , m_doc(doc)
-    , m_toolbar(NULL)
-    , m_addUniverseAction(NULL)
-    , m_deleteUniverseAction(NULL)
-    , m_uniNameEdit(NULL)
-    , m_uniPassthroughCheck(NULL)
-    , m_editor(NULL)
+    , m_toolbar(nullptr)
+    , m_addUniverseAction(nullptr)
+    , m_deleteUniverseAction(nullptr)
+    , m_uniNameEdit(nullptr)
+    , m_uniPassthroughCheck(nullptr)
+    , m_editor(nullptr)
     , m_editorUniverse(UINT_MAX)
 {
-    Q_ASSERT(s_instance == NULL);
+    Q_ASSERT(s_instance == nullptr);
     s_instance = this;
 
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     m_ioMap = doc->inputOutputMap();
 
@@ -173,7 +173,7 @@ InputOutputManager::~InputOutputManager()
     QSettings settings;
     settings.setValue(SETTINGS_SPLITTER, m_splitter->saveState());
 
-    s_instance = NULL;
+    s_instance = nullptr;
 }
 
 InputOutputManager* InputOutputManager::instance()
@@ -195,11 +195,11 @@ void InputOutputManager::updateList()
 
     if (m_ioMap->universesCount() == 0)
     {
-        if (m_editor != NULL)
+        if (m_editor != nullptr)
         {
             m_splitter->widget(1)->layout()->removeWidget(m_editor);
             m_editor->deleteLater();
-            m_editor = NULL;
+            m_editor = nullptr;
         }
         m_deleteUniverseAction->setEnabled(false);
         m_uniNameEdit->setText("");
@@ -216,7 +216,7 @@ void InputOutputManager::updateList()
 
 void InputOutputManager::updateItem(QListWidgetItem* item, quint32 universe)
 {
-    Q_ASSERT(item != NULL);
+    Q_ASSERT(item != nullptr);
 
     InputPatch* ip = m_ioMap->inputPatch(universe);
     OutputPatch* op = m_ioMap->outputPatch(universe);
@@ -233,7 +233,7 @@ void InputOutputManager::updateItem(QListWidgetItem* item, quint32 universe)
         item->setData(Qt::DisplayRole, uniName);
     item->setSizeHint(QSize(m_list->width(), 50));
     item->setData(Qt::UserRole, universe);
-    if (ip != NULL)
+    if (ip != nullptr)
     {
         item->setData(Qt::UserRole + 1, ip->inputName());
         item->setData(Qt::UserRole + 2, ip->profileName());
@@ -243,11 +243,11 @@ void InputOutputManager::updateItem(QListWidgetItem* item, quint32 universe)
         item->setData(Qt::UserRole + 1, KInputNone);
         item->setData(Qt::UserRole + 2, KInputNone);
     }
-    if (op != NULL)
+    if (op != nullptr)
         item->setData(Qt::UserRole + 3, op->outputName());
     else
         item->setData(Qt::UserRole + 3, KOutputNone);
-    if (fp != NULL)
+    if (fp != nullptr)
         item->setData(Qt::UserRole + 4, fp->outputName());
     else
         item->setData(Qt::UserRole + 4, KOutputNone);
@@ -263,7 +263,7 @@ void InputOutputManager::slotInputValueChanged(quint32 universe, quint32 channel
         return;
 
     QListWidgetItem *item = m_list->item(universe);
-    if (item == NULL)
+    if (item == nullptr)
         return;
 
     /* Show an icon on a universe row that received input data */
@@ -285,7 +285,7 @@ void InputOutputManager::slotTimerTimeout()
 void InputOutputManager::slotCurrentItemChanged()
 {
     QListWidgetItem* item = m_list->currentItem();
-    if (item == NULL)
+    if (item == nullptr)
     {
         if (m_ioMap->universesCount() == 0)
             return;
@@ -293,7 +293,7 @@ void InputOutputManager::slotCurrentItemChanged()
         m_list->setCurrentItem(m_list->item(0));
         item = m_list->currentItem();
     }
-    if (item == NULL)
+    if (item == nullptr)
         return;
 
     quint32 universe = item->data(Qt::UserRole).toInt();
@@ -305,11 +305,11 @@ void InputOutputManager::slotCurrentItemChanged()
     else
         m_deleteUniverseAction->setEnabled(true);
 
-    if (m_editor != NULL)
+    if (m_editor != nullptr)
     {
         m_splitter->widget(1)->layout()->removeWidget(m_editor);
         m_editor->deleteLater();
-        m_editor = NULL;
+        m_editor = nullptr;
     }
 
 
@@ -327,7 +327,7 @@ void InputOutputManager::slotCurrentItemChanged()
 void InputOutputManager::slotMappingChanged()
 {
     QListWidgetItem* item = m_list->currentItem();
-    if (item != NULL)
+    if (item != nullptr)
     {
         uint universe = item->data(Qt::UserRole).toInt();
         updateItem(item, universe);
@@ -395,7 +395,7 @@ void InputOutputManager::slotDeleteUniverse()
 void InputOutputManager::slotUniverseNameChanged(QString name)
 {
     QListWidgetItem *currItem = m_list->currentItem();
-    if (currItem == NULL)
+    if (currItem == nullptr)
         return;
 
     int uniIdx = m_list->currentRow();
@@ -414,7 +414,7 @@ void InputOutputManager::slotUniverseAdded(quint32 universe)
 void InputOutputManager::slotPassthroughChanged(bool checked)
 {
     QListWidgetItem *currItem = m_list->currentItem();
-    if (currItem == NULL)
+    if (currItem == nullptr)
         return;
 
     int uniIdx = m_list->currentRow();

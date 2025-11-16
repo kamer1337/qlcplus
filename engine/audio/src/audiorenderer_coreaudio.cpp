@@ -89,7 +89,7 @@ bool AudioRendererCoreAudio::initialize(quint32 freq, int chan, AudioFormat form
         qDebug() << Q_FUNC_INFO << "Buffer #" << i << " allocate status: " << status;
     }
 
-    status = AudioQueueStart(m_queue, NULL);
+    status = AudioQueueStart(m_queue, nullptr);
     if (status)
     {
         qDebug() << Q_FUNC_INFO << "Cannot start Audio Queue!";
@@ -157,7 +157,7 @@ void AudioRendererCoreAudio::resume()
 {
     OSStatus status;
 
-    status = AudioQueueStart(m_queue, NULL);
+    status = AudioQueueStart(m_queue, nullptr);
     if (status)
         qDebug() << Q_FUNC_INFO << "Failed to resume Audio Queue !!";
 }

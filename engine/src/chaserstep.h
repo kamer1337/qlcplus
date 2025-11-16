@@ -57,7 +57,7 @@ public:
     /** Return the actual function pointer for $fid from $doc */
     Function* resolveFunction(const Doc* doc) const;
 
-    int setValue(SceneValue value, int index = -1, bool *created = NULL);
+    int setValue(SceneValue value, int index = -1, bool *created = nullptr);
 
     int unSetValue(SceneValue value, int index = -1);
 
@@ -77,7 +77,7 @@ public:
      ***********************************************************************/
 public:
     /** Load ChaserStep contents from $root and return step index in $stepNumber.
-      * $doc is used to check fixture existence. If NULL the check is skipped */
+      * $doc is used to check fixture existence. If nullptr the check is skipped */
     bool loadXML(QXmlStreamReader &root, int& stepNumber, Doc *doc);
 
     /** Save ChaserStep contents to $doc, with $stepNumber */

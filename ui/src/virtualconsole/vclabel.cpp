@@ -53,13 +53,13 @@ VCLabel::~VCLabel()
 
 VCWidget* VCLabel::createCopy(VCWidget* parent)
 {
-    Q_ASSERT(parent != NULL);
+    Q_ASSERT(parent != nullptr);
 
     VCLabel* label = new VCLabel(parent, m_doc);
     if (label->copyFrom(this) == false)
     {
         delete label;
-        label = NULL;
+        label = nullptr;
     }
 
     return label;
@@ -72,7 +72,7 @@ VCWidget* VCLabel::createCopy(VCWidget* parent)
 void VCLabel::editProperties()
 {
     bool ok = false;
-    QString text = QInputDialog::getText(NULL, tr("Rename Label"), tr("Caption:"),
+    QString text = QInputDialog::getText(nullptr, tr("Rename Label"), tr("Caption:"),
                                          QLineEdit::Normal, caption(), &ok);
     if (ok == true)
         setCaption(text);
@@ -119,7 +119,7 @@ bool VCLabel::loadXML(QXmlStreamReader &root)
 
 bool VCLabel::saveXML(QXmlStreamWriter *doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* VC Label entry */
     doc->writeStartElement(KXMLQLCVCLabel);

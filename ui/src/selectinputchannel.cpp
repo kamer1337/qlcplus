@@ -45,7 +45,7 @@ SelectInputChannel::SelectInputChannel(QWidget* parent, InputOutputMap *ioMap)
     : QDialog(parent)
     , m_ioMap(ioMap)
 {
-    Q_ASSERT(ioMap != NULL);
+    Q_ASSERT(ioMap != nullptr);
 
     m_universe = InputOutputMap::invalidUniverse();
     m_channel = QLCChannel::invalid();
@@ -99,7 +99,7 @@ void SelectInputChannel::accept()
 
     /* Extract data from the selected item */
     item = m_tree->currentItem();
-    if (item != NULL)
+    if (item != nullptr)
     {
         m_universe = item->text(KColumnUniverse).toUInt();
         m_channel = item->text(KColumnChannel).toUInt();
@@ -159,7 +159,7 @@ void SelectInputChannel::fillTree()
     {
         /* Get the patch associated to the current universe */
         patch = m_ioMap->inputPatch(uni);
-        if (patch == NULL && !m_allowUnpatchedCb->isChecked())
+        if (patch == nullptr && !m_allowUnpatchedCb->isChecked())
             continue;
 
         /* Make an item for each universe */
@@ -168,22 +168,22 @@ void SelectInputChannel::fillTree()
 
         /* Add a manual option to each patched universe */
         chItem = new QTreeWidgetItem(uniItem);
-        updateChannelItem(chItem, uni, NULL, NULL);
+        updateChannelItem(chItem, uni, nullptr, nullptr);
 
         /* Don't try to find a profile on an non-patched universe */
-        if (patch == NULL)
+        if (patch == nullptr)
             continue;
 
         /* Add known channels from profile (if any) */
         profile = patch->profile();
-        if (profile != NULL)
+        if (profile != nullptr)
         {
             QMapIterator <quint32, QLCInputChannel*>
             it(profile->channels());
             while (it.hasNext() == true)
             {
                 channel = it.next().value();
-                Q_ASSERT(channel != NULL);
+                Q_ASSERT(channel != nullptr);
 
                 chItem = new QTreeWidgetItem(uniItem);
                 updateChannelItem(chItem, uni, channel,
@@ -198,11 +198,11 @@ void SelectInputChannel::updateChannelItem(QTreeWidgetItem* item,
         const QLCInputChannel* channel,
         const QLCInputProfile* profile)
 {
-    Q_ASSERT(item != NULL);
+    Q_ASSERT(item != nullptr);
 
     /* Add a manual option to each universe */
     item->setText(KColumnUniverse, QString("%1").arg(universe));
-    if (channel == NULL && profile == NULL)
+    if (channel == nullptr && profile == nullptr)
     {
         item->setFlags(item->flags() | Qt::ItemIsEditable);
         item->setText(KColumnName,
@@ -229,9 +229,9 @@ void SelectInputChannel::updateUniverseItem(QTreeWidgetItem* item,
 {
     QString name;
 
-    Q_ASSERT(item != NULL);
+    Q_ASSERT(item != nullptr);
 
-    if (patch == NULL)
+    if (patch == nullptr)
     {
         /* The current universe doesn't have an input assigned to it */
         name = QString("%1: %2").arg(universe + 1).arg(KInputNone);
@@ -240,7 +240,7 @@ void SelectInputChannel::updateUniverseItem(QTreeWidgetItem* item,
     {
         /* The current universe has something assigned to it. Check,
            whether it has an input profile. */
-        if (patch->profile() != NULL)
+        if (patch->profile() != nullptr)
         {
             name = QString("%1: %2").arg(universe + 1)
                    .arg(patch->profileName());
@@ -262,7 +262,7 @@ void SelectInputChannel::slotItemChanged(QTreeWidgetItem* item, int column)
 {
     quint32 channel;
 
-    Q_ASSERT(item != NULL);
+    Q_ASSERT(item != nullptr);
     if (column != KColumnName)
         return;
 

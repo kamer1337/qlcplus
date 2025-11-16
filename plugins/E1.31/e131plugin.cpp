@@ -51,7 +51,7 @@ void E131Plugin::init()
                 E131IO tmpIO;
                 tmpIO.iface = iface;
                 tmpIO.address = entry;
-                tmpIO.controller = NULL;
+                tmpIO.controller = nullptr;
 
                 bool alreadyInList = false;
                 for (int j = 0; j < m_IOmapping.count(); j++)
@@ -144,7 +144,7 @@ QString E131Plugin::outputInfo(quint32 output)
     str += QString("<H3>%1 %2</H3>").arg(tr("Output")).arg(outputs()[output]);
     str += QString("<P>");
     E131Controller *ctrl = m_IOmapping.at(output).controller;
-    if (ctrl == NULL || ctrl->type() == E131Controller::Input)
+    if (ctrl == nullptr || ctrl->type() == E131Controller::Input)
         str += tr("Status: Not open");
     else
     {
@@ -168,7 +168,7 @@ bool E131Plugin::openOutput(quint32 output, quint32 universe)
     qDebug() << "[E1.31] Open output with address :" << m_IOmapping.at(output).address.ip().toString();
 
     // if the controller doesn't exist, create it
-    if (m_IOmapping[output].controller == NULL)
+    if (m_IOmapping[output].controller == nullptr)
     {
         E131Controller *controller = new E131Controller(m_IOmapping.at(output).iface,
                                                         m_IOmapping.at(output).address,
@@ -191,13 +191,13 @@ void E131Plugin::closeOutput(quint32 output, quint32 universe)
 
     removeFromMap(output, universe, Output);
     E131Controller *controller = m_IOmapping.at(output).controller;
-    if (controller != NULL)
+    if (controller != nullptr)
     {
         controller->removeUniverse(universe, E131Controller::Output);
         if (controller->universesList().count() == 0)
         {
             delete m_IOmapping[output].controller;
-            m_IOmapping[output].controller = NULL;
+            m_IOmapping[output].controller = nullptr;
         }
     }
 }
@@ -210,7 +210,7 @@ void E131Plugin::writeUniverse(quint32 universe, quint32 output, const QByteArra
         return;
 
     E131Controller *controller = m_IOmapping[output].controller;
-    if (controller != NULL)
+    if (controller != nullptr)
         controller->sendDmx(universe, data);
 }
 
@@ -237,7 +237,7 @@ bool E131Plugin::openInput(quint32 input, quint32 universe)
     qDebug() << "[E1.31] Open input with address :" << m_IOmapping.at(input).address.ip().toString();
 
     // if the controller doesn't exist, create it
-    if (m_IOmapping[input].controller == NULL)
+    if (m_IOmapping[input].controller == nullptr)
     {
         E131Controller *controller = new E131Controller(m_IOmapping.at(input).iface,
                                                         m_IOmapping.at(input).address,
@@ -260,13 +260,13 @@ void E131Plugin::closeInput(quint32 input, quint32 universe)
 
     removeFromMap(input, universe, Input);
     E131Controller *controller = m_IOmapping.at(input).controller;
-    if (controller != NULL)
+    if (controller != nullptr)
     {
         controller->removeUniverse(universe, E131Controller::Input);
         if (controller->universesList().count() == 0)
         {
             delete m_IOmapping[input].controller;
-            m_IOmapping[input].controller = NULL;
+            m_IOmapping[input].controller = nullptr;
         }
     }
 }
@@ -283,7 +283,7 @@ QString E131Plugin::inputInfo(quint32 input)
     str += QString("<H3>%1 %2</H3>").arg(tr("Input")).arg(inputs()[input]);
     str += QString("<P>");
     E131Controller *ctrl = m_IOmapping.at(input).controller;
-    if (ctrl == NULL || ctrl->type() == E131Controller::Output)
+    if (ctrl == nullptr || ctrl->type() == E131Controller::Output)
         str += tr("Status: Not open");
     else
     {
@@ -320,7 +320,7 @@ void E131Plugin::setParameter(quint32 universe, quint32 line, Capability type,
         return;
 
     E131Controller *controller = m_IOmapping.at(line).controller;
-    if (controller == NULL)
+    if (controller == nullptr)
         return;
 
     if (type == Input)

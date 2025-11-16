@@ -29,12 +29,12 @@
 
 Win32IOEnumerator::Win32IOEnumerator(QObject* parent)
     : IOEnumerator(parent)
-    , m_usbdmx(NULL)
+    , m_usbdmx(nullptr)
 {
     qDebug() << Q_FUNC_INFO;
 
     m_usbdmx = usbdmx_init();
-    if (m_usbdmx == NULL)
+    if (m_usbdmx == nullptr)
     {
         qWarning() << "Loading USBDMX.DLL failed.";
     }
@@ -44,7 +44,7 @@ Win32IOEnumerator::Win32IOEnumerator(QObject* parent)
         qWarning() << "USBDMX.DLL version does not match. Abort.";
         qWarning() << "Found" << m_usbdmx->version() << "but expected"
                    << USBDMX_DLL_VERSION;
-        m_usbdmx = NULL;
+        m_usbdmx = nullptr;
     }
     else
     {
@@ -63,7 +63,7 @@ Win32IOEnumerator::~Win32IOEnumerator()
 
 QVariant Win32IOEnumerator::extractUID(HANDLE handle)
 {
-    Q_ASSERT(handle != NULL);
+    Q_ASSERT(handle != nullptr);
     USHORT uid = 0;
     if (m_usbdmx->device_id(handle, &uid) == TRUE)
         return QVariant(uid);
@@ -92,7 +92,7 @@ QString Win32IOEnumerator::extractName(HANDLE handle)
 
 void Win32IOEnumerator::rescan()
 {
-    if (m_usbdmx == NULL)
+    if (m_usbdmx == nullptr)
         return;
 
     QList <OutputDevice*> destroyOutputs(m_outputDevices);
@@ -100,7 +100,7 @@ void Win32IOEnumerator::rescan()
 
     for (USHORT id = 0; id < MAX_USBDMX_DEVICES; id++)
     {
-        HANDLE handle = NULL;
+        HANDLE handle = nullptr;
         if (m_usbdmx->open(id, &handle) == TRUE)
         {
             QVariant uid = extractUID(handle);
@@ -108,10 +108,10 @@ void Win32IOEnumerator::rescan()
 
             // We don't need the handle anymore for now
             m_usbdmx->close(handle);
-            handle = NULL;
+            handle = nullptr;
 
             OutputDevice* od = outputDevice(uid);
-            if (od == NULL)
+            if (od == nullptr)
             {
                 // New device
                 od = new Win32PeperoniDevice(uid, name, id, m_usbdmx, this);
@@ -162,11 +162,11 @@ OutputDevice* Win32IOEnumerator::outputDevice(const QVariant& uid) const
             return dev;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 InputDevice* Win32IOEnumerator::inputDevice(const QVariant& uid) const
 {
     Q_UNUSED(uid);
-    return NULL;
+    return nullptr;
 }

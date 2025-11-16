@@ -48,7 +48,7 @@ void MonitorFixtureItem_Test::initTestCase()
 void MonitorFixtureItem_Test::cleanupTestCase()
 {
     delete m_doc;
-    m_doc = NULL;
+    m_doc = nullptr;
 }
 
 void MonitorFixtureItem_Test::cleanup()
@@ -69,11 +69,11 @@ void MonitorFixtureItem_Test::computeAlpha()
     fxi->setName("Test Fixture");
 
     QLCFixtureDef* def = m_doc->fixtureDefCache()->fixtureDef(manufacturer, model);
-    QVERIFY(def != NULL);
-    QVERIFY(def != NULL);
+    QVERIFY(def != nullptr);
+    QVERIFY(def != nullptr);
     QVERIFY(def->channels().size() > 0);
     QLCFixtureMode* m = def->mode(mode);
-    QVERIFY(m != NULL);
+    QVERIFY(m != nullptr);
 
     fxi->setFixtureDefinition(def, m);
     fxi->setUniverse(0);
@@ -84,8 +84,8 @@ void MonitorFixtureItem_Test::computeAlpha()
     const FixtureHead* h1 = mfi->m_heads.at(0);
     const FixtureHead* h2 = mfi->m_heads.at(1);
 
-    QVERIFY(h1 != NULL);
-    QVERIFY(h2 != NULL);
+    QVERIFY(h1 != nullptr);
+    QVERIFY(h2 != nullptr);
 
     if (masterDimmer != QLCChannel::invalid())
     {

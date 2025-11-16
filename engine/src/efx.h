@@ -502,7 +502,7 @@ public:
     const QList <EFXFixture *> fixtures() const;
 
     /** Get an EFXFixture reference from Fixture $id and &headIndex
-     *  Returns NULL on failure */
+     *  Returns nullptr on failure */
     EFXFixture *fixture(quint32 id, int headIndex);
 
     /** @reimp */

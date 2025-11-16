@@ -60,7 +60,7 @@ void QLCFixtureDefCache_Test::add()
     QVERIFY(cache.fixtureCache().isEmpty() == false);
     QVERIFY(cache.fixtureCache()["Martin"]["MAC250"] == false);
 
-    QVERIFY(cache.addFixtureDef(NULL) == false);
+    QVERIFY(cache.addFixtureDef(nullptr) == false);
 
     QVERIFY(cache.manufacturers().count() != 0);
     cache.clear();
@@ -90,7 +90,7 @@ void QLCFixtureDefCache_Test::add()
     QVERIFY(cache.manufacturers().contains("Martin") == true);
 
     delete def2;
-    def2 = NULL;
+    def2 = nullptr;
 
     /* Another fixtureDef, same manufacturer, different model */
     def2 = new QLCFixtureDef();
@@ -188,10 +188,10 @@ void QLCFixtureDefCache_Test::fixtureDef()
     QVERIFY(cache.fixtureDef("Martin", "MAC500") == def2);
     QVERIFY(cache.fixtureDef("Robe", "WL250") == def3);
     QVERIFY(cache.fixtureDef("Futurelight", "DJ Scan 250") == def4);
-    QVERIFY(cache.fixtureDef("Martin", "MAC 250") == NULL);
-    QVERIFY(cache.fixtureDef("Mar tin", "MAC250") == NULL);
-    QVERIFY(cache.fixtureDef("Foobar", "Foobar") == NULL);
-    QVERIFY(cache.fixtureDef("", "") == NULL);
+    QVERIFY(cache.fixtureDef("Martin", "MAC 250") == nullptr);
+    QVERIFY(cache.fixtureDef("Mar tin", "MAC250") == nullptr);
+    QVERIFY(cache.fixtureDef("Foobar", "Foobar") == nullptr);
+    QVERIFY(cache.fixtureDef("", "") == nullptr);
 }
 
 void QLCFixtureDefCache_Test::load()

@@ -38,8 +38,8 @@ VCMatrixProperties::VCMatrixProperties(VCMatrix* matrix, Doc* doc)
     : QDialog(matrix)
     , m_doc(doc)
 {
-    Q_ASSERT(matrix != NULL);
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(matrix != nullptr);
+    Q_ASSERT(doc != nullptr);
 
     setupUi(this);
 
@@ -152,7 +152,7 @@ void VCMatrixProperties::slotSetFunction(quint32 fid)
     m_function = fid;
     Function* func = m_doc->function(m_function);
 
-    if (func == NULL)
+    if (func == nullptr)
     {
         m_functionEdit->setText(tr("No function"));
     }
@@ -343,10 +343,10 @@ void VCMatrixProperties::updateTree()
 VCMatrixControl *VCMatrixProperties::getSelectedControl()
 {
     if (m_controlsTree->selectedItems().isEmpty())
-        return NULL;
+        return nullptr;
 
     QTreeWidgetItem * item = m_controlsTree->selectedItems().first();
-    if (item != NULL)
+    if (item != nullptr)
     {
         quint8 ctlID = item->data(0, Qt::UserRole).toUInt();
         foreach (VCMatrixControl *control, m_controls)
@@ -357,7 +357,7 @@ VCMatrixControl *VCMatrixProperties::getSelectedControl()
     }
 
     Q_ASSERT(false);
-    return NULL;
+    return nullptr;
 }
 
 QList<QColor> VCMatrixProperties::rgbColorList()
@@ -461,7 +461,7 @@ void VCMatrixProperties::slotRemoveClicked()
         // For R/G/B Knobs:
         // Remove the two others
         VCMatrixControl *control = getSelectedControl();
-        if (control != NULL)
+        if (control != nullptr)
         {
             if (control->m_type == VCMatrixControl::Color1Knob
                     || control->m_type == VCMatrixControl::Color2Knob
@@ -503,7 +503,7 @@ void VCMatrixProperties::slotInputValueChanged(quint32 universe, quint32 channel
 
     VCMatrixControl *preset = getSelectedControl();
 
-    if (preset != NULL) {
+    if (preset != nullptr) {
         preset->m_inputSource = m_presetInputWidget->inputSource();
     }
 }
@@ -512,7 +512,7 @@ void VCMatrixProperties::slotKeySequenceChanged(QKeySequence key)
 {
     VCMatrixControl *preset = getSelectedControl();
 
-    if (preset != NULL)
+    if (preset != nullptr)
         preset->m_keySequence = key;
 }
 
@@ -521,7 +521,7 @@ void VCMatrixProperties::slotTreeSelectionChanged()
 {
     VCMatrixControl *control = getSelectedControl();
 
-    if (control != NULL)
+    if (control != nullptr)
     {
         m_presetInputWidget->setInputSource(control->m_inputSource);
         m_presetInputWidget->setKeySequence(control->m_keySequence.toString(QKeySequence::NativeText));

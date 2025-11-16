@@ -41,13 +41,13 @@
 
 void VCFrame_Test::initTestCase()
 {
-    m_doc = NULL;
+    m_doc = nullptr;
 }
 
 void VCFrame_Test::init()
 {
     m_doc = new Doc(this);
-    new VirtualConsole(NULL, m_doc);
+    new VirtualConsole(nullptr, m_doc);
 }
 
 void VCFrame_Test::cleanup()
@@ -74,7 +74,7 @@ void VCFrame_Test::copy()
     VCButton* btn = new VCButton(&frame, m_doc);
     btn->setCaption("Foobar");
     VCWidget* frame2 = frame.createCopy(&parent);
-    QVERIFY(frame2 != NULL && frame2 != &frame);
+    QVERIFY(frame2 != nullptr && frame2 != &frame);
     QCOMPARE(frame2->objectName(), QString("VCFrame"));
     QCOMPARE(frame2->parentWidget(), &parent);
 
@@ -83,7 +83,7 @@ void VCFrame_Test::copy()
     QCOMPARE(list.size(), 1);
     QCOMPARE(list[0]->caption(), QString("Foobar"));
 
-    QVERIFY(frame.copyFrom(NULL) == false);
+    QVERIFY(frame.copyFrom(nullptr) == false);
 }
 
 void VCFrame_Test::loadXML()
@@ -132,7 +132,7 @@ void VCFrame_Test::loadXML()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
 
     buffer.seek(0);
     QXmlStreamReader xmlReader(&buffer);
@@ -191,7 +191,7 @@ void VCFrame_Test::saveXML()
 
     QVERIFY(parent.saveXML(&xmlWriter) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -383,11 +383,11 @@ void VCFrame_Test::saveXML()
 void VCFrame_Test::customMenu()
 {
     VCFrame* frame = VirtualConsole::instance()->contents();
-    QVERIFY(frame != NULL);
+    QVERIFY(frame != nullptr);
 
     QMenu menu;
     QMenu* customMenu = frame->customMenu(&menu);
-    QVERIFY(customMenu != NULL);
+    QVERIFY(customMenu != nullptr);
     QCOMPARE(customMenu->title(), tr("Add"));
     delete customMenu;
 }

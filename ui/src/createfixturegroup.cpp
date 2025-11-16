@@ -42,21 +42,21 @@ CreateFixtureGroup::~CreateFixtureGroup()
 
 QString CreateFixtureGroup::name() const
 {
-    Q_ASSERT(m_nameEdit != NULL);
+    Q_ASSERT(m_nameEdit != nullptr);
     return m_nameEdit->text();
 }
 
 void CreateFixtureGroup::setSize(const QSize& size)
 {
-    Q_ASSERT(m_widthSpin != NULL);
-    Q_ASSERT(m_heightSpin != NULL);
+    Q_ASSERT(m_widthSpin != nullptr);
+    Q_ASSERT(m_heightSpin != nullptr);
     m_widthSpin->setValue(size.width());
     m_heightSpin->setValue(size.height());
 }
 
 QSize CreateFixtureGroup::size() const
 {
-    Q_ASSERT(m_widthSpin != NULL);
-    Q_ASSERT(m_heightSpin != NULL);
+    Q_ASSERT(m_widthSpin != nullptr);
+    Q_ASSERT(m_heightSpin != nullptr);
     return QSize(m_widthSpin->value(), m_heightSpin->value());
 }

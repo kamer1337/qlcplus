@@ -73,10 +73,10 @@ InputOutputPatchEditor::InputOutputPatchEditor(QWidget* parent, quint32 universe
     , m_currentProfileName(KInputNone)
     , m_currentFeedbackPluginName(KOutputNone)
     , m_currentFeedback(QLCIOPlugin::invalidLine())
-    , m_inputCapture(NULL)
+    , m_inputCapture(nullptr)
 {
     Q_ASSERT(universe < m_ioMap->universesCount());
-    Q_ASSERT(ioMap != NULL);
+    Q_ASSERT(ioMap != nullptr);
 
     setupUi(this);
 
@@ -88,20 +88,20 @@ InputOutputPatchEditor::InputOutputPatchEditor(QWidget* parent, quint32 universe
     OutputPatch* feedbackPatch = m_ioMap->feedbackPatch(universe);
 
     /* Copy these so they can be applied if the user cancels */
-    if (inputPatch != NULL)
+    if (inputPatch != nullptr)
     {
         m_currentInputPluginName = inputPatch->pluginName();
         m_currentInput = inputPatch->input();
         m_currentProfileName = inputPatch->profileName();
     }
 
-    if (outputPatch != NULL)
+    if (outputPatch != nullptr)
     {
         m_currentOutputPluginName = outputPatch->pluginName();
         m_currentOutput = outputPatch->output();
     }
 
-    if (feedbackPatch != NULL)
+    if (feedbackPatch != nullptr)
     {
         m_currentFeedbackPluginName = feedbackPatch->pluginName();
         m_currentFeedback = feedbackPatch->output();
@@ -155,7 +155,7 @@ InputOutputPatchEditor::~InputOutputPatchEditor()
 InputPatch* InputOutputPatchEditor::patch() const
 {
     InputPatch* p = m_ioMap->inputPatch(m_universe);
-    Q_ASSERT(p != NULL);
+    Q_ASSERT(p != nullptr);
     return p;
 }
 
@@ -164,7 +164,7 @@ QTreeWidgetItem* InputOutputPatchEditor::currentlyMappedItem() const
     for (int i = 0; i < m_mapTree->topLevelItemCount(); i++)
     {
         QTreeWidgetItem* pluginItem = m_mapTree->topLevelItem(i);
-        Q_ASSERT(pluginItem != NULL);
+        Q_ASSERT(pluginItem != nullptr);
 
         if (pluginItem->text(KMapColumnPluginName) == patch()->pluginName())
         {
@@ -173,7 +173,7 @@ QTreeWidgetItem* InputOutputPatchEditor::currentlyMappedItem() const
         }
     }
 
-    return NULL;
+    return nullptr;
 }
 
 void InputOutputPatchEditor::setupMappingPage()
@@ -361,7 +361,7 @@ void InputOutputPatchEditor::slotMapCurrentItemChanged(QTreeWidgetItem* item)
     QString info;
     bool configurable;
 
-    if (item == NULL)
+    if (item == nullptr)
     {
         info = m_ioMap->inputPluginStatus(QString(), 0);
         info += m_ioMap->outputPluginStatus(QString(), 0);
@@ -396,7 +396,7 @@ void InputOutputPatchEditor::slotMapCurrentItemChanged(QTreeWidgetItem* item)
 
 void InputOutputPatchEditor::slotMapItemChanged(QTreeWidgetItem* item, int col)
 {
-    if (item == NULL)
+    if (item == nullptr)
         return;
 
     /* Temporarily disable this signal to prevent an endless loop */
@@ -407,7 +407,7 @@ void InputOutputPatchEditor::slotMapItemChanged(QTreeWidgetItem* item, int col)
     {
         /* Set all other items unchecked... */
         QTreeWidgetItemIterator it(m_mapTree);
-        while ((*it) != NULL)
+        while ((*it) != nullptr)
         {
             /* Don't touch the item that was just checked */
             if (*it != item && (*it)->checkState(col))
@@ -516,7 +516,7 @@ void InputOutputPatchEditor::slotConfigureInputClicked()
 
     /* Find out the currently selected plugin */
     item = m_mapTree->currentItem();
-    if (item == NULL)
+    if (item == nullptr)
         return;
     else
         plugin = item->text(KMapColumnPluginName);
@@ -535,7 +535,7 @@ void InputOutputPatchEditor::slotPluginConfigurationChanged(const QString& plugi
     }
 
     QTreeWidgetItem* item = pluginItem(pluginName);
-    if (item == NULL)
+    if (item == nullptr)
         return;
 
     fillMappingTree();
@@ -556,7 +556,7 @@ QTreeWidgetItem* InputOutputPatchEditor::pluginItem(const QString& pluginName)
             return item;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 void InputOutputPatchEditor::showPluginMappingError()
@@ -616,7 +616,7 @@ void InputOutputPatchEditor::fillProfileTree()
 
 void InputOutputPatchEditor::updateProfileItem(const QString& name, QTreeWidgetItem* item)
 {
-    Q_ASSERT(item != NULL);
+    Q_ASSERT(item != nullptr);
 
     item->setText(KProfileColumnName, name);
     QLCInputProfile * prof = m_ioMap->profile(name);
@@ -655,7 +655,7 @@ void InputOutputPatchEditor::slotProfileItemChanged(QTreeWidgetItem* item)
 
         /* Set all other items unchecked... */
         QTreeWidgetItemIterator it(m_profileTree);
-        while (*it != NULL)
+        while (*it != nullptr)
         {
             /* ...except the one that was just checked */
             if (*it != item)
@@ -691,7 +691,7 @@ void InputOutputPatchEditor::slotProfileItemChanged(QTreeWidgetItem* item)
 void InputOutputPatchEditor::slotAddProfileClicked()
 {
     /* Create a new input profile and start editing it */
-    InputProfileEditor ite(this, NULL, m_ioMap);
+    InputProfileEditor ite(this, nullptr, m_ioMap);
 edit:
     if (ite.exec() == QDialog::Accepted)
     {
@@ -755,13 +755,13 @@ void InputOutputPatchEditor::slotRemoveProfileClicked()
 
     /* Find out the currently selected item */
     item = m_profileTree->currentItem();
-    if (item == NULL)
+    if (item == nullptr)
         return;
 
     /* Get the currently selected profile object by its name */
     name = item->text(KProfileColumnName);
     profile = m_ioMap->profile(name);
-    if (profile == NULL)
+    if (profile == nullptr)
         return;
 
     /* Ask for user confirmation */
@@ -781,7 +781,7 @@ void InputOutputPatchEditor::slotRemoveProfileClicked()
                    so select "None" next. */
                 QTreeWidgetItem* none;
                 none = m_profileTree->topLevelItem(0);
-                Q_ASSERT(none != NULL);
+                Q_ASSERT(none != nullptr);
                 none->setCheckState(KProfileColumnName,
                                     Qt::Checked);
             }
@@ -810,13 +810,13 @@ void InputOutputPatchEditor::slotEditProfileClicked()
     /* Get the currently selected item and bail out if nothing or "None"
        is selected */
     item = m_profileTree->currentItem();
-    if (item == NULL || item->text(KProfileColumnName) == KInputNone)
+    if (item == nullptr || item->text(KProfileColumnName) == KInputNone)
         return;
 
     /* Get the currently selected profile by its name */
     name = item->text(KProfileColumnName);
     profile = m_ioMap->profile(name);
-    if (profile == NULL)
+    if (profile == nullptr)
         return;
 
     /* Edit the profile and update the item if OK was pressed */
@@ -967,7 +967,7 @@ void InputOutputPatchEditor::initAudioTab()
 
 void InputOutputPatchEditor::slotAudioDeviceItemChanged(QTreeWidgetItem *item, int col)
 {
-    if (item == NULL)
+    if (item == nullptr)
         return;
 
     /* Temporarily disable this signal to prevent an endless loop */
@@ -980,7 +980,7 @@ void InputOutputPatchEditor::slotAudioDeviceItemChanged(QTreeWidgetItem *item, i
     {
         /* Set all other items unchecked... */
         QTreeWidgetItemIterator it(m_audioMapTree);
-        while ((*it) != NULL)
+        while ((*it) != nullptr)
         {
             /* Don't touch the item that was just checked */
             if (*it != item && (*it)->checkState(col))

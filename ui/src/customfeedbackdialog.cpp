@@ -25,7 +25,7 @@
 CustomFeedbackDialog::CustomFeedbackDialog(Doc *doc, const QSharedPointer<QLCInputSource> &source, QWidget *parent)
     : QDialog(parent)
     , m_doc(doc)
-    , m_profile(NULL)
+    , m_profile(nullptr)
     , m_inputSource(source)
     , m_selectedFeedback(None)
 {
@@ -52,7 +52,7 @@ CustomFeedbackDialog::CustomFeedbackDialog(Doc *doc, const QSharedPointer<QLCInp
     if (enableControls)
     {
         InputPatch *ip = m_doc->inputOutputMap()->inputPatch(m_inputSource->universe());
-        if (ip != NULL && ip->profile() != NULL)
+        if (ip != nullptr && ip->profile() != nullptr)
         {
             m_profile = ip->profile();
             if (m_profile->hasColorTable())

@@ -55,8 +55,8 @@
 Audio::Audio(Doc* doc)
   : Function(doc, Function::AudioType)
   , m_doc(doc)
-  , m_decoder(NULL)
-  , m_audio_out(NULL)
+  , m_decoder(nullptr)
+  , m_audio_out(nullptr)
   , m_audioDevice(QString())
   , m_sourceFileName("")
   , m_audioDuration(0)
@@ -72,12 +72,12 @@ Audio::Audio(Doc* doc)
 
 Audio::~Audio()
 {
-    if (m_audio_out != NULL)
+    if (m_audio_out != nullptr)
     {
         m_audio_out->stop();
         delete m_audio_out;
     }
-    if (m_decoder != NULL)
+    if (m_decoder != nullptr)
         delete m_decoder;
 }
 
@@ -92,18 +92,18 @@ QIcon Audio::getIcon() const
 
 Function* Audio::createCopy(Doc* doc, bool addToDoc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     Function* copy = new Audio(doc);
     if (copy->copyFrom(this) == false)
     {
         delete copy;
-        copy = NULL;
+        copy = nullptr;
     }
     if (addToDoc == true && doc->addFunction(copy) == false)
     {
         delete copy;
-        copy = NULL;
+        copy = nullptr;
     }
 
     return copy;
@@ -112,7 +112,7 @@ Function* Audio::createCopy(Doc* doc, bool addToDoc)
 bool Audio::copyFrom(const Function* function)
 {
     const Audio* aud = qobject_cast<const Audio*> (function);
-    if (aud == NULL)
+    if (aud == nullptr)
         return false;
 
     setSourceFileName(aud->m_sourceFileName);
@@ -147,10 +147,10 @@ bool Audio::setSourceFileName(QString filename)
     if (m_sourceFileName.isEmpty() == false)
     {
         // unload previous source
-        if (m_decoder != NULL)
+        if (m_decoder != nullptr)
         {
             delete m_decoder;
-            m_decoder = NULL;
+            m_decoder = nullptr;
         }
     }
 
@@ -172,7 +172,7 @@ bool Audio::setSourceFileName(QString filename)
 
     m_decoder = m_doc->audioPluginCache()->getDecoderForFile(m_sourceFileName);
 
-    if (m_decoder == NULL)
+    if (m_decoder == nullptr)
         return false;
 
     setDuration(m_decoder->totalTime());
@@ -217,7 +217,7 @@ int Audio::adjustAttribute(qreal fraction, int attributeId)
 {
     int attrIndex = Function::adjustAttribute(fraction, attributeId);
 
-    if (m_audio_out != NULL && attrIndex == Intensity)
+    if (m_audio_out != nullptr && attrIndex == Intensity)
         m_audio_out->adjustIntensity(m_volume * getAttributeValue(Function::Intensity));
 
     return attrIndex;
@@ -228,11 +228,11 @@ void Audio::slotEndOfStream()
     if (!stopped())
         stop(FunctionParent::master());
 
-    if (m_audio_out != NULL)
+    if (m_audio_out != nullptr)
     {
         m_audio_out->stop();
         m_audio_out->deleteLater();
-        m_audio_out = NULL;
+        m_audio_out = nullptr;
     }
     m_decoder->seek(0);
 }
@@ -248,7 +248,7 @@ void Audio::slotFunctionRemoved(quint32 fid)
 
 bool Audio::saveXML(QXmlStreamWriter *doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* Function tag */
     doc->writeStartElement(KXMLQLCFunction);
@@ -339,14 +339,14 @@ void Audio::postLoad()
  *********************************************************************/
 void Audio::preRun(MasterTimer* timer)
 {
-    if (m_decoder != NULL)
+    if (m_decoder != nullptr)
     {
         uint fadeIn = overrideFadeInSpeed() == defaultSpeed() ? fadeInSpeed() : overrideFadeInSpeed();
 
-        if (m_audio_out != NULL && m_audio_out->isRunning())
+        if (m_audio_out != nullptr && m_audio_out->isRunning())
         {
             delete m_audio_out;
-            m_audio_out = NULL;
+            m_audio_out = nullptr;
         }
 
         m_decoder->seek(elapsed());
@@ -381,7 +381,7 @@ void Audio::setPause(bool enable)
 {
     if (isRunning())
     {
-        if (m_audio_out != NULL)
+        if (m_audio_out != nullptr)
         {
             if (enable)
                 m_audio_out->suspend();
@@ -409,7 +409,7 @@ void Audio::write(MasterTimer* timer, QList<Universe *> universes)
 
         if (fadeout)
         {
-            if (m_audio_out != NULL && totalDuration() - elapsed() <= fadeOutSpeed())
+            if (m_audio_out != nullptr && totalDuration() - elapsed() <= fadeOutSpeed())
                 m_audio_out->setFadeOut(fadeOutSpeed());
         }
         if (m_audio_out->isEos())
@@ -429,7 +429,7 @@ void Audio::postRun(MasterTimer* timer, QList<Universe*> universes)
     }
     else
     {
-        if (m_audio_out != NULL)
+        if (m_audio_out != nullptr)
             m_audio_out->setFadeOut(fadeout);
     }
 

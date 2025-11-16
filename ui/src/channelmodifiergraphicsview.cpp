@@ -25,7 +25,7 @@
 
 ChannelModifierGraphicsView::ChannelModifierGraphicsView(QWidget *parent)
     : QGraphicsView(parent)
-    , m_currentHandler(NULL)
+    , m_currentHandler(nullptr)
 {
     m_scene = new QGraphicsScene(this);
     //m_scene->setSceneRect(this->rect());
@@ -42,11 +42,11 @@ ChannelModifierGraphicsView::ChannelModifierGraphicsView(QWidget *parent)
 void ChannelModifierGraphicsView::setHandlerDMXValue(uchar pos, uchar value)
 {
     //qDebug() << "Set new DMX value:" << pos << value;
-    if (m_currentHandler == NULL)
+    if (m_currentHandler == nullptr)
         return;
 
     HandlerItem *handler = getSelectedHandler();
-    if (handler != NULL)
+    if (handler != nullptr)
     {
         handler->m_dmxMap.first = pos;
         handler->m_dmxMap.second = value;
@@ -58,13 +58,13 @@ void ChannelModifierGraphicsView::addNewHandler()
 {
     // always give the fact that there are at least two handlers !
     HandlerItem *prevHandler = getSelectedHandler();
-    if (prevHandler == NULL)
+    if (prevHandler == nullptr)
         prevHandler = m_handlers.at(0);
     if (prevHandler == m_handlers.last())
         prevHandler = m_handlers.at(m_handlers.count() - 2);
 
     int prevHdlrIdx = 0;
-    HandlerItem *nextHandler = NULL;
+    HandlerItem *nextHandler = nullptr;
     for (prevHdlrIdx = 0; prevHdlrIdx < m_handlers.count(); prevHdlrIdx++)
     {
         HandlerItem *hdlr = m_handlers.at(prevHdlrIdx);
@@ -81,7 +81,7 @@ void ChannelModifierGraphicsView::addNewHandler()
     newHandler->m_dmxMap = QPair<uchar, uchar>(halfDMXpos, halfDMXval);
     //qDebug() << "Half way DMX value:" << halfDMXpos << halfDMXval;
     newHandler->m_pos = getPositionFromDMX(newHandler->m_dmxMap);
-    newHandler->m_item = updateHandlerItem(NULL, newHandler->m_pos);
+    newHandler->m_item = updateHandlerItem(nullptr, newHandler->m_pos);
     newHandler->m_item->setBoundingBox(QRectF(prevHandler->m_pos.x(), m_bgRect->y(),
                                            nextHandler->m_pos.x() - prevHandler->m_pos.x(),
                                            m_bgRect->rect().height()));
@@ -98,7 +98,7 @@ void ChannelModifierGraphicsView::addNewHandler()
 
 void ChannelModifierGraphicsView::removeHander()
 {
-    if (m_currentHandler == NULL)
+    if (m_currentHandler == nullptr)
         return;
 
     for (int i = 0; i < m_handlers.count(); i++)
@@ -106,7 +106,7 @@ void ChannelModifierGraphicsView::removeHander()
         HandlerItem *handler = m_handlers.at(i);
         if (handler->m_item == m_currentHandler)
         {
-            m_currentHandler = NULL;
+            m_currentHandler = nullptr;
             m_scene->removeItem(handler->m_item);
             m_scene->removeItem(handler->m_line);
             m_handlers.takeAt(i);
@@ -114,14 +114,14 @@ void ChannelModifierGraphicsView::removeHander()
         }
     }
     updateView();
-    emit viewClicked(NULL);
+    emit viewClicked(nullptr);
 }
 
 void ChannelModifierGraphicsView::setModifierMap(QList<QPair<uchar, uchar> > map)
 {
     m_scene->clear();
     m_handlers.clear();
-    m_currentHandler = NULL;
+    m_currentHandler = nullptr;
 
     m_bgRect = m_scene->addRect(0, 0, m_scene->width(), m_scene->height(),
                                 QPen(Qt::NoPen), QBrush(QColor(70, 70, 70, 255), Qt::SolidPattern));
@@ -133,9 +133,9 @@ void ChannelModifierGraphicsView::setModifierMap(QList<QPair<uchar, uchar> > map
         HandlerItem *handler = new HandlerItem;
         handler->m_dmxMap = QPair<uchar, uchar>(dmxPair.first, dmxPair.second);
         handler->m_pos = getPositionFromDMX(dmxPair);
-        handler->m_item = updateHandlerItem(NULL, handler->m_pos);
+        handler->m_item = updateHandlerItem(nullptr, handler->m_pos);
         if (i == 0)
-            handler->m_line = NULL;
+            handler->m_line = nullptr;
         else
             handler->m_line = m_scene->addLine(0,0,1,1,QPen(Qt::yellow));
         m_handlers.append(handler);
@@ -158,13 +158,13 @@ HandlerItem *ChannelModifierGraphicsView::getSelectedHandler()
     foreach (HandlerItem *handler, m_handlers)
         if (handler->m_item->isSelected())
             return handler;
-    return NULL;
+    return nullptr;
 }
 
 HandlerGraphicsItem *ChannelModifierGraphicsView::updateHandlerItem(HandlerGraphicsItem *item, QPoint pos)
 {
     HandlerGraphicsItem *tmpItem = item;
-    if (tmpItem == NULL)
+    if (tmpItem == nullptr)
     {
         tmpItem =  new HandlerGraphicsItem(pos.x() - 5, pos.y() - 5, 10, 10,
                                            QPen(Qt::yellow), QBrush(Qt::yellow));
@@ -246,14 +246,14 @@ void ChannelModifierGraphicsView::updateView()
         HandlerItem *blHdlr = new HandlerItem;
         blHdlr->m_dmxMap = QPair<uchar, uchar>(0, 0);
         blHdlr->m_pos = QPoint(bgRect.x(), bgRect.bottom());
-        blHdlr->m_item = updateHandlerItem(NULL, blHdlr->m_pos);
-        blHdlr->m_line = NULL;
+        blHdlr->m_item = updateHandlerItem(nullptr, blHdlr->m_pos);
+        blHdlr->m_line = nullptr;
         m_handlers.append(blHdlr);
 
         HandlerItem *trHdlr = new HandlerItem;
         trHdlr->m_dmxMap = QPair<uchar, uchar>(255, 255);
         trHdlr->m_pos = QPoint(bgRect.right(), bgRect.y());
-        trHdlr->m_item = updateHandlerItem(NULL, trHdlr->m_pos);
+        trHdlr->m_item = updateHandlerItem(nullptr, trHdlr->m_pos);
         trHdlr->m_line = m_scene->addLine(blHdlr->m_pos.x(), blHdlr->m_pos.y(),
                                          trHdlr->m_pos.x(), trHdlr->m_pos.y(),
                                          QPen(Qt::yellow));
@@ -270,7 +270,7 @@ void ChannelModifierGraphicsView::updateView()
             handler->m_pos = getPositionFromDMX(handler->m_dmxMap);
             handler->m_item = updateHandlerItem(handler->m_item, handler->m_pos);
 
-            if (handler->m_line != NULL)
+            if (handler->m_line != nullptr)
             {
                 handler->m_line->setLine(lastPos.x(), lastPos.y(),
                                          handler->m_pos.x(), handler->m_pos.y());
@@ -289,11 +289,11 @@ void ChannelModifierGraphicsView::resizeEvent(QResizeEvent *event)
 
 void ChannelModifierGraphicsView::mouseReleaseEvent(QMouseEvent *e)
 {
-    if (getSelectedHandler() == NULL)
+    if (getSelectedHandler() == nullptr)
     {
-        if (m_currentHandler != NULL)
+        if (m_currentHandler != nullptr)
             m_currentHandler->setBrush(QBrush(Qt::yellow));
-        m_currentHandler = NULL;
+        m_currentHandler = nullptr;
         emit viewClicked(e);
 
         QGraphicsView::mouseReleaseEvent(e);
@@ -302,11 +302,11 @@ void ChannelModifierGraphicsView::mouseReleaseEvent(QMouseEvent *e)
 
 void ChannelModifierGraphicsView::slotItemSelected(HandlerGraphicsItem *item)
 {
-    if (m_currentHandler != NULL)
+    if (m_currentHandler != nullptr)
         m_currentHandler->setBrush(QBrush(Qt::yellow));
     m_currentHandler = item;
     HandlerItem *handler = getSelectedHandler();
-    if (handler != NULL)
+    if (handler != nullptr)
         emit itemClicked(handler->m_dmxMap.first, handler->m_dmxMap.second);
 }
 
@@ -340,7 +340,7 @@ void ChannelModifierGraphicsView::slotItemMoved(HandlerGraphicsItem *item,
         newPos.setY(event->scenePos().y() - 5);
     }
     HandlerItem *handler = getSelectedHandler();
-    if (handler != NULL)
+    if (handler != nullptr)
     {
         handler->m_dmxMap = getDMXFromPosition(newPos);
         emit itemDMXMapChanged(handler->m_dmxMap.first, handler->m_dmxMap.second);

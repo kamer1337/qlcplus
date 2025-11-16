@@ -44,7 +44,7 @@ ConfigureMidiPlugin::ConfigureMidiPlugin(MidiPlugin* plugin, QWidget* parent)
     : QDialog(parent)
     , m_plugin(plugin)
 {
-    Q_ASSERT(plugin != NULL);
+    Q_ASSERT(plugin != nullptr);
     setupUi(this);
 
     QSettings settings;
@@ -70,13 +70,13 @@ void ConfigureMidiPlugin::slotRefresh()
 void ConfigureMidiPlugin::slotMidiChannelValueChanged(int value)
 {
     QWidget* widget = qobject_cast<QWidget*> (QObject::sender());
-    Q_ASSERT(widget != NULL);
+    Q_ASSERT(widget != nullptr);
 
     QVariant var = widget->property(PROP_DEV);
     Q_ASSERT(var.isValid() == true);
 
     MidiDevice* dev = (MidiDevice*) var.toULongLong();
-    Q_ASSERT(dev != NULL);
+    Q_ASSERT(dev != nullptr);
 
     // Zero is a special value for OMNI mode
     if (value == 0)
@@ -88,13 +88,13 @@ void ConfigureMidiPlugin::slotMidiChannelValueChanged(int value)
 void ConfigureMidiPlugin::slotModeActivated(int index)
 {
     QComboBox* combo = qobject_cast<QComboBox*> (QObject::sender());
-    Q_ASSERT(combo != NULL);
+    Q_ASSERT(combo != nullptr);
 
     QVariant var = combo->property(PROP_DEV);
     Q_ASSERT(var.isValid() == true);
 
     MidiDevice* dev = (MidiDevice*) var.toULongLong();
-    Q_ASSERT(dev != NULL);
+    Q_ASSERT(dev != nullptr);
 
     MidiDevice::Mode mode = (MidiDevice::Mode) combo->itemData(index).toInt();
     dev->setMode(mode);
@@ -103,13 +103,13 @@ void ConfigureMidiPlugin::slotModeActivated(int index)
 void ConfigureMidiPlugin::slotInitMessageActivated(int index)
 {
     QComboBox* combo = qobject_cast<QComboBox*> (QObject::sender());
-    Q_ASSERT(combo != NULL);
+    Q_ASSERT(combo != nullptr);
 
     QVariant var = combo->property(PROP_DEV);
     Q_ASSERT(var.isValid() == true);
 
     MidiDevice* dev = (MidiDevice*) var.toULongLong();
-    Q_ASSERT(dev != NULL);
+    Q_ASSERT(dev != nullptr);
 
     QString initMessage = combo->itemText(index);
     dev->setMidiTemplateName(initMessage);
@@ -118,13 +118,13 @@ void ConfigureMidiPlugin::slotInitMessageActivated(int index)
 void ConfigureMidiPlugin::slotInitMessageChanged(QString midiTemplateName)
 {
     QComboBox* combo = qobject_cast<QComboBox*> (QObject::sender());
-    Q_ASSERT(combo != NULL);
+    Q_ASSERT(combo != nullptr);
 
     QVariant var = combo->property(PROP_DEV);
     Q_ASSERT(var.isValid() == true);
 
     MidiDevice* dev = (MidiDevice*) var.toULongLong();
-    Q_ASSERT(dev != NULL);
+    Q_ASSERT(dev != nullptr);
     dev->setMidiTemplateName(midiTemplateName);
 }
 

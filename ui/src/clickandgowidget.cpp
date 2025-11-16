@@ -246,7 +246,7 @@ QImage ClickAndGoWidget::getImageFromValue(uchar value)
 void ClickAndGoWidget::createPresetList(const QLCChannel *chan)
 {
     int i = 1;
-    if (chan == NULL)
+    if (chan == nullptr)
         return;
 
     m_title = chan->name();

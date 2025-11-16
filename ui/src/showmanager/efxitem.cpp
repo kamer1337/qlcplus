@@ -31,7 +31,7 @@ EFXItem::EFXItem(EFX *efx, ShowFunction *func)
     : ShowItem(func)
     , m_efx(efx)
 {
-    Q_ASSERT(efx != NULL);
+    Q_ASSERT(efx != nullptr);
 
     if (func->color().isValid())
         setColor(func->color());

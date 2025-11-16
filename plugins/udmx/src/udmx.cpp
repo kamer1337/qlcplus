@@ -33,7 +33,7 @@ UDMX::~UDMX()
 
 void UDMX::init()
 {
-    m_ctx = NULL;
+    m_ctx = nullptr;
 
     if (libusb_init(&m_ctx) != 0)
         qWarning() << "Unable to initialize libusb context!";
@@ -133,12 +133,12 @@ void UDMX::rescanDevices()
     QList <UDMXDevice*> destroyList(m_devices);
     int devCount = m_devices.count();
 
-    libusb_device** devices = NULL;
+    libusb_device** devices = nullptr;
     ssize_t count = libusb_get_device_list(m_ctx, &devices);
     for (ssize_t i = 0; i < count; i++)
     {
         libusb_device* dev = devices[i];
-        Q_ASSERT(dev != NULL);
+        Q_ASSERT(dev != nullptr);
 
         libusb_device_descriptor desc;
         int r = libusb_get_device_descriptor(dev, &desc);
@@ -148,7 +148,7 @@ void UDMX::rescanDevices()
             continue;
         }
         UDMXDevice* udev = device(dev);
-        if (udev != NULL)
+        if (udev != nullptr)
         {
             /* We already have this device and it's still
                there. Remove from the destroy list and
@@ -186,7 +186,7 @@ UDMXDevice* UDMX::device(struct libusb_device* usbdev)
             return udev;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 /*****************************************************************************
@@ -195,7 +195,7 @@ UDMXDevice* UDMX::device(struct libusb_device* usbdev)
 
 void UDMX::configure()
 {
-    int r = QMessageBox::question(NULL, name(),
+    int r = QMessageBox::question(nullptr, name(),
                                   tr("Do you wish to re-scan your hardware?"),
                                   QMessageBox::Yes, QMessageBox::No);
     if (r == QMessageBox::Yes)

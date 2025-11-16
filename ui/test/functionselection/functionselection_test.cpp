@@ -49,7 +49,7 @@ void FunctionSelection_Test::cleanupTestCase()
     }
 
     delete m_doc;
-    m_doc = NULL;
+    m_doc = nullptr;
 }
 
 void FunctionSelection_Test::initial()

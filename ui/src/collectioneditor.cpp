@@ -37,8 +37,8 @@ CollectionEditor::CollectionEditor(QWidget* parent, Collection* fc, Doc* doc)
     , m_doc(doc)
     , m_collection(fc)
 {
-    Q_ASSERT(doc != NULL);
-    Q_ASSERT(fc != NULL);
+    Q_ASSERT(doc != nullptr);
+    Q_ASSERT(fc != nullptr);
 
     setupUi(this);
 
@@ -198,7 +198,7 @@ void CollectionEditor::updateFunctionList()
     foreach (QVariant fid, m_collection->functions())
     {
         Function* function = m_doc->function(fid.toUInt());
-        Q_ASSERT(function != NULL);
+        Q_ASSERT(function != nullptr);
 
         QTreeWidgetItem* item = new QTreeWidgetItem(m_tree);
         item->setText(0, function->name());

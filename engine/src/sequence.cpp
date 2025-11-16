@@ -45,18 +45,18 @@ QIcon Sequence::getIcon() const
 
 Function *Sequence::createCopy(Doc *doc, bool addToDoc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     Function* copy = new Sequence(doc);
     if (copy->copyFrom(this) == false)
     {
         delete copy;
-        copy = NULL;
+        copy = nullptr;
     }
     if (addToDoc == true && doc->addFunction(copy) == false)
     {
         delete copy;
-        copy = NULL;
+        copy = nullptr;
     }
 
     return copy;
@@ -65,7 +65,7 @@ Function *Sequence::createCopy(Doc *doc, bool addToDoc)
 bool Sequence::copyFrom(const Function *function)
 {
     const Sequence* sequence = qobject_cast<const Sequence*> (function);
-    if (sequence == NULL)
+    if (sequence == nullptr)
         return false;
 
     // Copy sequence stuff
@@ -103,7 +103,7 @@ QList<quint32> Sequence::components()
 
 bool Sequence::saveXML(QXmlStreamWriter *doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* Function tag */
     doc->writeStartElement(KXMLQLCFunction);
@@ -169,7 +169,7 @@ bool Sequence::loadXML(QXmlStreamReader &root)
 
     Scene *scene = qobject_cast<Scene *>(doc()->function(boundSceneID()));
     QList<SceneValue> sceneValues;
-    if (scene != NULL)
+    if (scene != nullptr)
     {
         sceneValues = scene->values();
         std::sort(sceneValues.begin(), sceneValues.end());
@@ -234,11 +234,11 @@ void Sequence::postLoad()
         return;
 
     Doc* doc = this->doc();
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     Scene *scene = qobject_cast<Scene *>(doc->function(boundSceneID()));
     QList<SceneValue> sceneValues;
-    if (scene != NULL)
+    if (scene != nullptr)
     {
         sceneValues = scene->values();
 
@@ -250,7 +250,7 @@ void Sequence::postLoad()
                 foreach (SceneValue value, m_steps.at(0).values)
                 {
                     value.value = 0;
-                    if (doc->fixture(value.fxi) != NULL)
+                    if (doc->fixture(value.fxi) != nullptr)
                         scene->setValue(value);
                 }
             }

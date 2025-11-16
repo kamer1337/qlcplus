@@ -63,7 +63,7 @@ const QString Script::waitKeyCmd = QStringLiteral("waitkey"); // LEGACY - NOT US
  ****************************************************************************/
 
 Script::Script(Doc* doc) : Function(doc, Function::ScriptType)
-    , m_runner(NULL)
+    , m_runner(nullptr)
 {
     setName(tr("New Script"));
 }
@@ -93,18 +93,18 @@ quint32 Script::totalDuration()
 
 Function* Script::createCopy(Doc* doc, bool addToDoc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     Function* copy = new Script(doc);
     if (copy->copyFrom(this) == false)
     {
         delete copy;
-        copy = NULL;
+        copy = nullptr;
     }
     if (addToDoc == true && doc->addFunction(copy) == false)
     {
         delete copy;
-        copy = NULL;
+        copy = nullptr;
     }
 
     return copy;
@@ -113,7 +113,7 @@ Function* Script::createCopy(Doc* doc, bool addToDoc)
 bool Script::copyFrom(const Function* function)
 {
     const Script* script = qobject_cast<const Script*> (function);
-    if (script == NULL)
+    if (script == nullptr)
         return false;
 
     setData(script->data());
@@ -133,7 +133,7 @@ bool Script::setData(const QString& str)
     m_data = str;
 
     Doc* doc = qobject_cast<Doc*> (parent());
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
     doc->setModified();
 
     return true;
@@ -291,7 +291,7 @@ bool Script::loadXML(QXmlStreamReader &root)
 
 bool Script::saveXML(QXmlStreamWriter *doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* Function tag */
     doc->writeStartElement(KXMLQLCFunction);
@@ -365,7 +365,7 @@ void Script::postRun(MasterTimer* timer, QList<Universe *> universes)
 void Script::slotRunnerFinished()
 {
     delete m_runner;
-    m_runner = NULL;
+    m_runner = nullptr;
 }
 
 quint32 Script::getValueFromString(QString str, bool *ok)
@@ -397,7 +397,7 @@ QString Script::convertLine(const QString& str, bool *ok)
     QString command;
     QString value;
 
-    if (ok != NULL)
+    if (ok != nullptr)
         *ok = true; // in case, this is set to false afterwards
 
     if (str.simplified().startsWith("//") == true || str.simplified().isEmpty() == true)
@@ -433,7 +433,7 @@ QString Script::convertLine(const QString& str, bool *ok)
         if (right == -1)
         {
             qDebug() << "Syntax error (colon missing after keyword):" << line.mid(left);
-            if (ok != NULL)
+            if (ok != nullptr)
                 *ok = false;
             break;
         }
@@ -463,7 +463,7 @@ QString Script::convertLine(const QString& str, bool *ok)
             else
             {
                 qDebug() << "Syntax error (unbalanced quotes):" << line.mid(quoteleft);
-                if (ok != NULL)
+                if (ok != nullptr)
                     *ok = false;
                 break;
             }
@@ -475,7 +475,7 @@ QString Script::convertLine(const QString& str, bool *ok)
             if (right == -1)
             {
                 qDebug() << "Syntax error (whitespace before value missing):" << line.mid(left);
-                if (ok != NULL)
+                if (ok != nullptr)
                     *ok = false;
                 break;
             }
@@ -490,7 +490,7 @@ QString Script::convertLine(const QString& str, bool *ok)
         if (values.count() > 0 && knownKeywords.contains(keyword.trimmed()) == false)
         {
             qDebug() << "Syntax error. Unknown keyword detected:" << keyword.trimmed();
-            if (ok != NULL)
+            if (ok != nullptr)
                 *ok = false;
             break;
         }

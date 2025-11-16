@@ -58,10 +58,10 @@ void ChaserStep_Test::comparison()
 void ChaserStep_Test::resolveFunction()
 {
     ChaserStep step(0);
-    QVERIFY(step.resolveFunction(NULL) == NULL);
+    QVERIFY(step.resolveFunction(nullptr) == nullptr);
 
     Doc doc(this);
-    QVERIFY(step.resolveFunction(&doc) == NULL);
+    QVERIFY(step.resolveFunction(&doc) == nullptr);
 
     Scene* scene = new Scene(&doc);
     doc.addFunction(scene);
@@ -161,7 +161,7 @@ void ChaserStep_Test::load()
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
     QXmlStreamReader xmlReader(&buffer);
 
-    QVERIFY(step.loadXML(xmlReader, number, NULL) == false);
+    QVERIFY(step.loadXML(xmlReader, number, nullptr) == false);
     QCOMPARE(number, -1);
 
     buffer.close();
@@ -177,14 +177,14 @@ void ChaserStep_Test::load()
     xmlWriter.writeCharacters("30");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
     xmlReader.setDevice(&buffer);
     xmlReader.readNextStartElement();
 
-    QVERIFY(step.loadXML(xmlReader, number, NULL) == true);
+    QVERIFY(step.loadXML(xmlReader, number, nullptr) == true);
     QCOMPARE(number, 5);
     QCOMPARE(step.fadeIn, uint(10));
     QCOMPARE(step.hold, uint(15));
@@ -213,14 +213,14 @@ void ChaserStep_Test::load_sequence()
     xmlWriter.writeCharacters("5:0,150,2,100,3,75:7:10,100,15,200");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
     xmlReader.setDevice(&buffer);
     xmlReader.readNextStartElement();
 
-    QVERIFY(step.loadXML(xmlReader, number, NULL) == true);
+    QVERIFY(step.loadXML(xmlReader, number, nullptr) == true);
     QCOMPARE(number, 1);
     QCOMPARE(step.fadeIn, uint(10));
     QCOMPARE(step.hold, uint(15));
@@ -258,14 +258,14 @@ void ChaserStep_Test::load_legacy_sequence()
     xmlWriter.writeCharacters("5,0,150,5,2,100,5,3,75,7,10,100,7,15,200");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
     xmlReader.setDevice(&buffer);
     xmlReader.readNextStartElement();
 
-    QVERIFY(step.loadXML(xmlReader, number, NULL) == true);
+    QVERIFY(step.loadXML(xmlReader, number, nullptr) == true);
     QCOMPARE(number, 1);
     QCOMPARE(step.fadeIn, uint(10));
     QCOMPARE(step.hold, uint(15));
@@ -288,7 +288,7 @@ void ChaserStep_Test::save()
     ChaserStep step(1, 2, 3, 4);
     QVERIFY(step.saveXML(&xmlWriter, 5, false) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -328,7 +328,7 @@ void ChaserStep_Test::save_sequence()
 
     QVERIFY(step.saveXML(&xmlWriter, 1, true) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);

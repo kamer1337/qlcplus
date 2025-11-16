@@ -59,7 +59,7 @@ VCXYPadFixture::VCXYPadFixture(Doc *doc)
     , m_universe(Universe::invalid())
     , m_fixtureAddress(QLCChannel::invalid())
 {
-    Q_ASSERT(m_doc != NULL);
+    Q_ASSERT(m_doc != nullptr);
 
     precompute();
 }
@@ -67,7 +67,7 @@ VCXYPadFixture::VCXYPadFixture(Doc *doc)
 VCXYPadFixture::VCXYPadFixture(Doc* doc, const QVariant& variant)
     : m_doc(doc)
 {
-    Q_ASSERT(m_doc != NULL);
+    Q_ASSERT(m_doc != nullptr);
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     if (variant.canConvert(QVariant::StringList) == true)
@@ -129,7 +129,7 @@ VCXYPadFixture::~VCXYPadFixture()
 VCXYPadFixture& VCXYPadFixture::operator=(const VCXYPadFixture& fxi)
 {
     m_doc = fxi.m_doc;
-    Q_ASSERT(m_doc != NULL);
+    Q_ASSERT(m_doc != nullptr);
 
     m_head = fxi.m_head;
     m_universe = fxi.m_universe;
@@ -203,7 +203,7 @@ GroupHead const & VCXYPadFixture::head() const
 QRectF VCXYPadFixture::degreesRange() const
 {
     Fixture* fxi = m_doc->fixture(m_head.fxi);
-    if (fxi == NULL)
+    if (fxi == nullptr)
     {
         return QRectF();
     }
@@ -219,7 +219,7 @@ QString VCXYPadFixture::name() const
         return QString();
 
     Fixture* fxi = m_doc->fixture(m_head.fxi);
-    if (fxi == NULL)
+    if (fxi == nullptr)
         return QString();
 
     if (m_head.head >= fxi->heads())
@@ -431,7 +431,7 @@ bool VCXYPadFixture::loadXML(QXmlStreamReader &root)
 
 bool VCXYPadFixture::saveXML(QXmlStreamWriter *doc) const
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* VCXYPad Fixture */
     doc->writeStartElement(KXMLQLCVCXYPadFixture);
@@ -473,7 +473,7 @@ bool VCXYPadFixture::saveXML(QXmlStreamWriter *doc) const
 void VCXYPadFixture::arm()
 {
     Fixture* fxi = m_doc->fixture(m_head.fxi);
-    if (fxi == NULL)
+    if (fxi == nullptr)
     {
         m_xMSB = QLCChannel::invalid();
         m_xLSB = QLCChannel::invalid();

@@ -32,7 +32,7 @@ GenericDMXSource::GenericDMXSource(Doc* doc)
     , m_clearRequest(false)
     , m_changed(false)
 {
-    Q_ASSERT(m_doc != NULL);
+    Q_ASSERT(m_doc != nullptr);
     m_doc->masterTimer()->registerDMXSource(this);
 }
 
@@ -115,7 +115,7 @@ void GenericDMXSource::writeDMX(MasterTimer* timer, QList<Universe *> ua)
         {
             it.next();
             Fixture *fixture = m_doc->fixture(it.key().first);
-            if (fixture == NULL)
+            if (fixture == nullptr)
                 continue;
 
             quint32 channelIndex = it.key().second;

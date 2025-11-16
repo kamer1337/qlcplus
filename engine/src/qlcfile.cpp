@@ -45,7 +45,7 @@ bool QLCFile::m_hasWindowManager = true;
 
 QXmlStreamReader *QLCFile::getXMLReader(const QString &path)
 {
-    QXmlStreamReader *reader = NULL;
+    QXmlStreamReader *reader = nullptr;
 
     if (path.isEmpty() == true)
     {
@@ -69,10 +69,10 @@ QXmlStreamReader *QLCFile::getXMLReader(const QString &path)
 
 void QLCFile::releaseXMLReader(QXmlStreamReader *reader)
 {
-    if (reader == NULL)
+    if (reader == nullptr)
         return;
 
-    if (reader->device() != NULL)
+    if (reader->device() != nullptr)
     {
         if (reader->device()->isOpen())
             reader->device()->close();
@@ -83,7 +83,7 @@ void QLCFile::releaseXMLReader(QXmlStreamReader *reader)
 
 bool QLCFile::writeXMLHeader(QXmlStreamWriter *xml, const QString &content, const QString &author)
 {
-    if (xml == NULL || xml->device() == NULL)
+    if (xml == nullptr || xml->device() == nullptr)
         return false;
 
     xml->writeStartDocument();
@@ -158,7 +158,7 @@ QString QLCFile::currentUserName()
  #else
     QString name;
     struct passwd* passwd = getpwuid(getuid());
-    if (passwd == NULL)
+    if (passwd == nullptr)
         name.append(getenv("USER"));
     else
         name.append(passwd->pw_gecos);

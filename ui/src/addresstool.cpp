@@ -30,7 +30,7 @@
 AddressTool::AddressTool(QWidget *parent, int presetValue) :
     QDialog(parent)
   , ui(new Ui::AddressTool)
-  , m_dipSwitch(NULL)
+  , m_dipSwitch(nullptr)
 {
     ui->setupUi(this);
     QPixmap px(16, 16);
@@ -81,7 +81,7 @@ int AddressTool::getAddress()
 
 void AddressTool::slotChangeColor()
 {
-    if (m_dipSwitch == NULL)
+    if (m_dipSwitch == nullptr)
         return;
 
     if (sender() == ui->m_blueBtn)

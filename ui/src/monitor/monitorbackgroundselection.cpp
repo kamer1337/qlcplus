@@ -36,11 +36,11 @@ MonitorBackgroundSelection::MonitorBackgroundSelection(QWidget *parent, Doc *doc
     : QDialog(parent)
     , m_doc(doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
     setupUi(this);
 
     m_props = doc->monitorProperties();
-    Q_ASSERT(m_props != NULL);
+    Q_ASSERT(m_props != nullptr);
 
     m_commonBackgroundImage = m_props->commonBackgroundImage();
     m_customBackgroundImages = m_props->customBackgroundList();
@@ -117,7 +117,7 @@ void MonitorBackgroundSelection::updateCustomTree()
 
         quint32 fid = it.key();
         Function *f = m_doc->function(fid);
-        if (f != NULL)
+        if (f != nullptr)
         {
             QTreeWidgetItem *item = new QTreeWidgetItem(m_customTree);
             item->setIcon(KColumnName, f->getIcon());

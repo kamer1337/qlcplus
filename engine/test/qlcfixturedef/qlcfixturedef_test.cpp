@@ -74,7 +74,7 @@ void QLCFixtureDef_Test::addChannel()
     QLCFixtureDef* fd = new QLCFixtureDef();
     QVERIFY(fd->channels().size() == 0);
 
-    fd->addChannel(NULL);
+    fd->addChannel(nullptr);
     QVERIFY(fd->channels().size() == 0);
 
     QLCChannel* ch1 = new QLCChannel();
@@ -101,7 +101,7 @@ void QLCFixtureDef_Test::removeChannel()
     QLCChannel* ch2 = new QLCChannel();
 
     QVERIFY(fd->channels().size() == 0);
-    QVERIFY(fd->removeChannel(NULL) == false);
+    QVERIFY(fd->removeChannel(nullptr) == false);
     QVERIFY(fd->removeChannel(ch1) == false);
     QVERIFY(fd->removeChannel(ch2) == false);
 
@@ -117,7 +117,7 @@ void QLCFixtureDef_Test::removeChannel()
     QVERIFY(fd->channels().size() == 1);
     QVERIFY(fd->channels().at(0) == ch2);
 
-    QVERIFY(fd->removeChannel(NULL) == false);
+    QVERIFY(fd->removeChannel(nullptr) == false);
     QVERIFY(fd->channels().size() == 1);
     QVERIFY(fd->channels().at(0) == ch2);
 
@@ -145,7 +145,7 @@ void QLCFixtureDef_Test::channel()
     QVERIFY(fd->channel("foo") == ch1);
     QVERIFY(fd->channel("bar") == ch2);
     QVERIFY(fd->channel("xyzzy") == ch3);
-    QVERIFY(fd->channel("foobar") == NULL);
+    QVERIFY(fd->channel("foobar") == nullptr);
 
     delete fd;
 }
@@ -182,7 +182,7 @@ void QLCFixtureDef_Test::addMode()
 
     QVERIFY(fd->modes().size() == 0);
 
-    fd->addMode(NULL);
+    fd->addMode(nullptr);
     QVERIFY(fd->modes().size() == 0);
 
     fd->addMode(mode1);
@@ -208,7 +208,7 @@ void QLCFixtureDef_Test::removeMode()
     QLCFixtureMode* mode2 = new QLCFixtureMode(fd);
 
     QVERIFY(fd->modes().size() == 0);
-    QVERIFY(fd->removeMode(NULL) == false);
+    QVERIFY(fd->removeMode(nullptr) == false);
     QVERIFY(fd->removeMode(mode1) == false);
     QVERIFY(fd->removeMode(mode2) == false);
     QVERIFY(fd->modes().size() == 0);
@@ -225,7 +225,7 @@ void QLCFixtureDef_Test::removeMode()
     QVERIFY(fd->modes().size() == 1);
     QVERIFY(fd->modes().at(0) == mode2);
 
-    QVERIFY(fd->removeMode(NULL) == false);
+    QVERIFY(fd->removeMode(nullptr) == false);
     QVERIFY(fd->modes().size() == 1);
     QVERIFY(fd->modes().at(0) == mode2);
 
@@ -253,7 +253,7 @@ void QLCFixtureDef_Test::mode()
     QVERIFY(fd->mode("foo") == mode1);
     QVERIFY(fd->mode("bar") == mode2);
     QVERIFY(fd->mode("xyzzy") == mode3);
-    QVERIFY(fd->mode("foobar") == NULL);
+    QVERIFY(fd->mode("foobar") == nullptr);
 
     delete fd;
 }

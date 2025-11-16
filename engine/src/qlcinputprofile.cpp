@@ -265,7 +265,7 @@ QMap<QString, QVariant> QLCInputProfile::globalSettings() const
 bool QLCInputProfile::insertChannel(quint32 channel,
                                     QLCInputChannel* ich)
 {
-    if (ich != NULL && m_channels.contains(channel) == false)
+    if (ich != nullptr && m_channels.contains(channel) == false)
     {
         m_channels.insert(channel, ich);
         return true;
@@ -281,7 +281,7 @@ bool QLCInputProfile::removeChannel(quint32 channel)
     if (m_channels.contains(channel) == true)
     {
         QLCInputChannel* ich = m_channels.take(channel);
-        Q_ASSERT(ich != NULL);
+        Q_ASSERT(ich != nullptr);
         delete ich;
         return true;
     }
@@ -293,7 +293,7 @@ bool QLCInputProfile::removeChannel(quint32 channel)
 
 bool QLCInputProfile::remapChannel(QLCInputChannel* ich, quint32 number)
 {
-    if (ich == NULL)
+    if (ich == nullptr)
         return false;
 
     quint32 old = channelNumber(ich);
@@ -311,12 +311,12 @@ bool QLCInputProfile::remapChannel(QLCInputChannel* ich, quint32 number)
 
 QLCInputChannel* QLCInputProfile::channel(quint32 channel) const
 {
-    return m_channels.value(channel, NULL);
+    return m_channels.value(channel, nullptr);
 }
 
 quint32 QLCInputProfile::channelNumber(const QLCInputChannel* channel) const
 {
-    if (channel == NULL)
+    if (channel == nullptr)
         return QLCChannel::invalid();
 
     QMapIterator <quint32,QLCInputChannel*> it(m_channels);
@@ -337,7 +337,7 @@ QMap <quint32,QLCInputChannel*> QLCInputProfile::channels() const
 
 QVariant QLCInputProfile::channelExtraParams(const QLCInputChannel* channel) const
 {
-    if (channel == NULL)
+    if (channel == nullptr)
         return QVariant();
 
     switch (m_type)
@@ -413,10 +413,10 @@ QMap<uchar, QString> QLCInputProfile::midiChannelTable()
 QLCInputProfile* QLCInputProfile::loader(const QString& path)
 {
     QXmlStreamReader *doc = QLCFile::getXMLReader(path);
-    if (doc == NULL || doc->device() == NULL || doc->hasError())
+    if (doc == nullptr || doc->device() == nullptr || doc->hasError())
     {
         qWarning() << Q_FUNC_INFO << "Unable to load input profile from" << path;
-        return NULL;
+        return nullptr;
     }
 
     QLCInputProfile* profile = new QLCInputProfile();
@@ -428,7 +428,7 @@ QLCInputProfile* QLCInputProfile::loader(const QString& path)
                     .arg(doc->columnNumber());
 
         delete profile;
-        profile = NULL;
+        profile = nullptr;
     }
     else
     {

@@ -126,10 +126,10 @@ void AddFixture_Test::findAddress()
 
 void AddFixture_Test::initialNoFixture()
 {
-    AddFixture af(NULL, m_doc);
+    AddFixture af(nullptr, m_doc);
     QVERIFY(m_doc == af.m_doc);
-    QVERIFY(af.fixtureDef() == NULL);
-    QVERIFY(af.mode() == NULL);
+    QVERIFY(af.fixtureDef() == nullptr);
+    QVERIFY(af.mode() == nullptr);
     QCOMPARE(af.name(), tr("Dimmers"));
     QVERIFY(af.address() == 0);
     QVERIFY(af.universe() == 0);
@@ -177,9 +177,9 @@ void AddFixture_Test::initialNoFixture()
     QVERIFY(makers.isEmpty() == true);
 
     // Generic / Generic should be selected by default
-    QVERIFY(af.m_tree->currentItem() != NULL);
+    QVERIFY(af.m_tree->currentItem() != nullptr);
     QCOMPARE(af.m_tree->currentItem()->text(0), QString(KXMLFixtureGeneric));
-    QVERIFY(af.m_tree->currentItem()->parent() != NULL);
+    QVERIFY(af.m_tree->currentItem()->parent() != nullptr);
     QCOMPARE(af.m_tree->currentItem()->parent()->text(0), QString(KXMLFixtureGeneric));
 
     QVERIFY(af.m_modeCombo->isEnabled() == false);
@@ -218,10 +218,10 @@ void AddFixture_Test::initialDimmer()
     fxi->setAddress(484);
     m_doc->addFixture(fxi);
 
-    AddFixture af(NULL, m_doc, fxi);
+    AddFixture af(nullptr, m_doc, fxi);
     QVERIFY(m_doc == af.m_doc);
-    QVERIFY(af.fixtureDef() != NULL);
-    QVERIFY(af.mode() != NULL);
+    QVERIFY(af.fixtureDef() != nullptr);
+    QVERIFY(af.mode() != nullptr);
     QVERIFY(af.name() == QString("My dimmer"));
     QVERIFY(af.address() == 484);
     QVERIFY(af.universe() == 2);
@@ -268,9 +268,9 @@ void AddFixture_Test::initialDimmer()
     QVERIFY(makers.isEmpty() == true);
 
     // Generic / Generic should be selected for dimmers
-    QVERIFY(af.m_tree->currentItem() != NULL);
+    QVERIFY(af.m_tree->currentItem() != nullptr);
     QCOMPARE(af.m_tree->currentItem()->text(0), QString(KXMLFixtureGeneric));
-    QVERIFY(af.m_tree->currentItem()->parent() != NULL);
+    QVERIFY(af.m_tree->currentItem()->parent() != nullptr);
     QCOMPARE(af.m_tree->currentItem()->parent()->text(0), QString(KXMLFixtureGeneric));
 
     QVERIFY(af.m_modeCombo->isEnabled() == false);
@@ -307,8 +307,8 @@ void AddFixture_Test::initialScanner()
     fxi->setName("My scanner");
 
     QLCFixtureDef* def = m_doc->fixtureDefCache()->fixtureDef("Martin", "MAC300");
-    Q_ASSERT(def != NULL);
-    Q_ASSERT(def != NULL);
+    Q_ASSERT(def != nullptr);
+    Q_ASSERT(def != nullptr);
     Q_ASSERT(def->channels().size() > 0);
     QLCFixtureMode* mode = def->modes().first();
     Q_ASSERT(def->modes().size() > 1);
@@ -318,7 +318,7 @@ void AddFixture_Test::initialScanner()
     fxi->setAddress(484);
     m_doc->addFixture(fxi);
 
-    AddFixture af(NULL, m_doc, fxi);
+    AddFixture af(nullptr, m_doc, fxi);
     QVERIFY(m_doc == af.m_doc);
     QVERIFY(af.fixtureDef() == def);
     QVERIFY(af.mode() == mode);
@@ -368,9 +368,9 @@ void AddFixture_Test::initialScanner()
     QVERIFY(makers.isEmpty() == true);
 
     // Generic / Generic should be selected for dimmers
-    QVERIFY(af.m_tree->currentItem() != NULL);
+    QVERIFY(af.m_tree->currentItem() != nullptr);
     QCOMPARE(af.m_tree->currentItem()->text(0), def->model());
-    QVERIFY(af.m_tree->currentItem()->parent() != NULL);
+    QVERIFY(af.m_tree->currentItem()->parent() != nullptr);
     QCOMPARE(af.m_tree->currentItem()->parent()->text(0), def->manufacturer());
 
     QVERIFY(af.m_modeCombo->isEnabled() == true);
@@ -401,13 +401,13 @@ void AddFixture_Test::initialScanner()
 
 void AddFixture_Test::selectionNothing()
 {
-    AddFixture af(NULL, m_doc);
+    AddFixture af(nullptr, m_doc);
 
-    af.m_tree->setCurrentItem(NULL);
-    QVERIFY(af.m_tree->currentItem() == NULL);
+    af.m_tree->setCurrentItem(nullptr);
+    QVERIFY(af.m_tree->currentItem() == nullptr);
 
-    QVERIFY(af.fixtureDef() == NULL);
-    QVERIFY(af.mode() == NULL);
+    QVERIFY(af.fixtureDef() == nullptr);
+    QVERIFY(af.mode() == nullptr);
     QVERIFY(af.name() == "");
     QVERIFY(af.address() == 0);
     QVERIFY(af.universe() == 0);
@@ -441,25 +441,25 @@ void AddFixture_Test::selectionNothing()
 
 void AddFixture_Test::selectionGeneric()
 {
-    AddFixture af(NULL, m_doc);
+    AddFixture af(nullptr, m_doc);
 
     // Select the last item which should be Generic - Generic
     QTreeWidgetItem* item = af.m_tree->topLevelItem(af.m_tree->topLevelItemCount() - 1);
-    QVERIFY(item != NULL);
+    QVERIFY(item != nullptr);
     // First, select the parent node so that selectionChanged() fires
     QCOMPARE(item->childCount(), 4);
     af.m_tree->setCurrentItem(item);
     // Then, select the child to fire again
     item = item->child(0);
-    QVERIFY(item != NULL);
+    QVERIFY(item != nullptr);
     af.m_tree->setCurrentItem(item);
     QVERIFY(af.m_tree->currentItem() == item);
 
     QVERIFY(af.m_modeCombo->isEnabled() == false);
     QCOMPARE(af.m_modeCombo->count(), 1);
     QCOMPARE(af.m_modeCombo->itemText(0), QString(/*KXMLFixtureGeneric*/));
-    QVERIFY(af.fixtureDef() == NULL);
-    QVERIFY(af.mode() == NULL);
+    QVERIFY(af.fixtureDef() == nullptr);
+    QVERIFY(af.mode() == nullptr);
 
     QVERIFY(af.m_universeCombo->isEnabled() == true);
     QCOMPARE(af.m_universeCombo->currentIndex(), 0);
@@ -493,12 +493,12 @@ void AddFixture_Test::selectionGeneric()
 void AddFixture_Test::rememberExpanded()
 {
     {
-        AddFixture af(NULL, m_doc);
+        AddFixture af(nullptr, m_doc);
         af.m_tree->invisibleRootItem()->child(5)->setExpanded(true);
     }
 
     {
-        AddFixture af(NULL, m_doc);
+        AddFixture af(nullptr, m_doc);
         QVERIFY(af.m_tree->invisibleRootItem()->child(5)->isExpanded());
     }
 }

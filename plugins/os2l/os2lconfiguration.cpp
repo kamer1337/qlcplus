@@ -31,7 +31,7 @@
 OS2LConfiguration::OS2LConfiguration(OS2LPlugin* plugin, QWidget* parent)
         : QDialog(parent)
 {
-    Q_ASSERT(plugin != NULL);
+    Q_ASSERT(plugin != nullptr);
     m_plugin = plugin;
 
     /* Setup UI controls */

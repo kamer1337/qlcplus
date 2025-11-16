@@ -77,19 +77,19 @@ void FocusSpinBox::focusInEvent(QFocusEvent* event)
 SpeedDial::SpeedDial(QWidget* parent)
     : QGroupBox(parent)
     , m_timer(new QTimer(this))
-    , m_dial(NULL)
-    , m_hrs(NULL)
-    , m_min(NULL)
-    , m_sec(NULL)
-    , m_ms(NULL)
-    , m_focus(NULL)
+    , m_dial(nullptr)
+    , m_hrs(nullptr)
+    , m_min(nullptr)
+    , m_sec(nullptr)
+    , m_ms(nullptr)
+    , m_focus(nullptr)
     , m_previousDialValue(0)
     , m_preventSignals(false)
     , m_value(0)
     , m_tapTick(false)
-    , m_tapTime(NULL)
-    , m_tapTickTimer(NULL)
-    , m_tapTickElapseTimer(NULL)
+    , m_tapTime(nullptr)
+    , m_tapTickTimer(nullptr)
+    , m_tapTickElapseTimer(nullptr)
     , m_visibilityMask(DEFAULT_VISIBILITY_MASK)
 {
     new QVBoxLayout(this);
@@ -198,7 +198,7 @@ SpeedDial::~SpeedDial()
     if (m_tapTickElapseTimer)
     {
         delete m_tapTickElapseTimer;
-        m_tapTickElapseTimer = NULL;
+        m_tapTickElapseTimer = nullptr;
     }
     stopTimers();
 }
@@ -239,16 +239,16 @@ void SpeedDial::toggleInfinite()
 
 void SpeedDial::stopTimers(bool stopTime, bool stopTapTimer)
 {
-    if (stopTime && m_tapTime != NULL)
+    if (stopTime && m_tapTime != nullptr)
     {
         delete m_tapTime;
-        m_tapTime = NULL;
+        m_tapTime = nullptr;
     }
-    if (stopTapTimer && m_tapTickTimer != NULL)
+    if (stopTapTimer && m_tapTickTimer != nullptr)
     {
         m_tapTickTimer->stop();
         delete m_tapTickTimer;
-        m_tapTickTimer = NULL;
+        m_tapTickTimer = nullptr;
         m_tap->setStyleSheet(tapDefaultSS);
         m_tapTick = false;
     }
@@ -270,7 +270,7 @@ void SpeedDial::updateTapTimer()
         m_tapTickTimer->stop();
 
     if (m_value != (int) Function::infiniteSpeed()
-       && m_tapTickTimer == NULL)
+       && m_tapTickTimer == nullptr)
     {
         m_tapTickTimer = new QTimer();
         m_tapTickTimer->setTimerType(Qt::PreciseTimer);
@@ -401,7 +401,7 @@ void SpeedDial::slotPlusMinusTimeout()
 
 void SpeedDial::slotDialChanged(int value)
 {
-    Q_ASSERT(m_focus != NULL);
+    Q_ASSERT(m_focus != nullptr);
 
     int newValue = dialDiff(value, m_previousDialValue, m_dial->singleStep()) + m_focus->value();
     if (newValue > m_focus->maximum())
@@ -532,14 +532,14 @@ void SpeedDial::slotInfiniteChecked(bool state)
 void SpeedDial::slotSpinFocusGained()
 {
     m_focus = qobject_cast <FocusSpinBox*> (QObject::sender());
-    Q_ASSERT(m_focus != NULL);
+    Q_ASSERT(m_focus != nullptr);
     m_dial->setRange(m_focus->minimum(), m_focus->maximum());
     m_dial->setSingleStep(m_focus->singleStep());
 }
 
 void SpeedDial::slotTapClicked()
 {
-    if (m_tapTime == NULL)
+    if (m_tapTime == nullptr)
     {
         m_tapTime = new QElapsedTimer();
         m_tapTime->start();

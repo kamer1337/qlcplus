@@ -71,7 +71,7 @@ public:
      *
      * @param manufacturer The fixture definition's manufacturer
      * @param model The fixture definition's model
-     * @return A matching fixture definition or NULL if not found
+     * @return A matching fixture definition or nullptr if not found
      */
     QLCFixtureDef* fixtureDef(const QString& manufacturer,
                               const QString& model) const;

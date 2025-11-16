@@ -529,7 +529,7 @@ public:
      * Get a function that has the given ID
      *
      * @param id The ID of the function to get
-     * @return A function at the given ID or NULL if not found
+     * @return A function at the given ID or nullptr if not found
      */
     Function* function(quint32 id) const;
 

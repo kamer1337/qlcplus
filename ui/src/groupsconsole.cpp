@@ -40,7 +40,7 @@ GroupsConsole::GroupsConsole(QWidget* parent, Doc* doc, QList <quint32> ids, QLi
     , m_ids(ids)
     , m_levels(levels)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
     new QHBoxLayout(this);
 
     init();
@@ -61,7 +61,7 @@ void GroupsConsole::init()
     foreach (quint32 id, m_ids)
     {
         ChannelsGroup *grp = m_doc->channelsGroup(id);
-        if (grp != NULL && grp->getChannels().count() > 0)
+        if (grp != nullptr && grp->getChannels().count() > 0)
         {
             SceneValue scv = grp->getChannels().at(0);
 

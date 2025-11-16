@@ -982,7 +982,7 @@ QLCCapability* QLCChannel::searchCapability(uchar value) const
             return capability;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 QLCCapability* QLCChannel::searchCapability(const QString& name,
@@ -999,12 +999,12 @@ QLCCapability* QLCChannel::searchCapability(const QString& name,
             return capability;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 bool QLCChannel::addCapability(QLCCapability* cap)
 {
-    Q_ASSERT(cap != NULL);
+    Q_ASSERT(cap != nullptr);
 
     /* Check for overlapping values */
     foreach (QLCCapability* another, m_capabilities)
@@ -1019,7 +1019,7 @@ bool QLCChannel::addCapability(QLCCapability* cap)
 
 bool QLCChannel::setCapabilityRange(QLCCapability* cap, uchar min, uchar max)
 {
-    Q_ASSERT(cap != NULL);
+    Q_ASSERT(cap != nullptr);
 
     uchar prevMin = cap->min();
     cap->setMin(min);
@@ -1045,7 +1045,7 @@ bool QLCChannel::setCapabilityRange(QLCCapability* cap, uchar min, uchar max)
 
 bool QLCChannel::removeCapability(QLCCapability* cap)
 {
-    Q_ASSERT(cap != NULL);
+    Q_ASSERT(cap != nullptr);
 
     QMutableListIterator <QLCCapability*> it(m_capabilities);
     while (it.hasNext() == true)
@@ -1077,7 +1077,7 @@ void QLCChannel::sortCapabilities()
 
 bool QLCChannel::saveXML(QXmlStreamWriter *doc) const
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* Channel entry */
     doc->writeStartElement(KXMLQLCChannel);

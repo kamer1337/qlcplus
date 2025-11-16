@@ -32,8 +32,8 @@ VideoEditor::VideoEditor(QWidget* parent, Video *video, Doc* doc)
     , m_doc(doc)
     , m_video(video)
 {
-    Q_ASSERT(doc != NULL);
-    Q_ASSERT(video != NULL);
+    Q_ASSERT(doc != nullptr);
+    Q_ASSERT(video != nullptr);
 
     setupUi(this);
 

@@ -95,11 +95,11 @@ quint32 ShowFunction::duration(const Doc *doc) const
     if (m_duration)
         return m_duration;
 
-    if (doc == NULL)
+    if (doc == nullptr)
         return 0;
 
     Function *f = doc->function(m_functionId);
-    if (f == NULL)
+    if (f == nullptr)
         return 0;
 
     return f->totalDuration();
@@ -188,7 +188,7 @@ bool ShowFunction::loadXML(QXmlStreamReader &root)
 
 bool ShowFunction::saveXML(QXmlStreamWriter *doc, quint32 trackId) const
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* Main tag */
     doc->writeStartElement(KXMLShowFunction);

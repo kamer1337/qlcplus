@@ -67,19 +67,19 @@ public:
     void addTrack(Track *track);
 
     /** Add a new sequence item to the given track */
-    void addSequence(Chaser *chaser, Track *track = NULL, ShowFunction *sf = NULL);
+    void addSequence(Chaser *chaser, Track *track = nullptr, ShowFunction *sf = nullptr);
 
     /** Add a new audio item to the given track */
-    void addAudio(Audio *audio, Track *track = NULL, ShowFunction *sf = NULL);
+    void addAudio(Audio *audio, Track *track = nullptr, ShowFunction *sf = nullptr);
 
     /** Add a new RGB Matrix item to the given track */
-    void addRGBMatrix(RGBMatrix *rgbm, Track *track = NULL, ShowFunction *sf = NULL);
+    void addRGBMatrix(RGBMatrix *rgbm, Track *track = nullptr, ShowFunction *sf = nullptr);
 
     /** Add a new EFX item to the given track */
-    void addEFX(EFX *efx, Track *track = NULL, ShowFunction *sf = NULL);
+    void addEFX(EFX *efx, Track *track = nullptr, ShowFunction *sf = nullptr);
 
     /** Add a new video item to the given track */
-    void addVideo(Video *video, Track *track = NULL, ShowFunction *sf = NULL);
+    void addVideo(Video *video, Track *track = nullptr, ShowFunction *sf = nullptr);
 
     /** Delete the currently selected item */
     quint32 deleteSelectedItem();
@@ -91,12 +91,12 @@ public:
     /** Set the given track to active state */
     void activateTrack(Track *track);
 
-    /** get the selected Show item. If none, returns NULL */
+    /** get the selected Show item. If none, returns nullptr */
     ShowItem *getSelectedItem();
 
 private:
     /** Retrieve the index of the given Track.
-     *  If trk is NULL, this function returns the currently
+     *  If trk is nullptr, this function returns the currently
      *  selected track.
      */
     int getTrackIndex(Track *trk);

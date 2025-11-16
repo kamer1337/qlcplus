@@ -76,13 +76,13 @@ VCSoloFrame::~VCSoloFrame()
 
 VCWidget* VCSoloFrame::createCopy(VCWidget* parent)
 {
-    Q_ASSERT(parent != NULL);
+    Q_ASSERT(parent != nullptr);
 
     VCSoloFrame* frame = new VCSoloFrame(parent, m_doc, true);
     if (frame->copyFrom(this) == false)
     {
         delete frame;
-        frame = NULL;
+        frame = nullptr;
     }
 
     return frame;
@@ -91,7 +91,7 @@ VCWidget* VCSoloFrame::createCopy(VCWidget* parent)
 bool VCSoloFrame::copyFrom(const VCWidget* widget)
 {
     const VCSoloFrame* frame = qobject_cast<const VCSoloFrame*> (widget);
-    if (frame == NULL)
+    if (frame == nullptr)
         return false;
 
     setSoloframeMixing(frame->soloframeMixing());
@@ -109,7 +109,7 @@ void VCSoloFrame::updateChildrenConnection(bool doConnect)
     while (it.hasNext())
     {
         VCWidget* widget = it.next();
-        if (widget != NULL && thisIsNearestSoloFrameParent(widget))
+        if (widget != nullptr && thisIsNearestSoloFrameParent(widget))
         {
             if (doConnect)
             {
@@ -144,12 +144,12 @@ void VCSoloFrame::setLiveEdit(bool liveEdit)
 
 bool VCSoloFrame::thisIsNearestSoloFrameParent(QWidget* widget)
 {
-    while (widget != NULL)
+    while (widget != nullptr)
     {
         widget = widget->parentWidget();
 
         VCSoloFrame *sf = qobject_cast<VCSoloFrame*>(widget);
-        if (sf != NULL)
+        if (sf != nullptr)
         {
             return sf == this;
         }
@@ -162,7 +162,7 @@ void VCSoloFrame::slotWidgetFunctionStarting(quint32 fid, qreal intensity)
 {
     VCWidget* senderWidget = qobject_cast<VCWidget*>(sender());
 
-    if (senderWidget != NULL)
+    if (senderWidget != nullptr)
     {
         // get every widget that is a child of this soloFrame and turn their
         // functions off
@@ -171,7 +171,7 @@ void VCSoloFrame::slotWidgetFunctionStarting(quint32 fid, qreal intensity)
         while (it.hasNext() == true)
         {
             VCWidget* widget = it.next();
-            if (widget != NULL && widget != senderWidget)
+            if (widget != nullptr && widget != senderWidget)
                 widget->notifyFunctionStarting(fid, soloframeMixing() ? intensity : 1.0);
         }
     }
@@ -183,7 +183,7 @@ void VCSoloFrame::slotWidgetFunctionStarting(quint32 fid, qreal intensity)
 
 void VCSoloFrame::editProperties()
 {
-    VCSoloFrameProperties prop(NULL, this, m_doc);
+    VCSoloFrameProperties prop(nullptr, this, m_doc);
     if (prop.exec() == QDialog::Accepted)
     {
         applyProperties(prop);
@@ -217,7 +217,7 @@ void VCSoloFrame::paintEvent(QPaintEvent* e)
 {
     /* No point coming here if there is no VC instance */
     VirtualConsole* vc = VirtualConsole::instance();
-    if (vc == NULL)
+    if (vc == nullptr)
         return;
 
     QPainter painter(this);

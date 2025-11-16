@@ -43,8 +43,8 @@ ShowEditor::ShowEditor(QWidget* parent, Show* show, Doc* doc)
     , m_doc(doc)
     , m_show(show)
 {
-    Q_ASSERT(doc != NULL);
-    Q_ASSERT(show != NULL);
+    Q_ASSERT(doc != nullptr);
+    Q_ASSERT(show != nullptr);
 
     setupUi(this);
     m_tree->setRootIsDecorated(true);
@@ -96,7 +96,7 @@ void ShowEditor::updateFunctionList()
 
     m_tree->clear();
 
-    if (m_show == NULL)
+    if (m_show == nullptr)
     {
         qDebug() << Q_FUNC_INFO << "Invalid show!";
         return;
@@ -109,12 +109,12 @@ void ShowEditor::updateFunctionList()
 
     foreach (Track *track, m_show->tracks())
     {
-        QTreeWidgetItem* sceneItem = NULL;
+        QTreeWidgetItem* sceneItem = nullptr;
         Scene *scene = qobject_cast<Scene*>(m_doc->function(track->getSceneID()));
-        if (scene != NULL)
+        if (scene != nullptr)
         {
             sceneItem = scenesMap[scene->id()];
-            if (sceneItem == NULL)
+            if (sceneItem == nullptr)
             {
                 sceneItem = new QTreeWidgetItem(masterItem);
                 sceneItem->setText(NAME_COL, scene->name());
@@ -126,14 +126,14 @@ void ShowEditor::updateFunctionList()
         foreach (ShowFunction *sf, track->showFunctions())
         {
             Function *func = m_doc->function(sf->functionID());
-            if (func == NULL)
+            if (func == nullptr)
             {
                 qDebug() << "Cannot find Function with ID:" << sf->functionID();
                 continue;
             }
 
-            QTreeWidgetItem *fItem = NULL;
-            if (sceneItem == NULL)
+            QTreeWidgetItem *fItem = nullptr;
+            if (sceneItem == nullptr)
                 fItem = new QTreeWidgetItem(masterItem);
             else
                 fItem = new QTreeWidgetItem(sceneItem);

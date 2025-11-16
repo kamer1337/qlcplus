@@ -395,11 +395,11 @@ void App::slotFileSave()
     QMdiSubWindow *sub;
 
     sub = (qobject_cast<QMdiArea*> (centralWidget()))->activeSubWindow();
-    if (sub == NULL)
+    if (sub == nullptr)
         return;
 
     editor = static_cast<QLCFixtureEditor*> (sub->widget());
-    if (editor == NULL)
+    if (editor == nullptr)
         return;
 
     editor->save();

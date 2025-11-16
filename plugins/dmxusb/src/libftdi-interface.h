@@ -95,7 +95,7 @@ public:
     QByteArray read(int size);
 
     /** @reimpl */
-    uchar readByte(bool* ok = NULL);
+    uchar readByte(bool* ok = nullptr);
 
 private:
     struct ftdi_context m_handle;

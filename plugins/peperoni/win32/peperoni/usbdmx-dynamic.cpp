@@ -39,7 +39,7 @@ HINSTANCE	hLib = 0;
  * USBDMX_INIT() increments a "used" counter to track the number of
  * useres. Make shure to call usbdmx_release if the DLL is not used
  * anymore.
- * If the DLL was not found, NULL is returned.
+ * If the DLL was not found, nullptr is returned.
  */
 struct usbdmx_functions *usbdmx_init(VOID)
 {
@@ -53,7 +53,7 @@ struct usbdmx_functions *usbdmx_init(VOID)
     // load the DLL
     hLib = LoadLibrary(TEXT("usbdmx.dll"));
     if (!hLib)
-        return NULL;
+        return nullptr;
 
     // load all functions of the DLL
     if ((usbdmx.version		= (USBDMX_TYPE_VERSION)     (void *)GetProcAddress(hLib, ("usbdmx_version"))) &&
@@ -100,7 +100,7 @@ struct usbdmx_functions *usbdmx_init(VOID)
     }
     else
     {
-        return NULL;
+        return nullptr;
     }
 }
 

@@ -28,7 +28,7 @@
 VCDockArea::VCDockArea(QWidget* parent, InputOutputMap *ioMap)
     : QFrame(parent)
 {
-    Q_ASSERT(ioMap != NULL);
+    Q_ASSERT(ioMap != nullptr);
 
     new QHBoxLayout(this);
     layout()->setContentsMargins(0, 0, 0, 0);
@@ -44,7 +44,7 @@ VCDockArea::~VCDockArea()
 
 void VCDockArea::setGrandMasterVisible(bool visible)
 {
-    Q_ASSERT(m_gm != NULL);
+    Q_ASSERT(m_gm != nullptr);
     if (visible)
         m_gm->show();
     else
@@ -53,7 +53,7 @@ void VCDockArea::setGrandMasterVisible(bool visible)
 
 void VCDockArea::setGrandMasterInvertedAppearance(GrandMaster::SliderMode mode)
 {
-    Q_ASSERT(m_gm != NULL);
+    Q_ASSERT(m_gm != nullptr);
     if (mode == GrandMaster::Normal)
         m_gm->setInvertedAppearance(false);
     else

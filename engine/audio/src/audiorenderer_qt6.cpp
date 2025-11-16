@@ -28,8 +28,8 @@
 
 AudioRendererQt6::AudioRendererQt6(QString device, Doc *doc, QObject *parent)
     : AudioRenderer(parent)
-    , m_audioSink(NULL)
-    , m_output(NULL)
+    , m_audioSink(nullptr)
+    , m_output(nullptr)
     , m_device(device)
 {
     QSettings settings;
@@ -51,12 +51,12 @@ AudioRendererQt6::~AudioRendererQt6()
 {
     stop();
 
-    if (m_audioSink == NULL)
+    if (m_audioSink == nullptr)
         return;
 
     m_audioSink->stop();
     delete m_audioSink;
-    m_audioSink = NULL;
+    m_audioSink = nullptr;
 }
 
 bool AudioRendererQt6::initialize(quint32 freq, int chan, AudioFormat format)
@@ -140,7 +140,7 @@ qint64 AudioRendererQt6::writeAudio(unsigned char *data, qint64 maxSize)
 {
     qsizetype bFree = m_audioSink->bytesFree();
 
-    if (m_audioSink == NULL || bFree < maxSize)
+    if (m_audioSink == nullptr || bFree < maxSize)
         return 0;
 
     //qDebug() << "writeAudio called !! - " << maxSize << m_outputBuffer.length() << bFree;
@@ -181,13 +181,13 @@ void AudioRendererQt6::resume()
 
 void AudioRendererQt6::run()
 {
-    if (m_audioSink == NULL)
+    if (m_audioSink == nullptr)
     {
         qDebug() << "Creating audio sink on" << m_deviceInfo.description();
 
         m_audioSink = new QAudioSink(m_deviceInfo, m_format);
 
-        if (m_audioSink == NULL)
+        if (m_audioSink == nullptr)
         {
             qWarning() << "Cannot open audio output stream from device" << m_deviceInfo.description();
             return;

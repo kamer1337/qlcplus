@@ -55,11 +55,11 @@ ChaserEditor::ChaserEditor(QWidget* parent, Chaser* chaser, Doc* doc, bool liveM
     : QWidget(parent)
     , m_doc(doc)
     , m_chaser(chaser)
-    , m_speedDials(NULL)
+    , m_speedDials(nullptr)
     , m_liveMode(liveMode)
 {
-    Q_ASSERT(chaser != NULL);
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(chaser != nullptr);
+    Q_ASSERT(doc != nullptr);
 
     setupUi(this);
 
@@ -241,9 +241,9 @@ ChaserEditor::ChaserEditor(QWidget* parent, Chaser* chaser, Doc* doc, bool liveM
 
 ChaserEditor::~ChaserEditor()
 {
-    if (m_speedDials != NULL)
+    if (m_speedDials != nullptr)
         m_speedDials->deleteLater();
-    m_speedDials = NULL;
+    m_speedDials = nullptr;
 
     // double check that the Chaser still exists !
     if (m_liveMode == false &&
@@ -293,9 +293,9 @@ void ChaserEditor::slotFunctionManagerActive(bool active)
     }
     else
     {
-        if (m_speedDials != NULL)
+        if (m_speedDials != nullptr)
             m_speedDials->deleteLater();
-        m_speedDials = NULL;
+        m_speedDials = nullptr;
     }
 }
 
@@ -367,7 +367,7 @@ void ChaserEditor::slotAddClicked()
 
     int insertionPoint = m_tree->topLevelItemCount();
     QTreeWidgetItem* item = m_tree->currentItem();
-    if (item != NULL)
+    if (item != nullptr)
         insertionPoint = m_tree->indexOfTopLevelItem(item) + 1;
 
     if (m_chaser->type() == Function::SequenceType)
@@ -578,9 +578,9 @@ void ChaserEditor::slotSpeedDialToggle(bool state)
         updateSpeedDials();
     else
     {
-        if (m_speedDials != NULL)
+        if (m_speedDials != nullptr)
             m_speedDials->deleteLater();
-        m_speedDials = NULL;
+        m_speedDials = nullptr;
     }
 }
 
@@ -709,7 +709,7 @@ void ChaserEditor::slotCutClicked()
     }
 
     m_doc->clipboard()->copyContent(m_chaser->id(), copyList);
-    m_tree->setCurrentItem(NULL);
+    m_tree->setCurrentItem(nullptr);
 
     updateStepNumbers();
     updateClipboardButtons();
@@ -757,7 +757,7 @@ void ChaserEditor::slotPasteClicked()
 
     int insertionPoint = 0;
     QTreeWidgetItem* currentItem = m_tree->currentItem();
-    if (currentItem != NULL)
+    if (currentItem != nullptr)
     {
         insertionPoint = m_tree->indexOfTopLevelItem(currentItem) + 1;
         currentItem->setSelected(false);
@@ -774,7 +774,7 @@ void ChaserEditor::slotPasteClicked()
     {
         QTreeWidgetItem* item = new QTreeWidgetItem;
         ChaserStep step(it.next());
-        if (step.resolveFunction(m_doc) == NULL) // Function has been removed
+        if (step.resolveFunction(m_doc) == nullptr) // Function has been removed
         {
             qWarning() << Q_FUNC_INFO << "Trying to paste an invalid function (removed function?)";
             continue;
@@ -953,7 +953,7 @@ void ChaserEditor::slotDialDestroyed(QObject *)
 
 void ChaserEditor::createSpeedDials()
 {
-    if (m_speedDials == NULL)
+    if (m_speedDials == nullptr)
     {
         m_speedDials = new SpeedDialWidget(this);
         m_speedDials->setAttribute(Qt::WA_DeleteOnClose);
@@ -1197,13 +1197,13 @@ void ChaserEditor::updateTree(bool clear)
 
     for (int i = 0; i < m_chaser->steps().size(); i++)
     {
-        QTreeWidgetItem* item = NULL;
+        QTreeWidgetItem* item = nullptr;
 
         if (clear == true)
             item = new QTreeWidgetItem(m_tree);
         else
             item = m_tree->topLevelItem(i);
-        Q_ASSERT(item != NULL);
+        Q_ASSERT(item != nullptr);
 
         ChaserStep step(m_chaser->steps().at(i));
         updateItem(item, step);
@@ -1215,8 +1215,8 @@ void ChaserEditor::updateTree(bool clear)
 void ChaserEditor::updateItem(QTreeWidgetItem* item, ChaserStep& step)
 {
     Function* function = step.resolveFunction(m_doc);
-    Q_ASSERT(function != NULL);
-    Q_ASSERT(item != NULL);
+    Q_ASSERT(function != nullptr);
+    Q_ASSERT(item != nullptr);
 
     m_tree->blockSignals(true);
 
@@ -1283,14 +1283,14 @@ void ChaserEditor::updateStepNumbers()
     for (int i = 0; i < m_tree->topLevelItemCount(); i++)
     {
         QTreeWidgetItem* item = m_tree->topLevelItem(i);
-        Q_ASSERT(item != NULL);
+        Q_ASSERT(item != nullptr);
         item->setText(COL_NUM, QString("%1").arg(i + 1));
     }
 }
 
 ChaserStep ChaserEditor::stepAtItem(const QTreeWidgetItem* item) const
 {
-    Q_ASSERT(item != NULL);
+    Q_ASSERT(item != nullptr);
 
     int idx = item->text(COL_NUM).toInt() - 1;
     if (idx < 0 || idx >= m_chaser->steps().count())
@@ -1335,7 +1335,7 @@ void ChaserEditor::applyStepValues()
         QTreeWidgetItem* item(selected.first());
         int idx = m_tree->indexOfTopLevelItem(item);
         qDebug() << "Idx: " << idx << ", steps: " << m_chaser->steps().count();
-        if (m_chaser != NULL && idx < m_chaser->steps().count())
+        if (m_chaser != nullptr && idx < m_chaser->steps().count())
         {
             ChaserStep step = m_chaser->steps().at(idx);
 

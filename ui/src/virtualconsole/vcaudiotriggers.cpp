@@ -44,12 +44,12 @@ const QSize VCAudioTriggers::defaultSize(QSize(300, 200));
 
 VCAudioTriggers::VCAudioTriggers(QWidget* parent, Doc* doc)
     : VCWidget(parent, doc)
-    , m_hbox(NULL)
-    , m_button(NULL)
-    , m_label(NULL)
-    , m_spectrum(NULL)
-    , m_volumeSlider(NULL)
-    , m_inputCapture(NULL)
+    , m_hbox(nullptr)
+    , m_button(nullptr)
+    , m_label(nullptr)
+    , m_spectrum(nullptr)
+    , m_volumeSlider(nullptr)
+    , m_inputCapture(nullptr)
 {
     /* Set the class name "VCAudioTriggers" as the object name as well */
     setObjectName(VCAudioTriggers::staticMetaObject.className());
@@ -326,7 +326,7 @@ void VCAudioTriggers::writeDMX(MasterTimer *timer, QList<Universe *> universes)
                 if (universe != lastUniverse)
                 {
                     fader = m_fadersMap.value(universe, QSharedPointer<GenericFader>());
-                    if (fader == NULL)
+                    if (fader == nullptr)
                     {
                         fader = universes[universe]->requestFader();
                         fader->adjustIntensity(intensity());
@@ -407,13 +407,13 @@ void VCAudioTriggers::slotInputValueChanged(quint32 universe, quint32 channel, u
 
 VCWidget *VCAudioTriggers::createCopy(VCWidget *parent)
 {
-    Q_ASSERT(parent != NULL);
+    Q_ASSERT(parent != nullptr);
 
     VCAudioTriggers* triggers = new VCAudioTriggers(parent, m_doc);
     if (triggers->copyFrom(this) == false)
     {
         delete triggers;
-        triggers = NULL;
+        triggers = nullptr;
     }
 
     return triggers;
@@ -422,7 +422,7 @@ VCWidget *VCAudioTriggers::createCopy(VCWidget *parent)
 bool VCAudioTriggers::copyFrom(const VCWidget *widget)
 {
     const VCAudioTriggers* triggers = qobject_cast <const VCAudioTriggers*> (widget);
-    if (triggers == NULL)
+    if (triggers == nullptr)
         return false;
 
     /* TODO: Copy triggers-specific stuff */
@@ -437,7 +437,7 @@ bool VCAudioTriggers::copyFrom(const VCWidget *widget)
 
 void VCAudioTriggers::setCaption(const QString &text)
 {
-    if (m_label != NULL)
+    if (m_label != nullptr)
         m_label->setText(text);
 
     VCWidget::setCaption(text);
@@ -445,7 +445,7 @@ void VCAudioTriggers::setCaption(const QString &text)
 
 void VCAudioTriggers::setForegroundColor(const QColor &color)
 {
-    if (m_label != NULL)
+    if (m_label != nullptr)
     {
         m_label->setStyleSheet("QLabel { background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #345D27, stop: 1 #0E1A0A); "
                                "color: " + color.name() + "; border-radius: 3px; padding: 3px; margin-left: 2px; }");
@@ -456,7 +456,7 @@ void VCAudioTriggers::setForegroundColor(const QColor &color)
 
 QColor VCAudioTriggers::foregroundColor() const
 {
-    if (m_label != NULL)
+    if (m_label != nullptr)
         return m_label->palette().color(m_label->foregroundRole());
     else
         return VCWidget::foregroundColor();
@@ -505,7 +505,7 @@ AudioBar *VCAudioTriggers::getSpectrumBar(int index)
     if (index >= 0 && index < m_spectrumBars.size())
         return m_spectrumBars.at(index);
 
-    return NULL;
+    return nullptr;
 }
 
 QList<AudioBar *> VCAudioTriggers::getAudioBars()
@@ -536,7 +536,7 @@ void VCAudioTriggers::setSpectrumBarsNumber(int num)
             delete m_spectrumBars.takeLast();
     }
 
-    if (m_spectrum != NULL)
+    if (m_spectrum != nullptr)
         m_spectrum->setBarsNumber(num);
 }
 
@@ -677,7 +677,7 @@ bool VCAudioTriggers::loadXML(QXmlStreamReader &root)
 
 bool VCAudioTriggers::saveXML(QXmlStreamWriter *doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* VC button entry */
     doc->writeStartElement(KXMLQLCVCAudioTriggers);

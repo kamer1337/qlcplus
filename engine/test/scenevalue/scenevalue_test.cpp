@@ -86,7 +86,7 @@ void SceneValue_Test::loadSuccess()
     xmlWriter.writeCharacters("100");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -112,7 +112,7 @@ void SceneValue_Test::loadWrongRoot()
     xmlWriter.writeCharacters("100");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -135,7 +135,7 @@ void SceneValue_Test::loadWrongFixture()
     xmlWriter.writeCharacters("100");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -158,7 +158,7 @@ void SceneValue_Test::loadWrongValue()
     xmlWriter.writeCharacters("257");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -179,7 +179,7 @@ void SceneValue_Test::save()
     SceneValue scv(4, 8, 16);
     QVERIFY(scv.saveXML(&xmlWriter) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);

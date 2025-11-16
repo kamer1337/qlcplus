@@ -87,18 +87,18 @@ QIcon Video::getIcon() const
 
 Function* Video::createCopy(Doc* doc, bool addToDoc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     Function* copy = new Video(doc);
     if (copy->copyFrom(this) == false)
     {
         delete copy;
-        copy = NULL;
+        copy = nullptr;
     }
     if (addToDoc == true && doc->addFunction(copy) == false)
     {
         delete copy;
-        copy = NULL;
+        copy = nullptr;
     }
 
     return copy;
@@ -107,7 +107,7 @@ Function* Video::createCopy(Doc* doc, bool addToDoc)
 bool Video::copyFrom(const Function* function)
 {
     const Video* vid = qobject_cast<const Video*> (function);
-    if (vid == NULL)
+    if (vid == nullptr)
         return false;
 
     setSourceUrl(vid->m_sourceUrl);
@@ -356,7 +356,7 @@ void Video::slotFunctionRemoved(quint32 fid)
 
 bool Video::saveXML(QXmlStreamWriter *doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* Function tag */
     doc->writeStartElement(KXMLQLCFunction);

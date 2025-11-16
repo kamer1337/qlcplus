@@ -36,8 +36,8 @@ AudioBar::AudioBar(int t, uchar v, quint32 parentId)
     m_tapped = false;
     m_dmxChannels.clear();
     m_absDmxChannels.clear();
-    m_function = NULL;
-    m_widget = NULL;
+    m_function = nullptr;
+    m_widget = nullptr;
     m_widgetID = VCWidget::invalidId();
     m_minThreshold = 51; // 20%
     m_maxThreshold = 204; // 80%
@@ -80,8 +80,8 @@ void AudioBar::setType(int type)
         m_tapped = false;
         m_dmxChannels.clear();
         m_absDmxChannels.clear();
-        m_function = NULL;
-        m_widget = NULL;
+        m_function = nullptr;
+        m_widget = nullptr;
         m_widgetID = VCWidget::invalidId();
         m_minThreshold = 51; // 20%
         m_maxThreshold = 204; // 80%
@@ -115,7 +115,7 @@ void AudioBar::attachDmxChannels(Doc *doc, QList<SceneValue> list)
     foreach (SceneValue scv, m_dmxChannels)
     {
         Fixture *fx = doc->fixture(scv.fxi);
-        if (fx != NULL)
+        if (fx != nullptr)
         {
             quint32 absAddr = fx->universeAddress() + scv.channel;
             m_absDmxChannels.append(absAddr);
@@ -125,7 +125,7 @@ void AudioBar::attachDmxChannels(Doc *doc, QList<SceneValue> list)
 
 void AudioBar::attachFunction(Function *func)
 {
-    if (func != NULL)
+    if (func != nullptr)
     {
         qDebug() << Q_FUNC_INFO << "Attaching function:" << func->name();
         m_function = func;
@@ -139,13 +139,13 @@ void AudioBar::attachWidget(quint32 wID)
 
     qDebug() << Q_FUNC_INFO << "Attaching widget with ID" << wID;
     m_widgetID = wID;
-    m_widget = NULL;
+    m_widget = nullptr;
     m_tapped = false;
 }
 
 VCWidget *AudioBar::widget()
 {
-    if (m_widget == NULL)
+    if (m_widget == nullptr)
         m_widget = VirtualConsole::instance()->widget(m_widgetID);
 
     return m_widget;
@@ -153,7 +153,7 @@ VCWidget *AudioBar::widget()
 
 void AudioBar::checkFunctionThresholds(Doc *doc)
 {
-    if (m_function == NULL)
+    if (m_function == nullptr)
         return;
     if (m_value >= m_maxThreshold)
     {
@@ -170,7 +170,7 @@ void AudioBar::checkWidgetFunctionality()
     if (m_widgetID == VCWidget::invalidId())
         return;
 
-    if (widget() == NULL) // fills m_widget if needed
+    if (widget() == nullptr) // fills m_widget if needed
         return;
 
     if (m_widget->type() == VCWidget::ButtonWidget)
@@ -254,7 +254,7 @@ bool AudioBar::loadXML(QXmlStreamReader &root, Doc *doc)
                 {
                     quint32 fid = attrs.value(KXMLQLCAudioBarFunction).toString().toUInt();
                     Function *func = doc->function(fid);
-                    if (func != NULL)
+                    if (func != nullptr)
                         m_function = func;
                 }
             }
@@ -308,7 +308,7 @@ bool AudioBar::loadXML(QXmlStreamReader &root, Doc *doc)
 
 bool AudioBar::saveXML(QXmlStreamWriter *doc, QString tagName, int index)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     qDebug() << Q_FUNC_INFO;
 
@@ -334,7 +334,7 @@ bool AudioBar::saveXML(QXmlStreamWriter *doc, QString tagName, int index)
             doc->writeTextElement(KXMLQLCAudioBarDMXChannels, chans);
         }
     }
-    else if (m_type == AudioBar::FunctionBar && m_function != NULL)
+    else if (m_type == AudioBar::FunctionBar && m_function != nullptr)
     {
         doc->writeAttribute(KXMLQLCAudioBarFunction, QString::number(m_function->id()));
     }

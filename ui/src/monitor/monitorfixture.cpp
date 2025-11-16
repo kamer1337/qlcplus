@@ -35,9 +35,9 @@ MonitorFixture::MonitorFixture(QWidget* parent, Doc* doc)
     : QFrame(parent)
     , m_doc(doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
-    m_fixtureLabel = NULL;
+    m_fixtureLabel = nullptr;
     m_fixture = Fixture::invalidId();
     m_channelStyle = MonitorProperties::DMXChannels;
     m_valueStyle = MonitorProperties::DMXValues;
@@ -55,11 +55,11 @@ MonitorFixture::~MonitorFixture()
     if (m_fixture != Fixture::invalidId())
     {
         Fixture* fxi = m_doc->fixture(m_fixture);
-        if (fxi != NULL)
+        if (fxi != nullptr)
             disconnect(fxi, SIGNAL(valuesChanged()), this, SLOT(slotValuesChanged()));
     }
 
-    if (m_fixtureLabel != NULL)
+    if (m_fixtureLabel != nullptr)
         delete m_fixtureLabel;
 
     while (m_iconsLabels.isEmpty() == false)
@@ -76,11 +76,11 @@ bool MonitorFixture::operator<(const MonitorFixture& mof)
     Fixture* mof_fxi;
 
     fxi = m_doc->fixture(m_fixture);
-    if (fxi == NULL)
+    if (fxi == nullptr)
         return false;
 
     mof_fxi = m_doc->fixture(mof.fixture());
-    if (mof_fxi == NULL)
+    if (mof_fxi == nullptr)
         return false;
 
     if ((*fxi) < (*mof_fxi))
@@ -104,7 +104,7 @@ void MonitorFixture::setFixture(quint32 fxi_id)
     Fixture* fxi;
 
     /* Get rid of old stuff first, if such exists */
-    if (m_fixtureLabel != NULL)
+    if (m_fixtureLabel != nullptr)
         delete m_fixtureLabel;
     while (m_iconsLabels.isEmpty() == false)
         delete m_iconsLabels.takeFirst();
@@ -115,7 +115,7 @@ void MonitorFixture::setFixture(quint32 fxi_id)
 
     m_fixture = fxi_id;
     fxi = m_doc->fixture(m_fixture);
-    if (fxi != NULL)
+    if (fxi != nullptr)
     {
         /* The grid layout uses columns and rows. The first row is for
            the fixture name, second row for channel numbers and the
@@ -145,7 +145,7 @@ void MonitorFixture::setFixture(quint32 fxi_id)
             /* Create a label for channel number */
             QLabel *label = new QLabel(this);
 
-            if (channel != NULL)
+            if (channel != nullptr)
             {
                 icon->setToolTip(channel->name());
                 label->setToolTip(channel->name());
@@ -189,7 +189,7 @@ void MonitorFixture::slotChannelStyleChanged(MonitorProperties::ChannelStyle sty
         return;
 
     Fixture* fxi = m_doc->fixture(m_fixture);
-    Q_ASSERT(fxi != NULL);
+    Q_ASSERT(fxi != nullptr);
 
     /* Start channel numbering from this fixture's address */
     if (style == MonitorProperties::DMXChannels)
@@ -221,7 +221,7 @@ void MonitorFixture::slotValueStyleChanged(MonitorProperties::ValueStyle style)
         int value;
 
         label = it.next();
-        Q_ASSERT(label != NULL);
+        Q_ASSERT(label != nullptr);
 
         value = label->text().toInt();
 
@@ -250,7 +250,7 @@ void MonitorFixture::slotValuesChanged()
 
     /* Check that this MonitorFixture's fixture really exists */
     Fixture* fxi = m_doc->fixture(m_fixture);
-    if (fxi == NULL)
+    if (fxi == nullptr)
         return;
 
     QByteArray fxValues = fxi->channelValues();
@@ -260,7 +260,7 @@ void MonitorFixture::slotValuesChanged()
     while (it.hasNext() == true)
     {
         QLabel* label = it.next();
-        Q_ASSERT(label != NULL);
+        Q_ASSERT(label != nullptr);
         QString str;
 
         /* Set the label's text to reflect the changed value */

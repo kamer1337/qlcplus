@@ -116,7 +116,7 @@ void GenericFader::replace(const FadeChannel &ch)
 
 void GenericFader::remove(FadeChannel *ch)
 {
-    if (ch == NULL)
+    if (ch == nullptr)
         return;
 
     quint32 hash = channelHash(ch->fixture(), ch->channel());

@@ -27,8 +27,8 @@
 
 AudioRendererQt5::AudioRendererQt5(QString device, Doc *doc, QObject *parent)
     : AudioRenderer(parent)
-    , m_audioOutput(NULL)
-    , m_output(NULL)
+    , m_audioOutput(nullptr)
+    , m_output(nullptr)
     , m_device(device)
 {
     QSettings settings;
@@ -48,12 +48,12 @@ AudioRendererQt5::AudioRendererQt5(QString device, Doc *doc, QObject *parent)
 
 AudioRendererQt5::~AudioRendererQt5()
 {
-    if (m_audioOutput == NULL)
+    if (m_audioOutput == nullptr)
         return;
 
     m_audioOutput->stop();
     delete m_audioOutput;
-    m_audioOutput = NULL;
+    m_audioOutput = nullptr;
 }
 
 bool AudioRendererQt5::initialize(quint32 freq, int chan, AudioFormat format)
@@ -144,7 +144,7 @@ QList<AudioDeviceInfo> AudioRendererQt5::getDevicesInfo()
 
 qint64 AudioRendererQt5::writeAudio(unsigned char *data, qint64 maxSize)
 {
-    if (m_audioOutput == NULL || m_audioOutput->bytesFree() < maxSize)
+    if (m_audioOutput == nullptr || m_audioOutput->bytesFree() < maxSize)
         return 0;
 
     //qDebug() << "writeAudio called !! - " << maxSize;
@@ -178,11 +178,11 @@ void AudioRendererQt5::resume()
 
 void AudioRendererQt5::run()
 {
-    if (m_audioOutput == NULL)
+    if (m_audioOutput == nullptr)
     {
         m_audioOutput = new QAudioOutput(m_deviceInfo, m_format);
 
-        if (m_audioOutput == NULL)
+        if (m_audioOutput == nullptr)
         {
             qWarning() << "Cannot open audio output stream from device" << m_deviceInfo.deviceName();
             return;

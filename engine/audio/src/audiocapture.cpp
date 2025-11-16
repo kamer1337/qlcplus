@@ -36,10 +36,10 @@ AudioCapture::AudioCapture (QObject* parent)
     , m_captureSize(0)
     , m_sampleRate(0)
     , m_channels(0)
-    , m_audioBuffer(NULL)
-    , m_audioMixdown(NULL)
-    , m_fftInputBuffer(NULL)
-    , m_fftOutputBuffer(NULL)
+    , m_audioBuffer(nullptr)
+    , m_audioMixdown(nullptr)
+    , m_fftInputBuffer(nullptr)
+    , m_fftOutputBuffer(nullptr)
 {
     bufferSize = AUDIO_DEFAULT_BUFFER_SIZE;
     m_sampleRate = AUDIO_DEFAULT_SAMPLE_RATE;

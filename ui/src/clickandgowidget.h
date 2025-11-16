@@ -57,7 +57,7 @@ public:
      * Set the widget type. This is fundamental
      * for the whole widget behaviour
      */
-    void setType(int type, const QLCChannel *chan = NULL);
+    void setType(int type, const QLCChannel *chan = nullptr);
 
     /**
      * Returns the widget type

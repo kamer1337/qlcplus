@@ -32,7 +32,7 @@ QList<SceneValue> KeyPadParser::parseCommand(Doc *doc, QString command,
                                              QByteArray &uniData)
 {
     QList<SceneValue> values;
-    if (doc == NULL || command.isEmpty())
+    if (doc == nullptr || command.isEmpty())
         return values;
 
     QStringList tokens = command.split(" ");

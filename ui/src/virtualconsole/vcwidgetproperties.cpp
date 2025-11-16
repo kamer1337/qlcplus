@@ -80,7 +80,7 @@ int VCWidgetProperties::height() const
 
 void VCWidgetProperties::store(QWidget* widget)
 {
-    Q_ASSERT(widget != NULL);
+    Q_ASSERT(widget != nullptr);
     m_state = widget->windowState();
     m_visible = widget->isVisible();
     m_x = widget->x();
@@ -123,7 +123,7 @@ bool VCWidgetProperties::loadXML(QXmlStreamReader &root)
 
 bool VCWidgetProperties::saveXML(QXmlStreamWriter *doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* Widget Properties entry */
     doc->writeStartElement(KXMLQLCWidgetProperties);

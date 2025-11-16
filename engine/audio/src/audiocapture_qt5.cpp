@@ -25,15 +25,15 @@
 
 AudioCaptureQt5::AudioCaptureQt5(QObject * parent)
     : AudioCapture(parent)
-    , m_audioInput(NULL)
-    , m_input(NULL)
+    , m_audioInput(nullptr)
+    , m_input(nullptr)
 {
 }
 
 AudioCaptureQt5::~AudioCaptureQt5()
 {
     stop();
-    Q_ASSERT(m_audioInput == NULL);
+    Q_ASSERT(m_audioInput == nullptr);
 }
 
 bool AudioCaptureQt5::initialize()
@@ -71,11 +71,11 @@ bool AudioCaptureQt5::initialize()
         m_sampleRate = m_format.sampleRate();
     }
 
-    Q_ASSERT(m_audioInput == NULL);
+    Q_ASSERT(m_audioInput == nullptr);
 
     m_audioInput = new QAudioInput(audioDevice, m_format);
 
-    if (m_audioInput == NULL)
+    if (m_audioInput == nullptr)
     {
         qWarning() << "Cannot open audio input stream from device" << audioDevice.deviceName();
         return false;
@@ -87,8 +87,8 @@ bool AudioCaptureQt5::initialize()
     {
         qWarning() << "Could not start input capture on device" << audioDevice.deviceName();
         delete m_audioInput;
-        m_audioInput = NULL;
-        m_input = NULL;
+        m_audioInput = nullptr;
+        m_input = nullptr;
         return false;
     }
 
@@ -99,11 +99,11 @@ bool AudioCaptureQt5::initialize()
 
 void AudioCaptureQt5::uninitialize()
 {
-    Q_ASSERT(m_audioInput != NULL);
+    Q_ASSERT(m_audioInput != nullptr);
 
     m_audioInput->stop();
     delete m_audioInput;
-    m_audioInput = NULL;
+    m_audioInput = nullptr;
 }
 
 qint64 AudioCaptureQt5::latency()
@@ -117,7 +117,7 @@ void AudioCaptureQt5::setVolume(qreal volume)
         return;
 
     m_volume = volume;
-    if (m_audioInput != NULL)
+    if (m_audioInput != nullptr)
         m_audioInput->setVolume(volume);
 
     emit volumeChanged(volume * 100.0);
@@ -133,7 +133,7 @@ void AudioCaptureQt5::resume()
 
 bool AudioCaptureQt5::readAudio(int maxSize)
 {
-    if (m_audioInput == NULL || m_input == NULL)
+    if (m_audioInput == nullptr || m_input == nullptr)
         return false;
 
     int bufferSize = maxSize * sizeof(*m_audioBuffer);

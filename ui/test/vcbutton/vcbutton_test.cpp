@@ -44,13 +44,13 @@ static const QKeySequence keySequenceB(Qt::Key_B);
 
 void VCButton_Test::initTestCase()
 {
-    m_doc = NULL;
+    m_doc = nullptr;
 }
 
 void VCButton_Test::init()
 {
     m_doc = new Doc(this);
-    new VirtualConsole(NULL, m_doc);
+    new VirtualConsole(nullptr, m_doc);
 
     Fixture* fxi = new Fixture(m_doc);
     fxi->setChannels(4);
@@ -78,8 +78,8 @@ void VCButton_Test::initial()
     QCOMPARE(btn.state(), VCButton::Inactive);
     QCOMPARE(btn.action(), VCButton::Toggle);
     QCOMPARE(btn.iconPath(), QString());
-    QVERIFY(btn.m_chooseIconAction != NULL);
-    QVERIFY(btn.m_resetIconAction != NULL);
+    QVERIFY(btn.m_chooseIconAction != nullptr);
+    QVERIFY(btn.m_resetIconAction != nullptr);
 
     // Only for coverage
     btn.setBackgroundImage(QString());
@@ -290,7 +290,7 @@ void VCButton_Test::copy()
 
     VCFrame parent(&w, m_doc);
     VCButton* copy = qobject_cast<VCButton*> (btn.createCopy(&parent));
-    QVERIFY(copy != NULL);
+    QVERIFY(copy != nullptr);
     QCOMPARE(copy->caption(), QString("Foobar"));
     QCOMPARE(copy->iconPath(), QString("../../../resources/icons/png/qlcplus.png"));
     QCOMPARE(copy->function(), sc->id());
@@ -348,7 +348,7 @@ void VCButton_Test::load()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -425,7 +425,7 @@ void VCButton_Test::save()
     int function = 0, action = 0, key = 0, intensity = 0, wstate = 0, appearance = 0, flashProperties = 0;
     QCOMPARE(btn.saveXML(&xmlWriter), true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -494,8 +494,8 @@ void VCButton_Test::customMenu()
     QWidget w;
 
     VCButton btn(&w, m_doc);
-    QMenu* menu = btn.customMenu(NULL);
-    QVERIFY(menu != NULL);
+    QMenu* menu = btn.customMenu(nullptr);
+    QVERIFY(menu != nullptr);
     QCOMPARE(menu->title(), tr("Icon"));
     QCOMPARE(menu->actions().size(), 2);
     QCOMPARE(menu->actions()[0], btn.m_chooseIconAction);

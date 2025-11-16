@@ -43,7 +43,7 @@ SimpleDeskEngine::SimpleDeskEngine(Doc* doc)
     , m_doc(doc)
 {
     qDebug() << Q_FUNC_INFO;
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
     doc->masterTimer()->registerDMXSource(this);
 }
 
@@ -169,7 +169,7 @@ CueStack* SimpleDeskEngine::createCueStack()
     qDebug() << Q_FUNC_INFO;
 
     CueStack* cs = new CueStack(m_doc);
-    Q_ASSERT(cs != NULL);
+    Q_ASSERT(cs != nullptr);
     connect(cs, SIGNAL(currentCueChanged(int)), this, SLOT(slotCurrentCueChanged(int)));
     connect(cs, SIGNAL(started()), this, SLOT(slotCueStackStarted()));
     connect(cs, SIGNAL(stopped()), this, SLOT(slotCueStackStopped()));
@@ -180,7 +180,7 @@ void SimpleDeskEngine::slotCurrentCueChanged(int index)
 {
     qDebug() << Q_FUNC_INFO;
 
-    if (sender() == NULL)
+    if (sender() == nullptr)
         return;
 
     uint stack = sender()->property(PROP_ID).toUInt();
@@ -191,7 +191,7 @@ void SimpleDeskEngine::slotCueStackStarted()
 {
     qDebug() << Q_FUNC_INFO;
 
-    if (sender() == NULL)
+    if (sender() == nullptr)
         return;
 
     uint stack = sender()->property(PROP_ID).toUInt();
@@ -202,7 +202,7 @@ void SimpleDeskEngine::slotCueStackStopped()
 {
     qDebug() << Q_FUNC_INFO;
 
-    if (sender() == NULL)
+    if (sender() == nullptr)
         return;
 
     uint stack = sender()->property(PROP_ID).toUInt();
@@ -249,7 +249,7 @@ bool SimpleDeskEngine::loadXML(QXmlStreamReader &root)
 bool SimpleDeskEngine::saveXML(QXmlStreamWriter *doc) const
 {
     qDebug() << Q_FUNC_INFO;
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     doc->writeStartElement(KXMLQLCSimpleDeskEngine);
 
@@ -319,10 +319,10 @@ void SimpleDeskEngine::writeDMX(MasterTimer *timer, QList<Universe *> ua)
                         Fixture *fixture = m_doc->fixture(fc.fixture());
                         quint32 chIndex = fc.channel();
 
-                        if (fixture != NULL)
+                        if (fixture != nullptr)
                         {
                             const QLCChannel *ch = fixture->channel(chIndex);
-                            if (ch != NULL)
+                            if (ch != nullptr)
                             {
                                 qDebug() << "Restoring default value of fixture" << fixture->id()
                                          << "channel" << chIndex << "value" << ch->defaultValue();
@@ -351,15 +351,15 @@ void SimpleDeskEngine::writeDMX(MasterTimer *timer, QList<Universe *> ua)
                     quint32 chIndex = fc.channel();
                     fader->remove(&fc);
 
-                    if (fixture != NULL && fixture->crossUniverse() && channel > 511)
+                    if (fixture != nullptr && fixture->crossUniverse() && channel > 511)
                         channel -= 512;
 
                     ua[universe]->reset(channel & 0x01FF, 1);
 
-                    if (fixture != NULL)
+                    if (fixture != nullptr)
                     {
                         const QLCChannel *ch = fixture->channel(chIndex);
-                        if (ch != NULL)
+                        if (ch != nullptr)
                         {
                             qDebug() << "Restoring default value of fixture" << fixture->id()
                                      << "channel" << chIndex << "value" << ch->defaultValue();
@@ -391,7 +391,7 @@ void SimpleDeskEngine::writeDMX(MasterTimer *timer, QList<Universe *> ua)
 
     foreach (CueStack *cueStack, m_cueStacks)
     {
-        if (cueStack == NULL)
+        if (cueStack == nullptr)
             continue;
 
         if (cueStack->isRunning())

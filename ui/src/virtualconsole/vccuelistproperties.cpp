@@ -29,8 +29,8 @@ VCCueListProperties::VCCueListProperties(VCCueList* cueList, Doc* doc)
     : QDialog(cueList)
     , m_doc(doc)
 {
-    Q_ASSERT(doc != NULL);
-    Q_ASSERT(cueList != NULL);
+    Q_ASSERT(doc != nullptr);
+    Q_ASSERT(cueList != nullptr);
     m_cueList = cueList;
 
     setupUi(this);
@@ -225,7 +225,7 @@ void VCCueListProperties::slotPlaybackLayoutChanged()
 void VCCueListProperties::updateChaserName()
 {
     Function* function = m_doc->function(m_chaserId);
-    if (function == NULL)
+    if (function == nullptr)
         m_chaserEdit->setText(tr("No function"));
     else
         m_chaserEdit->setText(function->name());

@@ -55,7 +55,7 @@ void HIDOSXJoystick::init()
     m_HIDManager = IOHIDManagerCreate(kCFAllocatorDefault, kIOHIDOptionsTypeNone);
     IOHIDManagerOpen(m_HIDManager, kIOHIDOptionsTypeNone);
     /* Get a list of the Devices */
-    IOHIDManagerSetDeviceMatching(m_HIDManager, NULL);
+    IOHIDManagerSetDeviceMatching(m_HIDManager, nullptr);
     CFSetRef device_set = IOHIDManagerCopyDevices(m_HIDManager);
 
     /* Convert the list into a C array so we can iterate easily. */
@@ -85,7 +85,7 @@ void HIDOSXJoystick::init()
         return;
 
     // to return all elements for a device
-    CFArrayRef elementsArray = IOHIDDeviceCopyMatchingElements(m_IOKitDevice, NULL, kIOHIDOptionsTypeNone);
+    CFArrayRef elementsArray = IOHIDDeviceCopyMatchingElements(m_IOKitDevice, nullptr, kIOHIDOptionsTypeNone);
     if (elementsArray)
     {
         CFIndex count = CFArrayGetCount(elementsArray);

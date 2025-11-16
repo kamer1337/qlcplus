@@ -36,15 +36,15 @@
 
 SpeedDialWidget::SpeedDialWidget(QWidget* parent)
     : QWidget(parent)
-    , m_fadeIn(NULL)
-    , m_fadeOut(NULL)
-    , m_hold(NULL)
-    , m_optionalTextGroup(NULL)
-    , m_optionalTextEdit(NULL)
+    , m_fadeIn(nullptr)
+    , m_fadeOut(nullptr)
+    , m_hold(nullptr)
+    , m_optionalTextGroup(nullptr)
+    , m_optionalTextEdit(nullptr)
 {
     QSettings settings;
     QVariant var;
-    QBoxLayout* lay = NULL;
+    QBoxLayout* lay = nullptr;
 
     setWindowFlags(WINDOW_FLAGS);
 

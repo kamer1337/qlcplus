@@ -351,7 +351,7 @@ bool QLCPhysical::loadXML(QXmlStreamReader &doc)
 
 bool QLCPhysical::saveXML(QXmlStreamWriter *doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* Physical entry */
     doc->writeStartElement(KXMLQLCPhysical);

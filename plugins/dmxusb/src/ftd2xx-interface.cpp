@@ -114,7 +114,7 @@ static FT_STATUS get_interface_info(DWORD deviceIndex,
 FTD2XXInterface::FTD2XXInterface(const QString& serial, const QString& name, const QString& vendor,
                                  quint16 VID, quint16 PID, quint32 id)
     : DMXInterface(serial, name, vendor, VID, PID , id)
-    , m_handle(NULL)
+    , m_handle(nullptr)
 {
 }
 
@@ -226,7 +226,7 @@ bool FTD2XXInterface::openByPID(const int PID)
 bool FTD2XXInterface::close()
 {
     FT_STATUS status = FT_Close(m_handle);
-    m_handle = NULL;
+    m_handle = nullptr;
     if (status != FT_OK)
     {
         qWarning() << Q_FUNC_INFO << name() << status;
@@ -240,7 +240,7 @@ bool FTD2XXInterface::close()
 
 bool FTD2XXInterface::isOpen() const
 {
-    return (m_handle != NULL) ? true : false;
+    return (m_handle != nullptr) ? true : false;
 }
 
 bool FTD2XXInterface::reset()
@@ -387,7 +387,7 @@ bool FTD2XXInterface::write(const QByteArray& data)
 
 QByteArray FTD2XXInterface::read(int size)
 {
-    if (m_handle == NULL)
+    if (m_handle == nullptr)
         return QByteArray();
 
     DWORD RxBytes, TxBytes, event;
@@ -396,10 +396,10 @@ QByteArray FTD2XXInterface::read(int size)
     if (RxBytes < (DWORD)size)
         return QByteArray();
 
-    uchar* buffer = NULL;
+    uchar* buffer = nullptr;
 
     buffer = (uchar*) malloc(sizeof(uchar) * size);
-    Q_ASSERT(buffer != NULL);
+    Q_ASSERT(buffer != nullptr);
 
     int read = 0;
     QByteArray array;
@@ -415,7 +415,7 @@ uchar FTD2XXInterface::readByte(bool* ok)
 {
     if (ok) *ok = false;
 
-    if (m_handle == NULL)
+    if (m_handle == nullptr)
         return 0;
 
     DWORD RxBytes, TxBytes, event;

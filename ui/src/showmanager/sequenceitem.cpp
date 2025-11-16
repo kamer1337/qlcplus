@@ -30,7 +30,7 @@ SequenceItem::SequenceItem(Chaser *seq, ShowFunction *func)
     , m_chaser(seq)
     , m_selectedStep(-1)
 {
-    Q_ASSERT(seq != NULL);
+    Q_ASSERT(seq != nullptr);
 
     if (func->color().isValid())
         setColor(func->color());

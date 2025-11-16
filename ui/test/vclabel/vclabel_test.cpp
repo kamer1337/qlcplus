@@ -42,13 +42,13 @@
 
 void VCLabel_Test::initTestCase()
 {
-    m_doc = NULL;
+    m_doc = nullptr;
 }
 
 void VCLabel_Test::init()
 {
     m_doc = new Doc(this);
-    new VirtualConsole(NULL, m_doc);
+    new VirtualConsole(nullptr, m_doc);
 }
 
 void VCLabel_Test::cleanup()
@@ -76,12 +76,12 @@ void VCLabel_Test::copy()
     VCLabel label(&parent, m_doc);
     label.setCaption("Foobar");
     VCLabel* label2 = qobject_cast<VCLabel*> (label.createCopy(&parent));
-    QVERIFY(label2 != NULL && label2 != &label);
+    QVERIFY(label2 != nullptr && label2 != &label);
     QCOMPARE(label2->objectName(), QString("VCLabel"));
     QCOMPARE(label2->parentWidget(), &parent);
     QCOMPARE(label2->caption(), QString("Foobar"));
 
-    QVERIFY(label.copyFrom(NULL) == false);
+    QVERIFY(label.copyFrom(nullptr) == false);
 }
 
 void VCLabel_Test::loadXML()
@@ -112,7 +112,7 @@ void VCLabel_Test::loadXML()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
 
     buffer.seek(0);
     QXmlStreamReader xmlReader(&buffer);
@@ -151,7 +151,7 @@ void VCLabel_Test::saveXML()
 
     QVERIFY(label.saveXML(&xmlWriter) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);

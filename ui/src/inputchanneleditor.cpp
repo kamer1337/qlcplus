@@ -87,7 +87,7 @@ InputChannelEditor::InputChannelEditor(QWidget* parent,
         m_typeCombo->addItem(QLCInputChannel::stringToIcon(str), str);
     }
 
-    if (channel != NULL && profile != NULL)
+    if (channel != nullptr && profile != nullptr)
     {
         QString type;
         quint32 num;

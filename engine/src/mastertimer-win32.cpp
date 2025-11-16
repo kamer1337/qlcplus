@@ -41,7 +41,7 @@ extern "C"
         Q_UNUSED(TimerOrWaitFired);
 
         MasterTimerPrivate* mtp = (MasterTimerPrivate*) lpParameter;
-        Q_ASSERT(mtp != NULL);
+        Q_ASSERT(mtp != nullptr);
         mtp->timerTick();
     }
 }
@@ -53,10 +53,10 @@ extern "C"
 MasterTimerPrivate::MasterTimerPrivate(MasterTimer* masterTimer)
     : m_masterTimer(masterTimer)
     , m_systemTimerResolution(0)
-    , m_phTimer(NULL)
+    , m_phTimer(nullptr)
     , m_run(false)
 {
-    Q_ASSERT(masterTimer != NULL);
+    Q_ASSERT(masterTimer != nullptr);
 }
 
 MasterTimerPrivate::~MasterTimerPrivate()
@@ -88,7 +88,7 @@ void MasterTimerPrivate::start()
     }
 
     BOOL ok = CreateTimerQueueTimer(&m_phTimer,
-                                    NULL,
+                                    nullptr,
                                     (WAITORTIMERCALLBACK) masterTimerWin32Callback,
                                     this,
                                     0,
@@ -111,11 +111,11 @@ void MasterTimerPrivate::stop()
         return;
 
     // Destroy the timer and wait for it to complete its last firing (if applicable)
-    if (DeleteTimerQueueTimer(NULL, m_phTimer, INVALID_HANDLE_VALUE))
+    if (DeleteTimerQueueTimer(nullptr, m_phTimer, INVALID_HANDLE_VALUE))
         timeEndPeriod(m_systemTimerResolution);
 
     m_systemTimerResolution = 0;
-    m_phTimer = NULL;
+    m_phTimer = nullptr;
     m_run = false;
 }
 

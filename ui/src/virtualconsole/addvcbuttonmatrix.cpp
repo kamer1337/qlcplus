@@ -40,7 +40,7 @@ AddVCButtonMatrix::AddVCButtonMatrix(QWidget* parent, Doc* doc)
     : QDialog(parent)
     , m_doc(doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     QSettings settings;
     QVariant var;
@@ -180,7 +180,7 @@ void AddVCButtonMatrix::accept()
 void AddVCButtonMatrix::addFunction(quint32 fid)
 {
     Function* function = m_doc->function(fid);
-    if (function == NULL)
+    if (function == nullptr)
         return;
 
     QTreeWidgetItem* item = new QTreeWidgetItem(m_tree);

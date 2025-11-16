@@ -43,9 +43,9 @@ void VCXYPadFixtureEditor_Test::initTestCase()
     QVERIFY(m_doc->fixtureDefCache()->loadMap(dir) == true);
 
     QLCFixtureDef* def = m_doc->fixtureDefCache()->fixtureDef("Futurelight", "DJScan250");
-    QVERIFY(def != NULL);
+    QVERIFY(def != nullptr);
     QLCFixtureMode* mode = def->modes()[0];
-    QVERIFY(mode != NULL);
+    QVERIFY(mode != nullptr);
 
     Fixture* fxi = new Fixture(m_doc);
     fxi->setName("Fixture 1");
@@ -80,7 +80,7 @@ void VCXYPadFixtureEditor_Test::initial()
     fxi.setY(0, 1, false);
     list << fxi;
 
-    VCXYPadFixtureEditor fe(NULL, list);
+    VCXYPadFixtureEditor fe(nullptr, list);
     QCOMPARE(fe.fixtures(), list);
     QCOMPARE(fe.m_xMin->value(), 10);
     QCOMPARE(fe.m_xMax->value(), 20);
@@ -91,7 +91,7 @@ void VCXYPadFixtureEditor_Test::initial()
 
     list.clear();
 
-    VCXYPadFixtureEditor fe2(NULL, list);
+    VCXYPadFixtureEditor fe2(nullptr, list);
     QCOMPARE(fe2.fixtures().isEmpty(), true);
     QCOMPARE(fe2.m_xMin->value(), 0);
     QCOMPARE(fe2.m_xMax->value(), 100);
@@ -104,7 +104,7 @@ void VCXYPadFixtureEditor_Test::initial()
 void VCXYPadFixtureEditor_Test::valueSlots()
 {
     QList <VCXYPadFixture> list;
-    VCXYPadFixtureEditor fe(NULL, list);
+    VCXYPadFixtureEditor fe(nullptr, list);
 
     fe.m_xMin->setValue(50);
     fe.m_xMax->setValue(20);
@@ -142,7 +142,7 @@ void VCXYPadFixtureEditor_Test::accept()
     fxi.setY(0.5, 0.6, true);
     list << fxi;
 
-    VCXYPadFixtureEditor fe(NULL, list);
+    VCXYPadFixtureEditor fe(nullptr, list);
     fe.m_xMin->setValue(10);
     fe.m_xMax->setValue(20);
     fe.m_yMin->setValue(30);
@@ -171,7 +171,7 @@ void VCXYPadFixtureEditor_Test::accept()
 void VCXYPadFixtureEditor_Test::cleanupTestCase()
 {
     delete m_doc;
-    m_doc = NULL;
+    m_doc = nullptr;
 }
 
 QTEST_MAIN(VCXYPadFixtureEditor_Test)

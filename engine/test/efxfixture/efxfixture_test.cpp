@@ -59,9 +59,9 @@ void EFXFixture_Test::init()
     int address = 0;
     {
         QLCFixtureDef* def = m_doc->fixtureDefCache()->fixtureDef("Futurelight", "DJScan250");
-        QVERIFY(def != NULL);
+        QVERIFY(def != nullptr);
         QLCFixtureMode* mode = def->modes().first();
-        QVERIFY(mode != NULL);
+        QVERIFY(mode != nullptr);
 
         Fixture* fxi = new Fixture(m_doc);
         fxi->setFixtureDefinition(def, mode);
@@ -74,9 +74,9 @@ void EFXFixture_Test::init()
 
     {
         QLCFixtureDef* def = m_doc->fixtureDefCache()->fixtureDef("Futurelight", "MH-440");
-        QVERIFY(def != NULL);
+        QVERIFY(def != nullptr);
         QLCFixtureMode* mode = def->modes().first();
-        QVERIFY(mode != NULL);
+        QVERIFY(mode != nullptr);
 
         Fixture* fxi = new Fixture(m_doc);
         fxi->setFixtureDefinition(def, mode);
@@ -89,9 +89,9 @@ void EFXFixture_Test::init()
 
     {
         QLCFixtureDef* def = m_doc->fixtureDefCache()->fixtureDef("Futurelight", "CY-200");
-        QVERIFY(def != NULL);
+        QVERIFY(def != nullptr);
         QLCFixtureMode* mode = def->modes().first();
-        QVERIFY(mode != NULL);
+        QVERIFY(mode != nullptr);
 
         Fixture* fxi = new Fixture(m_doc);
         fxi->setFixtureDefinition(def, mode);
@@ -104,9 +104,9 @@ void EFXFixture_Test::init()
 
     {
         QLCFixtureDef* def = m_doc->fixtureDefCache()->fixtureDef("American DJ", "Sweeper Beam Quad LED");
-        QVERIFY(def != NULL);
+        QVERIFY(def != nullptr);
         QLCFixtureMode* mode = def->modes().last(); // 39 Channel mode
-        QVERIFY(mode != NULL);
+        QVERIFY(mode != nullptr);
 
         Fixture* fxi = new Fixture(m_doc);
         fxi->setFixtureDefinition(def, mode);
@@ -202,7 +202,7 @@ void EFXFixture_Test::loadSuccess()
     xmlWriter.writeTextElement("Direction", "Backward");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -229,7 +229,7 @@ void EFXFixture_Test::loadWrongRoot()
     xmlWriter.writeTextElement("Direction", "Backward");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -255,7 +255,7 @@ void EFXFixture_Test::loadWrongDirection()
     xmlWriter.writeTextElement("Direction", "Phorrwarrd");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -282,7 +282,7 @@ void EFXFixture_Test::loadExtraTag()
     xmlWriter.writeTextElement("Foobar", "Just testing");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -311,7 +311,7 @@ void EFXFixture_Test::save()
 
     QVERIFY(ef.saveXML(&xmlWriter) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);

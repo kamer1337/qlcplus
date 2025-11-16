@@ -89,7 +89,7 @@ QList<DMXInterface *> LibFTDIInterface::interfaces(QList<DMXInterface *> discove
         return interfacesList;
     }
 
-    while ((dev = devs[i++]) != NULL)
+    while ((dev = devs[i++]) != nullptr)
     {
         libusb_get_device_descriptor(dev, &dev_descriptor);
 #else
@@ -116,7 +116,7 @@ QList<DMXInterface *> LibFTDIInterface::interfaces(QList<DMXInterface *> discove
       {
         dev_descriptor = dev->descriptor;
 #endif
-        Q_ASSERT(dev != NULL);
+        Q_ASSERT(dev != nullptr);
 
         // Skip non wanted devices
         if (validInterface(dev_descriptor.idVendor, dev_descriptor.idProduct) == false)
@@ -181,7 +181,7 @@ bool LibFTDIInterface::open()
         return true;
 
     QByteArray sba = serial().toLatin1();
-    const char *ser = NULL;
+    const char *ser = nullptr;
     if (serial().isEmpty() == false)
         ser = (const char *)sba.data();
 
@@ -232,7 +232,7 @@ bool LibFTDIInterface::close()
 
 bool LibFTDIInterface::isOpen() const
 {
-    return (m_handle.usb_dev != NULL) ? true : false;
+    return (m_handle.usb_dev != nullptr) ? true : false;
 }
 
 bool LibFTDIInterface::reset()
@@ -376,10 +376,10 @@ bool LibFTDIInterface::write(const QByteArray& data)
 
 QByteArray LibFTDIInterface::read(int size)
 {
-    uchar* buffer = NULL;
+    uchar* buffer = nullptr;
 
     buffer = (uchar*) malloc(sizeof(uchar) * size);
-    Q_ASSERT(buffer != NULL);
+    Q_ASSERT(buffer != nullptr);
 
     QByteArray array;
     int read = ftdi_read_data(&m_handle, buffer, size);

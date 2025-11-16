@@ -67,7 +67,7 @@ void Show_Test::copy()
     t->addShowFunction(sf);
     show.addTrack(t);
 
-    QVERIFY(show.showFunction(666) == NULL);
+    QVERIFY(show.showFunction(666) == nullptr);
     QVERIFY(show.showFunction(0) == sf);
 
     Show showCopy(m_doc);
@@ -144,8 +144,8 @@ void Show_Test::tracks()
     QCOMPARE(s.getTracksCount(), 1);
     QCOMPARE(s.tracks().count(), 1);
 
-    QVERIFY(s.track(456) == NULL);
-    QVERIFY(s.getTrackFromSceneID(456) == NULL);
+    QVERIFY(s.track(456) == nullptr);
+    QVERIFY(s.getTrackFromSceneID(456) == nullptr);
 
     QVERIFY(s.track(0) == t);
     QVERIFY(s.getTrackFromSceneID(123) == t);
@@ -242,7 +242,7 @@ void Show_Test::load()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -259,7 +259,7 @@ void Show_Test::load()
 
     Track *t, *t2;
     t = s.track(111);
-    QVERIFY(t == NULL);
+    QVERIFY(t == nullptr);
 
     t = s.track(0);
     t2 = s.track(1);
@@ -295,7 +295,7 @@ void Show_Test::save()
     QXmlStreamWriter xmlWriter(&buffer);
 
     QVERIFY(s.saveXML(&xmlWriter) == true);
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);

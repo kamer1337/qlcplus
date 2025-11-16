@@ -81,7 +81,7 @@ ScriptEditor::ScriptEditor(QWidget* parent, Script* script, Doc* doc)
 ScriptEditor::~ScriptEditor()
 {
     delete m_document;
-    m_document = NULL;
+    m_document = nullptr;
 
     if (m_testPlayButton->isChecked() == true)
         m_script->stopAndWait();
@@ -232,7 +232,7 @@ void ScriptEditor::slotAddStartFunction()
         foreach (quint32 id, fs.selection())
         {
             Function* function = m_doc->function(id);
-            Q_ASSERT(function != NULL);
+            Q_ASSERT(function != nullptr);
             QString cmd = QString("%1:%2 // %3\n").arg(Script::startFunctionCmd)
                                                    .arg(id)
                                                    .arg(function->name());
@@ -254,7 +254,7 @@ void ScriptEditor::slotAddStopFunction()
         foreach (quint32 id, fs.selection())
         {
             Function* function = m_doc->function(id);
-            Q_ASSERT(function != NULL);
+            Q_ASSERT(function != nullptr);
             QString cmd = QString("%1:%2 // %3\n").arg(Script::stopFunctionCmd)
                                                   .arg(id)
                                                   .arg(function->name());
@@ -358,7 +358,7 @@ void ScriptEditor::slotAddSetFixture()
     foreach (SceneValue sv, channelsList)
     {
         Fixture* fxi = m_doc->fixture(sv.fxi);
-        if (fxi != NULL)
+        if (fxi != nullptr)
         {
             const QLCChannel* channel = fxi->channel(sv.channel);
             m_editor->moveCursor(QTextCursor::StartOfLine);

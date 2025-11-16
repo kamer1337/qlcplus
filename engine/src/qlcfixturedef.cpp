@@ -45,7 +45,7 @@ QLCFixtureDef::QLCFixtureDef(const QLCFixtureDef* fixtureDef)
     , m_fileAbsolutePath(QString())
     , m_type(Dimmer)
 {
-    if (fixtureDef != NULL)
+    if (fixtureDef != nullptr)
         *this = *fixtureDef;
 }
 
@@ -240,7 +240,7 @@ void QLCFixtureDef::setIsUser(bool flag)
 
 bool QLCFixtureDef::addChannel(QLCChannel* channel)
 {
-    if (channel != NULL && m_channels.contains(channel) == false)
+    if (channel != nullptr && m_channels.contains(channel) == false)
     {
         m_channels.append(channel);
         return true;
@@ -284,7 +284,7 @@ QLCChannel* QLCFixtureDef::channel(const QString& name)
             return ch;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 QList <QLCChannel*> QLCFixtureDef::channels() const
@@ -298,7 +298,7 @@ QList <QLCChannel*> QLCFixtureDef::channels() const
 
 bool QLCFixtureDef::addMode(QLCFixtureMode* mode)
 {
-    if (mode != NULL && m_modes.contains(mode) == false)
+    if (mode != nullptr && m_modes.contains(mode) == false)
     {
         m_modes.append(mode);
         return true;
@@ -336,7 +336,7 @@ QLCFixtureMode *QLCFixtureDef::mode(const QString& name)
             return mode;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 QList <QLCFixtureMode*> QLCFixtureDef::modes()
@@ -428,7 +428,7 @@ QFile::FileError QLCFixtureDef::loadXML(const QString& fileName)
         return QFile::OpenError;
 
     QXmlStreamReader *doc = QLCFile::getXMLReader(fileName);
-    if (doc == NULL || doc->device() == NULL || doc->hasError())
+    if (doc == nullptr || doc->device() == nullptr || doc->hasError())
     {
         qWarning() << Q_FUNC_INFO << "Unable to read from" << fileName;
         return QFile::ReadError;

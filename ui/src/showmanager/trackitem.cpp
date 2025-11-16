@@ -40,7 +40,7 @@ TrackItem::TrackItem(Track *track, int number)
     m_btnFont.setBold(true);
     m_btnFont.setPixelSize(12);
 
-    if (track != NULL)
+    if (track != nullptr)
     {
         m_name = m_track->name();
         m_isMute = m_track->isMute();

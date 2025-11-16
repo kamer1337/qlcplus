@@ -107,19 +107,19 @@ void Doc_Test::denormalizeComponentPath()
 
 void Doc_Test::defaults()
 {
-    QVERIFY(m_doc->m_fixtureDefCache != NULL);
-    QVERIFY(m_doc->m_modifiersCache != NULL);
-    QVERIFY(m_doc->m_audioPluginCache != NULL);
-    QVERIFY(m_doc->m_ioMap != NULL);
-    QVERIFY(m_doc->m_masterTimer != NULL);
-    QVERIFY(m_doc->m_clipboard != NULL);
+    QVERIFY(m_doc->m_fixtureDefCache != nullptr);
+    QVERIFY(m_doc->m_modifiersCache != nullptr);
+    QVERIFY(m_doc->m_audioPluginCache != nullptr);
+    QVERIFY(m_doc->m_ioMap != nullptr);
+    QVERIFY(m_doc->m_masterTimer != nullptr);
+    QVERIFY(m_doc->m_clipboard != nullptr);
 
-    QVERIFY(m_doc->fixtureDefCache() != NULL);
-    QVERIFY(m_doc->modifiersCache() != NULL);
-    QVERIFY(m_doc->audioPluginCache() != NULL);
-    QVERIFY(m_doc->ioPluginCache() != NULL);
-    QVERIFY(m_doc->masterTimer() != NULL);
-    QVERIFY(m_doc->clipboard() != NULL);
+    QVERIFY(m_doc->fixtureDefCache() != nullptr);
+    QVERIFY(m_doc->modifiersCache() != nullptr);
+    QVERIFY(m_doc->audioPluginCache() != nullptr);
+    QVERIFY(m_doc->ioPluginCache() != nullptr);
+    QVERIFY(m_doc->masterTimer() != nullptr);
+    QVERIFY(m_doc->clipboard() != nullptr);
 
     QVERIFY(m_doc->m_loadStatus == Doc::Cleared);
     QVERIFY(m_doc->loadStatus() == Doc::Cleared);
@@ -275,13 +275,13 @@ void Doc_Test::deleteFixture()
     // Existing ID
     quint32 id = f2->id();
     QPointer <Fixture> f2ptr(f2);
-    QVERIFY(f2ptr != NULL);
+    QVERIFY(f2ptr != nullptr);
     QVERIFY(m_doc->deleteFixture(id) == true);
     QVERIFY(m_doc->fixtures().size() == 2);
     QVERIFY(m_doc->isModified() == true);
     QVERIFY(spy.size() == 1);
     QVERIFY(spy.at(0).at(0) == id);
-    QVERIFY(f2ptr == NULL);
+    QVERIFY(f2ptr == nullptr);
 
     // The same ID we just removed
     QVERIFY(m_doc->deleteFixture(id) == false);
@@ -295,24 +295,24 @@ void Doc_Test::deleteFixture()
     // Another ID just for repetition
     id = f1->id();
     QPointer <Fixture> f1ptr(f1);
-    QVERIFY(f1ptr != NULL);
+    QVERIFY(f1ptr != nullptr);
     QVERIFY(m_doc->deleteFixture(id) == true);
     QVERIFY(m_doc->fixtures().size() == 1);
     QVERIFY(m_doc->isModified() == true);
     QVERIFY(spy.size() == 2);
     QVERIFY(spy.at(1).at(0) == id);
-    QVERIFY(f1ptr == NULL);
+    QVERIFY(f1ptr == nullptr);
 
     // And the last one...
     id = f3->id();
     QPointer <Fixture> f3ptr(f3);
-    QVERIFY(f3ptr != NULL);
+    QVERIFY(f3ptr != nullptr);
     QVERIFY(m_doc->deleteFixture(id) == true);
     QVERIFY(m_doc->fixtures().size() == 0);
     QVERIFY(m_doc->isModified() == true);
     QVERIFY(spy.size() == 3);
     QVERIFY(spy.at(2).at(0) == id);
-    QVERIFY(f3ptr == NULL);
+    QVERIFY(f3ptr == nullptr);
 }
 
 void Doc_Test::replaceFixtures()
@@ -352,10 +352,10 @@ void Doc_Test::replaceFixtures()
 
     QLCFixtureDef *fixtureDef;
     fixtureDef = m_doc->fixtureDefCache()->fixtureDef("Showtec", "MiniMax 250");
-    Q_ASSERT(fixtureDef != NULL);
+    Q_ASSERT(fixtureDef != nullptr);
     QLCFixtureMode *fixtureMode;
     fixtureMode = fixtureDef->modes().at(0);
-    Q_ASSERT(fixtureMode != NULL);
+    Q_ASSERT(fixtureMode != nullptr);
     f4->setFixtureDefinition(fixtureDef, fixtureMode);
     f4->setAddress(100);
     f4->setUniverse(0);
@@ -411,16 +411,16 @@ void Doc_Test::fixture()
     QVERIFY(m_doc->fixture(f1->id()) == f1);
     QVERIFY(m_doc->fixture(f2->id()) == f2);
     QVERIFY(m_doc->fixture(f3->id()) == f3);
-    QVERIFY(m_doc->fixture(f3->id() + 1) == NULL);
-    QVERIFY(m_doc->fixture(42) == NULL);
-    QVERIFY(m_doc->fixture(Fixture::invalidId()) == NULL);
+    QVERIFY(m_doc->fixture(f3->id() + 1) == nullptr);
+    QVERIFY(m_doc->fixture(42) == nullptr);
+    QVERIFY(m_doc->fixture(Fixture::invalidId()) == nullptr);
 
     QLCFixtureDef *fixtureDef;
     fixtureDef = m_doc->fixtureDefCache()->fixtureDef("Showtec", "MiniMax 250");
-    Q_ASSERT(fixtureDef != NULL);
+    Q_ASSERT(fixtureDef != nullptr);
     QLCFixtureMode *fixtureMode;
     fixtureMode = fixtureDef->modes().at(0);
-    Q_ASSERT(fixtureMode != NULL);
+    Q_ASSERT(fixtureMode != nullptr);
 
     /* test forced HTP/LTP channels */
     Fixture *f4 = new Fixture(m_doc);
@@ -454,10 +454,10 @@ void Doc_Test::totalPowerConsumption()
     /* Load Showtec - MiniMax 250 with 250W power consumption */
     QLCFixtureDef *fixtureDef;
     fixtureDef = m_doc->fixtureDefCache()->fixtureDef("Showtec", "MiniMax 250");
-    Q_ASSERT(fixtureDef != NULL);
+    Q_ASSERT(fixtureDef != nullptr);
     QLCFixtureMode *fixtureMode;
     fixtureMode = fixtureDef->modes().at(0);
-    Q_ASSERT(fixtureMode != NULL);
+    Q_ASSERT(fixtureMode != nullptr);
 
     /* Add a new fixture */
     Fixture *f1 = new Fixture(m_doc);
@@ -564,18 +564,18 @@ void Doc_Test::removeFixtureGroup()
     grp = new FixtureGroup(m_doc);
     QCOMPARE(m_doc->addFixtureGroup(grp), true);
     QCOMPARE(m_doc->fixtureGroups().size(), 3);
-    QVERIFY(m_doc->fixtureGroup(0) != NULL);
-    QVERIFY(m_doc->fixtureGroup(1) != NULL);
-    QVERIFY(m_doc->fixtureGroup(2) != NULL);
+    QVERIFY(m_doc->fixtureGroup(0) != nullptr);
+    QVERIFY(m_doc->fixtureGroup(1) != nullptr);
+    QVERIFY(m_doc->fixtureGroup(2) != nullptr);
 
     QCOMPARE(m_doc->deleteFixtureGroup(0), true);
     QCOMPARE(spy.size(), 1);
     QCOMPARE(spy[0].size(), 1);
     QCOMPARE(spy[0][0].toUInt(), quint32(0));
     QCOMPARE(m_doc->fixtureGroups().size(), 2);
-    QVERIFY(m_doc->fixtureGroup(0) == NULL);
-    QVERIFY(m_doc->fixtureGroup(1) != NULL);
-    QVERIFY(m_doc->fixtureGroup(2) != NULL);
+    QVERIFY(m_doc->fixtureGroup(0) == nullptr);
+    QVERIFY(m_doc->fixtureGroup(1) != nullptr);
+    QVERIFY(m_doc->fixtureGroup(2) != nullptr);
 
     QCOMPARE(m_doc->deleteFixtureGroup(0), false);
     QCOMPARE(spy.size(), 1);
@@ -585,9 +585,9 @@ void Doc_Test::removeFixtureGroup()
     QCOMPARE(spy[1].size(), 1);
     QCOMPARE(spy[1][0].toUInt(), quint32(1));
     QCOMPARE(m_doc->fixtureGroups().size(), 1);
-    QVERIFY(m_doc->fixtureGroup(0) == NULL);
-    QVERIFY(m_doc->fixtureGroup(1) == NULL);
-    QVERIFY(m_doc->fixtureGroup(2) != NULL);
+    QVERIFY(m_doc->fixtureGroup(0) == nullptr);
+    QVERIFY(m_doc->fixtureGroup(1) == nullptr);
+    QVERIFY(m_doc->fixtureGroup(2) != nullptr);
 }
 
 void Doc_Test::channelGroups()
@@ -630,7 +630,7 @@ void Doc_Test::channelGroups()
     QCOMPARE(spy2[0][0].toUInt(), quint32(0));
 
     /* get an invalid channel group */
-    QVERIFY(m_doc->channelsGroup(42) == NULL);
+    QVERIFY(m_doc->channelsGroup(42) == nullptr);
 
     /* get a valid channel group */
     QVERIFY(m_doc->channelsGroup(1) == group2);
@@ -679,7 +679,7 @@ void Doc_Test::palettes()
     QCOMPARE(spy[1][0].toUInt(), quint32(1));
 
     /* get an invalid palette */
-    QVERIFY(m_doc->palette(42) == NULL);
+    QVERIFY(m_doc->palette(42) == nullptr);
 
     /* get a valid palette */
     QVERIFY(m_doc->palette(1) == p2);
@@ -801,7 +801,7 @@ void Doc_Test::deleteFunction()
     m_doc->resetModified();
 
     QPointer <Scene> ptr(s2);
-    QVERIFY(ptr != NULL);
+    QVERIFY(ptr != nullptr);
     quint32 id = s2->id();
     QVERIFY(m_doc->deleteFunction(id) == true);
     QVERIFY(m_doc->isModified() == true);
@@ -811,7 +811,7 @@ void Doc_Test::deleteFunction()
     QVERIFY(m_doc->deleteFunction(id) == false);
     QVERIFY(m_doc->deleteFunction(42) == false);
     QVERIFY(m_doc->isModified() == false);
-    QVERIFY(ptr == NULL); // m_doc->deleteFunction() should also delete
+    QVERIFY(ptr == nullptr); // m_doc->deleteFunction() should also delete
     QVERIFY(m_doc->m_fixtures.contains(id) == false);
 
     id = s1->id();
@@ -844,7 +844,7 @@ void Doc_Test::function()
 
     quint32 id = s2->id();
     QVERIFY(m_doc->deleteFunction(id) == true);
-    QVERIFY(m_doc->function(id) == NULL);
+    QVERIFY(m_doc->function(id) == nullptr);
 
     m_doc->setStartupFunction(s1->id());
     QVERIFY(m_doc->startupFunction() == s1->id());
@@ -989,7 +989,7 @@ void Doc_Test::load()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -1044,7 +1044,7 @@ void Doc_Test::loadWrongRoot()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -1106,7 +1106,7 @@ void Doc_Test::save()
 
     QVERIFY(m_doc->saveXML(&xmlWriter) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);

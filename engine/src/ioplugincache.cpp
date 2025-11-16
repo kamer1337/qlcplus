@@ -70,10 +70,10 @@ void IOPluginCache::load(const QDir& dir)
 #endif
         QPluginLoader loader(path, this);
         QLCIOPlugin* ptr = qobject_cast<QLCIOPlugin*> (loader.instance());
-        if (ptr != NULL)
+        if (ptr != nullptr)
         {
             /* Check for duplicates */
-            if (plugin(ptr->name()) == NULL)
+            if (plugin(ptr->name()) == nullptr)
             {
                 /* New plugin. Append and init. */
                 qDebug() << "Loaded I/O plugin" << ptr->name() << "from" << fileName;
@@ -120,7 +120,7 @@ QLCIOPlugin* IOPluginCache::plugin(const QString& name) const
             return ptr;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 void IOPluginCache::slotConfigurationChanged()
@@ -128,7 +128,7 @@ void IOPluginCache::slotConfigurationChanged()
     qDebug() << Q_FUNC_INFO;
 
     QLCIOPlugin* plugin = static_cast<QLCIOPlugin*> (QObject::sender());
-    if (plugin != NULL) // 3rd party plugins might not behave correctly
+    if (plugin != nullptr) // 3rd party plugins might not behave correctly
         emit pluginConfigurationChanged(plugin);
 }
 

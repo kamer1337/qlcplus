@@ -107,7 +107,7 @@ bool SceneValue::loadXML(QXmlStreamReader &tag)
 
 bool SceneValue::saveXML(QXmlStreamWriter *doc) const
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     /* Value tag and its attributes */
     doc->writeStartElement(KXMLQLCSceneValue);

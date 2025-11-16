@@ -350,7 +350,7 @@ bool QLCInputChannel::loadXML(QXmlStreamReader &root)
 
 bool QLCInputChannel::saveXML(QXmlStreamWriter *doc, quint32 channelNumber) const
 {
-    if (doc == NULL || doc->device() == NULL)
+    if (doc == nullptr || doc->device() == nullptr)
         return false;
 
     doc->writeStartElement(KXMLQLCInputChannel);

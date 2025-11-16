@@ -41,14 +41,14 @@ MonitorFixtureItem::MonitorFixtureItem(Doc *doc, quint32 fid)
     , m_gelColor(QColor())
     , m_labelVisibility(false)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     setCursor(Qt::OpenHandCursor);
     setFlag(QGraphicsItem::ItemIsMovable, true);
     setFlag(QGraphicsItem::ItemIsSelectable, true);
 
     Fixture *fxi = m_doc->fixture(fid);
-    Q_ASSERT(fxi != NULL);
+    Q_ASSERT(fxi != nullptr);
 
     m_name = fxi->name();
 
@@ -96,7 +96,7 @@ MonitorFixtureItem::MonitorFixtureItem(Doc *doc, quint32 fid)
         }
         else
         {
-            fxiItem->m_back = NULL;
+            fxiItem->m_back = nullptr;
         }
 
         fxiItem->m_panChannel = head.channelNumber(QLCChannel::Pan, QLCChannel::MSB);
@@ -105,7 +105,7 @@ MonitorFixtureItem::MonitorFixtureItem(Doc *doc, quint32 fid)
             // retrieve the PAN max degrees from the fixture mode
             fxiItem->m_panMaxDegrees = 360; // fallback. Very unprecise
             QLCFixtureMode *mode = fxi->fixtureMode();
-            if (mode != NULL)
+            if (mode != nullptr)
             {
                 if (mode->physical().focusPanMax() != 0)
                     fxiItem->m_panMaxDegrees = mode->physical().focusPanMax();
@@ -120,7 +120,7 @@ MonitorFixtureItem::MonitorFixtureItem(Doc *doc, quint32 fid)
             // retrieve the TILT max degrees from the fixture mode
             fxiItem->m_tiltMaxDegrees = 270; // fallback. Very unprecise
             QLCFixtureMode *mode = fxi->fixtureMode();
-            if (mode != NULL)
+            if (mode != nullptr)
             {
                 if (mode->physical().focusTiltMax() != 0)
                     fxiItem->m_tiltMaxDegrees = mode->physical().focusTiltMax();
@@ -130,20 +130,20 @@ MonitorFixtureItem::MonitorFixtureItem(Doc *doc, quint32 fid)
         }
 
         QLCFixtureMode *mode = fxi->fixtureMode();
-        if (mode != NULL)
+        if (mode != nullptr)
         {
             foreach (quint32 wheel, head.colorWheels())
             {
                QList<QColor> values;
                QLCChannel *ch = mode->channel(wheel);
-               if (ch == NULL)
+               if (ch == nullptr)
                    continue;
 
                bool containsColor = false;
                for (quint32 v = 0; v < 256; ++v)
                {
                    QLCCapability *cap = ch->searchCapability(v);
-                   if (cap != NULL && cap->resource(0).isValid())
+                   if (cap != nullptr && cap->resource(0).isValid())
                    {
                        values << cap->resource(0).value<QColor>();
                        containsColor = true;
@@ -165,7 +165,7 @@ MonitorFixtureItem::MonitorFixtureItem(Doc *doc, quint32 fid)
             {
                QList<FixtureHead::ShutterState> values;
                QLCChannel *ch = mode->channel(shutter);
-               if (ch == NULL)
+               if (ch == nullptr)
                    continue;
 
                bool containsShutter = false;
@@ -244,7 +244,7 @@ MonitorFixtureItem::~MonitorFixtureItem()
     if (m_fid != Fixture::invalidId())
     {
         Fixture* fxi = m_doc->fixture(m_fid);
-        if (fxi != NULL)
+        if (fxi != nullptr)
             disconnect(fxi, SIGNAL(valuesChanged()), this, SLOT(slotUpdateValues()));
     }
 
@@ -327,7 +327,7 @@ void MonitorFixtureItem::setSize(QSize size)
 
                 head->setZValue(2);
                 QGraphicsEllipseItem *back = m_heads.at(index)->m_back;
-                if (back != NULL)
+                if (back != nullptr)
                 {
                     back->setRect(head->rect());
                     back->setZValue(1);
@@ -432,7 +432,7 @@ void MonitorFixtureItem::slotUpdateValues()
 
     /* Check that this MonitorFixture's fixture really exists */
     Fixture* fxi = m_doc->fixture(m_fid);
-    if (fxi == NULL)
+    if (fxi == nullptr)
         return;
 
     QByteArray fxValues = fxi->channelValues();

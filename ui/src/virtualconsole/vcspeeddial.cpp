@@ -214,13 +214,13 @@ void VCSpeedDial::enableWidgetUI(bool enable)
 
 VCWidget* VCSpeedDial::createCopy(VCWidget* parent)
 {
-    Q_ASSERT(parent != NULL);
+    Q_ASSERT(parent != nullptr);
 
     VCSpeedDial* dial = new VCSpeedDial(parent, m_doc);
     if (dial->copyFrom(this) == false)
     {
         delete dial;
-        dial = NULL;
+        dial = nullptr;
     }
 
     return dial;
@@ -229,7 +229,7 @@ VCWidget* VCSpeedDial::createCopy(VCWidget* parent)
 bool VCSpeedDial::copyFrom(const VCWidget* widget)
 {
     const VCSpeedDial* dial = qobject_cast<const VCSpeedDial*> (widget);
-    if (dial == NULL)
+    if (dial == nullptr)
         return false;
 
     setFunctions(dial->functions());
@@ -307,7 +307,7 @@ void VCSpeedDial::setCaption(const QString& text)
 {
     VCWidget::setCaption(text);
 
-    Q_ASSERT(m_dial != NULL);
+    Q_ASSERT(m_dial != nullptr);
     m_dial->setTitle(text);
 }
 
@@ -366,7 +366,7 @@ void VCSpeedDial::slotDialTapped()
     foreach (const VCSpeedDialFunction &speeddialfunction, m_functions)
     {
         Function* function = m_doc->function(speeddialfunction.functionId);
-        if (function != NULL)
+        if (function != nullptr)
         {
             if (speeddialfunction.durationMultiplier != VCSpeedDialFunction::None)
                 function->tap();
@@ -401,7 +401,7 @@ void VCSpeedDial::slotUpdate()
 
 void VCSpeedDial::addPreset(VCSpeedDialPreset const& preset)
 {
-    QWidget *presetWidget = NULL;
+    QWidget *presetWidget = nullptr;
 
     {
         QPushButton *presetButton = new QPushButton(this);
@@ -415,7 +415,7 @@ void VCSpeedDial::addPreset(VCSpeedDialPreset const& preset)
         presetButton->setText(fontMetrics().elidedText(btnLabel, Qt::ElideRight, 72));
     }
 
-    Q_ASSERT(presetWidget != NULL);
+    Q_ASSERT(presetWidget != nullptr);
 
     connect(reinterpret_cast<QPushButton*>(presetWidget), SIGNAL(clicked()),
             this, SLOT(slotPresetClicked()));
@@ -426,7 +426,7 @@ void VCSpeedDial::addPreset(VCSpeedDialPreset const& preset)
     m_presets[presetWidget] = new VCSpeedDialPreset(preset);
     m_presetsLayout->addWidget(presetWidget);
 
-    if (m_presets[presetWidget]->m_inputSource != NULL)
+    if (m_presets[presetWidget]->m_inputSource != nullptr)
     {
         setInputSource(m_presets[presetWidget]->m_inputSource,
                        m_presets[presetWidget]->m_id);
@@ -464,7 +464,7 @@ void VCSpeedDial::slotPresetClicked()
     QPushButton *btn = qobject_cast<QPushButton*>(sender());
     VCSpeedDialPreset *preset = m_presets[btn];
 
-    Q_ASSERT(preset != NULL);
+    Q_ASSERT(preset != nullptr);
 
     {
         // Special case: infinite buttons should act as checkboxes
@@ -559,7 +559,7 @@ void VCSpeedDial::slotFactoredValueChanged()
     foreach (const VCSpeedDialFunction &speeddialfunction, m_functions)
     {
         Function* function = m_doc->function(speeddialfunction.functionId);
-        if (function != NULL)
+        if (function != nullptr)
         {
             if (speeddialfunction.fadeInMultiplier != VCSpeedDialFunction::None)
             {
@@ -617,7 +617,7 @@ void VCSpeedDial::updateFeedback()
             it != m_presets.end(); ++it)
     {
         VCSpeedDialPreset* preset = it.value();
-        if (preset->m_inputSource != NULL)
+        if (preset->m_inputSource != nullptr)
         {
             QPushButton* button = reinterpret_cast<QPushButton*>(it.key());
             if (preset->m_inputSource.isNull() == false)
@@ -675,7 +675,7 @@ void VCSpeedDial::slotInputValueChanged(quint32 universe, quint32 channel, uchar
                 it != m_presets.end(); ++it)
         {
             VCSpeedDialPreset *preset = it.value();
-            if (preset->m_inputSource != NULL &&
+            if (preset->m_inputSource != nullptr &&
                     preset->m_inputSource->universe() == universe &&
                     preset->m_inputSource->channel() == pagedCh)
             {
@@ -799,7 +799,7 @@ quint32 VCSpeedDial::visibilityMask() const
 
 void VCSpeedDial::setVisibilityMask(quint32 mask)
 {
-    if (m_dial != NULL)
+    if (m_dial != nullptr)
         m_dial->setVisibilityMask(mask);
 
     if (mask & MultDiv)
@@ -866,7 +866,7 @@ bool VCSpeedDial::loadXML(QXmlStreamReader &root)
     // Sorted list for new presets
     QList<VCSpeedDialPreset> newPresets;
     // legacy: transform the infinite checkbox into an infinite preset
-    QSharedPointer<VCSpeedDialPreset> infinitePreset(NULL);
+    QSharedPointer<VCSpeedDialPreset> infinitePreset(nullptr);
 
     /* Children */
     while (root.readNextStartElement())
@@ -1040,7 +1040,7 @@ bool VCSpeedDial::loadXMLInfiniteLegacy(QXmlStreamReader &root, QSharedPointer<V
 
 bool VCSpeedDial::saveXML(QXmlStreamWriter *doc)
 {
-    Q_ASSERT(doc != NULL);
+    Q_ASSERT(doc != nullptr);
 
     doc->writeStartElement(KXMLQLCVCSpeedDial);
 
@@ -1158,7 +1158,7 @@ void VCSpeedDial::postLoad()
     {
         it.next();
         Function* function = m_doc->function(it.value().functionId);
-        if (function == NULL)
+        if (function == nullptr)
             it.remove();
     }
 }

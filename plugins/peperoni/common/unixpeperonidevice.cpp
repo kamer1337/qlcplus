@@ -29,12 +29,12 @@ UnixPeperoniDevice::UnixPeperoniDevice(const QVariant& uid, const QString& name,
                                        QObject* parent)
     : OutputDevice(uid, name, parent)
     , m_device(device)
-    , m_handle(NULL)
+    , m_handle(nullptr)
     , m_firmwareVersion(desc->bcdDevice)
     , m_configuration(PEPERONI_CONF_TXONLY)
 {
-    Q_ASSERT(device != NULL);
-    Q_ASSERT(desc != NULL);
+    Q_ASSERT(device != nullptr);
+    Q_ASSERT(desc != nullptr);
 
     libusb_ref_device(m_device);
 
@@ -54,7 +54,7 @@ UnixPeperoniDevice::~UnixPeperoniDevice()
     close();
 
     libusb_unref_device(m_device);
-    m_device = NULL;
+    m_device = nullptr;
 }
 
 void UnixPeperoniDevice::open()
@@ -68,7 +68,7 @@ void UnixPeperoniDevice::open()
     if (r < 0)
     {
         qWarning() << "Unable to open device:" << r;
-        m_handle = NULL;
+        m_handle = nullptr;
         return;
     }
 
@@ -90,7 +90,7 @@ void UnixPeperoniDevice::open()
                         PEPERONI_TX_STARTCODE,   // Set DMX startcode
                         0,                       // Standard startcode is 0
                         0,                       // No index
-                        NULL,                    // No data
+                        nullptr,                    // No data
                         0,                       // Zero data length
                         50);                     // Timeout (ms)
     if (r < 0)
@@ -121,12 +121,12 @@ void UnixPeperoniDevice::close()
         qWarning() << "Unable to release interface EP0:" << r;
 
     libusb_close(m_handle);
-    m_handle = NULL;
+    m_handle = nullptr;
 }
 
 bool UnixPeperoniDevice::isOpen() const
 {
-    if (m_handle != NULL)
+    if (m_handle != nullptr)
         return true;
     else
         return false;
@@ -140,7 +140,7 @@ void UnixPeperoniDevice::writeChannel(ushort channel, uchar value)
 
 void UnixPeperoniDevice::writeUniverse(const QByteArray& universe)
 {
-    if (m_handle == NULL)
+    if (m_handle == nullptr)
         return;
 
     int r = -1;

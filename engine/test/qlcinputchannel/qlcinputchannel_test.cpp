@@ -138,7 +138,7 @@ void QLCInputChannel_Test::load()
     xmlWriter.writeTextElement("Name", "Foobar");
     xmlWriter.writeTextElement("Type", "Slider");
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -161,7 +161,7 @@ void QLCInputChannel_Test::loadWrongType()
     xmlWriter.writeTextElement("Name", "Foobar");
     xmlWriter.writeTextElement("Type", "Xyzzy");
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -186,7 +186,7 @@ void QLCInputChannel_Test::save()
 
     QVERIFY(ch.saveXML(&xmlWriter, 12) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);

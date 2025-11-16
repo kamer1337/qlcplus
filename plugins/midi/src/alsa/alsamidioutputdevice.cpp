@@ -39,8 +39,8 @@ AlsaMidiOutputDevice::AlsaMidiOutputDevice(const QVariant& uid,
     , m_open(false)
     , m_universe(MAX_MIDI_DMX_CHANNELS, char(0))
 {
-    Q_ASSERT(alsa != NULL);
-    Q_ASSERT(recv_address != NULL);
+    Q_ASSERT(alsa != nullptr);
+    Q_ASSERT(recv_address != nullptr);
     m_receiver_address->client = recv_address->client;
     m_receiver_address->port = recv_address->port;
     m_sender_address = send_address;
@@ -54,7 +54,7 @@ AlsaMidiOutputDevice::~AlsaMidiOutputDevice()
     close();
 
     delete m_receiver_address;
-    m_receiver_address = NULL;
+    m_receiver_address = nullptr;
 }
 
 bool AlsaMidiOutputDevice::open()
@@ -62,11 +62,11 @@ bool AlsaMidiOutputDevice::open()
     qDebug() << Q_FUNC_INFO;
     m_open = true;
 
-    Q_ASSERT(m_sender_address != NULL);
-    Q_ASSERT(m_receiver_address != NULL);
+    Q_ASSERT(m_sender_address != nullptr);
+    Q_ASSERT(m_receiver_address != nullptr);
 
     /* Subscribe QLC+ ALSA client to the MIDI device */
-    snd_seq_port_subscribe_t* sub = NULL;
+    snd_seq_port_subscribe_t* sub = nullptr;
     snd_seq_port_subscribe_alloca(&sub);
     snd_seq_port_subscribe_set_sender(sub, m_sender_address);
     snd_seq_port_subscribe_set_dest(sub, m_receiver_address);
@@ -80,11 +80,11 @@ void AlsaMidiOutputDevice::close()
     qDebug() << Q_FUNC_INFO;
     m_open = false;
 
-    Q_ASSERT(m_sender_address != NULL);
-    Q_ASSERT(m_receiver_address != NULL);
+    Q_ASSERT(m_sender_address != nullptr);
+    Q_ASSERT(m_receiver_address != nullptr);
 
     /* Unsubscribe QLC+ ALSA client to the MIDI device */
-    snd_seq_port_subscribe_t* sub = NULL;
+    snd_seq_port_subscribe_t* sub = nullptr;
     snd_seq_port_subscribe_alloca(&sub);
     snd_seq_port_subscribe_set_sender(sub, m_sender_address);
     snd_seq_port_subscribe_set_dest(sub, m_receiver_address);

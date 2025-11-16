@@ -61,7 +61,7 @@ protected slots:
     {
         emit closing();
         // avoid the real context to be destroyed !
-        setCentralWidget(NULL);
+        setCentralWidget(nullptr);
         QMainWindow::closeEvent(ev);
     }
 

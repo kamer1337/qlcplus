@@ -34,7 +34,7 @@ void VCWidgetProperties_Test::stateAndVisibility()
     QVERIFY(p.state() == Qt::WindowNoState);
     QVERIFY(p.visible() == false);
 
-    QWidget w(NULL);
+    QWidget w(nullptr);
     p.store(&w);
     QVERIFY(p.state() == Qt::WindowNoState);
     QVERIFY(p.visible() == false);
@@ -64,7 +64,7 @@ void VCWidgetProperties_Test::xy()
 {
     VCWidgetProperties p;
 
-    QWidget w(NULL);
+    QWidget w(nullptr);
     p.store(&w);
 
     QVERIFY(p.x() == 0);
@@ -81,7 +81,7 @@ void VCWidgetProperties_Test::wh()
 {
     VCWidgetProperties p;
 
-    QWidget w(NULL);
+    QWidget w(nullptr);
     p.store(&w);
 
     QVERIFY(p.x() == 0);
@@ -111,7 +111,7 @@ void VCWidgetProperties_Test::load()
     xmlWriter.writeTextElement("Foobar", "1");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
 
     buffer.seek(0);
     QXmlStreamReader xmlReader(&buffer);
@@ -135,7 +135,7 @@ void VCWidgetProperties_Test::loadWrongRoot()
 
     xmlWriter.writeStartElement("WidgetPropertiez");
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
 
     buffer.seek(0);
     QXmlStreamReader xmlReader(&buffer);
@@ -167,7 +167,7 @@ void VCWidgetProperties_Test::save()
 
     QVERIFY(p.saveXML(&xmlWriter) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);

@@ -46,7 +46,7 @@ void FixtureGroup_Test::initTestCase()
 void FixtureGroup_Test::cleanupTestCase()
 {
     delete m_doc;
-    m_doc = NULL;
+    m_doc = nullptr;
 }
 
 void FixtureGroup_Test::init()
@@ -167,9 +167,9 @@ void FixtureGroup_Test::assignFixtureNoSize()
     QVERIFY(grp.headsMap()[QLCPoint(0, 2)] == GroupHead(1, 0));
 
     QLCFixtureDef* def = m_doc->fixtureDefCache()->fixtureDef("Futurelight", "DJScan250");
-    QVERIFY(def != NULL);
+    QVERIFY(def != nullptr);
     QLCFixtureMode* mode = def->modes().first();
-    QVERIFY(mode != NULL);
+    QVERIFY(mode != nullptr);
 
     fxi = new Fixture(m_doc);
     fxi->setFixtureDefinition(def, mode);
@@ -186,9 +186,9 @@ void FixtureGroup_Test::assignFixtureNoSize()
     QVERIFY(grp.headsMap()[QLCPoint(0, 3)] == GroupHead(2, 0));
 
     def = m_doc->fixtureDefCache()->fixtureDef("i-Pix", "BB4");
-    QVERIFY(def != NULL);
+    QVERIFY(def != nullptr);
     mode = def->modes().last();
-    QVERIFY(mode != NULL);
+    QVERIFY(mode != nullptr);
     QCOMPARE(mode->heads().size(), 4);
 
     fxi = new Fixture(m_doc);
@@ -221,9 +221,9 @@ void FixtureGroup_Test::assignFixture4x2()
     for (int i = 0; i < 11; i++)
     {
         QLCFixtureDef* def = m_doc->fixtureDefCache()->fixtureDef("Futurelight", "DJScan250");
-        QVERIFY(def != NULL);
+        QVERIFY(def != nullptr);
         QLCFixtureMode* mode = def->modes().first();
-        QVERIFY(mode != NULL);
+        QVERIFY(mode != nullptr);
 
         Fixture* fxi = new Fixture(m_doc);
         fxi->setFixtureDefinition(def, mode);
@@ -400,9 +400,9 @@ void FixtureGroup_Test::assignFixtureAtPoint()
     for (int i = 0; i < 2; i++)
     {
         QLCFixtureDef* def = m_doc->fixtureDefCache()->fixtureDef("American DJ", "Dotz Bar 1.4");
-        QVERIFY(def != NULL);
+        QVERIFY(def != nullptr);
         QLCFixtureMode* mode = def->modes().last();
-        QVERIFY(mode != NULL);
+        QVERIFY(mode != nullptr);
 
         Fixture* fxi = new Fixture(m_doc);
         fxi->setFixtureDefinition(def, mode);
@@ -632,7 +632,7 @@ void FixtureGroup_Test::loadWrongID()
     xmlWriter.writeAttribute("ID", "Pertti");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -660,7 +660,7 @@ void FixtureGroup_Test::loadWrongHeadAttributes()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -689,7 +689,7 @@ void FixtureGroup_Test::loadWrongHeadAttributes()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -717,7 +717,7 @@ void FixtureGroup_Test::loadWrongHeadAttributes()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -745,7 +745,7 @@ void FixtureGroup_Test::loadWrongHeadAttributes()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -773,7 +773,7 @@ void FixtureGroup_Test::loadWrongHeadAttributes()
     xmlWriter.writeEndElement();
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -812,7 +812,7 @@ void FixtureGroup_Test::load()
     xmlWriter.writeStartElement("Bar");
     xmlWriter.writeEndDocument();
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -825,7 +825,7 @@ void FixtureGroup_Test::load()
     QVERIFY(FixtureGroup::loader(xmlReader, m_doc) == true);
     QCOMPARE(m_doc->fixtureGroups().size(), 1);
     FixtureGroup* grp2 = m_doc->fixtureGroup(99);
-    QVERIFY(grp2 != NULL);
+    QVERIFY(grp2 != nullptr);
     QCOMPARE(grp2->size(), QSize(4, 5));
     QCOMPARE(grp2->name(), QString("Pertti Pasanen"));
     QCOMPARE(grp2->id(), quint32(99));
@@ -856,7 +856,7 @@ void FixtureGroup_Test::save()
 
     QVERIFY(grp.saveXML(&xmlWriter) == true);
 
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);

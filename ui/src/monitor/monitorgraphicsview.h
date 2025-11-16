@@ -58,7 +58,7 @@ public:
     QList <quint32> fixturesID() const;
 
     /** Retrieve the currently selected MonitorFixtureItem.
-     *  Return NULL if none */
+     *  Return nullptr if none */
     MonitorFixtureItem *getSelectedItem();
 
     /** Set the gel color of the fixture with the given ID */

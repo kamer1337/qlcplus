@@ -27,9 +27,9 @@
 
 void Bus_Test::initTestCase()
 {
-    QVERIFY(Bus::instance() == NULL);
+    QVERIFY(Bus::instance() == nullptr);
     Bus::init(this);
-    QVERIFY(Bus::instance() != NULL);
+    QVERIFY(Bus::instance() != nullptr);
 }
 
 void Bus_Test::defaults()
@@ -134,7 +134,7 @@ void Bus_Test::loadWrongRoot()
 
     xmlWriter.writeStartElement("Bush");
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -158,7 +158,7 @@ void Bus_Test::load()
     xmlWriter.writeTextElement("Foobar", "Xyzzy");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -183,7 +183,7 @@ void Bus_Test::loadWrongID()
     xmlWriter.writeTextElement("Value", "142");
 
     xmlWriter.writeEndDocument();
-    xmlWriter.setDevice(NULL);
+    xmlWriter.setDevice(nullptr);
     buffer.close();
 
     buffer.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -197,9 +197,9 @@ void Bus_Test::loadWrongID()
 
 void Bus_Test::cleanupTestCase()
 {
-    QVERIFY(Bus::instance() != NULL);
+    QVERIFY(Bus::instance() != nullptr);
     delete Bus::instance();
-    QVERIFY(Bus::instance() == NULL);
+    QVERIFY(Bus::instance() == nullptr);
 }
 
 QTEST_APPLESS_MAIN(Bus_Test)

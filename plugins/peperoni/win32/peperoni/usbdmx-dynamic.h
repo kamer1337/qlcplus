@@ -417,7 +417,7 @@ struct usbdmx_functions
  * Load the usbdmx.DLL and returns all functions in struct usbdmx.
  * USBDMX_INIT() increments a "used" counter to track the number of
  * users. Make shure to call usbdmx_release if the DLL is not used
- * anymore. If the DLL was not found, NULL is returned.
+ * anymore. If the DLL was not found, nullptr is returned.
  */
 struct usbdmx_functions* usbdmx_init(void);
 

@@ -23,7 +23,7 @@
 
 #include "audiocapture_wavein.h"
 
-static HWAVEIN deviceHandle = NULL;
+static HWAVEIN deviceHandle = nullptr;
 static WAVEHDR waveHeaders[HEADERS_NUMBER];
 
 AudioCaptureWaveIn::AudioCaptureWaveIn(QObject * parent)
@@ -125,7 +125,7 @@ void AudioCaptureWaveIn::uninitialize()
         waveInReset(deviceHandle);
         waveInClose(deviceHandle);
     }
-    deviceHandle = NULL;
+    deviceHandle = nullptr;
 }
 
 qint64 AudioCaptureWaveIn::latency()
